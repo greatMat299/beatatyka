@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://d2da6311tt80o"
+path="res://.godot/imported/test.mid-e5b8ded2592f7cce989bc56f9e92b143.res"
+
+[deps]
+
+source_file="res://Assets/Sound/test.mid"
+dest_files=["res://.godot/imported/test.mid-e5b8ded2592f7cce989bc56f9e92b143.res"]
+
+[params]
+
