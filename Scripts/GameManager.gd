@@ -1,12 +1,22 @@
 extends Node
 
 var currentNote=0
+var isGamePlaying=true
+var platformsList=[]
+var spikeList=[]
+var mapName="Map1"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func searchForPlatforms():
+	for i in range(1,5):
+		var platformNode = get_parent().get_node(mapName).get_node(str("Platforms")+str(i))
+		print(platformNode)
+		platformsList.push_back(platformNode)
+	print(platformsList)
+	
+func searchForSpikes():
+	for i in range(1,3):
+		var spikeNode = get_parent().get_node(mapName).get_node(str("Spikes")+str(i))
+		print(spikeNode)
+		spikeList.push_back(spikeNode)
+	print(spikeList)
+		

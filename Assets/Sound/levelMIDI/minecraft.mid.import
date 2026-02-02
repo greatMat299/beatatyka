@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://cayf62xevoimb"
+path="res://.godot/imported/minecraft.mid-c7a7fb54658f3af3c241c937b9b96b46.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/minecraft.mid"
+dest_files=["res://.godot/imported/minecraft.mid-c7a7fb54658f3af3c241c937b9b96b46.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://gr2gr88addpl"
+path="res://.godot/imported/clocksSeq.mid-fcfa698c2795c4e8edc77108bd33e3f6.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/clocksSeq.mid"
+dest_files=["res://.godot/imported/clocksSeq.mid-fcfa698c2795c4e8edc77108bd33e3f6.res"]
+
+[params]
+
