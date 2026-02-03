@@ -1,7 +1,8 @@
 extends MidiPlayer
 
-signal note_played(note)
-signal note_played_c2(note)
+signal note_played(note,sender)
+signal note_played_c2(note,sender)
+signal note_played_w(note,sender)
 signal note_off
 
 #przygotowanie muzyki oraz sygnału
@@ -21,9 +22,11 @@ func my_note_callback(event, track):
 		if event['subtype'] == MIDI_MESSAGE_NOTE_ON: 
 			#print(str(event['note'])+" "+str(event['channel']))
 			if self.name=="MidiPlayer":
-				emit_signal("note_played", event['note'])
+				emit_signal("note_played", event['note'], self)
 			elif self.name=="MidiPlayerChannel2":
-				emit_signal("note_played_c2", event['note'])	
+				emit_signal("note_played_c2", event['note'], self)
+			elif self.name=="MidiPlayerWarning":
+				emit_signal("note_played_w", event['note'], self)	
 		elif event['subtype'] == MIDI_MESSAGE_NOTE_OFF:
 			#print("and off")
 			note_off.emit()

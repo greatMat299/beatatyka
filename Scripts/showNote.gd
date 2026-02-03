@@ -27,8 +27,11 @@ func _on_note_off():
 	text = "Note off"
 	
 # This function MUST exist!
-func _on_note_played(note):
+func _on_note_played(note,sender):
 	var type=""
+	if note==59:
+		self.add_theme_color_override("font_color", Color(0.0, 0.0, 0.0, 1.0))
+		type="normal"
 	if note>=60&&note<=64:
 		self.add_theme_color_override("font_color", Color(1, 0.5, 0))
 		type="change platform"

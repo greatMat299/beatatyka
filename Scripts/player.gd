@@ -3,23 +3,41 @@ extends CharacterBody2D
 
 const SPEED = 250.0
 const JUMP_VELOCITY = -500.0
+var jumps=0
+var maxJumps = 1
 @onready var animSprite = $AnimatedSprite2D
 @onready var moveTimer = $MoveTimer
+@onready var bufferTimer = $BufferTimer
+@export var maxBufferTime : float = 0.15
 
 func _ready():
-	GameManager.searchForPlatforms()
-	GameManager.searchForSpikes()
-	GameManager.mapName=get_parent().name
+	bufferTimer.wait_time = maxBufferTime
+	print(bufferTimer.wait_time)
 
 
 func _physics_process(delta):	
+	#print(bufferTimer.time_left)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("player1_jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("player1_jump"):
+		bufferTimer.start()
+		if jumps < maxJumps:
+			print("yump")
+			jumps += 1
+			velocity.y = JUMP_VELOCITY
+			
+			
+	if is_on_floor():
+		jumps = 0
+		if bufferTimer.time_left>0:
+			jumps += 1
+			velocity.y = JUMP_VELOCITY
+			bufferTimer.stop()
+
+			
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
