@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7rgv0jc3wi4v" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dahq7vmqj1ytq" path="res://Assets/robinHood_ v1.1/bishopOfHereford_.png" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://d1tc0c78rjfer" path="res://Scripts/health_manager.gd" id="3_6t5aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
@@ -108,7 +109,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4iuc"]
 size = Vector2(12, 16)
 
-[node name="Player" type="CharacterBody2D" unique_id=647595686]
+[node name="Player1" type="CharacterBody2D" unique_id=647595686]
 collision_layer = 2
 script = ExtResource("1_cvnsp")
 maxBufferTime = 0.1
@@ -129,4 +130,30 @@ one_shot = true
 [node name="BufferTimer" type="Timer" parent="." unique_id=136234073]
 one_shot = true
 
+[node name="DashPressTimer" type="Timer" parent="." unique_id=1991868778]
+wait_time = 0.15
+one_shot = true
+
+[node name="HealthManager" type="Node" parent="." unique_id=92446803]
+script = ExtResource("3_6t5aa")
+
+[node name="AttackRaycast" type="RayCast2D" parent="." unique_id=415044685]
+rotation = -1.5707964
+target_position = Vector2(0, 20)
+collision_mask = 2
+
+[node name="DashRaycast" type="RayCast2D" parent="." unique_id=2037535853]
+rotation = -1.5707964
+target_position = Vector2(0, 40)
+collision_mask = 2
+
+[node name="DashCooldownTimer" type="Timer" parent="." unique_id=1881951015]
+one_shot = true
+
+[node name="DashAttackCooldownTimer" type="Timer" parent="." unique_id=1537987962]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="playerAttack" from="." to="HealthManager" method="_on_player_attack"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="DashPressTimer" to="." method="_on_dash_press_timer_timeout"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crvd4x1oahyu7"]
 
-[ext_resource type="Script" uid="uid://dsbwiod0qro4g" path="res://Scripts/showNote.gd" id="1_46wpf"]
+[ext_resource type="Script" uid="uid://uck650mdef1m" path="res://Scripts/ui_health_show.gd" id="1_46wpf"]
 
 [node name="UserUI" type="CanvasLayer" unique_id=1761966764]
 
@@ -12,33 +12,59 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="." unique_id=906574925]
-texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "Note off"
-horizontal_alignment = 1
+[node name="HealthLabels" type="Node" parent="." unique_id=429693231]
 script = ExtResource("1_46wpf")
 
-[node name="LabelC2" type="Label" parent="." unique_id=981810817]
+[node name="Label1" type="Label" parent="HealthLabels" unique_id=906574925]
 texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -182.0
-offset_top = 73.0
-offset_right = 179.0
-offset_bottom = 156.0
-grow_horizontal = 2
+offset_right = 263.0
+offset_bottom = 83.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "Note off"
+theme_override_font_sizes/font_size = 60
+text = "Player 1: "
 horizontal_alignment = 1
-script = ExtResource("1_46wpf")
+
+[node name="Label2" type="Label" parent="HealthLabels" unique_id=1261639452]
+visible = false
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -263.0
+offset_bottom = 83.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Player 2: "
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="HealthLabels" unique_id=1573888930]
+visible = false
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1270.0
+offset_top = 100.0
+offset_right = -1007.0
+offset_bottom = 183.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Player 3: "
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="HealthLabels" unique_id=1969961975]
+visible = false
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -263.0
+offset_top = 100.0
+offset_bottom = 183.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Player 4: "
+horizontal_alignment = 1

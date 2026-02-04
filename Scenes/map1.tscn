@@ -23,7 +23,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.49019608)]
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_tnejx"]
@@ -39,17 +39,34 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.49019608), Color(1, 1, 1, 0.78431374), Color(1, 1, 1, 0.49019608)]
+"values": [Color(1, 1, 1, 0.37254903), Color(1, 1, 1, 0.8627451), Color(1, 1, 1, 0.13725491)]
+}
+
+[sub_resource type="Animation" id="Animation_vcux0"]
+resource_name = "showSpikes"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.78431374), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vcux0"]
 _data = {
 &"RESET": SubResource("Animation_si05j"),
-&"showPlatform": SubResource("Animation_tnejx")
+&"showPlatform": SubResource("Animation_tnejx"),
+&"showSpikes": SubResource("Animation_vcux0")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wouuh"]
-size = Vector2(61, 28)
+size = Vector2(144, 28)
 
 [node name="Map1" type="Node2D" unique_id=1065128858]
 script = ExtResource("1_jemul")
@@ -67,9 +84,9 @@ tile_map_data = PackedByteArray("AAD//wMAAgACAAcAAAD4/wMAAgACAAcAAAD5/wMAAgACAAc
 tile_set = ExtResource("1_wouuh")
 
 [node name="Platforms1Prev" type="TileMapLayer" parent="." unique_id=1964008327]
-visible = false
-self_modulate = Color(1, 1, 1, 0.49019608)
+self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAD//wMAAgACAAcAAAD4/wMAAgACAAcAAAD5/wMAAgACAAcAAAD6/wMAAgACAAcAAAD7/wMAAgACAAcAAAD8/wMAAgACAAcAAAD9/wMAAgACAAcAAAD+/wMAAgACAAcAAAAMAAEAAgACAAcAAAALAAEAAgACAAcAAAAKAAEAAgACAAcAAAAJAAEAAgACAAcAAAAIAAEAAgACAAcAAAAHAAEAAgACAAcAAAAGAAEAAgACAAcAAAAFAAEAAgACAAcAAAAEAAEAAgACAAcAAAA=")
+enabled = false
 tile_set = ExtResource("1_wouuh")
 collision_enabled = false
 
@@ -82,8 +99,7 @@ enabled = false
 tile_set = ExtResource("1_wouuh")
 
 [node name="Platforms2Prev" type="TileMapLayer" parent="." unique_id=1755843419]
-visible = false
-self_modulate = Color(1, 1, 1, 0.49019608)
+self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAD4/wAAAgAFAAcAAAD5/wAAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAD8/wAAAgAFAAcAAAD9/wAAAgAFAAcAAAAEAAMAAgAFAAcAAAAFAAMAAgAFAAcAAAAGAAMAAgAFAAcAAAAHAAMAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAALAAMAAgAFAAcAAAAMAAMAAgAFAAcAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
@@ -93,14 +109,13 @@ collision_enabled = false
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms3" type="TileMapLayer" parent="." unique_id=319529954]
-tile_map_data = PackedByteArray("AAD8//7/AgAFAAcAAAD9//7/AgAFAAcAAAD2/wEAAgAFAAcAAAD3/wEAAgAFAAcAAAD4/wEAAgAFAAcAAAALAP//AgAFAAcAAAAMAP//AgAFAAcAAAANAP//AgAFAAcAAAD//wEAAgAFAAcAAAAAAAEAAgAFAAcAAAABAAEAAgAFAAcAAAAEAAQAAgAFAAwAAAAFAAQAAgAFAAwAAAAGAAQAAgAFAAwAAAA=")
+tile_map_data = PackedByteArray("AADz/wAAAgAFAAcAAAD0/wAAAgAFAAcAAAD1/wAAAgAFAAcAAAD2/wAAAgAFAAcAAAAFAP//AgAFAAcAAAAGAP//AgAFAAcAAAAHAP//AgAFAAcAAAAIAP//AgAFAAcAAAAJAP//AgAFAAcAAAAAAAEAAgAFAAcAAAABAAEAAgAFAAcAAAAFAAMAAgAFAAgAAAAGAAMAAgAFAAgAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
 
-[node name="Platforms3Prev" type="TileMapLayer" parent="." unique_id=1335393762]
-visible = false
-self_modulate = Color(1, 1, 1, 0.49019608)
-tile_map_data = PackedByteArray("AAD8//7/AgAFAAcAAAD9//7/AgAFAAcAAAAFAAMAAgAFAAcAAAAGAAMAAgAFAAcAAAAHAAMAAgAFAAcAAAAIAAMAAgAFAAcAAAD2/wEAAgAFAAcAAAD3/wEAAgAFAAcAAAD4/wEAAgAFAAcAAAALAP//AgAFAAcAAAAMAP//AgAFAAcAAAANAP//AgAFAAcAAAD//wEAAgAFAAcAAAAAAAEAAgAFAAcAAAABAAEAAgAFAAcAAAA=")
+[node name="Platforms3Prev" type="TileMapLayer" parent="." unique_id=1358067471]
+self_modulate = Color(1, 1, 1, 0)
+tile_map_data = PackedByteArray("AADz/wAAAgAFAAcAAAD0/wAAAgAFAAcAAAD1/wAAAgAFAAcAAAD2/wAAAgAFAAcAAAAFAP//AgAFAAcAAAAGAP//AgAFAAcAAAAHAP//AgAFAAcAAAAIAP//AgAFAAcAAAAJAP//AgAFAAcAAAAAAAEAAgAFAAcAAAABAAEAAgAFAAcAAAAFAAMAAgAFAAgAAAAGAAMAAgAFAAgAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
 collision_enabled = false
@@ -109,14 +124,13 @@ collision_enabled = false
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms4" type="TileMapLayer" parent="." unique_id=987987478]
-tile_map_data = PackedByteArray("AAAEAPv/AgAFAAcAAAAFAPv/AgAFAAcAAAAGAPv/AgAFAAcAAAAHAPv/AgAFAAcAAAAIAPv/AgAFAAcAAAAJAPv/AgAFAAcAAAAAAP//AgAFAAcAAAABAP//AgAFAAcAAAACAP//AgAFAAcAAAD9/wUAAgAFAAcAAAD9/wQAAgAFAAcAAAD9/wMAAgAFAAcAAAD+/wMAAgAFAAcAAAD//wMAAgAFAAcAAAD//wQAAgAFAAcAAAD//wUAAgAFAAcAAAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAGAAEAAgAFAAcAAAAHAAEAAgAFAAcAAAA=")
+tile_map_data = PackedByteArray("AAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAEAP3/AgAFAAcAAAAFAP3/AgAFAAcAAAAGAP3/AgAFAAcAAAAHAP3/AgAFAAcAAAAIAP3/AgAFAAcAAAAJAP3/AgAFAAcAAAD2/wMAAgAFAAcAAAD2/wQAAgAFAAcAAAD2/wUAAgAFAAcAAAD4/wAAAgAFAAcAAAD5/wAAAgAFAAcAAAAFAAQAAgAFAAcAAAAEAAQAAgAFAAcAAAD9/wEAAgAFAAcAAAD+/wEAAgAFAAcAAAD//wEAAgAFAAcAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
 
-[node name="Platforms4Prev" type="TileMapLayer" parent="." unique_id=2098342373]
-visible = false
-self_modulate = Color(1, 1, 1, 0.49019608)
-tile_map_data = PackedByteArray("AAAEAPv/AgAFAAcAAAAFAPv/AgAFAAcAAAAGAPv/AgAFAAcAAAAHAPv/AgAFAAcAAAAIAPv/AgAFAAcAAAAJAPv/AgAFAAcAAAAAAP//AgAFAAcAAAABAP//AgAFAAcAAAACAP//AgAFAAcAAAD9/wUAAgAFAAcAAAD9/wQAAgAFAAcAAAD9/wMAAgAFAAcAAAD+/wMAAgAFAAcAAAD//wMAAgAFAAcAAAD//wQAAgAFAAcAAAD//wUAAgAFAAcAAAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAGAAEAAgAFAAcAAAAHAAEAAgAFAAcAAAA=")
+[node name="Platforms4Prev" type="TileMapLayer" parent="." unique_id=324244365]
+self_modulate = Color(1, 1, 1, 0)
+tile_map_data = PackedByteArray("AAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAEAP3/AgAFAAcAAAAFAP3/AgAFAAcAAAAGAP3/AgAFAAcAAAAHAP3/AgAFAAcAAAAIAP3/AgAFAAcAAAAJAP3/AgAFAAcAAAD2/wMAAgAFAAcAAAD2/wQAAgAFAAcAAAD2/wUAAgAFAAcAAAD4/wAAAgAFAAcAAAD5/wAAAgAFAAcAAAAFAAQAAgAFAAcAAAAEAAQAAgAFAAcAAAD9/wEAAgAFAAcAAAD+/wEAAgAFAAcAAAD//wEAAgAFAAcAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
 collision_enabled = false
@@ -130,8 +144,7 @@ enabled = false
 tile_set = ExtResource("1_wouuh")
 
 [node name="Platforms5Prev" type="TileMapLayer" parent="." unique_id=12406663]
-visible = false
-self_modulate = Color(1, 1, 1, 0.49019608)
+self_modulate = Color(1, 1, 1, 0)
 tile_map_data = PackedByteArray("AAAEAPv/AgAFAAcAAAAFAPv/AgAFAAcAAAAGAPv/AgAFAAcAAAAHAPv/AgAFAAcAAAAIAPv/AgAFAAcAAAAJAPv/AgAFAAcAAAAAAP//AgAFAAcAAAABAP//AgAFAAcAAAACAP//AgAFAAcAAAD9/wUAAgAFAAcAAAD9/wQAAgAFAAcAAAD9/wMAAgAFAAcAAAD+/wMAAgAFAAcAAAD//wMAAgAFAAcAAAD//wQAAgAFAAcAAAD//wUAAgAFAAcAAAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAGAAEAAgAFAAcAAAAHAAEAAgAFAAcAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
@@ -140,22 +153,47 @@ collision_enabled = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms5Prev" unique_id=1953864587]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
-[node name="Spikes1" type="TileMapLayer" parent="." unique_id=1422841761]
+[node name="Spikes1" type="TileMapLayer" parent="." unique_id=1814854722]
 tile_map_data = PackedByteArray("AAD2/wUAAwADAAcAAAD3/wUAAwADAAcAAAD4/wUAAwADAAcAAAAMAAUAAwADAAcAAAANAAUAAwADAAcAAAAOAAUAAwADAAcAAAAPAAUAAwADAAcAAAD5/wUAAwADAAcAAAD//wUAAwADAAcAAAAAAAUAAwADAAcAAAABAAUAAwADAAcAAAACAAUAAwADAAcAAAADAAUAAwADAAcAAAAEAAUAAwADAAcAAAAFAAUAAwADAAcAAAAGAAUAAwADAAcAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
 
-[node name="Spikes2" type="TileMapLayer" parent="." unique_id=1427316551]
+[node name="Spikes1Prev" type="TileMapLayer" parent="." unique_id=1078629690]
+self_modulate = Color(1, 1, 1, 0)
+tile_map_data = PackedByteArray("AAD2/wUAAwADAAcAAAD3/wUAAwADAAcAAAD4/wUAAwADAAcAAAAMAAUAAwADAAcAAAANAAUAAwADAAcAAAAOAAUAAwADAAcAAAAPAAUAAwADAAcAAAD5/wUAAwADAAcAAAD//wUAAwADAAcAAAAAAAUAAwADAAcAAAABAAUAAwADAAcAAAACAAUAAwADAAcAAAADAAUAAwADAAcAAAAEAAUAAwADAAcAAAAFAAUAAwADAAcAAAAGAAUAAwADAAcAAAA=")
+enabled = false
+tile_set = ExtResource("1_wouuh")
+collision_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spikes1Prev" unique_id=2013734494]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
+[node name="Spikes2" type="TileMapLayer" parent="." unique_id=866281500]
 tile_map_data = PackedByteArray("AAD7/wUAAwADAAcAAAD8/wUAAwADAAcAAAD9/wUAAwADAAcAAAAIAAUAAwADAAcAAAAJAAUAAwADAAcAAAAKAAUAAwADAAcAAAD6/wUAAwADAAcAAAD+/wUAAwADAAcAAAAHAAUAAwADAAcAAAALAAUAAwADAAcAAAA=")
 enabled = false
 tile_set = ExtResource("1_wouuh")
+
+[node name="Spikes2Prev" type="TileMapLayer" parent="." unique_id=650315595]
+self_modulate = Color(1, 1, 1, 0)
+tile_map_data = PackedByteArray("AAD7/wUAAwADAAcAAAD8/wUAAwADAAcAAAD9/wUAAwADAAcAAAAIAAUAAwADAAcAAAAJAAUAAwADAAcAAAAKAAUAAwADAAcAAAD6/wUAAwADAAcAAAD+/wUAAwADAAcAAAAHAAUAAwADAAcAAAALAAUAAwADAAcAAAA=")
+enabled = false
+tile_set = ExtResource("1_wouuh")
+collision_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spikes2Prev" unique_id=2051464797]
+libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974044964]
 position = Vector2(51, 7)
 zoom = Vector2(2.88, 2.88)
 
-[node name="Player" parent="." unique_id=732194411 instance=ExtResource("4_xgpx1")]
+[node name="Player1" parent="." unique_id=732194411 instance=ExtResource("4_xgpx1")]
 position = Vector2(53, 80)
+collision_mask = 3
+
+[node name="Player2" parent="." unique_id=647595686 instance=ExtResource("4_xgpx1")]
+position = Vector2(14, 79)
+collision_mask = 3
 
 [node name="MusicPlayer" type="Node" parent="." unique_id=1917010015]
 
@@ -185,11 +223,11 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathArea" unique_id=1173869249]
-position = Vector2(465, 19)
+position = Vector2(505.25, 19)
 shape = SubResource("RectangleShape2D_wouuh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea" unique_id=700767055]
-position = Vector2(-13.5, 19)
+position = Vector2(-55, 19)
 shape = SubResource("RectangleShape2D_wouuh")
 
-[connection signal="body_entered" from="DeathArea" to="Player" method="_on_death_area_body_entered"]
+[connection signal="body_entered" from="DeathArea" to="Player1" method="_on_death_area_body_entered"]
