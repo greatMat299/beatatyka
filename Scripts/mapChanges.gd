@@ -29,6 +29,11 @@ func _ready() -> void:
 	midi_player2.note_played_c2.connect(self._on_note_played)
 	midi_playerW.note_played_w.connect(self._on_warning_note_played)
 	
+func _process(_delta):
+	if GameManager.player_count==1:
+		#print("NOOOOOO")
+		GameManager.isGamePlaying=false
+	
 func _on_warning_note_played(note,sender):
 	print(str("warn: ")+str(note))
 	if note>=59&&note<=64:
@@ -98,18 +103,6 @@ func set_active_platform(index: int, isWarning: bool):
 
 		GameManager.platformsList[index].enabled = true
 		currentPlatform = index
-
-	#
-	#
-#func set_active_spike(index: int):
-	#if currentSpike == index:
-		#return
-#
-	#if currentSpike != -1:
-		#GameManager.spikeList[currentSpike].enabled = false
-#
-	#GameManager.spikeList[index].enabled = true
-	#currentSpike = index
 	
 func _on_note_played(note, sender):
 	if currentWarningPlatform != -1:

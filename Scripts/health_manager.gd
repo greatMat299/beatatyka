@@ -11,13 +11,14 @@ func _ready():
 	pass
 	
 func _process(delta):
-	print(GameManager.arePlayersAlive)
 	if health<=0 and GameManager.arePlayersAlive[id-1]==true:
+		get_parent().get_node("SFX").get_node("DeathSfx").play()
 		GameManager.arePlayersAlive[id-1]=false
+		GameManager.player_count-=1
 		health=0
 		pass
 
-func _on_player_attack(player, damage, playerDamaged):
+func _on_player_attack(player, damage, playerDamaged, direction):
 	print(str("helo ")+str(playerDamaged))
 	playerDamaged.get_node("HealthManager").health-=damage
 	#print(playerDamaged.get_node("HealthManager").health)

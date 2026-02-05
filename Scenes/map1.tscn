@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ber0mlqh7sjro" path="res://Scripts/mapChanges.gd" id="1_jemul"]
 [ext_resource type="TileSet" uid="uid://bhs3hu7ad0kxq" path="res://Assets/TileSets/testTileSet.res" id="1_wouuh"]
+[ext_resource type="Script" uid="uid://bw0sauhnn3yro" path="res://Scripts/camera_work.gd" id="3_tnejx"]
 [ext_resource type="PackedScene" uid="uid://cmovijrkx6q7m" path="res://Scenes/player.tscn" id="4_xgpx1"]
 [ext_resource type="MidiResource" uid="uid://d2ni3hwmw5yj2" path="res://Assets/Sound/levelMIDI/crabRaveC1.mid" id="5_jemul"]
 [ext_resource type="MidiResource" uid="uid://cqo03vx8ekjl7" path="res://Assets/Sound/levelMIDI/crabRaveC2.mid" id="5_si05j"]
@@ -186,6 +187,7 @@ libraries/ = SubResource("AnimationLibrary_vcux0")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974044964]
 position = Vector2(51, 7)
 zoom = Vector2(2.88, 2.88)
+script = ExtResource("3_tnejx")
 
 [node name="Player1" parent="." unique_id=732194411 instance=ExtResource("4_xgpx1")]
 position = Vector2(53, 80)
@@ -212,6 +214,7 @@ script = ExtResource("6_wouuh")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="MusicPlayer" unique_id=1586066414]
 stream = ExtResource("8_si05j")
 autoplay = true
+bus = &"Music"
 script = ExtResource("8_jemul")
 bpm = 128
 

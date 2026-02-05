@@ -7,12 +7,14 @@ var platformPrevList=[]
 var spikeList=[]
 var spikePrevList=[]
 var arePlayersAlive=[]
+var playerAttackStatus=[]
 var mapName="Map1"
 var player_count := 0
 var next_player_id := 0
 
 func register_player() -> int:
 	arePlayersAlive.push_back(true)
+	playerAttackStatus.push_back(false)
 	player_count += 1
 	next_player_id += 1
 	return next_player_id
