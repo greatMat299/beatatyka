@@ -1,32 +1,40 @@
 extends MidiPlayer
 
-signal note_played(note,sender)
-signal note_played_c2(note,sender)
-signal note_played_w(note,sender)
+signal note_played(note, sender)
+signal note_played_c2(note, sender)
+signal note_played_w(note, sender)
 signal note_off
+var ignore_events := false
 
-#przygotowanie muzyki oraz sygnału
 func _ready():
-	self.note.connect(my_note_callback)
-	self.play()
+	note.connect(my_note_callback)
+	play()
+	#current_time=129
 	
-#pauzowanie muzyki kiedy gra się kończy (np. śmierć)
-func _process(delta):
-	if GameManager.isGamePlaying==false:
-		self.stop()
-		pass
+func _process(_delta):
+	#zatrzymanie odtwarzacza MIDI jeżeli gra się skończy
+	if GameManager.isGamePlaying==false or GameManager.isSongOver==true:
+		stop()
 
-#wysyłanie informacji o obecnej nucie do innych skryptów
+#to miało być do pauzy odtwarzacza ale to średnio działa
+#func _notification(what):
+	#if what == NOTIFICATION_PAUSED:
+		#ignore_events = true
+	#elif what == NOTIFICATION_UNPAUSED:
+		#ignore_events = false
+
 func my_note_callback(event, track):
-	if GameManager.isGamePlaying==true:
-		if event['subtype'] == MIDI_MESSAGE_NOTE_ON: 
-			#print(str(event['note'])+" "+str(event['channel']))
-			if self.name=="MidiPlayer":
-				emit_signal("note_played", event['note'], self)
-			elif self.name=="MidiPlayerChannel2":
-				emit_signal("note_played_c2", event['note'], self)
-			elif self.name=="MidiPlayerWarning":
-				emit_signal("note_played_w", event['note'], self)	
-		elif event['subtype'] == MIDI_MESSAGE_NOTE_OFF:
-			#print("and off")
-			note_off.emit()
+	if ignore_events:
+		return
+
+	#wysyłanie obecnie zagranej nuty
+	if event["subtype"] == MIDI_MESSAGE_NOTE_ON:
+		match name:
+			"MidiPlayer":
+				note_played.emit(event["note"], self)
+			"MidiPlayerChannel2":
+				note_played_c2.emit(event["note"], self)
+			"MidiPlayerWarning":
+				note_played_w.emit(event["note"], self)
+	elif event["subtype"] == MIDI_MESSAGE_NOTE_OFF:
+		note_off.emit()

@@ -4,6 +4,8 @@ var midi_player
 var modifierType
 var mapName=GameManager.mapName
 
+#funkcja używana do pokazania nut na ekranie, jest wyłączona więc to wszystko możecie na razie zignorować
+
 func _ready() -> void:
 	var midiPlayerName
 	if self.name=="Label":

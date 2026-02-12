@@ -64,12 +64,27 @@ func _ready():
 
 
 func _physics_process(delta):
-	# Add the gravity.
+	#grawitacja
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		walkSfx.stop()
 		
+	#sprawdzanie nazwy tilemalayer'u
+	if is_on_floor():
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+
+			if collision.get_normal().dot(Vector2.UP) > 0.9:
+				var collider = collision.get_collider()
+
+				if "Spikes" in collider.name:
+					#get_node("HealthManager").health = 0
+					pass
+
+	#cała akcja z graczem jeżeli przynajmniej 2 graczy jest żywych
 	if GameManager.arePlayersAlive[player_id-1]==true:
+		
+		#zmiana kierunku animacji postaci
 		if animSprite.flip_h==true:
 			attackRaycast.target_position.y = -15
 			dashRaycast.target_position.y = -25
@@ -77,11 +92,16 @@ func _physics_process(delta):
 			attackRaycast.target_position.y = 15
 			dashRaycast.target_position.y = 25
 		
+		#kierunek ruchu postaci
 		var direction = Input.get_axis(currentPlayerActions[2], currentPlayerActions[1])
 		
+		#zatrzymanie animacji postaci oraz odliczania bez ruchu:
+		if GameManager.isGamePlaying==false:
+			moveTimer.stop()
+			animSprite.stop()
 			
 		#funkcje ataku i dash'a
-		if Input.is_action_just_pressed(currentPlayerActions[3]):
+		if Input.is_action_just_pressed(currentPlayerActions[3]) and GameManager.isGamePlaying==true:
 			dashPressTimer.start()
 			var dir = Input.get_axis(currentPlayerActions[2], currentPlayerActions[1])
 			if attackRaycast.is_colliding() and attackCooldownTimer.is_stopped() and dir != 0:
@@ -91,6 +111,11 @@ func _physics_process(delta):
 				else:
 					attackCooldownTimer.start()
 					body.attackVelocity = attackPushPower * sign(dir)
+					if body.get_node("AnimationPlayer").is_playing()==false:
+						body.get_node("AnimationPlayer").play("playerHurt")
+					else:
+						body.get_node("AnimationPlayer").stop()
+						body.get_node("AnimationPlayer").play("playerHurt")
 					emit_signal("playerAttack",player_id,attackPower,body,dir)
 			if dashPresses < maxDashPresses:
 				dashPresses += 1
@@ -103,20 +128,24 @@ func _physics_process(delta):
 					dashVelocity = dashPower * direction
 				dashPresses=0
 				dashPressTimer.stop()
-				
+		
+		#anulacja dash'u jeżeli odliczanie się skończy
 		if dashPressTimer.is_stopped():
 			dashPresses=0
-			
-		if Input.is_action_just_pressed(currentPlayerActions[4]):
+		
+		#funkcja zablokowania ataku
+		if Input.is_action_just_pressed(currentPlayerActions[4]) and GameManager.isGamePlaying==true:
 			if isPlayerInBlockArea==true and blockCooldownTimer.is_stopped():
 				print("block")
 				blocking=true
 				blockTimer.start()
 				blockCooldownTimer.start()
 				
+		#anulowanie zablokowania
 		if blockTimer.is_stopped():
 			blocking=false
-				
+		
+		#atak z dash'em
 		if dashRaycast.is_colliding():
 			if abs(velocity.x)>700.0 and dashAttackCooldownTimer.is_stopped():
 				dashAttackCooldownTimer.start()
@@ -127,8 +156,8 @@ func _physics_process(delta):
 				dashCooldownTimer.start()
 
 
-		# Handle dash.
-		if Input.is_action_just_pressed(currentPlayerActions[0]):
+		#aktywacja dash'a
+		if Input.is_action_just_pressed(currentPlayerActions[0]) and GameManager.isGamePlaying==true:
 			bufferTimer.start()
 			if jumps < maxJumps:
 				print("yump")
@@ -137,8 +166,8 @@ func _physics_process(delta):
 				velocity.y = JUMP_VELOCITY
 			
 			
-		#resetowanie skoków jeżeli gracz jest na ziemi
-		if is_on_floor():
+		#resetowanie skoków na buffer jeżeli gracz jest na ziemi
+		if is_on_floor() and GameManager.isGamePlaying==true:
 			jumps = 0	
 			if bufferTimer.time_left>0:
 				jumps += 1
@@ -146,16 +175,15 @@ func _physics_process(delta):
 				velocity.y = JUMP_VELOCITY
 				bufferTimer.stop()
 
-		
+		#zmienne z dash'em i atakowaniem z dash'em
 		dashVelocity = move_toward(dashVelocity, 0, dashPower * delta * 6)
 		attackVelocity = move_toward(attackVelocity, 0, 4000 * delta)
 
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
-		if direction:
+		#podstawowy ruch gracza
+		if direction and GameManager.isGamePlaying==true:
 			input_velocity = direction * SPEED
 			var external_velocity := dashVelocity + attackVelocity
-			if moveTimer.is_stopped()==false and GameManager.arePlayersAlive[player_id-1]==false:
+			if moveTimer.is_stopped()==false and GameManager.arePlayersAlive[player_id-1]==true:
 				moveTimer.stop()
 			if abs(external_velocity) > 1.0:
 				velocity.x = (direction * SPEED) + dashVelocity
@@ -177,8 +205,9 @@ func _physics_process(delta):
 				velocity.x = attackVelocity
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
-
 		move_and_slide()
+		
+	#akcje po śmierci wszystkich oprócz jednego gracza
 	else:
 		animSprite.stop()
 		set_collision_layer_value(2,false)
@@ -191,9 +220,10 @@ func _on_death_area_body_entered(body: Node2D) -> void:
 	moveTimer.stop()
 	body.get_node("HealthManager").health=0
 
-
+#funkcje po upłynięciu odliczania na ruch grazca
 func _on_move_timer_timeout():
-	#get_node("HealthManager").health=0
+	if velocity.x == 0 and is_on_floor():
+		get_node("HealthManager").health = 0
 	pass
 
 #rzeczy po zrobieniu damage'a przez gracza
@@ -210,7 +240,7 @@ func _on_player_attack(player, damage, playerDamaged, direction):
 func _on_dash_cooldown_timer_timeout():
 	print("COOLDOWN")
 
-
+#kiedy inny gracz wejdzie w strefę "blocku" gracza
 func _on_block_area_body_entered(body):
 	if body!=self:
 		playerAttacking=body.player_id

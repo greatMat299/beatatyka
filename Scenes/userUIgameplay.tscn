@@ -5,6 +5,74 @@
 [ext_resource type="Script" uid="uid://b8l640esogpq3" path="res://Scripts/pause_menu_logic.gd" id="3_7mm0a"]
 [ext_resource type="Shader" uid="uid://d2xvqetcvu2to" path="res://Shaders/blurShader.gdshader" id="3_iafmb"]
 [ext_resource type="Script" uid="uid://biirwqnvulu7e" path="res://Scripts/ui_block_show.gd" id="3_idex3"]
+[ext_resource type="Script" uid="uid://ip2g1uldtfvg" path="res://Scripts/ui_movetimer_show.gd" id="4_p5y4e"]
+[ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scenes/game_over_ui.gd" id="7_ha2xw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2xw"]
+shader = ExtResource("3_iafmb")
+shader_parameter/blur = 1.3
+
+[sub_resource type="Animation" id="Animation_p5y4e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ha2xw"]
+resource_name = "moveTimerUIBeat"
+loop_mode = 1
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2, 0.22, 0.24, 0.26, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26, 27, 26, 25, 24, 23, 22, 21, 20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ps6w"]
+_data = {
+&"RESET": SubResource("Animation_p5y4e"),
+&"moveTimerUIBeat": SubResource("Animation_ha2xw")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mm0a"]
 shader = ExtResource("3_iafmb")
@@ -12,195 +80,314 @@ shader_parameter/blur = 1.3
 
 [node name="UserUI" type="CanvasLayer" unique_id=1761966764]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2002860135]
+[node name="BlurFill" type="ColorRect" parent="." unique_id=1570569887]
+visible = false
+material = SubResource("ShaderMaterial_ha2xw")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverContainer" type="CenterContainer" parent="." unique_id=1338805771]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("7_ha2xw")
+metadata/_edit_use_anchors_ = true
 
-[node name="HealthLabels" type="Node" parent="." unique_id=429693231]
+[node name="Label" type="Label" parent="GameOverContainer" unique_id=1988620508]
+layout_mode = 2
+theme_override_font_sizes/font_size = 86
+text = "GAME OVER!"
+
+[node name="GameplayNodes" type="Control" parent="." unique_id=448258597]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="HealthLabels" type="Control" parent="GameplayNodes" unique_id=2102550579]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_46wpf")
 
-[node name="Label1" type="Label" parent="HealthLabels" unique_id=906574925]
+[node name="Label1" type="Label" parent="GameplayNodes/HealthLabels" unique_id=906574925]
 texture_filter = 1
+layout_mode = 0
 offset_right = 263.0
 offset_bottom = 83.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "Player 1: "
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Label2" type="Label" parent="HealthLabels" unique_id=1261639452]
+[node name="Label2" type="Label" parent="GameplayNodes/HealthLabels" unique_id=1261639452]
 visible = false
 texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -263.0
-offset_bottom = 83.0
-grow_horizontal = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 162.0
+offset_right = 247.0
+offset_bottom = 245.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
-text = "Player 2: "
+text = "Player 2:"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="HealthLabels" unique_id=1573888930]
+[node name="Label3" type="Label" parent="GameplayNodes/HealthLabels" unique_id=834803890]
 visible = false
 texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -1270.0
-offset_top = 139.0
-offset_right = -1007.0
-offset_bottom = 222.0
-grow_horizontal = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 328.0
+offset_right = 263.0
+offset_bottom = 411.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "Player 3: "
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="HealthLabels" unique_id=1969961975]
+[node name="Label4" type="Label" parent="GameplayNodes/HealthLabels" unique_id=1969961975]
 visible = false
 texture_filter = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -263.0
-offset_top = 139.0
-offset_bottom = 222.0
-grow_horizontal = 0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 492.0
+offset_right = 263.0
+offset_bottom = 575.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
 text = "Player 4: "
 horizontal_alignment = 1
 
-[node name="DashCooldownLabels" type="Node" parent="." unique_id=137096180]
+[node name="DashCooldownLabels" type="Control" parent="GameplayNodes" unique_id=783471833]
+anchors_preset = 0
 script = ExtResource("2_vpqug")
 
-[node name="Label1" type="Label" parent="DashCooldownLabels" unique_id=42393394]
-texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_top = -0.2400055
-offset_right = -0.42001343
-offset_bottom = -0.3199997
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "DASH COOLDOWN!"
-
-[node name="Label2" type="Label" parent="DashCooldownLabels" unique_id=632416320]
+[node name="Label1" type="Label" parent="GameplayNodes/DashCooldownLabels" unique_id=42393394]
 visible = false
 texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_left = 1007.0
-offset_top = -1.2400055
-offset_right = 1006.57996
-offset_bottom = -1.3199997
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 83.0
+offset_right = 185.0
+offset_bottom = 111.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "DASH COOLDOWN!"
 
-[node name="Label3" type="Label" parent="DashCooldownLabels" unique_id=1782094156]
+[node name="Label2" type="Label" parent="GameplayNodes/DashCooldownLabels" unique_id=632416320]
 visible = false
 texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_top = 137.76
-offset_right = -0.42001343
-offset_bottom = 137.68
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 244.0
+offset_right = 185.0
+offset_bottom = 272.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "DASH COOLDOWN!"
 
-[node name="Label4" type="Label" parent="DashCooldownLabels" unique_id=1232743029]
+[node name="Label3" type="Label" parent="GameplayNodes/DashCooldownLabels" unique_id=1782094156]
 visible = false
 texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_left = 1007.0
-offset_top = 137.76
-offset_right = 1006.57996
-offset_bottom = 137.68
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 405.0
+offset_right = 185.0
+offset_bottom = 433.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "DASH COOLDOWN!"
 
-[node name="BlockCooldownLabels" type="Node" parent="." unique_id=764642161]
+[node name="Label4" type="Label" parent="GameplayNodes/DashCooldownLabels" unique_id=1232743029]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 576.0
+offset_right = 185.0
+offset_bottom = 604.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "DASH COOLDOWN!"
+
+[node name="BlockCooldownLabels" type="Control" parent="GameplayNodes" unique_id=1358241843]
+anchors_preset = 0
 script = ExtResource("3_idex3")
 
-[node name="Label1" type="Label" parent="BlockCooldownLabels" unique_id=888071444]
-texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_top = 26.759995
-offset_right = 10.579987
-offset_bottom = 26.68
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "BLOCK COOLDOWN!"
-
-[node name="Label2" type="Label" parent="BlockCooldownLabels" unique_id=705795883]
+[node name="Label1" type="Label" parent="GameplayNodes/BlockCooldownLabels" unique_id=1857391973]
 visible = false
 texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_left = 1007.0
-offset_top = 26.759995
-offset_right = 1017.57996
-offset_bottom = 26.68
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 111.0
+offset_right = 185.0
+offset_bottom = 139.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "BLOCK COOLDOWN!"
 
-[node name="Label3" type="Label" parent="BlockCooldownLabels" unique_id=1380539562]
+[node name="Label2" type="Label" parent="GameplayNodes/BlockCooldownLabels" unique_id=1042988941]
 visible = false
 texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_top = 165.76
-offset_right = 10.579987
-offset_bottom = 165.68
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 272.0
+offset_right = 196.0
+offset_bottom = 300.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "BLOCK COOLDOWN!"
 
-[node name="Label4" type="Label" parent="BlockCooldownLabels" unique_id=1977133817]
+[node name="Label3" type="Label" parent="GameplayNodes/BlockCooldownLabels" unique_id=1337914080]
 visible = false
 texture_filter = 1
-anchors_preset = -1
-anchor_top = 0.117000006
-anchor_right = 0.14600001
-anchor_bottom = 0.156
-offset_left = 1007.0
-offset_top = 165.76
-offset_right = 1017.57996
-offset_bottom = 165.68
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 432.0
+offset_right = 196.0
+offset_bottom = 460.0
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "BLOCK COOLDOWN!"
 
-[node name="PauseMenu" type="Control" parent="." unique_id=10365116]
+[node name="Label4" type="Label" parent="GameplayNodes/BlockCooldownLabels" unique_id=775954129]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 604.0
+offset_right = 196.0
+offset_bottom = 632.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "BLOCK COOLDOWN!"
+
+[node name="MoveTimerLabel" type="Control" parent="GameplayNodes" unique_id=346882487]
+anchors_preset = 0
+script = ExtResource("4_p5y4e")
+
+[node name="Label1" type="Label" parent="GameplayNodes/MoveTimerLabel" unique_id=1666663595]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 137.5
+offset_right = 196.0
+offset_bottom = 168.5
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "MOVE!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/MoveTimerLabel/Label1" unique_id=1897301365]
+libraries/ = SubResource("AnimationLibrary_7ps6w")
+
+[node name="Label2" type="Label" parent="GameplayNodes/MoveTimerLabel" unique_id=1955069619]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 300.0
+offset_right = 196.0
+offset_bottom = 328.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "MOVE!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/MoveTimerLabel/Label2" unique_id=1626661827]
+libraries/ = SubResource("AnimationLibrary_7ps6w")
+speed_scale = 0.5
+
+[node name="Label3" type="Label" parent="GameplayNodes/MoveTimerLabel" unique_id=589778068]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 460.0
+offset_right = 196.0
+offset_bottom = 488.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "MOVE!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/MoveTimerLabel/Label3" unique_id=1401272637]
+libraries/ = SubResource("AnimationLibrary_7ps6w")
+speed_scale = 0.5
+
+[node name="Label4" type="Label" parent="GameplayNodes/MoveTimerLabel" unique_id=1248066984]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 632.0
+offset_right = 196.0
+offset_bottom = 660.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "MOVE!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/MoveTimerLabel/Label4" unique_id=2083464783]
+libraries/ = SubResource("AnimationLibrary_7ps6w")
+speed_scale = 0.5
+
+[node name="PauseMenu" type="Control" parent="GameplayNodes" unique_id=10365116]
 process_mode = 3
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -208,7 +395,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_7mm0a")
 
-[node name="BackgroundFill" type="ColorRect" parent="PauseMenu" unique_id=537255738]
+[node name="BackgroundFill" type="ColorRect" parent="GameplayNodes/PauseMenu" unique_id=537255738]
 material = SubResource("ShaderMaterial_7mm0a")
 layout_mode = 1
 anchors_preset = 15
@@ -217,7 +404,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseMenuContainer" type="VBoxContainer" parent="PauseMenu/BackgroundFill" unique_id=1662359046]
+[node name="PauseMenuContainer" type="VBoxContainer" parent="GameplayNodes/PauseMenu/BackgroundFill" unique_id=1662359046]
 texture_filter = 1
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
@@ -234,15 +421,15 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="ContinueBtn" type="Button" parent="PauseMenu/BackgroundFill/PauseMenuContainer" unique_id=351675730]
+[node name="ContinueBtn" type="Button" parent="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer" unique_id=351675730]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 text = "KONTYUNUJ"
 
-[node name="ExitBtn" type="Button" parent="PauseMenu/BackgroundFill/PauseMenuContainer" unique_id=284892593]
+[node name="ExitBtn" type="Button" parent="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer" unique_id=284892593]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 text = "WYJDŹ"
 
-[connection signal="pressed" from="PauseMenu/BackgroundFill/PauseMenuContainer/ContinueBtn" to="PauseMenu" method="resumeGame"]
-[connection signal="pressed" from="PauseMenu/BackgroundFill/PauseMenuContainer/ExitBtn" to="PauseMenu" method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="resumeGame"]
+[connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_exit_btn_pressed"]
