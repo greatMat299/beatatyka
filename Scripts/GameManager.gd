@@ -12,6 +12,7 @@ var mapName=""
 var player_count := 0
 var next_player_id := 0
 var isSongOver=false
+var currentPowerupIndex=-1
 
 #rejestracja gracza do tabeli
 func register_player() -> int:
