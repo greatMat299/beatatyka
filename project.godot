@@ -145,12 +145,15 @@ player4_block={
 2d_physics/layer_1="ground"
 2d_physics/layer_2="player"
 2d_physics/layer_3="blockArea"
+2d_physics/layer_4="powerup"
 
 [physics]
 
+2d/default_gravity=1200.0
 2d/default_gravity_vector=Vector2(0, 2)
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

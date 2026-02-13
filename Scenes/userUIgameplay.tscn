@@ -6,7 +6,9 @@
 [ext_resource type="Shader" uid="uid://d2xvqetcvu2to" path="res://Shaders/blurShader.gdshader" id="3_iafmb"]
 [ext_resource type="Script" uid="uid://biirwqnvulu7e" path="res://Scripts/ui_block_show.gd" id="3_idex3"]
 [ext_resource type="Script" uid="uid://ip2g1uldtfvg" path="res://Scripts/ui_movetimer_show.gd" id="4_p5y4e"]
-[ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scenes/game_over_ui.gd" id="7_ha2xw"]
+[ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scripts/game_over_ui.gd" id="7_ha2xw"]
+[ext_resource type="Script" uid="uid://66mihx2amhnt" path="res://Scripts/beat_report_ui.gd" id="8_7ps6w"]
+[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Assets/Images/1767176322606.jpg" id="8_i3n3s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2xw"]
 shader = ExtResource("3_iafmb")
@@ -78,6 +80,44 @@ _data = {
 shader = ExtResource("3_iafmb")
 shader_parameter/blur = 1.3
 
+[sub_resource type="Animation" id="Animation_riyq3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.165, 0.165)]
+}
+
+[sub_resource type="Animation" id="Animation_44dd6"]
+resource_name = "beatAnim"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.25, 0.25), Vector2(0.2, 0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_egsqa"]
+_data = {
+&"RESET": SubResource("Animation_riyq3"),
+&"beatAnim": SubResource("Animation_44dd6")
+}
+
 [node name="UserUI" type="CanvasLayer" unique_id=1761966764]
 
 [node name="BlurFill" type="ColorRect" parent="." unique_id=1570569887]
@@ -107,7 +147,11 @@ text = "GAME OVER!"
 
 [node name="GameplayNodes" type="Control" parent="." unique_id=448258597]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HealthLabels" type="Control" parent="GameplayNodes" unique_id=2102550579]
 layout_mode = 1
@@ -136,9 +180,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = 162.0
+offset_top = -197.0
 offset_right = 247.0
-offset_bottom = 245.0
+offset_bottom = -114.0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
@@ -152,9 +196,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = 328.0
+offset_top = -32.0
 offset_right = 263.0
-offset_bottom = 411.0
+offset_bottom = 51.0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
@@ -168,9 +212,9 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = 492.0
+offset_top = 137.0
 offset_right = 263.0
-offset_bottom = 575.0
+offset_bottom = 220.0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
@@ -430,6 +474,22 @@ text = "KONTYUNUJ"
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 text = "WYJDŹ"
+
+[node name="BeatLabel" type="TextureRect" parent="GameplayNodes" unique_id=1708007222]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -118.0
+offset_right = 1052.0
+offset_bottom = 1078.0
+grow_horizontal = 2
+scale = Vector2(0.165, 0.165)
+texture = ExtResource("8_i3n3s")
+script = ExtResource("8_7ps6w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/BeatLabel" unique_id=1255462400]
+libraries/ = SubResource("AnimationLibrary_egsqa")
 
 [connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="resumeGame"]
 [connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_exit_btn_pressed"]
