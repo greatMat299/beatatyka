@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://cqo03vx8ekjl7"
+path="res://.godot/imported/crabRaveC2.mid-75fd58d804144fa016cc446e963b1437.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/crabRaveC2.mid"
+dest_files=["res://.godot/imported/crabRaveC2.mid-75fd58d804144fa016cc446e963b1437.res"]
+
+[params]
+
