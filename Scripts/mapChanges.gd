@@ -13,6 +13,9 @@ var currentWarningSpike := -1
 
 func _ready() -> void:
 	var midiPlayerName
+	var rng = RandomNumberGenerator.new()
+	
+	GameManager.currentPowerupIndex = rng.randi_range(1, 3)
 	
 	#wstępne przygotowanie mapy
 	GameManager.mapName=self.name

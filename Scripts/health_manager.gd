@@ -22,10 +22,14 @@ func _ready():
 	pass
 	
 func heal_player(body, healthAdded):
-	print("healthyyyy")
-	var possibleHealthAdd = 100-body.get_node("HealthManager").health
-	if possibleHealthAdd>=healthAdded:
-		body.get_node("HealthManager").health+healthAdded
+	if get_parent()!=body:
+		pass
+	else:
+		print("healthyyyy")
+		var healthPenalty = 100-body.get_node("HealthManager").health
+		if healthPenalty>=50:
+			healthPenalty=healthAdded
+		body.get_node("HealthManager").health+=healthPenalty
 	
 func _process(_delta):
 	#akcje po wyczerpaniu się zdrowia gracza

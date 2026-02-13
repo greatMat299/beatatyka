@@ -18,6 +18,12 @@ var attacking = false
 var blocking = false
 var isPlayerInBlockArea=false
 var playerAttacking=""
+var isInvincible=false
+
+var powerup1
+var powerup2
+var powerup3
+
 @onready var animSprite = $AnimatedSprite2D
 @onready var moveTimer = $MoveTimer
 @onready var bufferTimer = $BufferTimer
@@ -51,6 +57,16 @@ var playerAttacking=""
 
 
 func _ready():
+	powerup1 = self.get_parent().get_node("Powerup1")
+	powerup2 = self.get_parent().get_node("Powerup2")
+	powerup3 = self.get_parent().get_node("Powerup3")
+	
+	powerup1.set_invicibility.connect(self.set_invicibility)
+	powerup2.set_invicibility.connect(self.set_invicibility)
+	powerup3.set_invicibility.connect(self.set_invicibility)
+	
+	print(powerup2)
+	
 	bufferTimer.wait_time = maxBufferTime
 	dashPressTimer.wait_time = maxDashPressTime
 	player_id = GameManager.register_player()
@@ -62,9 +78,17 @@ func _ready():
 		currentPlayerActions.push_back(str("player")+str(player_id)+str("_")+str(PLAYER_ACTIONS[i]))
 	attackRaycast.add_exception(self)
 	dashRaycast.add_exception(self)
+	
+func set_invicibility(body, state):
+	if self!=body:
+		pass
+	else:
+		print(str("INVINCIBLE!!! ")+str(state))
+		isInvincible=state
 
 
 func _physics_process(delta):
+	print(isInvincible)
 	#grawitacja
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -111,14 +135,15 @@ func _physics_process(delta):
 					body.get_node("AnimationPlayer").play("playerBlock")
 					blockSfx.play()
 				else:
-					attackCooldownTimer.start()
-					body.attackVelocity = attackPushPower * sign(dir)
-					if body.get_node("AnimationPlayer").is_playing()==false:
-						body.get_node("AnimationPlayer").play("playerHurt")
-					else:
-						body.get_node("AnimationPlayer").stop()
-						body.get_node("AnimationPlayer").play("playerHurt")
-					emit_signal("playerAttack",player_id,attackPower,body,dir)
+					if !body.isInvincible:
+						attackCooldownTimer.start()
+						body.attackVelocity = attackPushPower * sign(dir)
+						if body.get_node("AnimationPlayer").is_playing()==false:
+							body.get_node("AnimationPlayer").play("playerHurt")
+						else:
+							body.get_node("AnimationPlayer").stop()
+							body.get_node("AnimationPlayer").play("playerHurt")
+						emit_signal("playerAttack",player_id,attackPower,body,dir)
 			if dashPresses < maxDashPresses:
 				dashPresses += 1
 			else:
@@ -230,13 +255,15 @@ func _on_move_timer_timeout():
 
 #rzeczy po zrobieniu damage'a przez gracza
 func _on_player_attack(player, damage, playerDamaged, direction):
-	attackSfx.play()
-	attacking=true
-	GameManager.playerAttackStatus[player_id-1]=attacking
-	await get_tree().create_timer(.9).timeout
-	attacking=false
-	GameManager.playerAttackStatus[player_id-1]=attacking
-	print(str("Player ")+str(player)+str(" did ")+str(damage)+str(" damage")+str(" to ")+str(playerDamaged.name))
+	if !playerDamaged.isInvincible:
+		print("gets throug")
+		attackSfx.play()
+		attacking=true
+		GameManager.playerAttackStatus[player_id-1]=attacking
+		await get_tree().create_timer(.9).timeout
+		attacking=false
+		GameManager.playerAttackStatus[player_id-1]=attacking
+		print(str("Player ")+str(player)+str(" did ")+str(damage)+str(" damage")+str(" to ")+str(playerDamaged.name))
 
 
 func _on_dash_cooldown_timer_timeout():

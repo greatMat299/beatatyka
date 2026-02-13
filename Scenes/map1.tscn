@@ -68,7 +68,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wouuh"]
-size = Vector2(1018, 28)
+size = Vector2(1297, 28)
 
 [node name="CrabRave" type="Node2D" unique_id=1065128858]
 script = ExtResource("1_jemul")
@@ -274,7 +274,7 @@ position = Vector2(941, 19)
 shape = SubResource("RectangleShape2D_wouuh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea" unique_id=700767055]
-position = Vector2(-492, 19)
+position = Vector2(-352.5, 19)
 shape = SubResource("RectangleShape2D_wouuh")
 
 [connection signal="body_entered" from="DeathArea" to="Player1" method="_on_death_area_body_entered"]

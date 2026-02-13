@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2jpvgc3wkg5m"
-path="res://.godot/imported/prioressOfKirklees_.png-62683e8feb80cb9a78d6023460adbbaa.ctex"
+uid="uid://sm6v87sc5e7g"
+path="res://.godot/imported/no_damage.png-7d53afdb53ffd4881a5eb861273d43a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/prioressOfKirklees_.png"
-dest_files=["res://.godot/imported/prioressOfKirklees_.png-62683e8feb80cb9a78d6023460adbbaa.ctex"]
+source_file="res://Assets/Images/Powerups/no_damage.png"
+dest_files=["res://.godot/imported/no_damage.png-7d53afdb53ffd4881a5eb861273d43a1.ctex"]
 
 [params]
 

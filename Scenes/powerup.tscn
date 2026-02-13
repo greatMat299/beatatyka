@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuht07dng30u2" path="res://Scripts/powerup_logic.gd" id="1_dkaad"]
 [ext_resource type="Texture2D" uid="uid://dbxdumnujx0mj" path="res://Assets/Images/Powerups/heal.png" id="2_f1g1t"]
+[ext_resource type="AudioStream" uid="uid://cnplnsqr48ayc" path="res://Assets/Sound/SFX/healSound.mp3" id="3_f1g1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_og0gp"]
 size = Vector2(30.769234, 26.153849)
@@ -65,5 +66,8 @@ libraries/ = SubResource("AnimationLibrary_og0gp")
 wait_time = 3.0
 one_shot = true
 
+[node name="HealSFX" type="AudioStreamPlayer2D" parent="." unique_id=1233740677]
+stream = ExtResource("3_f1g1t")
+volume_db = 10.0
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
