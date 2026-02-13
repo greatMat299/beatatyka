@@ -34,7 +34,7 @@ func _process(_delta):
 		addedZoomX=defaultZoom-(zoomX_beg/playerCount) #zoom X
 		addedOffsetY=offsetY_beg/playerCount #zoom Y
 		self.zoom = Vector2(addedZoomX+addedOffsetY,addedZoomX+addedOffsetY)
-		print(players[0].position.y)
+		#print(players[0].position.y)
 	else:
 		#jeżeli z jakiegoś powodu nie wykryło żadnych graczy to je dodaje
 		playerCount=GameManager.player_count

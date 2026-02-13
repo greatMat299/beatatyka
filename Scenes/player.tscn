@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bddvmwmjtrvnh" path="res://Assets/Sound/SFX/attackSound.mp3" id="5_fkybt"]
 [ext_resource type="AudioStream" uid="uid://7rf2oinhwevi" path="res://Assets/Sound/SFX/deathSound.mp3" id="6_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://daoltk6k0d87n" path="res://Assets/Sound/SFX/jump.mp3" id="7_3smsa"]
+[ext_resource type="AudioStream" uid="uid://3nbkn8adte76" path="res://Assets/Sound/SFX/blockSound.mp3" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
@@ -135,6 +136,22 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_f1ek2"]
+resource_name = "playerBlock"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.35686275, 0.6627451, 1, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_8erm5"]
 resource_name = "playerHurt"
 length = 0.36
@@ -154,6 +171,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ek2"]
 _data = {
 &"RESET": SubResource("Animation_3smsa"),
+&"playerBlock": SubResource("Animation_f1ek2"),
 &"playerHurt": SubResource("Animation_8erm5")
 }
 
@@ -242,6 +260,11 @@ bus = &"SFX"
 
 [node name="JumpSfx" type="AudioStreamPlayer2D" parent="SFX" unique_id=1962131320]
 stream = ExtResource("7_3smsa")
+volume_db = 18.0
+bus = &"SFX"
+
+[node name="BlockSfx" type="AudioStreamPlayer2D" parent="SFX" unique_id=1135236567]
+stream = ExtResource("8_8erm5")
 volume_db = 18.0
 bus = &"SFX"
 

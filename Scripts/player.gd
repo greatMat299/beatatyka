@@ -33,6 +33,7 @@ var playerAttacking=""
 @onready var attackSfx = $SFX/AttackSfx
 @onready var walkSfx = $SFX/WalkSfx
 @onready var jumpSfx = $SFX/JumpSfx
+@onready var blockSfx = $SFX/BlockSfx
 
 @export_category("Timer Lengths")
 @export var maxBufferTime : float = 0.15
@@ -107,7 +108,8 @@ func _physics_process(delta):
 			if attackRaycast.is_colliding() and attackCooldownTimer.is_stopped() and dir != 0:
 				var body = attackRaycast.get_collider()
 				if body.blocking:
-					return
+					body.get_node("AnimationPlayer").play("playerBlock")
+					blockSfx.play()
 				else:
 					attackCooldownTimer.start()
 					body.attackVelocity = attackPushPower * sign(dir)
@@ -222,8 +224,8 @@ func _on_death_area_body_entered(body: Node2D) -> void:
 
 #funkcje po upłynięciu odliczania na ruch grazca
 func _on_move_timer_timeout():
-	if velocity.x == 0 and is_on_floor():
-		get_node("HealthManager").health = 0
+	#if velocity.x == 0 and is_on_floor():
+		#get_node("HealthManager").health = 0
 	pass
 
 #rzeczy po zrobieniu damage'a przez gracza

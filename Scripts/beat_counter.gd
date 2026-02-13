@@ -9,6 +9,8 @@ var last_reported_beat = 0
 var mesaure = 1
 var mesaures = 4
 
+signal hasBeat
+
 func _ready():
 	sec_per_beat = 60.0 / bpm
 
@@ -29,4 +31,5 @@ func reportBeat():
 			mesaure = 1
 		last_reported_beat = song_position_in_beats
 		mesaure += 1
-		#print("beat")
+		print("beat")
+		hasBeat.emit()

@@ -2,15 +2,32 @@ extends Node
 
 var health = 100
 var id: int =-1
+var powerup1
+var powerup2
+var powerup3
 
 func _ready():
+	powerup1 = self.get_parent().get_parent().get_node("Powerup1")
+	powerup2 = self.get_parent().get_parent().get_node("Powerup2")
+	powerup3 = self.get_parent().get_parent().get_node("Powerup3")
+	
+	powerup1.heal_player.connect(self.heal_player)
+	powerup2.heal_player.connect(self.heal_player)
+	powerup3.heal_player.connect(self.heal_player)
+	
 	var idString
 	idString=get_parent().name
 	id=int(idString.substr(len(idString)-1,len(idString)))
 	print(id)
 	pass
 	
-func _process(delta):
+func heal_player(body, healthAdded):
+	print("healthyyyy")
+	var possibleHealthAdd = 100-body.get_node("HealthManager").health
+	if possibleHealthAdd>=healthAdded:
+		body.get_node("HealthManager").health+healthAdded
+	
+func _process(_delta):
 	#akcje po wyczerpaniu się zdrowia gracza
 	if health<=0 and GameManager.arePlayersAlive[id-1]==true:
 		get_parent().get_node("SFX").get_node("DeathSfx").play()
