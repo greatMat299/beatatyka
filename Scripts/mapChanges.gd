@@ -9,9 +9,26 @@ var currentPlatform=-1
 var currentSpike=-1
 var currentWarningPlatform := -1
 var currentWarningSpike := -1
+var playerCount = 3
 @onready var ground := $Ground
 
+@export var playerScene : PackedScene
+@export var playerPos = [0.0,0.0,0.0,0.0]
+
+
 func _ready() -> void:
+	for i in range(0,playerCount):
+		var copy = playerScene.instantiate()
+		copy.player_id = GameManager.register_player()
+		copy.name=str("Player")+str(i+1)
+		copy.position.x = playerPos[i]
+		var death_area = get_node("DeathArea")
+		death_area.body_entered.connect(copy._on_death_area_body_entered)
+		add_child(copy)
+		
+	
+	
+	
 	var midiPlayerName
 	var rng = RandomNumberGenerator.new()
 	

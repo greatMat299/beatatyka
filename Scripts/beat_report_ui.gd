@@ -8,5 +8,4 @@ func _ready() -> void:
 	audioPlayer.hasBeat.connect(self.onBeat)
 
 func onBeat():
-	print("dj skibidi")
 	animPlayer.play("beatAnim")

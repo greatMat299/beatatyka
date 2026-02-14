@@ -5,8 +5,8 @@ var players=[]
 var activeLabels=[]
 
 func _ready():
-	
 	#dodawanie elementów graczy oraz tekstów z graczami
+	await get_tree().process_frame
 	playerCount=GameManager.player_count
 	for i in range(0,playerCount):
 		players.push_back(get_parent().get_parent().get_parent().get_node(str("Player")+str(i+1)))

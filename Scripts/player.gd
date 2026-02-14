@@ -10,7 +10,7 @@ var maxJumps = 1
 var dashPresses=0
 var maxDashPresses=1
 var dashVelocity := 0.0
-var player_id := -1
+var player_id : int = -1
 var attackVelocity := 0.0
 var currentPlayerActions = []
 var input_velocity := 0.0
@@ -57,6 +57,8 @@ var powerup3
 
 
 func _ready():
+	
+	#inicjacja powerupów
 	powerup1 = self.get_parent().get_node("Powerup1")
 	powerup2 = self.get_parent().get_node("Powerup2")
 	powerup3 = self.get_parent().get_node("Powerup3")
@@ -65,30 +67,33 @@ func _ready():
 	powerup2.set_invicibility.connect(self.set_invicibility)
 	powerup3.set_invicibility.connect(self.set_invicibility)
 	
-	print(powerup2)
-	
+	#inicjacja timerów
 	bufferTimer.wait_time = maxBufferTime
 	dashPressTimer.wait_time = maxDashPressTime
-	player_id = GameManager.register_player()
 	dashCooldownTimer.wait_time = dashCooldownAmount
 	attackCooldownTimer.wait_time = attackCooldownAmount
 	blockTimer.wait_time = blockTimeAmount
 	blockCooldownTimer.wait_time = blockCooldownAmount
+	
+	#dodanie przypisów klawiszy dla graczy
 	for i in range(0,len(PLAYER_ACTIONS)):
 		currentPlayerActions.push_back(str("player")+str(player_id)+str("_")+str(PLAYER_ACTIONS[i]))
+		
+	#usunięcie swojej kolizji z RayCastów
 	attackRaycast.add_exception(self)
 	dashRaycast.add_exception(self)
+	
+	print("I am player ", player_id, " and my node name is ", name)
 	
 func set_invicibility(body, state):
 	if self!=body:
 		pass
 	else:
-		print(str("INVINCIBLE!!! ")+str(state))
 		isInvincible=state
 
 
 func _physics_process(delta):
-	print(isInvincible)
+			
 	#grawitacja
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -208,10 +213,11 @@ func _physics_process(delta):
 
 		#podstawowy ruch gracza
 		if direction and GameManager.isGamePlaying==true:
-			input_velocity = direction * SPEED
-			var external_velocity := dashVelocity + attackVelocity
 			if moveTimer.is_stopped()==false and GameManager.arePlayersAlive[player_id-1]==true:
 				moveTimer.stop()
+			input_velocity = direction * SPEED
+			var external_velocity := dashVelocity + attackVelocity
+			
 			if abs(external_velocity) > 1.0:
 				velocity.x = (direction * SPEED) + dashVelocity
 			else:
@@ -236,6 +242,7 @@ func _physics_process(delta):
 		
 	#akcje po śmierci wszystkich oprócz jednego gracza
 	else:
+		#moveTimer.stop()
 		animSprite.stop()
 		set_collision_layer_value(2,false)
 		set_collision_mask_value(1,false)
@@ -243,9 +250,9 @@ func _physics_process(delta):
 
 #zakończenie gry po spadnięciu z mapy
 func _on_death_area_body_entered(body: Node2D) -> void:
-	print("DEATH")
-	moveTimer.stop()
-	body.get_node("HealthManager").health=0
+	if body is CharacterBody2D and body.has_node("HealthManager"):
+		body.get_node("HealthManager").health=0
+		moveTimer.stop()
 
 #funkcje po upłynięciu odliczania na ruch grazca
 func _on_move_timer_timeout():

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvlmbidlstuhw"
-path="res://.godot/imported/friarTuckHand_.png-b65ebc4a1a6b5c1b20d45f1201300b21.ctex"
+path="res://.godot/imported/friarTuckHand_.png-662be797185a28a0a077e09041a24de4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/friarTuckHand_.png"
-dest_files=["res://.godot/imported/friarTuckHand_.png-b65ebc4a1a6b5c1b20d45f1201300b21.ctex"]
+source_file="res://robinHood_ v1.1/friarTuckHand_.png"
+dest_files=["res://.godot/imported/friarTuckHand_.png-662be797185a28a0a077e09041a24de4.ctex"]
 
 [params]
 

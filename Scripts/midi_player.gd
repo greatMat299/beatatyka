@@ -3,13 +3,13 @@ extends MidiPlayer
 signal note_played(note, sender)
 signal note_played_c2(note, sender)
 signal note_played_w(note, sender)
+signal note_played_wc(note, sender) #warningcatch
 signal note_off
 var ignore_events := false
 
 func _ready():
 	note.connect(my_note_callback)
 	play()
-	#current_time=129
 	
 func _process(_delta):
 	#zatrzymanie odtwarzacza MIDI jeżeli gra się skończy
@@ -36,5 +36,7 @@ func my_note_callback(event, track):
 				note_played_c2.emit(event["note"], self)
 			"MidiPlayerWarning":
 				note_played_w.emit(event["note"], self)
+			"MidiPlayerCatcher":
+				note_played_wc.emit(event["note"], self)
 	elif event["subtype"] == MIDI_MESSAGE_NOTE_OFF:
 		note_off.emit()

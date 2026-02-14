@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fq4kuu4vxe50"
-path="res://.godot/imported/friarTuck_.png-8c0c59fad66f86b1b211e01543da64f9.ctex"
+path="res://.godot/imported/friarTuck_.png-9be6fc600f7a3e248901886e206c2a20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/friarTuck_.png"
-dest_files=["res://.godot/imported/friarTuck_.png-8c0c59fad66f86b1b211e01543da64f9.ctex"]
+source_file="res://robinHood_ v1.1/friarTuck_.png"
+dest_files=["res://.godot/imported/friarTuck_.png-9be6fc600f7a3e248901886e206c2a20.ctex"]
 
 [params]
 

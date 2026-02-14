@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qmvviun8ixjc"
-path="res://.godot/imported/bishopOfHerefordHand_.png-88827ea7091aeffa92bfbc465f7c6d0f.ctex"
+path="res://.godot/imported/bishopOfHerefordHand_.png-f6b5d56e2e96670a0c7676a7209cce04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/bishopOfHerefordHand_.png"
-dest_files=["res://.godot/imported/bishopOfHerefordHand_.png-88827ea7091aeffa92bfbc465f7c6d0f.ctex"]
+source_file="res://robinHood_ v1.1/bishopOfHerefordHand_.png"
+dest_files=["res://.godot/imported/bishopOfHerefordHand_.png-f6b5d56e2e96670a0c7676a7209cce04.ctex"]
 
 [params]
 

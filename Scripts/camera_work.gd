@@ -14,23 +14,37 @@ func addPlayers():
 		players.push_back(get_parent().get_node(str("Player")+str(i+1)))
 		
 func _process(_delta):
+	
+	
 	#jeżeli gracz nie jest za nisko to dodaje przybliżenie kamery zależne od pozycji wszystkich graczy
 	if playerCount>0:
 		if players[0].position.y<160:
 			offsetY_beg=(players[0].position.y-86.0)/500.0 #pozycja Y
 			zoomX_beg=abs(players[0].position.x)/2000.0 #pozycja X
+		else:
+			offsetY_beg = 0
+			zoomX_beg = 0
 		if playerCount>=2:
 			if players[1].position.y<160:
 				offsetY_beg+=(players[1].position.y-86.0)/500.0 #pozycja Y
 				zoomX_beg+=abs(players[1].position.x)/2000.0 #pozycja X
+			else:
+				offsetY_beg = 0
+				zoomX_beg = 0
 		if playerCount>=3:
 			if players[2].position.y<160:
 				offsetY_beg+=(players[2].position.y-86.0)/500.0 #pozycja Y
 				zoomX_beg+=abs(players[2].position.x)/2000.0 #pozycja X
+			else:
+				offsetY_beg = 0
+				zoomX_beg = 0
 		if playerCount>=4:
 			if players[3].position.y<160:
 				offsetY_beg+=(players[3].position.y-86.0)/500.0 #pozycja Y
 				zoomX_beg+=abs(players[3].position.x)/2000.0 #pozycja X
+			else:
+				offsetY_beg = 0
+				zoomX_beg = 0
 		addedZoomX=defaultZoom-(zoomX_beg/playerCount) #zoom X
 		addedOffsetY=offsetY_beg/playerCount #zoom Y
 		self.zoom = Vector2(addedZoomX+addedOffsetY,addedZoomX+addedOffsetY)

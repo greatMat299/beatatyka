@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://cmovijrkx6q7m"]
 
 [ext_resource type="Script" uid="uid://b7rgv0jc3wi4v" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://dahq7vmqj1ytq" path="res://Assets/robinHood_ v1.1/bishopOfHereford_.png" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://dahq7vmqj1ytq" path="res://robinHood_ v1.1/bishopOfHereford_.png" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://d1tc0c78rjfer" path="res://Scripts/health_manager.gd" id="3_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://cukebisn3e8yy" path="res://Assets/Sound/SFX/dashSound.mp3" id="4_vgqql"]
 [ext_resource type="AudioStream" uid="uid://bddvmwmjtrvnh" path="res://Assets/Sound/SFX/attackSound.mp3" id="5_fkybt"]
 [ext_resource type="AudioStream" uid="uid://7rf2oinhwevi" path="res://Assets/Sound/SFX/deathSound.mp3" id="6_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://daoltk6k0d87n" path="res://Assets/Sound/SFX/jump.mp3" id="7_3smsa"]
-[ext_resource type="AudioStream" uid="uid://3nbkn8adte76" path="res://Assets/Sound/SFX/blockSound.mp3" id="8_8erm5"]
+[ext_resource type="AudioStream" uid="uid://d1fasotr5cstu" path="res://Assets/Sound/SFX/blockSound.mp3" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
@@ -175,9 +175,12 @@ _data = {
 &"playerHurt": SubResource("Animation_8erm5")
 }
 
-[node name="Player1" type="CharacterBody2D" unique_id=647595686]
+[node name="Player1" type="CharacterBody2D" unique_id=647595686 groups=["player"]]
 collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_cvnsp")
+attackPower = 10.0
+dashAttackPower = 18.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=518338731]
 texture_filter = 1

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dd5v1gg3wkq11"
-path="res://.godot/imported/littleJohnHand_.png-efbc00a79fecf4417b8ee0c5d8e1669f.ctex"
+path="res://.godot/imported/littleJohnHand_.png-b3c7652859c4572fdd37ea31326dd5bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/littleJohnHand_.png"
-dest_files=["res://.godot/imported/littleJohnHand_.png-efbc00a79fecf4417b8ee0c5d8e1669f.ctex"]
+source_file="res://robinHood_ v1.1/littleJohnHand_.png"
+dest_files=["res://.godot/imported/littleJohnHand_.png-b3c7652859c4572fdd37ea31326dd5bf.ctex"]
 
 [params]
 

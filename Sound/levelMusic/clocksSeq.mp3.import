@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cf8w2w45hlnj0"
-path="res://.godot/imported/clocksSeq.mp3-9681e9dd2efe5433b38dadc9b7668c26.mp3str"
+path="res://.godot/imported/clocksSeq.mp3-bec460384a1fe0d0da2cfde7242b94d8.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/levelMusic/clocksSeq.mp3"
-dest_files=["res://.godot/imported/clocksSeq.mp3-9681e9dd2efe5433b38dadc9b7668c26.mp3str"]
+source_file="res://Sound/levelMusic/clocksSeq.mp3"
+dest_files=["res://.godot/imported/clocksSeq.mp3-bec460384a1fe0d0da2cfde7242b94d8.mp3str"]
 
 [params]
 

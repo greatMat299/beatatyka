@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dauqjhtnuxqe5"
-path="res://.godot/imported/prioressOfKirkleesHand_.png-364714ef0b73705e5c1dbeb2fae82ac1.ctex"
+path="res://.godot/imported/prioressOfKirkleesHand_.png-c2bacf0335f17ba81e336c09051e3a4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/prioressOfKirkleesHand_.png"
-dest_files=["res://.godot/imported/prioressOfKirkleesHand_.png-364714ef0b73705e5c1dbeb2fae82ac1.ctex"]
+source_file="res://robinHood_ v1.1/prioressOfKirkleesHand_.png"
+dest_files=["res://.godot/imported/prioressOfKirkleesHand_.png-c2bacf0335f17ba81e336c09051e3a4c.ctex"]
 
 [params]
 

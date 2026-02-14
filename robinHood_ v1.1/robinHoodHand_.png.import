@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7o5k3f7r88ih"
-path="res://.godot/imported/robinHoodHand_.png-3f0a5eeda8db3e932f375d6782fc107d.ctex"
+path="res://.godot/imported/robinHoodHand_.png-266ee8825d1d66f334d32ffdab789896.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/robinHood_ v1.1/robinHoodHand_.png"
-dest_files=["res://.godot/imported/robinHoodHand_.png-3f0a5eeda8db3e932f375d6782fc107d.ctex"]
+source_file="res://robinHood_ v1.1/robinHoodHand_.png"
+dest_files=["res://.godot/imported/robinHoodHand_.png-266ee8825d1d66f334d32ffdab789896.ctex"]
 
 [params]
 
