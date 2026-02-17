@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://udwpaopb3ae3"]
+
+[ext_resource type="Script" uid="uid://bpc8qsusr51xp" path="res://Scripts/MainMenu/keybinds_menu.gd" id="1_2im6s"]
+
+[node name="KeybindsMenu" type="Control" unique_id=192418036]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2im6s")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1882054342]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 110
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 110
+theme_override_constants/margin_bottom = 110
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer" unique_id=1678829692]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Container" unique_id=438267563]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Player1Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1643236412]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
+text = "PLAYER 1"
+
+[node name="Player2Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1416615071]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
+text = "PLAYER 2"
+
+[node name="Player3Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1683570593]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
+text = "PLAYER 3"
+
+[node name="Player4Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=170615368]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
+text = "PLAYER 4"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=898542523]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="LeftButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1005997891]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/LeftButton" unique_id=203646628]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftText" type="Label" parent="MarginContainer/Container/VBoxContainer/LeftButton/HBoxContainer" unique_id=2073345378]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "LEFT"
+
+[node name="CurrentLeftKey" type="Label" parent="MarginContainer/Container/VBoxContainer/LeftButton/HBoxContainer" unique_id=1969076731]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 28
+text = "←"
+horizontal_alignment = 1
+
+[node name="RightButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1433995185]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/RightButton" unique_id=794160716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RightText" type="Label" parent="MarginContainer/Container/VBoxContainer/RightButton/HBoxContainer" unique_id=972503406]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "RIGHT"
+
+[node name="CurrentRightKey" type="Label" parent="MarginContainer/Container/VBoxContainer/RightButton/HBoxContainer" unique_id=902440530]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 28
+text = "→"
+horizontal_alignment = 1
+
+[node name="JumpButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=335485505]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/JumpButton" unique_id=894994976]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JumpText" type="Label" parent="MarginContainer/Container/VBoxContainer/JumpButton/HBoxContainer" unique_id=1998923712]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "JUMP"
+
+[node name="CurrentJumpKey" type="Label" parent="MarginContainer/Container/VBoxContainer/JumpButton/HBoxContainer" unique_id=341505452]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 28
+text = "SPACE"
+horizontal_alignment = 1
+
+[node name="AttackButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1044293508]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/AttackButton" unique_id=208277120]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AttackText" type="Label" parent="MarginContainer/Container/VBoxContainer/AttackButton/HBoxContainer" unique_id=1233916191]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "BASIC ATTACK"
+
+[node name="CurrentAttackKey" type="Label" parent="MarginContainer/Container/VBoxContainer/AttackButton/HBoxContainer" unique_id=188425162]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 28
+text = "Z"
+horizontal_alignment = 1
+
+[node name="BlockButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1935285469]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/BlockButton" unique_id=846861510]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlockText" type="Label" parent="MarginContainer/Container/VBoxContainer/BlockButton/HBoxContainer" unique_id=1867678858]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 26
+text = "BLOCK"
+
+[node name="CurrentBlockKey" type="Label" parent="MarginContainer/Container/VBoxContainer/BlockButton/HBoxContainer" unique_id=351232292]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 28
+text = "↓"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Container/VBoxContainer" unique_id=1591645428]
+layout_mode = 2
+
+[node name="Return" type="Button" parent="MarginContainer/Container/VBoxContainer/HBoxContainer" unique_id=1756117763]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "RETURN"
+
+[node name="Save" type="Button" parent="MarginContainer/Container/VBoxContainer/HBoxContainer" unique_id=1405651376]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "SAVE"
+
+[connection signal="pressed" from="MarginContainer/Container/HBoxContainer/Player1Btn" to="." method="_on_player_btn_pressed" binds= [1]]
+[connection signal="pressed" from="MarginContainer/Container/HBoxContainer/Player2Btn" to="." method="_on_player_btn_pressed" binds= [2]]
+[connection signal="pressed" from="MarginContainer/Container/HBoxContainer/Player3Btn" to="." method="_on_player_btn_pressed" binds= [3]]
+[connection signal="pressed" from="MarginContainer/Container/HBoxContainer/Player4Btn" to="." method="_on_player_btn_pressed" binds= [4]]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/RightButton" to="." method="_on_right_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/JumpButton" to="." method="_on_jump_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/BlockButton" to="." method="_on_block_button_pressed"]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/HBoxContainer/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]

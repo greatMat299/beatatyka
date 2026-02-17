@@ -7,10 +7,10 @@
 [ext_resource type="MidiResource" uid="uid://cqo03vx8ekjl7" path="res://Sound/levelMIDI/crabRaveC2.mid" id="5_si05j"]
 [ext_resource type="Script" uid="uid://bxfsq5isjqiwb" path="res://Scripts/midi_player.gd" id="6_wouuh"]
 [ext_resource type="MidiResource" uid="uid://c7vii1ld818v2" path="res://Sound/levelMIDI/crabRaveWarn.mid" id="7_si05j"]
-[ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="8_jemul"]
-[ext_resource type="AudioStream" uid="uid://c7i1ehb2ahxp0" path="res://Assets/Sound/levelMusic/crabRave.wav" id="8_si05j"]
 [ext_resource type="PackedScene" uid="uid://crvd4x1oahyu7" path="res://Scenes/userUIgameplay.tscn" id="8_wouuh"]
 [ext_resource type="MidiResource" uid="uid://d2ni3hwmw5yj2" path="res://Sound/levelMIDI/crabRaveC1.mid" id="10_gg3vl"]
+[ext_resource type="AudioStream" uid="uid://c7i1ehb2ahxp0" path="res://Assets/Sound/levelMusic/crabRave.wav" id="11_vcux0"]
+[ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="12_gg3vl"]
 [ext_resource type="PackedScene" uid="uid://dhaa2cph3j40m" path="res://Scenes/powerup.tscn" id="12_vcux0"]
 
 [sub_resource type="Animation" id="Animation_si05j"]
@@ -232,30 +232,19 @@ position = Vector2(133, -30)
 
 [node name="MidiPlayer" type="MidiPlayer" parent="MusicPlayer" unique_id=1601789935 groups=["midiPlayer"]]
 midi = ExtResource("10_gg3vl")
-process_mode = 0
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerChannel2" type="MidiPlayer" parent="MusicPlayer" unique_id=1078224799 groups=["midiPlayer"]]
 midi = ExtResource("5_si05j")
-process_mode = 0
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerWarning" type="MidiPlayer" parent="MusicPlayer" unique_id=1508510296 groups=["midiPlayer"]]
 midi = ExtResource("7_si05j")
-process_mode = 0
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerCatcher" type="MidiPlayer" parent="MusicPlayer" unique_id=1413206763 groups=["midiPlayer"]]
 midi = ExtResource("10_gg3vl")
-process_mode = 0
 script = ExtResource("6_wouuh")
-
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="MusicPlayer" unique_id=1586066414]
-stream = ExtResource("8_si05j")
-autoplay = true
-bus = &"Music"
-script = ExtResource("8_jemul")
-bpm = 125
 
 [node name="UserUI" parent="." unique_id=1459571692 instance=ExtResource("8_wouuh")]
 
@@ -271,3 +260,20 @@ shape = SubResource("RectangleShape2D_wouuh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea" unique_id=700767055]
 position = Vector2(-352.5, 19)
 shape = SubResource("RectangleShape2D_wouuh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=927735588]
+stream = ExtResource("11_vcux0")
+volume_db = -5.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("12_gg3vl")
+bpm = 125
+
+[node name="PowerupCooldown" type="Timer" parent="." unique_id=1216662636]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
+[connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]
+[connection signal="timeout" from="PowerupCooldown" to="Powerup2" method="_on_powerup_cooldown_timeout"]
+[connection signal="timeout" from="PowerupCooldown" to="Powerup3" method="_on_powerup_cooldown_timeout"]

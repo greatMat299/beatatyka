@@ -19,6 +19,7 @@ var blocking = false
 var isPlayerInBlockArea=false
 var playerAttacking=""
 var isInvincible=false
+var playerKeybindId=-1
 
 var powerup1
 var powerup2
@@ -40,6 +41,7 @@ var powerup3
 @onready var walkSfx = $SFX/WalkSfx
 @onready var jumpSfx = $SFX/JumpSfx
 @onready var blockSfx = $SFX/BlockSfx
+@onready var invincibilitySfx = $SFX/InvincibilitySfx
 
 @export_category("Timer Lengths")
 @export var maxBufferTime : float = 0.15
@@ -77,7 +79,7 @@ func _ready():
 	
 	#dodanie przypisów klawiszy dla graczy
 	for i in range(0,len(PLAYER_ACTIONS)):
-		currentPlayerActions.push_back(str("player")+str(player_id)+str("_")+str(PLAYER_ACTIONS[i]))
+		currentPlayerActions.push_back(str("player")+str(playerKeybindId)+str("_")+str(PLAYER_ACTIONS[i]))
 		
 	#usunięcie swojej kolizji z RayCastów
 	attackRaycast.add_exception(self)
@@ -90,6 +92,12 @@ func set_invicibility(body, state):
 		pass
 	else:
 		isInvincible=state
+		if state==true:
+			body.get_node("AnimationPlayer").play("invincibilityAnim")
+			invincibilitySfx.play()
+		else:
+			body.get_node("AnimationPlayer").stop()
+			invincibilitySfx.stop()
 
 
 func _physics_process(delta):

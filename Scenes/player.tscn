@@ -1,115 +1,14 @@
 [gd_scene format=4 uid="uid://cmovijrkx6q7m"]
 
 [ext_resource type="Script" uid="uid://b7rgv0jc3wi4v" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://dahq7vmqj1ytq" path="res://robinHood_ v1.1/bishopOfHereford_.png" id="1_v0iea"]
+[ext_resource type="SpriteFrames" uid="uid://da7sa8hysdhys" path="res://Assets/SpriteSheets/sprite1frame.tres" id="2_f1ek2"]
 [ext_resource type="Script" uid="uid://d1tc0c78rjfer" path="res://Scripts/health_manager.gd" id="3_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://cukebisn3e8yy" path="res://Assets/Sound/SFX/dashSound.mp3" id="4_vgqql"]
 [ext_resource type="AudioStream" uid="uid://bddvmwmjtrvnh" path="res://Assets/Sound/SFX/attackSound.mp3" id="5_fkybt"]
 [ext_resource type="AudioStream" uid="uid://7rf2oinhwevi" path="res://Assets/Sound/SFX/deathSound.mp3" id="6_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://daoltk6k0d87n" path="res://Assets/Sound/SFX/jump.mp3" id="7_3smsa"]
 [ext_resource type="AudioStream" uid="uid://d1fasotr5cstu" path="res://Assets/Sound/SFX/blockSound.mp3" id="8_8erm5"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(0, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(24, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(48, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(72, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(0, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(24, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(48, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(72, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(0, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(24, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(48, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(72, 24, 24, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7dp3o"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cvnsp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6t5aa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgqql")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fkybt")
-}],
-"loop": false,
-"name": &"death",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x3wgy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3smsa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8erm5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f1ek2")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 9.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tx1dd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gymyn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pu2lt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukyrk")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 9.0
-}]
+[ext_resource type="AudioStream" uid="uid://ch88ybdgkukbu" path="res://Assets/Sound/SFX/invincibleEffectSound.mp3" id="9_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4iuc"]
 size = Vector2(12, 16)
@@ -134,6 +33,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tx1dd"]
+resource_name = "invincibilityAnim"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.85),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.55214655, 0.9348673, 0.99999994, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_f1ek2"]
@@ -171,6 +86,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f1ek2"]
 _data = {
 &"RESET": SubResource("Animation_3smsa"),
+&"invincibilityAnim": SubResource("Animation_tx1dd"),
 &"playerBlock": SubResource("Animation_f1ek2"),
 &"playerHurt": SubResource("Animation_8erm5")
 }
@@ -184,8 +100,9 @@ dashAttackPower = 18.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=518338731]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_7dp3o")
+sprite_frames = ExtResource("2_f1ek2")
 animation = &"idle"
+offset = Vector2(0, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1651175655]
 position = Vector2(-1, 2)
@@ -269,6 +186,11 @@ bus = &"SFX"
 [node name="BlockSfx" type="AudioStreamPlayer2D" parent="SFX" unique_id=1135236567]
 stream = ExtResource("8_8erm5")
 volume_db = 18.0
+bus = &"SFX"
+
+[node name="InvincibilitySfx" type="AudioStreamPlayer2D" parent="SFX" unique_id=1225737658]
+stream = ExtResource("9_f1ek2")
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1389346117]

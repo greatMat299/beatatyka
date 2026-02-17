@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://djsuarslw0rmb"]
+
+[node name="MapSelectMenu" type="Control" unique_id=1259350917]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=49726850]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 110
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 110
+theme_override_constants/margin_bottom = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=176351760]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1505276166]
+layout_mode = 2
+
+[node name="SongButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=978642834]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SONG 1"
+
+[node name="SongButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=19332479]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SONG 2"
+
+[node name="SongButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1754204659]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SONG 3"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=880289432]
+layout_mode = 2
+
+[node name="SongButton4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1864175380]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SONG 4"
+
+[node name="SongButton5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1066596232]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SONG 5"
+
+[node name="SongButton6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1440723393]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SONG 6"

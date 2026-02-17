@@ -1,0 +1,213 @@
+extends Control
+@onready var buttons = $Control/HBoxContainer.get_children()
+@onready var p1_frame = $Control/border_p1
+@onready var p2_frame = $Control/border_p2
+@onready var p3_frame = $Control/border_p3
+@onready var p4_frame = $Control/border_p4
+@onready var characterContainer = $Control/HBoxContainer
+@onready var warnLabel = $Control/warn_label
+var previewSprites = []
+var playerLabels = []
+var playerAmount=1
+var arePlayersActive=[true,false,false,false]
+var arePlayersReady=[false,false,false,false]
+var isGameReady=false
+var isGameLaunching=false
+var enabled=false
+var scene = "res://Scenes/map1.tscn"
+
+var index_p1 = 0;
+var index_p2 = 0;
+var index_p3 = 0;
+var index_p4 = 0;
+
+var characters = [
+	preload("res://Assets/robinHood_ v1.1/littleJohn_.png"),
+	preload("res://Assets/robinHood_ v1.1/maidMarian_.png"),
+	preload("res://Assets/robinHood_ v1.1/robinHood_.png"),
+	null 
+]
+
+var characterSprites = [
+	preload("res://Assets/SpriteSheets/sprite1frame.tres"),
+	preload("res://Assets/SpriteSheets/sprite2frame.tres"),
+	null,
+	null
+]
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass
+	
+func fillUpArrays():
+	for i in range(0,4):
+		print(InputMap.action_get_events("player"+str(i+1)+"_attack"))
+		previewSprites.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("PreviewSprite"))
+		previewSprites[i].play("idle")
+		playerLabels.append(get_node("Control").get_node("PlayerLabels").get_node("P"+str(i+1)+"Label"))
+		playerLabels[i].text = str("PLAYER ")+str(i+1)+str(" - PRESS ")+OS.get_keycode_string(InputMap.action_get_events("player"+str(i+1)+"_attack")[0].physical_keycode)
+
+func checkIfAllReady() -> bool:
+	var readyChecks=0
+	if playerAmount==1:
+		return false
+	else:
+		for i in range(0,4):
+			print(i)
+			if arePlayersReady[i]==true:
+				readyChecks+=1
+		print(readyChecks)
+		if readyChecks==playerAmount:
+			return true
+		else:
+			return false
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	
+	if enabled:
+		if len(previewSprites)==0:
+			fillUpArrays()
+			
+		handle_input_p1()
+		handle_input_p2()
+		handle_input_p3()
+		handle_input_p4()
+		
+		var progress=[]
+		ResourceLoader.load_threaded_get_status(scene,progress)
+		if progress[0]==1:
+			var packedScene = ResourceLoader.load_threaded_get(scene)
+			get_tree().change_scene_to_packed(packedScene)
+		
+		if isGameReady==true and isGameLaunching==false:
+			isGameLaunching=true
+			for i in range(0,4):
+				if arePlayersReady[i]==true:
+					GameManager.currentPlayerKeybinds.append(i+1)
+			GameManager.playerLoadCount=playerAmount
+			ResourceLoader.load_threaded_request(scene)
+			print("lets go")
+			
+		if playerAmount>=2 and warnLabel.visible==true:
+			warnLabel.visible=false
+
+func update_frame(frame, index):
+	var btn = buttons[index]
+	frame.global_position = btn.global_position
+	frame.size = btn.size
+
+func handle_input_p1():
+	if arePlayersReady[0]==false:
+		if Input.is_action_just_pressed("player1_right"):
+			index_p1 = (index_p1 + 1) % buttons.size()
+			update_frame(p1_frame, index_p1)
+			update_sprite_preview(1,index_p1)
+		
+		if Input.is_action_just_pressed("player1_left"):
+			index_p1 = (index_p1 - 1)% buttons.size()
+			update_frame(p1_frame,index_p1) 
+			update_sprite_preview(1,index_p1)
+			
+		if Input.is_action_just_pressed("player1_attack"):
+			print("Gracz 1 wybrał: ", index_p1)
+			playerLabels[0].text = "PLAYER 1 READY"
+			playerLabels[0].add_theme_color_override("font_color", Color(0.996, 0.0, 0.175, 1.0))
+			p1_frame.visible=false
+			arePlayersReady[0]=true
+			isGameReady = checkIfAllReady()
+		
+
+func handle_input_p2():
+	if arePlayersActive[1]!=false and arePlayersReady[1]==false:
+		if Input.is_action_just_pressed("player2_right"):
+			index_p2 = (index_p2 + 1) % buttons.size()
+			update_frame(p2_frame, index_p2)
+			update_sprite_preview(2,index_p2)
+		
+		if Input.is_action_just_pressed("player2_left"):
+			index_p2 = (index_p2 - 1 + buttons.size()) % buttons.size()
+			update_frame(p2_frame,index_p2)
+			update_sprite_preview(2,index_p2)
+			
+	if Input.is_action_just_pressed("player2_attack"):
+		if arePlayersActive[1]==false:
+			playerAmount+=1
+			arePlayersActive[1]=true
+			p2_frame.visible=true
+			previewSprites[1].visible=true
+			playerLabels[1].text = "PLAYER 2 IS CHOOSING"
+		else:
+			print("Gracz 2 wybrał: ", index_p2)
+			p2_frame.visible=false
+			playerLabels[1].text = "PLAYER 2 READY"
+			playerLabels[1].add_theme_color_override("font_color", Color(0.0, 0.556, 0.93, 1.0))
+			arePlayersReady[1]=true
+			isGameReady = checkIfAllReady()
+		
+func handle_input_p3():
+	if arePlayersActive[2]!=false and arePlayersReady[2]==false:
+		if Input.is_action_just_pressed("player3_right"):
+			index_p3 = (index_p3 + 1) % buttons.size()
+			update_frame(p3_frame, index_p3)
+			update_sprite_preview(3,index_p3)
+		
+		if Input.is_action_just_pressed("player3_left"):
+			index_p3 = (index_p3 - 1 + buttons.size()) % buttons.size()
+			update_frame(p3_frame,index_p3) 
+			update_sprite_preview(3,index_p3)
+			
+	if Input.is_action_just_pressed("player3_attack"):
+		if arePlayersActive[2]==false:
+			playerAmount+=1
+			arePlayersActive[2]=true
+			p3_frame.visible=true
+			previewSprites[2].visible=true
+			playerLabels[2].text = "PLAYER 3 IS CHOOSING"
+		else:
+			print("Gracz 3 wybrał: ", index_p3)
+			p3_frame.visible=false
+			playerLabels[2].text = "PLAYER 3 READY"
+			playerLabels[2].add_theme_color_override("font_color", Color(0.265, 0.64, 0.0, 1.0))
+			arePlayersReady[2]=true
+			isGameReady = checkIfAllReady()
+		
+func handle_input_p4():
+	if arePlayersActive[3]!=false and arePlayersReady[3]==false:
+		if Input.is_action_just_pressed("player4_right"):
+			index_p4 = (index_p4 + 1) % buttons.size()
+			update_frame(p4_frame, index_p4)
+			update_sprite_preview(4,index_p4)
+		
+		if Input.is_action_just_pressed("player4_left"):
+			index_p4 = (index_p4 - 1 + buttons.size()) % buttons.size()
+			update_frame(p4_frame,index_p4) 
+			update_sprite_preview(4,index_p4)
+			
+	if Input.is_action_just_pressed("player4_attack"):
+		if arePlayersActive[3]==false:
+			playerAmount+=1
+			arePlayersActive[3]=true
+			p4_frame.visible=true
+			previewSprites[3].visible=true
+			playerLabels[3].text = "PLAYER 4 IS CHOOSING"
+		else:
+			print("Gracz 4 wybrał: ", index_p4)
+			p4_frame.visible=false
+			playerLabels[3].text = "PLAYER 4 READY"
+			playerLabels[3].add_theme_color_override("font_color", Color(0.619, 0.584, 0.074, 1.0))
+			arePlayersReady[3]=true
+			isGameReady = checkIfAllReady()
+
+func update_sprite_preview(player,index):
+	print("sex")
+	previewSprites[player-1].sprite_frames = characterSprites[index]
+	previewSprites[player-1].play("idle")
+
+
+func update_preview(index):
+	var btn = buttons[index]
+	#if btn.icon != null:
+		#preview.texture = btn.icon
+	#else:
+		#pass

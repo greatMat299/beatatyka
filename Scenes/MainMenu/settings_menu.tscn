@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://crinudetly0iu"]
+
+[ext_resource type="Script" uid="uid://o7dtwc4eu77v" path="res://Scripts/MainMenu/settings_menu.gd" id="1_ufg0w"]
+
+[sub_resource type="Theme" id="Theme_ufg0w"]
+default_font_size = 32
+
+[node name="SettingsMenu" type="Control" unique_id=1974948080]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ufg0w")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1658624438]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ufg0w")
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=827551127]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=1451131966]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 2
+
+[node name="VolumeText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1672535895]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "VOLUME"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=2078160409]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Volume" type="HSlider" parent="MarginContainer/VBoxContainer/GridContainer/HFlowContainer" unique_id=2078910479]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="VolumeValue" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/HFlowContainer" unique_id=424008519]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "100"
+
+[node name="DisplayModeText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1396261756]
+layout_mode = 2
+text = "DISPLAY MODE"
+
+[node name="DisplayMode" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=755708616]
+layout_mode = 2
+text = "WINDOW"
+
+[node name="VSyncText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1096303974]
+layout_mode = 2
+text = "V-SYNC"
+
+[node name="VSync" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1038791073]
+layout_mode = 2
+text = "ON"
+
+[node name="FPSText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1802899836]
+layout_mode = 2
+text = "FPS"
+
+[node name="FPS" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=633404761]
+layout_mode = 2
+text = "60"
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1086689804]
+layout_mode = 2
+
+[node name="Keybinds" type="Button" parent="MarginContainer/VBoxContainer" unique_id=576157263]
+layout_mode = 2
+size_flags_vertical = 4
+text = "KEYBINDS"
+
+[node name="AudioTest" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2045980708]
+layout_mode = 2
+text = "AUDIO TEST"
+
+[node name="Return" type="Button" parent="MarginContainer" unique_id=375859853]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "RETURN"
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/HFlowContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/DisplayMode" to="." method="_on_display_mode_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/VSync" to="." method="_on_v_sync_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/FPS" to="." method="_on_fps_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Keybinds" to="." method="_on_keybinds_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/AudioTest" to="." method="_on_audio_test_pressed"]
+[connection signal="pressed" from="MarginContainer/Return" to="." method="_on_return_pressed"]

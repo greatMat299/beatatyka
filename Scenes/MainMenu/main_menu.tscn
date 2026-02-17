@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://ddw8eu16j846s"]
+
+[ext_resource type="Script" uid="uid://cw6pdjmkervtg" path="res://Scripts/MainMenu/main_menu.gd" id="1_jix8l"]
+[ext_resource type="PackedScene" uid="uid://crinudetly0iu" path="res://Scenes/MainMenu/settings_menu.tscn" id="2_fu7sn"]
+[ext_resource type="PackedScene" uid="uid://udwpaopb3ae3" path="res://Scenes/MainMenu/keybinds_menu.tscn" id="3_jix8l"]
+[ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
+[ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
+
+[sub_resource type="GDScript" id="GDScript_06t4h"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+
+func _on_pressed() -> void:
+	pass # Start the game
+"
+
+[sub_resource type="GDScript" id="GDScript_7vrkn"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_fu7sn"]
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+
+func _on_pressed() -> void:
+	get_tree().quit(0)
+"
+
+[node name="MainMenu" type="Control" unique_id=1821620089]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jix8l")
+
+[node name="MenuContainer" type="MarginContainer" parent="." unique_id=174165145]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.59900004
+anchor_right = 0.254
+anchor_bottom = 1.0
+offset_top = 49.71997
+offset_right = -49.580017
+grow_vertical = 0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer" unique_id=2095780475]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 7
+
+[node name="StartButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=145053464]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+action_mode = 0
+text = "PLAY"
+script = SubResource("GDScript_06t4h")
+
+[node name="SettingsButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=1461354496]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "SETTINGS"
+script = SubResource("GDScript_7vrkn")
+
+[node name="QuitButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=2017831119]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "QUIT GAME"
+script = SubResource("GDScript_fu7sn")
+
+[node name="SettingsMenu" parent="." unique_id=1974948080 instance=ExtResource("2_fu7sn")]
+visible = false
+layout_mode = 1
+
+[node name="KeybindsMenu" parent="." unique_id=192418036 instance=ExtResource("3_jix8l")]
+visible = false
+layout_mode = 1
+
+[node name="MapSelectMenu" parent="." unique_id=1259350917 instance=ExtResource("4_0qgbs")]
+visible = false
+layout_mode = 1
+
+[node name="CharacterSelection" parent="." unique_id=476259564 instance=ExtResource("5_adu2g")]
+visible = false
+layout_mode = 1
+
+[connection signal="focus_entered" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_focus_entered"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/SettingsButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/SettingsButton" to="MenuContainer/VBoxContainer/SettingsButton" method="_on_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="MenuContainer/VBoxContainer/QuitButton" method="_on_pressed"]

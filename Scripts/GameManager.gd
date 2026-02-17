@@ -8,11 +8,20 @@ var spikeList=[]
 var spikePrevList=[]
 var arePlayersAlive=[]
 var playerAttackStatus=[]
+var currentPlayerKeybinds=[]
 var mapName=""
+var playerLoadCount=0
 var player_count := 0
 var next_player_id := 0
 var isSongOver=false
-var currentPowerupIndex=-1
+var currentPowerupIndex = -1
+var currentPowerupType = -1
+var rng = RandomNumberGenerator.new()
+
+func choose_new_powerup():
+	currentPowerupIndex = rng.randi_range(1, 3)
+	currentPowerupType = rng.randi_range(1, 3)
+	print("i choose ",currentPowerupIndex)
 
 #rejestracja gracza do tabeli
 func register_player() -> int:

@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="beatatyka"
-run/main_scene="uid://dofsymi8vxrev"
+run/main_scene="uid://ddw8eu16j846s"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [audio]
@@ -25,6 +25,7 @@ buses/default_bus_layout="uid://cew3ukqatg8su"
 [autoload]
 
 GameManager="*uid://cky46toe0roth"
+ConfigFileHandler="*uid://bvwagu0c4lryo"
 
 [display]
 

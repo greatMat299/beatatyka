@@ -10,6 +10,7 @@ var currentSpike=-1
 var currentWarningPlatform := -1
 var currentWarningSpike := -1
 var playerCount = 3
+var rng
 @onready var ground := $Ground
 
 @export var playerScene : PackedScene
@@ -17,22 +18,26 @@ var playerCount = 3
 
 
 func _ready() -> void:
-	for i in range(0,playerCount):
+	#wybranie pozycji oraz typu powerupa
+	rng = RandomNumberGenerator.new()
+	GameManager.choose_new_powerup()
+	
+	print(GameManager.currentPlayerKeybinds)
+	
+	print("gay ",GameManager.playerLoadCount)
+	
+	#dodanie graczy
+	for i in range(0,GameManager.playerLoadCount):
 		var copy = playerScene.instantiate()
 		copy.player_id = GameManager.register_player()
+		copy.playerKeybindId = GameManager.currentPlayerKeybinds[i]
 		copy.name=str("Player")+str(i+1)
 		copy.position.x = playerPos[i]
 		var death_area = get_node("DeathArea")
 		death_area.body_entered.connect(copy._on_death_area_body_entered)
 		add_child(copy)
 		
-	
-	
-	
 	var midiPlayerName
-	var rng = RandomNumberGenerator.new()
-	
-	GameManager.currentPowerupIndex = rng.randi_range(1, 3)
 	
 	#wstępne przygotowanie mapy
 	GameManager.mapName=self.name
@@ -53,12 +58,9 @@ func _process(_delta):
 	
 	#logika po śmierci wszystkich oprócz jednego gracza
 	if GameManager.player_count<=1:
-		#print("NOOOOOO")
 		GameManager.isGamePlaying=false
 	
 func _on_warning_note_played(note,sender):
-	print(str("warn: ")+str(note))
-	
 	#aktywowanie platform ostrzegawczych
 	if note>=59&&note<=64:
 		modifierTypeW=abs(59-note)
@@ -158,7 +160,11 @@ func _on_note_played(note, sender):
 		set_active_spike(modifierType,false)
 	#elif note>=68&&note<=69: #deszcz
 		#pass
-	#elif note>=70&&note<=73: #trap platforma
+	#elif note>=70&&note<=73: #laser
 		#pass
 	elif note==74: #usunięcie ziemi
 		ground.enabled = false
+
+#wybranie nowego powerupa kiedy skończy się cooldown
+func _on_powerup_cooldown_timeout():
+	GameManager.choose_new_powerup()
