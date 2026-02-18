@@ -6,8 +6,12 @@ extends Control
 @onready var p4_frame = $Control/border_p4
 @onready var characterContainer = $Control/HBoxContainer
 @onready var warnLabel = $Control/warn_label
+@onready var mapSelectMenu = $"../MapSelectMenu"
 var previewSprites = []
 var playerLabels = []
+var speedCharLabels = []
+var jumpCharLabels = []
+var attackCharLabels = []
 var playerAmount=1
 var arePlayersActive=[true,false,false,false]
 var arePlayersReady=[false,false,false,false]
@@ -21,17 +25,10 @@ var index_p2 = 0;
 var index_p3 = 0;
 var index_p4 = 0;
 
-var characters = [
-	preload("res://Assets/robinHood_ v1.1/littleJohn_.png"),
-	preload("res://Assets/robinHood_ v1.1/maidMarian_.png"),
-	preload("res://Assets/robinHood_ v1.1/robinHood_.png"),
-	null 
-]
-
 var characterSprites = [
 	preload("res://Assets/SpriteSheets/sprite1frame.tres"),
 	preload("res://Assets/SpriteSheets/sprite2frame.tres"),
-	null,
+	preload("res://Assets/SpriteSheets/sprite3frame.tres"),
 	null
 ]
 
@@ -41,11 +38,18 @@ func _ready() -> void:
 	
 func fillUpArrays():
 	for i in range(0,4):
-		print(InputMap.action_get_events("player"+str(i+1)+"_attack"))
 		previewSprites.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("PreviewSprite"))
 		previewSprites[i].play("idle")
+		
 		playerLabels.append(get_node("Control").get_node("PlayerLabels").get_node("P"+str(i+1)+"Label"))
-		playerLabels[i].text = str("PLAYER ")+str(i+1)+str(" - PRESS ")+OS.get_keycode_string(InputMap.action_get_events("player"+str(i+1)+"_attack")[0].physical_keycode)
+		if i>0:
+			playerLabels[i].text = str("PLAYER ")+str(i+1)+str(" - PRESS ")+OS.get_keycode_string(InputMap.action_get_events("player"+str(i+1)+"_attack")[0].physical_keycode)
+		else:
+			playerLabels[0].text = "PLAYER 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" TO CONFIRM"
+		
+		speedCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("SpeedLabel"))
+		jumpCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("JumpLabel"))
+		attackCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("AttackLabel"))
 
 func checkIfAllReady() -> bool:
 	var readyChecks=0
@@ -56,7 +60,7 @@ func checkIfAllReady() -> bool:
 			print(i)
 			if arePlayersReady[i]==true:
 				readyChecks+=1
-		print(readyChecks)
+				
 		if readyChecks==playerAmount:
 			return true
 		else:
@@ -68,25 +72,41 @@ func _process(delta: float) -> void:
 	if enabled:
 		if len(previewSprites)==0:
 			fillUpArrays()
+			update_sprite_preview(1,0)
 			
 		handle_input_p1()
 		handle_input_p2()
 		handle_input_p3()
 		handle_input_p4()
 		
-		var progress=[]
-		ResourceLoader.load_threaded_get_status(scene,progress)
-		if progress[0]==1:
-			var packedScene = ResourceLoader.load_threaded_get(scene)
-			get_tree().change_scene_to_packed(packedScene)
 		
 		if isGameReady==true and isGameLaunching==false:
 			isGameLaunching=true
+			var thePlayerIndex
 			for i in range(0,4):
 				if arePlayersReady[i]==true:
 					GameManager.currentPlayerKeybinds.append(i+1)
+					match i:
+						0:
+							thePlayerIndex=index_p1
+						1:
+							thePlayerIndex=index_p2
+						2:
+							thePlayerIndex=index_p3
+						3:
+							thePlayerIndex=index_p4
+					
+					GameManager.playerSpriteSheets.append(characterSprites[thePlayerIndex])
+					GameManager.setCharacterAttribute(thePlayerIndex,0)
+					GameManager.setCharacterAttribute(thePlayerIndex,1)
+					GameManager.setCharacterAttribute(thePlayerIndex,2)
+					GameManager.setCharacterAttribute(thePlayerIndex,3)
+							
 			GameManager.playerLoadCount=playerAmount
-			ResourceLoader.load_threaded_request(scene)
+			self.visible=false
+			enabled=false
+			mapSelectMenu.visible = true
+			mapSelectMenu.enabled = true
 			print("lets go")
 			
 		if playerAmount>=2 and warnLabel.visible==true:
@@ -132,11 +152,16 @@ func handle_input_p2():
 			
 	if Input.is_action_just_pressed("player2_attack"):
 		if arePlayersActive[1]==false:
+			speedCharLabels[1].visible = true
+			jumpCharLabels[1].visible = true
+			attackCharLabels[1].visible = true
+			
+			playerLabels[1].add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 			playerAmount+=1
 			arePlayersActive[1]=true
 			p2_frame.visible=true
 			previewSprites[1].visible=true
-			playerLabels[1].text = "PLAYER 2 IS CHOOSING"
+			playerLabels[1].text = "PLAYER 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" TO CONFIRM"
 		else:
 			print("Gracz 2 wybrał: ", index_p2)
 			p2_frame.visible=false
@@ -159,11 +184,16 @@ func handle_input_p3():
 			
 	if Input.is_action_just_pressed("player3_attack"):
 		if arePlayersActive[2]==false:
+			speedCharLabels[2].visible = true
+			jumpCharLabels[2].visible = true
+			attackCharLabels[2].visible = true
+			
+			playerLabels[2].add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 			playerAmount+=1
 			arePlayersActive[2]=true
 			p3_frame.visible=true
 			previewSprites[2].visible=true
-			playerLabels[2].text = "PLAYER 3 IS CHOOSING"
+			playerLabels[2].text = "PLAYER 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" TO CONFIRM"
 		else:
 			print("Gracz 3 wybrał: ", index_p3)
 			p3_frame.visible=false
@@ -186,11 +216,16 @@ func handle_input_p4():
 			
 	if Input.is_action_just_pressed("player4_attack"):
 		if arePlayersActive[3]==false:
+			speedCharLabels[3].visible = true
+			jumpCharLabels[3].visible = true
+			attackCharLabels[3].visible = true
+			
+			playerLabels[3].add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 			playerAmount+=1
 			arePlayersActive[3]=true
 			p4_frame.visible=true
 			previewSprites[3].visible=true
-			playerLabels[3].text = "PLAYER 4 IS CHOOSING"
+			playerLabels[3].text = "PLAYER 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" TO CONFIRM"
 		else:
 			print("Gracz 4 wybrał: ", index_p4)
 			p4_frame.visible=false
@@ -203,6 +238,9 @@ func update_sprite_preview(player,index):
 	print("sex")
 	previewSprites[player-1].sprite_frames = characterSprites[index]
 	previewSprites[player-1].play("idle")
+	speedCharLabels[player-1].text = "Speed: "+str(GameManager.CHARACTER_SPEEDS[index])
+	jumpCharLabels[player-1].text = "Jump: "+str(abs(GameManager.CHARACTER_JUMP_VELS[index]))
+	attackCharLabels[player-1].text = "Attack: "+str(GameManager.CHARACTER_ATTACK_PWRS[index])
 
 
 func update_preview(index):

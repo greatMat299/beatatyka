@@ -1,5 +1,10 @@
 extends Node
 
+const CHARACTER_SPEEDS = [250.0,200.0,300.0]
+const CHARACTER_JUMP_VELS = [-500.0,-450.0,-600.0]
+const CHARACTER_ATTACK_PWRS = [7.0,14.0,5.0]
+const CHARACTER_DASH_ATTACK_PWRS = [12.0,16.0,9.0]
+
 var currentNote=0
 var isGamePlaying=true
 var platformsList=[]
@@ -9,6 +14,11 @@ var spikePrevList=[]
 var arePlayersAlive=[]
 var playerAttackStatus=[]
 var currentPlayerKeybinds=[]
+var playerSpriteSheets=[]
+var currentCharacterSpeeds=[]
+var currentCharacterJumpVels=[]
+var currentCharacterAttackPwr=[]
+var currentCharacterDashAttackPwr=[]
 var mapName=""
 var playerLoadCount=0
 var player_count := 0
@@ -17,6 +27,17 @@ var isSongOver=false
 var currentPowerupIndex = -1
 var currentPowerupType = -1
 var rng = RandomNumberGenerator.new()
+
+func setCharacterAttribute(charIndex, att):
+	match att:
+		0:
+			currentCharacterSpeeds.append(CHARACTER_SPEEDS[charIndex])
+		1:
+			currentCharacterJumpVels.append(CHARACTER_JUMP_VELS[charIndex])
+		2:
+			currentCharacterAttackPwr.append(CHARACTER_ATTACK_PWRS[charIndex])
+		3:
+			currentCharacterDashAttackPwr.append(CHARACTER_DASH_ATTACK_PWRS[charIndex])
 
 func choose_new_powerup():
 	currentPowerupIndex = rng.randi_range(1, 3)

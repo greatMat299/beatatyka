@@ -2,8 +2,6 @@ extends CharacterBody2D
 
 signal playerAttack(player, damage, playerDamaged, direction)
 
-const SPEED = 250.0
-const JUMP_VELOCITY = -500.0
 const PLAYER_ACTIONS = ["jump", "right", "left", "attack", "block"]
 var jumps=0
 var maxJumps = 1
@@ -20,6 +18,7 @@ var isPlayerInBlockArea=false
 var playerAttacking=""
 var isInvincible=false
 var playerKeybindId=-1
+var currentSpriteSheet
 
 var powerup1
 var powerup2
@@ -42,6 +41,10 @@ var powerup3
 @onready var jumpSfx = $SFX/JumpSfx
 @onready var blockSfx = $SFX/BlockSfx
 @onready var invincibilitySfx = $SFX/InvincibilitySfx
+
+@export_category("Player attributes")
+@export var playerSpeed : float = 250.0
+@export var jumpVelocity : float = -500.0
 
 @export_category("Timer Lengths")
 @export var maxBufferTime : float = 0.15
@@ -68,6 +71,8 @@ func _ready():
 	powerup1.set_invicibility.connect(self.set_invicibility)
 	powerup2.set_invicibility.connect(self.set_invicibility)
 	powerup3.set_invicibility.connect(self.set_invicibility)
+	
+	animSprite.sprite_frames=currentSpriteSheet
 	
 	#inicjacja timerów
 	bufferTimer.wait_time = maxBufferTime
@@ -203,7 +208,7 @@ func _physics_process(delta):
 				print("yump")
 				jumpSfx.play()
 				jumps += 1
-				velocity.y = JUMP_VELOCITY
+				velocity.y = jumpVelocity
 			
 			
 		#resetowanie skoków na buffer jeżeli gracz jest na ziemi
@@ -212,7 +217,7 @@ func _physics_process(delta):
 			if bufferTimer.time_left>0:
 				jumps += 1
 				jumpSfx.play()
-				velocity.y = JUMP_VELOCITY
+				velocity.y = jumpVelocity
 				bufferTimer.stop()
 
 		#zmienne z dash'em i atakowaniem z dash'em
@@ -223,13 +228,13 @@ func _physics_process(delta):
 		if direction and GameManager.isGamePlaying==true:
 			if moveTimer.is_stopped()==false and GameManager.arePlayersAlive[player_id-1]==true:
 				moveTimer.stop()
-			input_velocity = direction * SPEED
+			input_velocity = direction * playerSpeed
 			var external_velocity := dashVelocity + attackVelocity
 			
 			if abs(external_velocity) > 1.0:
-				velocity.x = (direction * SPEED) + dashVelocity
+				velocity.x = (direction * playerSpeed) + dashVelocity
 			else:
-				velocity.x = move_toward(velocity.x, input_velocity, SPEED)
+				velocity.x = move_toward(velocity.x, input_velocity, playerSpeed)
 			animSprite.play("walk")
 			if walkSfx.playing==false and is_on_floor():
 				walkSfx.play()
@@ -245,7 +250,7 @@ func _physics_process(delta):
 			if abs(attackVelocity) > 1.0:
 				velocity.x = attackVelocity
 			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
+				velocity.x = move_toward(velocity.x, 0, playerSpeed)
 		move_and_slide()
 		
 	#akcje po śmierci wszystkich oprócz jednego gracza

@@ -26,13 +26,27 @@ func _ready() -> void:
 	
 	print("gay ",GameManager.playerLoadCount)
 	
+	#do testów mapy
+	#GameManager.playerLoadCount=2
+	#GameManager.currentPlayerKeybinds=[1,2]
+	#GameManager.playerSpriteSheets=[preload("res://Assets/SpriteSheets/sprite1frame.tres"),preload("res://Assets/SpriteSheets/sprite1frame.tres")]
+
 	#dodanie graczy
 	for i in range(0,GameManager.playerLoadCount):
 		var copy = playerScene.instantiate()
+		
 		copy.player_id = GameManager.register_player()
 		copy.playerKeybindId = GameManager.currentPlayerKeybinds[i]
 		copy.name=str("Player")+str(i+1)
+		
+		copy.playerSpeed=GameManager.currentCharacterSpeeds[i]
+		copy.jumpVelocity=GameManager.currentCharacterJumpVels[i]
+		copy.attackPower=GameManager.currentCharacterAttackPwr[i]
+		copy.dashAttackPower=GameManager.currentCharacterDashAttackPwr[i]
+		
 		copy.position.x = playerPos[i]
+		copy.currentSpriteSheet = GameManager.playerSpriteSheets[i]
+		
 		var death_area = get_node("DeathArea")
 		death_area.body_entered.connect(copy._on_death_area_body_entered)
 		add_child(copy)
