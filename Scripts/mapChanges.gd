@@ -12,6 +12,7 @@ var currentWarningSpike := -1
 var playerCount = 3
 var rng
 @onready var ground := $Ground
+@onready var audioStreamPlayer = $AudioStreamPlayer2D
 
 @export var playerScene : PackedScene
 @export var playerPos = [0.0,0.0,0.0,0.0]
@@ -21,6 +22,8 @@ func _ready() -> void:
 	#wybranie pozycji oraz typu powerupa
 	rng = RandomNumberGenerator.new()
 	GameManager.choose_new_powerup()
+	
+	audioStreamPlayer.play()
 	
 	print(GameManager.currentPlayerKeybinds)
 	
@@ -73,6 +76,9 @@ func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
 	if GameManager.player_count<=1:
 		GameManager.isGamePlaying=false
+		
+	if GameManager.hasStartSeqFinished==true and audioStreamPlayer.playing==false:
+		audioStreamPlayer.play()
 	
 func _on_warning_note_played(note,sender):
 	#aktywowanie platform ostrzegawczych

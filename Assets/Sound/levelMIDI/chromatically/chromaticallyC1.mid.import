@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://0hwccjll802x"
+path="res://.godot/imported/chromaticallyC1.mid-64863e7dc364d53d5fe0d1c8f1f71ac2.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/chromatically/chromaticallyC1.mid"
+dest_files=["res://.godot/imported/chromaticallyC1.mid-64863e7dc364d53d5fe0d1c8f1f71ac2.res"]
+
+[params]
+

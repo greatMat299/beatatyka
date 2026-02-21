@@ -7,6 +7,7 @@ extends Control
 @onready var characterContainer = $Control/HBoxContainer
 @onready var warnLabel = $Control/warn_label
 @onready var mapSelectMenu = $"../MapSelectMenu"
+@onready var menuContainer = $"../MenuContainer"
 var previewSprites = []
 var playerLabels = []
 var speedCharLabels = []
@@ -70,6 +71,7 @@ func checkIfAllReady() -> bool:
 func _process(delta: float) -> void:
 	
 	if enabled:
+		print(arePlayersReady)
 		if len(previewSprites)==0:
 			fillUpArrays()
 			update_sprite_preview(1,0)
@@ -78,6 +80,16 @@ func _process(delta: float) -> void:
 		handle_input_p2()
 		handle_input_p3()
 		handle_input_p4()
+		
+		if Input.is_action_just_pressed("ui_cancel"):
+			await get_tree().create_timer(0.03).timeout
+			enabled=false
+			visible=false
+			playerAmount=1
+			arePlayersActive=[true,false,false,false]
+			arePlayersReady=[false,false,false,false]
+			menuContainer.visible=true
+			menuContainer.get_parent().isActive=true
 		
 		
 		if isGameReady==true and isGameLaunching==false:
@@ -119,6 +131,8 @@ func update_frame(frame, index):
 
 func handle_input_p1():
 	if arePlayersReady[0]==false:
+		playerLabels[0].text = "PLAYER 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" TO CONFIRM"
+		p1_frame.visible=true
 		if Input.is_action_just_pressed("player1_right"):
 			index_p1 = (index_p1 + 1) % buttons.size()
 			update_frame(p1_frame, index_p1)
@@ -132,7 +146,7 @@ func handle_input_p1():
 		if Input.is_action_just_pressed("player1_attack"):
 			print("Gracz 1 wybrał: ", index_p1)
 			playerLabels[0].text = "PLAYER 1 READY"
-			playerLabels[0].add_theme_color_override("font_color", Color(0.996, 0.0, 0.175, 1.0))
+			playerLabels[0].add_theme_color_override("font_color", Color(0.996, 0.0, 0.176, 1.0))
 			p1_frame.visible=false
 			arePlayersReady[0]=true
 			isGameReady = checkIfAllReady()
@@ -140,6 +154,8 @@ func handle_input_p1():
 
 func handle_input_p2():
 	if arePlayersActive[1]!=false and arePlayersReady[1]==false:
+		playerLabels[1].text = "PLAYER 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" TO CONFIRM"
+		p2_frame.visible=true
 		if Input.is_action_just_pressed("player2_right"):
 			index_p2 = (index_p2 + 1) % buttons.size()
 			update_frame(p2_frame, index_p2)
@@ -166,12 +182,14 @@ func handle_input_p2():
 			print("Gracz 2 wybrał: ", index_p2)
 			p2_frame.visible=false
 			playerLabels[1].text = "PLAYER 2 READY"
-			playerLabels[1].add_theme_color_override("font_color", Color(0.0, 0.556, 0.93, 1.0))
+			playerLabels[1].add_theme_color_override("font_color", Color(0.0, 0.557, 0.929, 1.0))
 			arePlayersReady[1]=true
 			isGameReady = checkIfAllReady()
 		
 func handle_input_p3():
 	if arePlayersActive[2]!=false and arePlayersReady[2]==false:
+		playerLabels[2].text = "PLAYER 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" TO CONFIRM"
+		p3_frame.visible=true
 		if Input.is_action_just_pressed("player3_right"):
 			index_p3 = (index_p3 + 1) % buttons.size()
 			update_frame(p3_frame, index_p3)
@@ -198,12 +216,14 @@ func handle_input_p3():
 			print("Gracz 3 wybrał: ", index_p3)
 			p3_frame.visible=false
 			playerLabels[2].text = "PLAYER 3 READY"
-			playerLabels[2].add_theme_color_override("font_color", Color(0.265, 0.64, 0.0, 1.0))
+			playerLabels[2].add_theme_color_override("font_color", Color(0.267, 0.639, 0.0, 1.0))
 			arePlayersReady[2]=true
 			isGameReady = checkIfAllReady()
 		
 func handle_input_p4():
 	if arePlayersActive[3]!=false and arePlayersReady[3]==false:
+		p4_frame.visible=true
+		playerLabels[3].text = "PLAYER 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" TO CONFIRM"
 		if Input.is_action_just_pressed("player4_right"):
 			index_p4 = (index_p4 + 1) % buttons.size()
 			update_frame(p4_frame, index_p4)
@@ -230,7 +250,7 @@ func handle_input_p4():
 			print("Gracz 4 wybrał: ", index_p4)
 			p4_frame.visible=false
 			playerLabels[3].text = "PLAYER 4 READY"
-			playerLabels[3].add_theme_color_override("font_color", Color(0.619, 0.584, 0.074, 1.0))
+			playerLabels[3].add_theme_color_override("font_color", Color(0.62, 0.584, 0.075, 1.0))
 			arePlayersReady[3]=true
 			isGameReady = checkIfAllReady()
 

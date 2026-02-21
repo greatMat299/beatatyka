@@ -6,57 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
 [ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
 
-[sub_resource type="GDScript" id="GDScript_06t4h"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-
-func _on_pressed() -> void:
-	pass # Start the game
-"
-
-[sub_resource type="GDScript" id="GDScript_7vrkn"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
-[sub_resource type="GDScript" id="GDScript_fu7sn"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-
-func _on_pressed() -> void:
-	get_tree().quit(0)
-"
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adu2g"]
+bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="MainMenu" type="Control" unique_id=1821620089]
 layout_mode = 3
@@ -91,19 +51,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 48
 action_mode = 0
 text = "PLAY"
-script = SubResource("GDScript_06t4h")
 
 [node name="SettingsButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=1461354496]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "SETTINGS"
-script = SubResource("GDScript_7vrkn")
 
 [node name="QuitButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=2017831119]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "QUIT GAME"
-script = SubResource("GDScript_fu7sn")
+
+[node name="selectBorder" type="Panel" parent="MenuContainer" unique_id=769435911]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_adu2g")
+metadata/_edit_use_anchors_ = true
 
 [node name="SettingsMenu" parent="." unique_id=1974948080 instance=ExtResource("2_fu7sn")]
 visible = false
@@ -122,11 +86,17 @@ visible = false
 layout_mode = 1
 
 [connection signal="focus_entered" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_focus_entered"]
+[connection signal="mouse_entered" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_exited"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="MenuContainer/VBoxContainer/SettingsButton" to="." method="_on_menu_button_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="MenuContainer/VBoxContainer/SettingsButton" to="." method="_on_menu_button_mouse_exited"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/SettingsButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/SettingsButton" to="MenuContainer/VBoxContainer/SettingsButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_menu_button_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_menu_button_mouse_exited"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="MenuContainer/VBoxContainer/QuitButton" method="_on_pressed"]

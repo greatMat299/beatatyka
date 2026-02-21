@@ -6,7 +6,8 @@ const CHARACTER_ATTACK_PWRS = [7.0,14.0,5.0]
 const CHARACTER_DASH_ATTACK_PWRS = [12.0,16.0,9.0]
 
 var currentNote=0
-var isGamePlaying=true
+var isGamePlaying=false
+var hasStartSeqFinished=false
 var platformsList=[]
 var platformPrevList=[]
 var spikeList=[]

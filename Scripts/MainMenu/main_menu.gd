@@ -3,10 +3,14 @@ extends Control
 @onready var settingsMenu = $SettingsMenu
 @onready var menuContainer = $MenuContainer
 @onready var characterSelection = $CharacterSelection
+@onready var selectBorder = $MenuContainer/selectBorder
 var status
 var scene = "res://Scenes/map1.tscn"
 var scene_loaded=false
 var scene_ready := false
+var isActive=true
+var menuButtons=[]
+var currentSelectIndex = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +18,13 @@ func _ready() -> void:
 	call_deferred("_apply_display_mode")
 	call_deferred("_apply_keybinds")
 	await get_tree().process_frame
+	
+	menuButtons.append(get_node("MenuContainer/VBoxContainer/StartButton"))
+	menuButtons.append(get_node("MenuContainer/VBoxContainer/SettingsButton"))
+	menuButtons.append(get_node("MenuContainer/VBoxContainer/QuitButton"))
+	
+	await get_tree().process_frame
+	changeBorderPosition(0)
 	
 func _apply_keybinds():
 	var keyLeft
@@ -74,15 +85,39 @@ func _apply_display_mode():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	var progress=[]
-	ResourceLoader.load_threaded_get_status(scene,progress)
-	if progress[0]==1:
-		var packedScene = ResourceLoader.load_threaded_get(scene)
-		get_tree().change_scene_to_packed(packedScene)
+func _process(_delta: float) -> void:
+	if isActive==true:
+		if Input.is_action_just_pressed("ui_down"):
+			if currentSelectIndex>-1 and currentSelectIndex<2:
+				currentSelectIndex+=1
+				changeBorderPosition(currentSelectIndex)
+				
+		if Input.is_action_just_pressed("ui_up"):
+			if currentSelectIndex>0 and currentSelectIndex<3:
+				currentSelectIndex-=1
+				changeBorderPosition(currentSelectIndex)
+			
+		if Input.is_action_just_pressed("ui_accept"):
+			print("oops")
+			isActive=false
+			match currentSelectIndex:
+				0:
+					_on_start_button_pressed()
+				1:
+					_on_settings_button_pressed()
+				2:
+					_on_quit_button_pressed()
+			
+			
+
+func changeBorderPosition(index):
+	selectBorder.visible=true
+	selectBorder.set_deferred("global_position", menuButtons[index].global_position)
+	selectBorder.set_deferred("size", menuButtons[index].size)
 
 
 func _on_start_button_pressed() -> void:
+	isActive=false
 	menuContainer.visible=false
 	characterSelection.enabled=true
 	characterSelection.visible=true
@@ -91,9 +126,26 @@ func _on_start_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	get_node("SettingsMenu").visible=true
+	get_node("SettingsMenu").isActive=true
 	menuContainer.visible=false
+	isActive=false
 	
 
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit(0)
+
+
+func _on_menu_button_mouse_entered(extra_arg_0):
+	if isActive:
+		if selectBorder.visible==false:
+			selectBorder.visible=true
+		if extra_arg_0>=0 and extra_arg_0<=2:
+			currentSelectIndex=extra_arg_0
+			changeBorderPosition(extra_arg_0)
+
+
+func _on_menu_button_mouse_exited():
+	if isActive:
+		if selectBorder.visible==true:
+			selectBorder.visible=false

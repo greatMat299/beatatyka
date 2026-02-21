@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/dashstarPreview.mp3-56574183b68839f06e992ffbd
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

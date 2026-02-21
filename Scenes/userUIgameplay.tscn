@@ -8,8 +8,12 @@
 [ext_resource type="Script" uid="uid://ip2g1uldtfvg" path="res://Scripts/ui_movetimer_show.gd" id="4_p5y4e"]
 [ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scripts/game_over_ui.gd" id="7_ha2xw"]
 [ext_resource type="Script" uid="uid://66mihx2amhnt" path="res://Scripts/beat_report_ui.gd" id="8_7ps6w"]
-[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="8_i3n3s"]
 [ext_resource type="PackedScene" uid="uid://cmxhxg7kkl32k" path="res://Scenes/beat_catcher.tscn" id="10_riyq3"]
+[ext_resource type="Script" uid="uid://bwky0kfhs3hmk" path="res://Scripts/ui_combo_labels.gd" id="11_bl3s2"]
+[ext_resource type="Script" uid="uid://bjqm2g40r5iai" path="res://Scripts/ui_start_game_logic.gd" id="11_cqsqe"]
+[ext_resource type="AudioStream" uid="uid://uik35qlbuqxg" path="res://Assets/Sound/SFX/startSound.mp3" id="12_bl3s2"]
+[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="13_4ii71"]
+[ext_resource type="Texture2D" uid="uid://blmf2qpr182wf" path="res://Assets/Images/drumstickplaceholderwillreplace.png" id="13_cqsqe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2xw"]
 shader = ExtResource("3_iafmb")
@@ -119,6 +123,140 @@ _data = {
 &"beatAnim": SubResource("Animation_44dd6")
 }
 
+[sub_resource type="Animation" id="Animation_88o7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("startSFX:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("startGameLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_32hsj"]
+resource_name = "getReadyAnim"
+length = 3.01
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("startSFX:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.1, 1.5, 1.6, 2, 2.1, 2.5, 2.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.90000004, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("startGameLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.99, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_atmls"]
+_data = {
+&"RESET": SubResource("Animation_88o7u"),
+&"getReadyAnim": SubResource("Animation_32hsj")
+}
+
 [node name="UserUI" type="CanvasLayer" unique_id=1761966764]
 
 [node name="BlurFill" type="ColorRect" parent="." unique_id=1570569887]
@@ -147,6 +285,7 @@ theme_override_font_sizes/font_size = 86
 text = "GAME OVER!"
 
 [node name="GameplayNodes" type="Control" parent="." unique_id=448258597]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -487,7 +626,7 @@ offset_right = 1052.0
 offset_bottom = 1078.0
 grow_horizontal = 2
 scale = Vector2(0.165, 0.165)
-texture = ExtResource("8_i3n3s")
+texture = ExtResource("13_4ii71")
 script = ExtResource("8_7ps6w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/BeatLabel" unique_id=1255462400]
@@ -496,5 +635,107 @@ libraries/ = SubResource("AnimationLibrary_egsqa")
 [node name="BeatCatcher" parent="GameplayNodes" unique_id=540349467 instance=ExtResource("10_riyq3")]
 layout_mode = 1
 
+[node name="ComboLabels" type="Control" parent="GameplayNodes" unique_id=1472397795]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_bl3s2")
+
+[node name="Label1" type="Label" parent="GameplayNodes/ComboLabels" unique_id=18813015]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 447.0
+offset_top = 38.0
+offset_right = 543.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 22
+
+[node name="Label2" type="Label" parent="GameplayNodes/ComboLabels" unique_id=316763528]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 447.0
+offset_top = 195.0
+offset_right = 543.0
+offset_bottom = 226.0
+theme_override_font_sizes/font_size = 22
+
+[node name="Label3" type="Label" parent="GameplayNodes/ComboLabels" unique_id=434213912]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 447.0
+offset_top = 363.0
+offset_right = 543.0
+offset_bottom = 394.0
+theme_override_font_sizes/font_size = 22
+
+[node name="Label4" type="Label" parent="GameplayNodes/ComboLabels" unique_id=317120698]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 447.0
+offset_top = 535.0
+offset_right = 543.0
+offset_bottom = 566.0
+theme_override_font_sizes/font_size = 22
+
+[node name="StartGameContainer" type="Control" parent="." unique_id=321453550]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_cqsqe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartGameContainer" unique_id=68794514]
+libraries/ = SubResource("AnimationLibrary_atmls")
+
+[node name="startSFX" type="AudioStreamPlayer2D" parent="StartGameContainer" unique_id=2085200463]
+stream = ExtResource("12_bl3s2")
+
+[node name="TextureRect" type="TextureRect" parent="StartGameContainer" unique_id=227857653]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41700003
+anchor_top = 0.365
+anchor_right = 0.583
+anchor_bottom = 0.63500005
+offset_left = 0.13165283
+offset_top = 0.19998169
+offset_right = -0.13171387
+offset_bottom = -0.20004272
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(105.279, 97)
+texture = ExtResource("13_cqsqe")
+expand_mode = 1
+
+[node name="startGameLabel" type="Label" parent="StartGameContainer" unique_id=105696582]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.333
+anchor_top = 0.39600003
+anchor_right = 0.66700006
+anchor_bottom = 0.60400003
+offset_left = 0.58999634
+offset_top = -0.120025635
+offset_right = -0.5900879
+offset_bottom = 0.1199646
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "GET READY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="resumeGame"]
 [connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_exit_btn_pressed"]
+[connection signal="animation_finished" from="StartGameContainer/AnimationPlayer" to="StartGameContainer" method="_on_animation_player_animation_finished"]

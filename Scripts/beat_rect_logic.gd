@@ -6,7 +6,7 @@ var noteSpeed=100.0
 
 func _ready():
 	windowX = get_window().size.x
-	position.y = 50
+	position.y = 70
 
 #przesuwanie obiektu nuty
 func _process(delta):

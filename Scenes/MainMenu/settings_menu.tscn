@@ -5,6 +5,18 @@
 [sub_resource type="Theme" id="Theme_ufg0w"]
 default_font_size = 32
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4tdx"]
+bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="SettingsMenu" type="Control" unique_id=1974948080]
 layout_mode = 3
 anchors_preset = 15
@@ -23,9 +35,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ufg0w")
 theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_bottom = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=827551127]
 layout_mode = 2
@@ -88,20 +100,32 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "KEYBINDS"
 
-[node name="AudioTest" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2045980708]
-layout_mode = 2
-text = "AUDIO TEST"
-
 [node name="Return" type="Button" parent="MarginContainer" unique_id=375859853]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "RETURN"
 
+[node name="selectBorder" type="Panel" parent="." unique_id=1909745576]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4tdx")
+metadata/_edit_use_anchors_ = true
+
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/HFlowContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/GridContainer/DisplayMode" to="." method="_on_button_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/GridContainer/DisplayMode" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/DisplayMode" to="." method="_on_display_mode_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/GridContainer/VSync" to="." method="_on_button_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/GridContainer/VSync" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/VSync" to="." method="_on_v_sync_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/GridContainer/FPS" to="." method="_on_button_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/GridContainer/FPS" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/FPS" to="." method="_on_fps_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Keybinds" to="." method="_on_button_mouse_entered" binds= [3]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Keybinds" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Keybinds" to="." method="_on_keybinds_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/AudioTest" to="." method="_on_audio_test_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Return" to="." method="_on_button_mouse_entered" binds= [4]]
+[connection signal="mouse_exited" from="MarginContainer/Return" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/Return" to="." method="_on_return_pressed"]

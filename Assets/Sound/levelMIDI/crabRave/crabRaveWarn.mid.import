@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://c7vii1ld818v2"
+path="res://.godot/imported/crabRaveWarn.mid-d1cc135a9539f2c109e9a0b4846fcd85.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/crabRave/crabRaveWarn.mid"
+dest_files=["res://.godot/imported/crabRaveWarn.mid-d1cc135a9539f2c109e9a0b4846fcd85.res"]
+
+[params]
+

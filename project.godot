@@ -32,7 +32,6 @@ ConfigFileHandler="*uid://bvwagu0c4lryo"
 window/size/viewport_width=1270
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [editor_plugins]
 

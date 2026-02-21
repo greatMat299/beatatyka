@@ -5,16 +5,23 @@ signal note_played_c2(note, sender)
 signal note_played_w(note, sender)
 signal note_played_wc(note, sender) #warningcatch
 signal note_off
+var isPlaying=false
 var ignore_events := false
 
 func _ready():
 	note.connect(my_note_callback)
-	play()
+	stop()
+	#await get_tree().create_timer(0.5).timeout
+	#play()
 	
 func _process(_delta):
 	#zatrzymanie odtwarzacza MIDI jeżeli gra się skończy
 	if GameManager.isGamePlaying==false or GameManager.isSongOver==true:
 		stop()
+		
+	if GameManager.hasStartSeqFinished==true and isPlaying==false:
+		isPlaying=true
+		play()
 
 #to miało być do pauzy odtwarzacza ale to średnio działa
 #func _notification(what):

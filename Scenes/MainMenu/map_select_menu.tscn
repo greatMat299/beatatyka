@@ -3,7 +3,13 @@
 [ext_resource type="Script" uid="uid://wyc72sbrsudc" path="res://Scripts/MainMenu/map_select_menu.gd" id="1_6he57"]
 [ext_resource type="Texture2D" uid="uid://602ry78tkmql" path="res://Assets/Images/MapScreenshots/level1.png" id="2_0n7bi"]
 [ext_resource type="Texture2D" uid="uid://1paao5pc1hga" path="res://Assets/Images/SongCovers/crabRave.jpeg" id="3_6lno7"]
+[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="4_cpwnx"]
 [ext_resource type="AudioStream" uid="uid://cjpe0r033pba" path="res://Assets/Sound/songPreviews/crabRavePreview.mp3" id="4_gkm5v"]
+[ext_resource type="Texture2D" uid="uid://bbx7or1yhen2w" path="res://Assets/Images/SongCovers/chromatically.png" id="5_jn2y1"]
+[ext_resource type="Texture2D" uid="uid://db6ds27aopqgn" path="res://Assets/Images/SongCovers/deadManWalking.jpg" id="6_ix5qw"]
+[ext_resource type="Texture2D" uid="uid://bea1efnah04o3" path="res://Assets/Images/SongCovers/ghosts_n_stuff.jpg" id="7_cq744"]
+[ext_resource type="Texture2D" uid="uid://c2c6ngaq1casb" path="res://Assets/Images/SongCovers/dashstar.png" id="8_lqrw5"]
+[ext_resource type="Texture2D" uid="uid://cn2rh2td2eagx" path="res://Assets/Images/SongCovers/itsYou.png" id="9_kt11f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkm5v"]
 content_margin_left = 4.0
@@ -24,6 +30,18 @@ resource_name = "albumCoverShow"
 _data = {
 &"albumCoverShow": SubResource("Animation_6lno7")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn2y1"]
+bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="MapSelectMenu" type="Control" unique_id=1259350917]
 layout_mode = 3
@@ -50,19 +68,30 @@ theme_override_constants/margin_bottom = 90
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1505276166]
+[node name="HBoxContainer1" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1505276166]
 layout_mode = 2
 
-[node name="SongButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=978642834]
+[node name="SongButton1" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer1" unique_id=978642834]
 texture_filter = 1
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_gkm5v")
-icon = ExtResource("2_0n7bi")
 expand_icon = true
 
-[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton" unique_id=1414314420]
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=656450723]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("2_0n7bi")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=1414314420]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -74,10 +103,26 @@ offset_right = 2.1029968
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "CRAB RAVE"
 
-[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton" unique_id=254667612]
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=9203754]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "NOISESTORM"
+
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=254667612]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -95,7 +140,8 @@ theme_override_colors/font_color = Color(0, 0.93781835, 0.030428646, 1)
 theme_override_font_sizes/font_size = 40
 text = "EASY"
 
-[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton" unique_id=1307446815]
+[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=1307446815]
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.772
@@ -107,17 +153,29 @@ offset_right = 0.021972656
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("3_6lno7")
-expand_mode = 1
+expand_mode = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton" unique_id=1722418931]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=1722418931]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
 
-[node name="SongButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=19332479]
+[node name="SongButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer1" unique_id=19332479]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" unique_id=1574391513]
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=1806478540]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("4_cpwnx")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=1574391513]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -129,11 +187,12 @@ offset_right = -0.0040130615
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "CHROMATICALLY"
 vertical_alignment = 1
 
-[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" unique_id=1404336326]
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=1404336326]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -151,7 +210,7 @@ theme_override_colors/font_color = Color(0.9764706, 0.7294118, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "MEDIUM"
 
-[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" unique_id=740828250]
+[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=740828250]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.772
@@ -162,34 +221,64 @@ offset_left = 0.115997314
 offset_right = 0.021972656
 grow_horizontal = 0
 grow_vertical = 2
+texture = ExtResource("5_jn2y1")
 expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" unique_id=1599160052]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=1599160052]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
 
-[node name="SongButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1754204659]
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=889969723]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "HAYWYRE"
+
+[node name="SongButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer1" unique_id=1754204659]
+modulate = Color(1, 1, 1, 0.48235294)
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 
-[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" unique_id=1657167106]
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=926074497]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("4_cpwnx")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=1657167106]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
 anchor_top = 0.68
 anchor_right = 0.68700004
 anchor_bottom = 0.95500004
-offset_left = -0.17597723
-offset_right = -0.07598877
+offset_left = 1.8240228
+offset_right = 21.924011
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 28
-text = "GHOSTS 'N STUFF"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "DEAD MAN WALKING"
 vertical_alignment = 1
 
-[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" unique_id=578717218]
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=578717218]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
@@ -207,7 +296,7 @@ theme_override_colors/font_color = Color(0.9764706, 0.7294118, 0.03137255, 1)
 theme_override_font_sizes/font_size = 40
 text = "MEDIUM"
 
-[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" unique_id=1637572679]
+[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=1637572679]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.772
@@ -218,19 +307,48 @@ offset_left = 0.115997314
 offset_right = 0.021972656
 grow_horizontal = 0
 grow_vertical = 2
+texture = ExtResource("6_ix5qw")
 expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" unique_id=1124392143]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=1124392143]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
+
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=785584655]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "GRANT & ELLIS"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=880289432]
 layout_mode = 2
 
 [node name="SongButton4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1864175380]
+modulate = Color(1, 1, 1, 0.48235294)
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
+
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=834951794]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("4_cpwnx")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=844626043]
 layout_mode = 1
@@ -239,13 +357,15 @@ anchor_left = 0.012
 anchor_top = 0.68
 anchor_right = 0.651
 anchor_bottom = 0.95500004
-offset_left = 1.836
-offset_right = 2.1029968
+offset_left = -4.164
+offset_right = 9.102997
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 40
-text = "DASHSTAR"
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "GHOSTS 'N STUFF"
+vertical_alignment = 1
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=1465588848]
 layout_mode = 1
@@ -276,16 +396,45 @@ offset_left = 0.115997314
 offset_right = 0.021972656
 grow_horizontal = 0
 grow_vertical = 2
+texture = ExtResource("7_cq744")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=1297946436]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
 
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=752245080]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "DEADMAU5 & ROB SWIRE"
+
 [node name="SongButton5" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1066596232]
+modulate = Color(1, 1, 1, 0.48235294)
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
+
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=722644199]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("4_cpwnx")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=1568531341]
 layout_mode = 1
@@ -299,8 +448,9 @@ offset_right = 2.1029968
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-text = "IT'S YOU"
+text = "DASHSTAR*"
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=991519697]
 layout_mode = 1
@@ -316,9 +466,9 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
-theme_override_colors/font_color = Color(0.75338984, 2.382472e-06, 5.7756904e-07, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-text = "HARDER"
+text = "HARD"
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=967666251]
 layout_mode = 1
@@ -331,16 +481,45 @@ offset_left = 0.115997314
 offset_right = 0.021972656
 grow_horizontal = 0
 grow_vertical = 2
+texture = ExtResource("8_lqrw5")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=1891741753]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
 
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=1731337748]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "KNOCK2"
+
 [node name="SongButton6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1440723393]
+modulate = Color(1, 1, 1, 0.48235294)
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
+
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=624703999]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("4_cpwnx")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=1477084043]
 layout_mode = 1
@@ -354,8 +533,10 @@ offset_right = 2.1029968
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-text = "???"
+text = "IT'S YOU"
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=42358440]
 layout_mode = 1
@@ -371,9 +552,9 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
-theme_override_colors/font_color = Color(0, 0.93781835, 0.030428646, 1)
+theme_override_colors/font_color = Color(0.84263474, 3.5616756e-06, 4.813075e-07, 1)
 theme_override_font_sizes/font_size = 40
-text = "???"
+text = "HARDER"
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=608438913]
 layout_mode = 1
@@ -386,10 +567,35 @@ offset_left = 0.115997314
 offset_right = 0.021972656
 grow_horizontal = 0
 grow_vertical = 2
+texture = ExtResource("9_kt11f")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=2089711087]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
+
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=996790630]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "NINAJIRACHI & DAINE"
+
+[node name="selectBorder" type="Panel" parent="MarginContainer" unique_id=96824703]
+custom_minimum_size = Vector2(347, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jn2y1")
+metadata/_edit_use_anchors_ = true
 
 [node name="SongPreview" type="AudioStreamPlayer2D" parent="." unique_id=1641397160]
 stream = ExtResource("4_gkm5v")
@@ -411,21 +617,21 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 70
 text = "WYBIERZ MAPĘ"
 
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton" to="." method="_on_song_button_mouse_entered" binds= [0]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton" to="." method="_on_song_button_mouse_exited"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton" to="." method="_on_song_button_pressed" binds= [0]]
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" to="." method="_on_song_button_mouse_entered" binds= [1]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" to="." method="_on_song_button_mouse_exited"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton2" to="." method="_on_song_button_pressed" binds= [1]]
-[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" to="." method="_on_song_button_mouse_entered" binds= [2]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" to="." method="_on_song_button_mouse_exited"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SongButton3" to="." method="_on_song_button_pressed" binds= [2]]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" to="." method="_on_song_button_mouse_entered" binds= [0]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" to="." method="_on_song_button_mouse_exited" binds= [0]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" to="." method="_on_song_button_pressed" binds= [0]]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" to="." method="_on_song_button_mouse_entered" binds= [1]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" to="." method="_on_song_button_mouse_exited" binds= [1]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" to="." method="_on_song_button_pressed" binds= [1]]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" to="." method="_on_song_button_mouse_entered" binds= [2]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" to="." method="_on_song_button_mouse_exited" binds= [2]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" to="." method="_on_song_button_pressed" binds= [2]]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" to="." method="_on_song_button_mouse_entered" binds= [3]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" to="." method="_on_song_button_mouse_exited"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" to="." method="_on_song_button_mouse_exited" binds= [3]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" to="." method="_on_song_button_pressed" binds= [3]]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_entered" binds= [4]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_exited"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_exited" binds= [4]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_pressed" binds= [4]]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_mouse_entered" binds= [5]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_mouse_exited"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_mouse_exited" binds= [5]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_pressed" binds= [5]]

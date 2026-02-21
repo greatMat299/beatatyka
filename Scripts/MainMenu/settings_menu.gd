@@ -3,12 +3,17 @@ extends Control
 const settingPath = "res://settings.ini"
 @onready var keybindsMenu = $"../KeybindsMenu"
 @onready var menuContainer = $"../MenuContainer"
+@onready var selectBorder = $selectBorder
 
 var masterVolume
 var currentDisplay
 var displayModes
 var fpsCap
 var vsync
+
+var isActive=false
+var currentSelectIndex=0
+var settingsButtons=[]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,11 +24,52 @@ func _ready() -> void:
 	vsync = ConfigFileHandler.config.get_value("Video","VSync")
 	loadValues()
 	
-
-
+	settingsButtons.append(get_node("MarginContainer/VBoxContainer/GridContainer/DisplayMode"))
+	settingsButtons.append(get_node("MarginContainer/VBoxContainer/GridContainer/VSync"))
+	settingsButtons.append(get_node("MarginContainer/VBoxContainer/GridContainer/FPS"))
+	settingsButtons.append(get_node("MarginContainer/VBoxContainer/Keybinds"))
+	settingsButtons.append(get_node("MarginContainer/Return"))
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+
+	if visible==true and isActive==false:
+		changeBorderPosition(currentSelectIndex)
+		isActive=true
+	
+	if isActive==true:
+		if Input.is_action_just_pressed("ui_down"):
+			if currentSelectIndex>-1 and currentSelectIndex<4:
+				currentSelectIndex+=1
+				changeBorderPosition(currentSelectIndex)
+				
+		if Input.is_action_just_pressed("ui_up"):
+			if currentSelectIndex>0 and currentSelectIndex<5:
+				currentSelectIndex-=1
+				changeBorderPosition(currentSelectIndex)
+				
+		if Input.is_action_just_pressed("ui_accept"):
+			print("oops")
+			isActive=false
+			match currentSelectIndex:
+				0:
+					_on_display_mode_pressed()
+				1:
+					_on_v_sync_pressed()
+				2:
+					_on_fps_pressed()
+				3:
+					_on_keybinds_pressed()
+				4:
+					_on_return_pressed()
+					
+		if Input.is_action_just_pressed("ui_cancel"):
+			_on_return_pressed()
+
+func changeBorderPosition(index):
+	selectBorder.visible=true
+	selectBorder.set_deferred("global_position", settingsButtons[index].global_position)
+	selectBorder.set_deferred("size", settingsButtons[index].size)
 
 
 func _on_volume_value_changed(value: float) -> void:
@@ -65,6 +111,9 @@ func _on_display_mode_pressed() -> void:
 
 func _on_return_pressed() -> void:
 	self.visible=false
+	isActive=false
+	currentSelectIndex=0
+	menuContainer.get_parent().isActive=true
 	menuContainer.visible=true
 
 func _on_v_sync_pressed() -> void:
@@ -100,11 +149,9 @@ func _on_fps_pressed() -> void:
 
 func _on_keybinds_pressed() -> void:
 	self.visible=false
+	currentSelectIndex=0
+	isActive=false
 	keybindsMenu.visible=true
-
-
-func _on_audio_test_pressed() -> void:
-	pass # Change scene to audio test
 
 func loadValues() -> void:
 	AudioServer.set_bus_volume_db(0, masterVolume)
@@ -136,4 +183,18 @@ func loadValues() -> void:
 		DisplayServer.VSYNC_ENABLED if vsync else DisplayServer.VSYNC_DISABLED
 	)
 
+	var button = get_node("MarginContainer/VBoxContainer/GridContainer/FPS")
+	if fpsCap==0:
+		button.text = "UNLIMITED"
+	else:
+		button.text = str(fpsCap)
 	Engine.max_fps = fpsCap
+
+
+func _on_button_mouse_entered(extra_arg_0):
+	changeBorderPosition(extra_arg_0)
+
+
+func _on_button_mouse_exited():
+	selectBorder.visible=false
+	currentSelectIndex=0
