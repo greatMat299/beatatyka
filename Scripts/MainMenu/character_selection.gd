@@ -27,9 +27,16 @@ var index_p3 = 0;
 var index_p4 = 0;
 
 var characterSprites = [
-	preload("res://Assets/SpriteSheets/sprite1frame.tres"),
-	preload("res://Assets/SpriteSheets/sprite2frame.tres"),
+	preload("res://Assets/SpriteSheets/classicGuitarFrames.tres"),
+	preload("res://Assets/SpriteSheets/electricGuitarFrames.tres"),
 	preload("res://Assets/SpriteSheets/sprite3frame.tres"),
+	null
+]
+
+var characterIcons = [
+	preload("res://Assets/Images/SongCovers/dashstar.png"),
+	preload("res://Assets/Images/SongCovers/itsYou.png"),
+	preload("res://Assets/Images/SongCovers/ghosts_n_stuff.jpg"),
 	null
 ]
 
@@ -109,6 +116,7 @@ func _process(delta: float) -> void:
 							thePlayerIndex=index_p4
 					
 					GameManager.playerSpriteSheets.append(characterSprites[thePlayerIndex])
+					GameManager.playerSpriteIcons.append(characterIcons[thePlayerIndex])
 					GameManager.setCharacterAttribute(thePlayerIndex,0)
 					GameManager.setCharacterAttribute(thePlayerIndex,1)
 					GameManager.setCharacterAttribute(thePlayerIndex,2)

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cmovijrkx6q7m"]
 
 [ext_resource type="Script" uid="uid://b7rgv0jc3wi4v" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="SpriteFrames" uid="uid://dupdvr7y6fpeu" path="res://Assets/SpriteSheets/sprite3frame.tres" id="2_f1ek2"]
+[ext_resource type="SpriteFrames" uid="uid://d3pkgnbsxuofj" path="res://Assets/SpriteSheets/electricGuitarFrames.tres" id="2_f1ek2"]
 [ext_resource type="Script" uid="uid://d1tc0c78rjfer" path="res://Scripts/health_manager.gd" id="3_6t5aa"]
 [ext_resource type="AudioStream" uid="uid://cukebisn3e8yy" path="res://Assets/Sound/SFX/dashSound.mp3" id="4_vgqql"]
 [ext_resource type="AudioStream" uid="uid://bddvmwmjtrvnh" path="res://Assets/Sound/SFX/attackSound.mp3" id="5_fkybt"]
@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ch88ybdgkukbu" path="res://Assets/Sound/SFX/invincibleEffectSound.mp3" id="9_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h4iuc"]
-size = Vector2(12, 16)
+size = Vector2(14, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
 size = Vector2(108, 32)
@@ -101,11 +101,11 @@ dashAttackPower = 18.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=518338731]
 texture_filter = 1
 sprite_frames = ExtResource("2_f1ek2")
-animation = &"jump"
+animation = &"dash"
 offset = Vector2(0, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1651175655]
-position = Vector2(-1, 2)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_h4iuc")
 
 [node name="MoveTimer" type="Timer" parent="." unique_id=1800716205]

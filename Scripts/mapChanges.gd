@@ -72,7 +72,6 @@ func _ready() -> void:
 	midi_playerW.note_played_w.connect(self._on_warning_note_played)
 	
 func _process(_delta):
-	
 	#logika po śmierci wszystkich oprócz jednego gracza
 	if GameManager.player_count<=1:
 		GameManager.isGamePlaying=false

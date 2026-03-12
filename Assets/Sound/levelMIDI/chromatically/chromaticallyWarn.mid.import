@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://b27h7u2htie2i"
+path="res://.godot/imported/chromaticallyWarn.mid-d96484ff50125bae0570d814d53f19d8.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/chromatically/chromaticallyWarn.mid"
+dest_files=["res://.godot/imported/chromaticallyWarn.mid-d96484ff50125bae0570d814d53f19d8.res"]
+
+[params]
+

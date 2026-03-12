@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://13ucrs8ylqr2"]
 
 [ext_resource type="Script" uid="uid://l4f3b6kb20h3" path="res://Scripts/MainMenu/character_selection.gd" id="1_mng1v"]
-[ext_resource type="Texture2D" uid="uid://dahq7vmqj1ytq" path="res://robinHood_ v1.1/bishopOfHereford_.png" id="2_fm6ub"]
+[ext_resource type="SpriteFrames" uid="uid://cc8p6eeltvhpn" path="res://Assets/SpriteSheets/classicGuitarFrames.tres" id="2_gih77"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fm6ub"]
 
@@ -52,108 +52,6 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(0, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(24, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(48, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(72, 96, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(0, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3smsa"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(24, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8erm5"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(48, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(72, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(0, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(24, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(48, 24, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
-atlas = ExtResource("2_fm6ub")
-region = Rect2(72, 24, 24, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_235bc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cvnsp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6t5aa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vgqql")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fkybt")
-}],
-"loop": false,
-"name": &"death",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x3wgy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3smsa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8erm5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f1ek2")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 9.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tx1dd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gymyn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pu2lt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ukyrk")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 9.0
-}]
 
 [node name="CharacterSelection" type="Control" unique_id=476259564]
 texture_filter = 1
@@ -374,8 +272,9 @@ anchor_left = 0.27600002
 anchor_right = 0.72400004
 anchor_bottom = 0.13000001
 offset_left = 0.10799408
+offset_top = -17.000008
 offset_right = -0.10800171
-offset_bottom = -0.010002136
+offset_bottom = -17.01001
 grow_horizontal = 2
 text = "Speed: 200.0"
 
@@ -386,9 +285,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.5
-offset_top = 23.0
+offset_top = 5.9999924
 offset_right = 48.5
-offset_bottom = 46.0
+offset_bottom = 28.999992
 grow_horizontal = 2
 text = "Jump: 200.0"
 
@@ -399,9 +298,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.5
-offset_top = 46.0
+offset_top = 28.999992
 offset_right = 48.5
-offset_bottom = 69.0
+offset_bottom = 51.999992
 grow_horizontal = 2
 text = "Attack: 0.0"
 
@@ -409,7 +308,7 @@ text = "Attack: 0.0"
 texture_filter = 1
 position = Vector2(108, 138)
 scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_235bc")
+sprite_frames = ExtResource("2_gih77")
 animation = &"idle"
 
 [node name="SpriteControl2" type="Control" parent="PreviewSprites" unique_id=2097983519]
@@ -432,9 +331,9 @@ anchor_left = 0.27600002
 anchor_right = 0.72400004
 anchor_bottom = 0.13000001
 offset_left = 0.10799408
-offset_top = -66.0
+offset_top = -83.0
 offset_right = -0.10800171
-offset_bottom = -66.01
+offset_bottom = -83.01
 grow_horizontal = 2
 text = "Speed: 200.0"
 
@@ -446,9 +345,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.5
-offset_top = -43.0
+offset_top = -60.0
 offset_right = 48.5
-offset_bottom = -20.0
+offset_bottom = -37.0
 grow_horizontal = 2
 text = "Jump: 200.0"
 
@@ -460,9 +359,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.5
-offset_top = -20.0
+offset_top = -37.0
 offset_right = 48.5
-offset_bottom = 3.0
+offset_bottom = -14.0
 grow_horizontal = 2
 text = "Attack: 0.0"
 
@@ -471,7 +370,7 @@ visible = false
 texture_filter = 1
 position = Vector2(107.99999, 71.99999)
 scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_235bc")
+sprite_frames = ExtResource("2_gih77")
 animation = &"idle"
 
 [node name="SpriteControl3" type="Control" parent="PreviewSprites" unique_id=413266042]
@@ -493,10 +392,10 @@ anchors_preset = -1
 anchor_left = 0.27600002
 anchor_right = 0.72400004
 anchor_bottom = 0.13000001
-offset_left = 0.10799408
-offset_top = -66.0
-offset_right = -0.10800171
-offset_bottom = -66.01
+offset_left = -1.8920059
+offset_top = -83.0
+offset_right = -2.1080017
+offset_bottom = -83.01
 grow_horizontal = 2
 text = "Speed: 200.0"
 
@@ -507,10 +406,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -48.5
-offset_top = -43.0
-offset_right = 48.5
-offset_bottom = -20.0
+offset_left = -50.5
+offset_top = -60.0
+offset_right = 46.5
+offset_bottom = -37.0
 grow_horizontal = 2
 text = "Jump: 200.0"
 
@@ -521,10 +420,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -48.5
-offset_top = -20.0
-offset_right = 48.5
-offset_bottom = 3.0
+offset_left = -50.5
+offset_top = -37.0
+offset_right = 46.5
+offset_bottom = -14.0
 grow_horizontal = 2
 text = "Attack: 0.0"
 
@@ -533,7 +432,7 @@ visible = false
 texture_filter = 1
 position = Vector2(107.99999, 71.99999)
 scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_235bc")
+sprite_frames = ExtResource("2_gih77")
 animation = &"idle"
 
 [node name="SpriteControl4" type="Control" parent="PreviewSprites" unique_id=1199654827]
@@ -556,9 +455,9 @@ anchor_left = 0.27600002
 anchor_right = 0.72400004
 anchor_bottom = 0.13000001
 offset_left = 0.10799408
-offset_top = -66.0
+offset_top = -83.0
 offset_right = -0.10800171
-offset_bottom = -66.01
+offset_bottom = -83.01
 grow_horizontal = 2
 text = "Speed: 200.0"
 
@@ -570,9 +469,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.5
-offset_top = -43.0
+offset_top = -60.0
 offset_right = 48.5
-offset_bottom = -20.0
+offset_bottom = -37.0
 grow_horizontal = 2
 text = "Jump: 200.0"
 
@@ -584,9 +483,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -48.5
-offset_top = -20.0
+offset_top = -37.0
 offset_right = 48.5
-offset_bottom = 3.0
+offset_bottom = -14.0
 grow_horizontal = 2
 text = "Attack: 0.0"
 
@@ -595,5 +494,5 @@ visible = false
 texture_filter = 1
 position = Vector2(107.99999, 71.99999)
 scale = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_235bc")
+sprite_frames = ExtResource("2_gih77")
 animation = &"idle"

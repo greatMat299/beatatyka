@@ -21,7 +21,7 @@ func _process(delta):
 	if GameManager.hasStartSeqFinished==true and isStarted==false:
 		isStarted=true
 		startCatcher()
-	print(comboAttacks)
+	#print(comboAttacks)
 		
 func startCatcher():
 	#dodanie graczy

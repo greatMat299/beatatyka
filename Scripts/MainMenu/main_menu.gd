@@ -111,9 +111,10 @@ func _process(_delta: float) -> void:
 			
 
 func changeBorderPosition(index):
-	selectBorder.visible=true
-	selectBorder.set_deferred("global_position", menuButtons[index].global_position)
-	selectBorder.set_deferred("size", menuButtons[index].size)
+	if len(menuButtons)>0:
+		selectBorder.visible=true
+		selectBorder.set_deferred("global_position", menuButtons[index].global_position)
+		selectBorder.set_deferred("size", menuButtons[index].size)
 
 
 func _on_start_button_pressed() -> void:

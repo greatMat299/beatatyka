@@ -169,6 +169,7 @@ func _physics_process(delta):
 					pass
 				else:
 					dashSfx.play()
+					animSprite.play("dash")
 					dashCooldownTimer.start()
 					dashVelocity = dashPower * direction
 				dashPresses=0

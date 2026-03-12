@@ -174,7 +174,7 @@ func changeButtonPosition(index):
 	selectBorder.size = songButtons[index].size
 
 func _on_song_button_mouse_entered(extra_arg_0):
-	if enabled:
+	if enabled and len(songButtons)>0:
 		if songButtons[extra_arg_0].disabled==false:
 			currentKeyboardMapIndex=extra_arg_0
 			playPreview(extra_arg_0)
