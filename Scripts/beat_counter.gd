@@ -13,6 +13,7 @@ signal hasBeat
 
 func _ready():
 	sec_per_beat = 60.0 / bpm
+	GameManager.levelBPM = bpm
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

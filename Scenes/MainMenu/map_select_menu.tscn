@@ -43,6 +43,43 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="Animation" id="Animation_jn2y1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ix5qw"]
+resource_name = "levelMenuDissapear"
+length = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cq744"]
+_data = {
+&"RESET": SubResource("Animation_jn2y1"),
+&"levelMenuDissapear": SubResource("Animation_ix5qw")
+}
+
 [node name="MapSelectMenu" type="Control" unique_id=1259350917]
 layout_mode = 3
 anchors_preset = 15
@@ -616,6 +653,9 @@ offset_bottom = 0.3600006
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 70
 text = "WYBIERZ MAPĘ"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1130479487]
+libraries/ = SubResource("AnimationLibrary_cq744")
 
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" to="." method="_on_song_button_mouse_entered" binds= [0]]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" to="." method="_on_song_button_mouse_exited" binds= [0]]

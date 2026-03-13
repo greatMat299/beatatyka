@@ -29,14 +29,16 @@ var index_p4 = 0;
 var characterSprites = [
 	preload("res://Assets/SpriteSheets/classicGuitarFrames.tres"),
 	preload("res://Assets/SpriteSheets/electricGuitarFrames.tres"),
-	preload("res://Assets/SpriteSheets/sprite3frame.tres"),
+	preload("res://Assets/SpriteSheets/saxophoneFrames.tres"),
+	preload("res://Assets/SpriteSheets/djPadFrames.tres"),
 	null
 ]
 
 var characterIcons = [
-	preload("res://Assets/Images/SongCovers/dashstar.png"),
-	preload("res://Assets/Images/SongCovers/itsYou.png"),
-	preload("res://Assets/Images/SongCovers/ghosts_n_stuff.jpg"),
+	preload("res://Assets/CharacterIcons/classicalGuitar.png"),
+	preload("res://Assets/CharacterIcons/electricGuitar.png"),
+	preload("res://Assets/CharacterIcons/saxophone.png"),
+	preload("res://Assets/CharacterIcons/djPad.png"),
 	null
 ]
 
@@ -58,7 +60,10 @@ func fillUpArrays():
 		speedCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("SpeedLabel"))
 		jumpCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("JumpLabel"))
 		attackCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("AttackLabel"))
-
+		
+	for i in range(0,len(characterIcons)-1):	
+		get_node("Control/HBoxContainer/Postac"+str(i+1)).icon = characterIcons[i]
+		
 func checkIfAllReady() -> bool:
 	var readyChecks=0
 	if playerAmount==1:
@@ -78,7 +83,6 @@ func checkIfAllReady() -> bool:
 func _process(delta: float) -> void:
 	
 	if enabled:
-		print(arePlayersReady)
 		if len(previewSprites)==0:
 			fillUpArrays()
 			update_sprite_preview(1,0)

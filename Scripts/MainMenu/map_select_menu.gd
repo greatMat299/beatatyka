@@ -11,6 +11,8 @@ var currentKeyboardMapIndex=0
 @onready var songPreviewPlayer = $SongPreview
 @onready var selectBorder = $MarginContainer/selectBorder
 @onready var characterSelection = $"../CharacterSelection"
+@onready var loadingScreen = $"../LoadingScreen"
+@onready var animPlayer = $AnimationPlayer
 
 var songPreviews = [
 	preload("res://Assets/Sound/songPreviews/crabRavePreview.mp3"),
@@ -118,12 +120,6 @@ func _process(_delta):
 			characterSelection.visible=true
 			currentKeyboardMapIndex=0
 			enabled=false
-		
-		var progress=[]
-		ResourceLoader.load_threaded_get_status(songMaps[currentSongMapIndex],progress)
-		if progress[0]==1:
-			var packedScene = ResourceLoader.load_threaded_get(songMaps[currentSongMapIndex])
-			get_tree().change_scene_to_packed(packedScene)
 
 func playPreview(index):
 	await get_tree().create_timer(0.03).timeout
@@ -161,7 +157,11 @@ func stopPreview(index):
 	fade_tween.tween_callback(songPreviewPlayer.stop)
 
 func loadGameMap(index):
-	ResourceLoader.load_threaded_request(songMaps[index])
+	loadingScreen.mapPath = songMaps[index]
+	animPlayer.play("levelMenuDissapear")
+	loadingScreen.visible=true
+	#self.visible=false
+	
 	
 func _on_song_button_pressed(extra_arg_0):
 	if enabled:

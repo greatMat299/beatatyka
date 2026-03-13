@@ -8,7 +8,7 @@
 [ext_resource type="MidiResource" uid="uid://0hwccjll802x" path="res://Assets/Sound/levelMIDI/chromatically/chromaticallyC1.mid" id="6_slxia"]
 [ext_resource type="Script" uid="uid://bxfsq5isjqiwb" path="res://Scripts/midi_player.gd" id="7_3vcwm"]
 [ext_resource type="MidiResource" uid="uid://b8cpq1t2m6ti8" path="res://Assets/Sound/levelMIDI/chromatically/chromaticallyC2.mid" id="8_kkkch"]
-[ext_resource type="MidiResource" uid="uid://c7vii1ld818v2" path="res://Assets/Sound/levelMIDI/crabRave/crabRaveWarn.mid" id="9_rjj4s"]
+[ext_resource type="MidiResource" uid="uid://c7vii1ld818v2" path="res://Sound/levelMIDI/crabRaveWarn.mid" id="9_rjj4s"]
 [ext_resource type="PackedScene" uid="uid://crvd4x1oahyu7" path="res://Scenes/userUIgameplay.tscn" id="10_grsgd"]
 [ext_resource type="AudioStream" uid="uid://4gp5kmomf17x" path="res://Assets/Sound/levelMusic/chromatically.mp3" id="11_o03xv"]
 [ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="12_88x3e"]
@@ -266,7 +266,6 @@ stream = ExtResource("11_o03xv")
 volume_db = -5.0
 bus = &"Music"
 script = ExtResource("12_88x3e")
-bpm = 125
 
 [node name="PowerupCooldown" type="Timer" parent="." unique_id=1216662636]
 wait_time = 5.0
