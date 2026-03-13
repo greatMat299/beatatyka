@@ -19,6 +19,7 @@ var playerAttacking=""
 var isInvincible=false
 var playerKeybindId=-1
 var currentSpriteSheet
+var isDashAnim=false
 
 var powerup1
 var powerup2
@@ -169,9 +170,13 @@ func _physics_process(delta):
 					pass
 				else:
 					dashSfx.play()
+					animSprite.stop()
 					animSprite.play("dash")
+					isDashAnim=true
 					dashCooldownTimer.start()
 					dashVelocity = dashPower * direction
+					await get_tree().create_timer(.2).timeout
+					isDashAnim=false
 				dashPresses=0
 				dashPressTimer.stop()
 		
@@ -236,7 +241,8 @@ func _physics_process(delta):
 				velocity.x = (direction * playerSpeed) + dashVelocity
 			else:
 				velocity.x = move_toward(velocity.x, input_velocity, playerSpeed)
-			animSprite.play("walk")
+			if isDashAnim==false:
+				animSprite.play("walk")
 			if walkSfx.playing==false and is_on_floor():
 				walkSfx.play()
 			if direction==-1:
@@ -246,7 +252,8 @@ func _physics_process(delta):
 		else:
 			if moveTimer.is_stopped()==true and GameManager.arePlayersAlive[player_id-1]==true:
 				moveTimer.start()
-			animSprite.play("idle")
+			if isDashAnim==false:
+				animSprite.play("idle")
 			walkSfx.stop()
 			if abs(attackVelocity) > 1.0:
 				velocity.x = attackVelocity

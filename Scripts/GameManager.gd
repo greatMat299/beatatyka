@@ -1,9 +1,9 @@
 extends Node
 
-const CHARACTER_SPEEDS = [250.0,200.0,300.0]
-const CHARACTER_JUMP_VELS = [-500.0,-450.0,-600.0]
-const CHARACTER_ATTACK_PWRS = [7.0,14.0,5.0]
-const CHARACTER_DASH_ATTACK_PWRS = [12.0,16.0,9.0]
+const CHARACTER_SPEEDS = [250.0,200.0,300.0,300.0]
+const CHARACTER_JUMP_VELS = [-500.0,-450.0,-600.0,-600.0]
+const CHARACTER_ATTACK_PWRS = [7.0,14.0,5.0,5.0]
+const CHARACTER_DASH_ATTACK_PWRS = [12.0,16.0,9.0,9.0]
 
 var currentNote=0
 var isGamePlaying=false
@@ -29,6 +29,7 @@ var isSongOver=false
 var currentPowerupIndex = -1
 var currentPowerupType = -1
 var rng = RandomNumberGenerator.new()
+var levelBPM = 0
 
 func setCharacterAttribute(charIndex, att):
 	match att:

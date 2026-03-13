@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://udwpaopb3ae3" path="res://Scenes/MainMenu/keybinds_menu.tscn" id="3_jix8l"]
 [ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
 [ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
+[ext_resource type="PackedScene" uid="uid://c4hfaayvti8bf" path="res://Scenes/loadingScreen.tscn" id="6_0l8wx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adu2g"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
@@ -82,6 +83,10 @@ visible = false
 layout_mode = 1
 
 [node name="CharacterSelection" parent="." unique_id=476259564 instance=ExtResource("5_adu2g")]
+visible = false
+layout_mode = 1
+
+[node name="LoadingScreen" parent="." unique_id=713565061 instance=ExtResource("6_0l8wx")]
 visible = false
 layout_mode = 1
 

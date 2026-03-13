@@ -127,19 +127,29 @@ metadata/_edit_use_anchors_ = true
 custom_minimum_size = Vector2(180, 200)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Postac1"
+icon_alignment = 1
+expand_icon = true
 
 [node name="Postac2" type="Button" parent="Control/HBoxContainer" unique_id=22655694]
 custom_minimum_size = Vector2(180, 200)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Postac2"
+icon_alignment = 1
+expand_icon = true
 
 [node name="Postac3" type="Button" parent="Control/HBoxContainer" unique_id=1844990826]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Postac3"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Postac4" type="Button" parent="Control/HBoxContainer" unique_id=8217605]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
 
 [node name="Random" type="Button" parent="Control/HBoxContainer" unique_id=136805166]
 custom_minimum_size = Vector2(160, 0)
@@ -198,7 +208,7 @@ horizontal_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721
-anchor_right = 0.24700001
+anchor_right = 0.19660631
 anchor_bottom = 1.0
 offset_top = -0.11999512
 offset_right = 0.30999756
@@ -207,12 +217,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mdkri")
 metadata/_edit_use_anchors_ = true
 
 [node name="border_p2" type="Panel" parent="Control" unique_id=1751002109]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721
-anchor_right = 0.25
-anchor_bottom = 0.9990001
+anchor_right = 0.1996063
+anchor_bottom = 0.999
 offset_top = -0.11999512
 offset_right = -3.5
 offset_bottom = 0.7199707
@@ -221,11 +230,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_235bc")
 metadata/_edit_use_anchors_ = true
 
 [node name="border_p3" type="Panel" parent="Control" unique_id=1253348842]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721
-anchor_right = 0.24700001
+anchor_right = 0.19660631
 anchor_bottom = 1.0
 offset_top = -0.11999512
 offset_right = 0.30999756
@@ -233,12 +241,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fm6ub")
 metadata/_edit_use_anchors_ = true
 
 [node name="border_p4" type="Panel" parent="Control" unique_id=236670937]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721
-anchor_right = 0.24700001
-anchor_bottom = 0.9990001
+anchor_right = 0.19660631
+anchor_bottom = 0.999
 offset_top = -0.11999512
 offset_right = 0.30999756
 offset_bottom = -0.2800293
