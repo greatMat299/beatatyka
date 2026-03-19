@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://chfrnkdk3o4vk"]
+
+[ext_resource type="Texture2D" uid="uid://ca66sut6piqce" path="res://Assets/CharacterSpriteSheets/random/questionMarkIdle.png" id="1_v2sx6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep5oi"]
+atlas = ExtResource("1_v2sx6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pntug"]
+atlas = ExtResource("1_v2sx6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tx6sy"]
+atlas = ExtResource("1_v2sx6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x673s"]
+atlas = ExtResource("1_v2sx6")
+region = Rect2(96, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep5oi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pntug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tx6sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x673s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]

@@ -13,6 +13,9 @@ var currentKeyboardMapIndex=0
 @onready var characterSelection = $"../CharacterSelection"
 @onready var loadingScreen = $"../LoadingScreen"
 @onready var animPlayer = $AnimationPlayer
+@onready var menuSelectSfx = $"../MenuSelectSfx"
+@onready var menuBackSfx = $"../MenuBackSfx"
+@onready var menuSwipeSfx = $"../MenuSwipeSfx"
 
 var songPreviews = [
 	preload("res://Assets/Sound/songPreviews/crabRavePreview.mp3"),
@@ -109,6 +112,7 @@ func _process(_delta):
 				loadGameMap(currentKeyboardMapIndex)
 				
 		if Input.is_action_just_pressed("ui_cancel"):
+			menuBackSfx.play()
 			for i in range(0,4):
 				characterSelection.arePlayersReady[i]=false
 			await get_tree().create_timer(0.03).timeout
@@ -122,6 +126,7 @@ func _process(_delta):
 			enabled=false
 
 func playPreview(index):
+	menuSwipeSfx.play()
 	await get_tree().create_timer(0.03).timeout
 	
 	if fade_tween:

@@ -4,6 +4,9 @@ const settingPath = "res://settings.ini"
 
 @onready var settingsMenu = $"../SettingsMenu"
 @onready var selectBorder = $selectBorder
+@onready var menuSelectSfx = $"../MenuSelectSfx"
+@onready var menuBackSfx = $"../MenuBackSfx"
+@onready var menuPickSfx = $"../MenuPickSfx"
 
 var waitingForInput = false
 var currentKey;
@@ -134,12 +137,14 @@ func _process(_delta):
 					
 
 func changeBorderPosition(index):
+	menuPickSfx.play()
 	selectBorder.set_deferred("global_position", menuButtons[index].global_position)
 	selectBorder.set_deferred("size", menuButtons[index].size)
 	selectBorder.visible=true
 
 
 func _on_return_pressed() -> void:
+	menuBackSfx.play()
 	self.visible=false
 	currentSelectIndex=0
 	settingsMenu.visible=true
@@ -266,3 +271,12 @@ func _on_player_btn_pressed(extra_arg_0):
 	playerButtons[extra_arg_0-1].add_theme_stylebox_override("normal", style_box)
 	
 	loadPlayerKeybinds(extra_arg_0,false,true)
+
+
+func _on_button_mouse_entered(extra_arg_0):
+	if isActive:
+		if selectBorder.visible==false:
+			selectBorder.visible=true
+		if extra_arg_0>=0 and extra_arg_0<=4:
+			currentSelectIndex=extra_arg_0
+			changeBorderPosition(extra_arg_0)

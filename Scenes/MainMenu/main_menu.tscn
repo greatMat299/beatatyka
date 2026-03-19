@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
 [ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
 [ext_resource type="PackedScene" uid="uid://c4hfaayvti8bf" path="res://Scenes/loadingScreen.tscn" id="6_0l8wx"]
+[ext_resource type="AudioStream" uid="uid://b76hbj6w3fkej" path="res://Assets/Sound/SFX/menuSelect.mp3" id="7_n5jej"]
+[ext_resource type="AudioStream" uid="uid://b6hwk2fptol7k" path="res://Assets/Sound/SFX/menuBack.mp3" id="8_2r307"]
+[ext_resource type="AudioStream" uid="uid://cb1rcaamngf3q" path="res://Assets/Sound/SFX/menuPick.mp3" id="9_omq0y"]
+[ext_resource type="AudioStream" uid="uid://bipyv4qkekmw2" path="res://Assets/Sound/SFX/menuSwipe.mp3" id="10_agesy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adu2g"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
@@ -89,6 +93,23 @@ layout_mode = 1
 [node name="LoadingScreen" parent="." unique_id=713565061 instance=ExtResource("6_0l8wx")]
 visible = false
 layout_mode = 1
+
+[node name="MenuSelectSfx" type="AudioStreamPlayer2D" parent="." unique_id=51584822]
+stream = ExtResource("7_n5jej")
+bus = &"SFX"
+
+[node name="MenuBackSfx" type="AudioStreamPlayer2D" parent="." unique_id=1443139595]
+stream = ExtResource("8_2r307")
+bus = &"SFX"
+
+[node name="MenuPickSfx" type="AudioStreamPlayer2D" parent="." unique_id=592210800]
+stream = ExtResource("9_omq0y")
+bus = &"SFX"
+
+[node name="MenuSwipeSfx" type="AudioStreamPlayer2D" parent="." unique_id=1869373910]
+stream = ExtResource("10_agesy")
+volume_db = -5.0
+bus = &"SFX"
 
 [connection signal="focus_entered" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_focus_entered"]
 [connection signal="mouse_entered" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_entered" binds= [0]]

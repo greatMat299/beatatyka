@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://13ucrs8ylqr2"]
 
 [ext_resource type="Script" uid="uid://l4f3b6kb20h3" path="res://Scripts/MainMenu/character_selection.gd" id="1_mng1v"]
+[ext_resource type="Texture2D" uid="uid://civlmw2yag3v3" path="res://Assets/CharacterIcons/question_mark.png" id="2_e4kuv"]
 [ext_resource type="SpriteFrames" uid="uid://cc8p6eeltvhpn" path="res://Assets/SpriteSheets/classicGuitarFrames.tres" id="2_gih77"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fm6ub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdkri"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
@@ -155,7 +154,7 @@ expand_icon = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-icon = SubResource("CompressedTexture2D_fm6ub")
+icon = ExtResource("2_e4kuv")
 autowrap_trim_flags = 0
 icon_alignment = 1
 vertical_icon_alignment = 0
@@ -217,6 +216,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mdkri")
 metadata/_edit_use_anchors_ = true
 
 [node name="border_p2" type="Panel" parent="Control" unique_id=1751002109]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721
@@ -230,6 +230,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_235bc")
 metadata/_edit_use_anchors_ = true
 
 [node name="border_p3" type="Panel" parent="Control" unique_id=1253348842]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721
@@ -241,6 +242,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fm6ub")
 metadata/_edit_use_anchors_ = true
 
 [node name="border_p4" type="Panel" parent="Control" unique_id=236670937]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.721

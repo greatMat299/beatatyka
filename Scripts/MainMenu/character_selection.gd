@@ -8,6 +8,9 @@ extends Control
 @onready var warnLabel = $Control/warn_label
 @onready var mapSelectMenu = $"../MapSelectMenu"
 @onready var menuContainer = $"../MenuContainer"
+@onready var menuSelectSfx = $"../MenuSelectSfx"
+@onready var menuBackSfx = $"../MenuBackSfx"
+@onready var menuSwipeSfx = $"../MenuSwipeSfx"
 var previewSprites = []
 var playerLabels = []
 var speedCharLabels = []
@@ -20,6 +23,7 @@ var isGameReady=false
 var isGameLaunching=false
 var enabled=false
 var scene = "res://Scenes/map1.tscn"
+var rng
 
 var index_p1 = 0;
 var index_p2 = 0;
@@ -31,7 +35,7 @@ var characterSprites = [
 	preload("res://Assets/SpriteSheets/electricGuitarFrames.tres"),
 	preload("res://Assets/SpriteSheets/saxophoneFrames.tres"),
 	preload("res://Assets/SpriteSheets/djPadFrames.tres"),
-	null
+	preload("res://Assets/SpriteSheets/randomCharFrames.tres")
 ]
 
 var characterIcons = [
@@ -39,12 +43,12 @@ var characterIcons = [
 	preload("res://Assets/CharacterIcons/electricGuitar.png"),
 	preload("res://Assets/CharacterIcons/saxophone.png"),
 	preload("res://Assets/CharacterIcons/djPad.png"),
-	null
+	preload("res://Assets/CharacterIcons/question_mark.png")
 ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	rng = RandomNumberGenerator.new()
 	
 func fillUpArrays():
 	for i in range(0,4):
@@ -93,6 +97,7 @@ func _process(delta: float) -> void:
 		handle_input_p4()
 		
 		if Input.is_action_just_pressed("ui_cancel"):
+			menuBackSfx.play()
 			await get_tree().create_timer(0.03).timeout
 			enabled=false
 			visible=false
@@ -119,13 +124,9 @@ func _process(delta: float) -> void:
 						3:
 							thePlayerIndex=index_p4
 					
-					GameManager.playerSpriteSheets.append(characterSprites[thePlayerIndex])
-					GameManager.playerSpriteIcons.append(characterIcons[thePlayerIndex])
-					GameManager.setCharacterAttribute(thePlayerIndex,0)
-					GameManager.setCharacterAttribute(thePlayerIndex,1)
-					GameManager.setCharacterAttribute(thePlayerIndex,2)
-					GameManager.setCharacterAttribute(thePlayerIndex,3)
-							
+					preparePlayer(thePlayerIndex)
+						
+						
 			GameManager.playerLoadCount=playerAmount
 			self.visible=false
 			enabled=false
@@ -135,8 +136,17 @@ func _process(delta: float) -> void:
 			
 		if playerAmount>=2 and warnLabel.visible==true:
 			warnLabel.visible=false
-
+			
+func preparePlayer(index):
+	GameManager.playerSpriteSheets.append(characterSprites[index])
+	GameManager.playerSpriteIcons.append(characterIcons[index])
+	GameManager.setCharacterAttribute(index,0)
+	GameManager.setCharacterAttribute(index,1)
+	GameManager.setCharacterAttribute(index,2)
+	GameManager.setCharacterAttribute(index,3)
+	
 func update_frame(frame, index):
+	menuSwipeSfx.play()
 	var btn = buttons[index]
 	frame.global_position = btn.global_position
 	frame.size = btn.size
@@ -161,8 +171,11 @@ func handle_input_p1():
 			playerLabels[0].add_theme_color_override("font_color", Color(0.996, 0.0, 0.176, 1.0))
 			p1_frame.visible=false
 			arePlayersReady[0]=true
+			if index_p1==len(characterSprites)-1:
+				index_p1 = rng.randi_range(-1,len(characterSprites)-3)
+				update_sprite_preview(1,index_p1)
 			isGameReady = checkIfAllReady()
-		
+			
 
 func handle_input_p2():
 	if arePlayersActive[1]!=false and arePlayersReady[1]==false:
@@ -196,6 +209,9 @@ func handle_input_p2():
 			playerLabels[1].text = "PLAYER 2 READY"
 			playerLabels[1].add_theme_color_override("font_color", Color(0.0, 0.557, 0.929, 1.0))
 			arePlayersReady[1]=true
+			if index_p2==len(characterSprites)-1:
+				index_p2 = rng.randi_range(0,len(characterSprites)-2)
+				update_sprite_preview(2,index_p2)
 			isGameReady = checkIfAllReady()
 		
 func handle_input_p3():
@@ -230,6 +246,9 @@ func handle_input_p3():
 			playerLabels[2].text = "PLAYER 3 READY"
 			playerLabels[2].add_theme_color_override("font_color", Color(0.267, 0.639, 0.0, 1.0))
 			arePlayersReady[2]=true
+			if index_p3==len(characterSprites)-1:
+				index_p3 = rng.randi_range(0,len(characterSprites)-2)
+				update_sprite_preview(3,index_p3)
 			isGameReady = checkIfAllReady()
 		
 func handle_input_p4():
@@ -264,16 +283,25 @@ func handle_input_p4():
 			playerLabels[3].text = "PLAYER 4 READY"
 			playerLabels[3].add_theme_color_override("font_color", Color(0.62, 0.584, 0.075, 1.0))
 			arePlayersReady[3]=true
+			if index_p4==len(characterSprites)-1:
+				index_p4 = rng.randi_range(0,len(characterSprites)-2)
+				update_sprite_preview(4,index_p4)
 			isGameReady = checkIfAllReady()
 
 func update_sprite_preview(player,index):
 	print("sex")
-	previewSprites[player-1].sprite_frames = characterSprites[index]
-	previewSprites[player-1].play("idle")
-	speedCharLabels[player-1].text = "Speed: "+str(GameManager.CHARACTER_SPEEDS[index])
-	jumpCharLabels[player-1].text = "Jump: "+str(abs(GameManager.CHARACTER_JUMP_VELS[index]))
-	attackCharLabels[player-1].text = "Attack: "+str(GameManager.CHARACTER_ATTACK_PWRS[index])
-
+	if index<len(GameManager.CHARACTER_SPEEDS):
+		previewSprites[player-1].sprite_frames = characterSprites[index]
+		previewSprites[player-1].play("idle")
+		speedCharLabels[player-1].text = "Speed: "+str(GameManager.CHARACTER_SPEEDS[index])
+		jumpCharLabels[player-1].text = "Jump: "+str(abs(GameManager.CHARACTER_JUMP_VELS[index]))
+		attackCharLabels[player-1].text = "Attack: "+str(GameManager.CHARACTER_ATTACK_PWRS[index])
+	elif index==len(GameManager.CHARACTER_SPEEDS):
+		previewSprites[player-1].sprite_frames = characterSprites[index]
+		previewSprites[player-1].play("idle")
+		speedCharLabels[player-1].text = ""
+		jumpCharLabels[player-1].text = ""
+		attackCharLabels[player-1].text = ""
 
 func update_preview(index):
 	var btn = buttons[index]

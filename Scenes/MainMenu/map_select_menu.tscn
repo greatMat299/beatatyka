@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://1paao5pc1hga" path="res://Assets/Images/SongCovers/crabRave.jpeg" id="3_6lno7"]
 [ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="4_cpwnx"]
 [ext_resource type="AudioStream" uid="uid://cjpe0r033pba" path="res://Assets/Sound/songPreviews/crabRavePreview.mp3" id="4_gkm5v"]
+[ext_resource type="Texture2D" uid="uid://bbhvp2rlacshj" path="res://Assets/Images/MapScreenshots/level2.png" id="4_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bbx7or1yhen2w" path="res://Assets/Images/SongCovers/chromatically.png" id="5_jn2y1"]
 [ext_resource type="Texture2D" uid="uid://db6ds27aopqgn" path="res://Assets/Images/SongCovers/deadManWalking.jpg" id="6_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bea1efnah04o3" path="res://Assets/Images/SongCovers/ghosts_n_stuff.jpg" id="7_cq744"]
@@ -208,7 +209,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(173.5, 100)
-texture = ExtResource("4_cpwnx")
+texture = ExtResource("4_ix5qw")
 expand_mode = 1
 stretch_mode = 6
 

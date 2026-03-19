@@ -4,6 +4,9 @@ const settingPath = "res://settings.ini"
 @onready var keybindsMenu = $"../KeybindsMenu"
 @onready var menuContainer = $"../MenuContainer"
 @onready var selectBorder = $selectBorder
+@onready var menuSelectSfx = $"../MenuSelectSfx"
+@onready var menuBackSfx = $"../MenuBackSfx"
+@onready var menuPickSfx = $"../MenuPickSfx"
 
 var masterVolume
 var currentDisplay
@@ -67,6 +70,7 @@ func _process(delta: float) -> void:
 			_on_return_pressed()
 
 func changeBorderPosition(index):
+	menuPickSfx.play()
 	selectBorder.visible=true
 	selectBorder.set_deferred("global_position", settingsButtons[index].global_position)
 	selectBorder.set_deferred("size", settingsButtons[index].size)
@@ -84,7 +88,6 @@ func _on_volume_value_changed(value: float) -> void:
 
 
 func _on_display_mode_pressed() -> void:
-	
 	var button = get_node("MarginContainer/VBoxContainer/GridContainer/DisplayMode")
 	
 	currentDisplay+=1;
@@ -110,6 +113,7 @@ func _on_display_mode_pressed() -> void:
 
 
 func _on_return_pressed() -> void:
+	menuBackSfx.play()
 	self.visible=false
 	isActive=false
 	currentSelectIndex=0
@@ -148,6 +152,7 @@ func _on_fps_pressed() -> void:
 
 
 func _on_keybinds_pressed() -> void:
+	menuSelectSfx.play()
 	self.visible=false
 	currentSelectIndex=0
 	isActive=false

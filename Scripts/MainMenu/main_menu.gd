@@ -4,6 +4,10 @@ extends Control
 @onready var menuContainer = $MenuContainer
 @onready var characterSelection = $CharacterSelection
 @onready var selectBorder = $MenuContainer/selectBorder
+@onready var menuSelectSfx = $MenuSelectSfx
+@onready var menuBackSfx = $MenuBackSfx
+@onready var menuPickSfx = $MenuPickSfx
+
 var status
 var scene = "res://Scenes/map1.tscn"
 var scene_loaded=false
@@ -112,12 +116,14 @@ func _process(_delta: float) -> void:
 
 func changeBorderPosition(index):
 	if len(menuButtons)>0:
+		menuPickSfx.play()
 		selectBorder.visible=true
 		selectBorder.set_deferred("global_position", menuButtons[index].global_position)
 		selectBorder.set_deferred("size", menuButtons[index].size)
 
 
 func _on_start_button_pressed() -> void:
+	menuSelectSfx.play()
 	isActive=false
 	menuContainer.visible=false
 	characterSelection.enabled=true
@@ -126,6 +132,7 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_settings_button_pressed() -> void:
+	menuSelectSfx.play()
 	get_node("SettingsMenu").visible=true
 	get_node("SettingsMenu").isActive=true
 	menuContainer.visible=false
@@ -134,6 +141,7 @@ func _on_settings_button_pressed() -> void:
 
 
 func _on_quit_button_pressed() -> void:
+	menuSelectSfx.play()
 	get_tree().quit(0)
 
 

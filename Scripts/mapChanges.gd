@@ -3,6 +3,7 @@ extends Node2D
 var midi_player1
 var midi_player2
 var midi_playerW
+var midi_playerW2
 var modifierType
 var modifierTypeW
 var currentPlatform=-1
@@ -65,11 +66,13 @@ func _ready() -> void:
 	midi_player1 = self.get_node("MusicPlayer").get_node("MidiPlayer")
 	midi_player2 = self.get_node("MusicPlayer").get_node("MidiPlayerChannel2")
 	midi_playerW = self.get_node("MusicPlayer").get_node("MidiPlayerWarning")
+	midi_playerW2 = self.get_node("MusicPlayer").get_node("MidiPlayerWarning2")
 	
 	#połączenie sygnału nut z otwarzaczami
 	midi_player1.note_played.connect(self._on_note_played)
 	midi_player2.note_played_c2.connect(self._on_note_played)
 	midi_playerW.note_played_w.connect(self._on_warning_note_played)
+	midi_playerW2.note_played_w.connect(self._on_warning_note_played)
 	
 func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
