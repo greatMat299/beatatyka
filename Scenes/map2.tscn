@@ -13,6 +13,8 @@
 [ext_resource type="MidiResource" uid="uid://bwmxqhxipqtax" path="res://Assets/Sound/levelMIDI/chromatically/chromaticallyWarn2.mid" id="10_kkkch"]
 [ext_resource type="AudioStream" uid="uid://4gp5kmomf17x" path="res://Assets/Sound/levelMusic/chromatically.mp3" id="11_o03xv"]
 [ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="12_88x3e"]
+[ext_resource type="PackedScene" uid="uid://j41nkenbbfni" path="res://Scenes/spikeScene.tscn" id="14_o03xv"]
+[ext_resource type="PackedScene" uid="uid://wurpq2bp4iqi" path="res://Scenes/spikeSceneNoCollision.tscn" id="14_tr3nq"]
 
 [sub_resource type="Animation" id="Animation_si05j"]
 length = 0.001
@@ -51,7 +53,7 @@ length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -148,7 +150,7 @@ libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms4" type="TileMapLayer" parent="." unique_id=987987478]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD2/wYAAgAFABEAAAD3/wYAAgAFABEAAAD4/wYAAgAFABEAAAD5/wYAAgAFABEAAAD6/wYAAgAFABEAAAD7/wYAAgAFABEAAAD8/wYAAgAFABEAAAD9/wYAAgAFABEAAAD+/wYAAgAFABEAAAD//wYAAgAFABEAAAAGAAYAAgAFABEAAAAHAAYAAgAFABEAAAAIAAYAAgAFABEAAAAJAAYAAgAFABEAAAAKAAYAAgAFABEAAAALAAYAAgAFABEAAAAMAAYAAgAFABEAAAANAAYAAgAFABEAAAAOAAYAAgAFABEAAAAPAAYAAgAFABEAAAAAAAYAAgAFABEAAAD5//v/AwALAAQAAFD5//z/AwALAAQAAFD5//3/AwALAAQAAFD5//7/AwALAAQAAFD5//r/AwAKAAQAAFD5////AwAMAAQAAFD5/wAAAwALAAQAAFD5/wEAAwALAAQAAFD5/wIAAwALAAQAAFD5/wMAAwALAAQAAFD5/wQAAwALAAQAAFD5/wUAAwALAAQAAFAMAAAAAwALAAQAAGAMAAEAAwALAAQAAGAMAAIAAwALAAQAAGAMAAMAAwALAAQAAGAMAAQAAwALAAQAAGAMAAUAAwALAAQAAGAMAPv/AwALAAQAAGAMAPz/AwALAAQAAGAMAP3/AwALAAQAAGAMAP7/AwALAAQAAGAMAP//AwALAAQAAGAMAPr/AwAMAAQAAGAGAP//AwAKAAYAAAAHAP//AwALAAYAAAAIAP//AwALAAYAAAAJAP//AwALAAYAAAD6////AwAKAAUAAAD7////AwALAAUAAAD8////AwALAAUAAAD9////AwALAAUAAAD+////AwALAAUAAAD/////AwALAAUAAAAAAP//AwAMAAUAAAALAP//AwAMAAYAAAAKAP//AwALAAYAAAAAAAMAAwANAAYAAAAGAAMAAwANAAUAAAADAAEAAwANAAUAAAA=")
+tile_map_data = PackedByteArray("AAD2/wYAAgAFABEAAAD3/wYAAgAFABEAAAD4/wYAAgAFABEAAAD5/wYAAgAFABEAAAD6/wYAAgAFABEAAAD7/wYAAgAFABEAAAD8/wYAAgAFABEAAAD9/wYAAgAFABEAAAD5//v/AwALAAQAAFD5//z/AwALAAQAAFD5//3/AwALAAQAAFD5//7/AwALAAQAAFD5//r/AwAKAAQAAFD5////AwAMAAQAAFD5/wAAAwALAAQAAFD5/wEAAwALAAQAAFD5/wIAAwALAAQAAFD5/wMAAwALAAQAAFD5/wQAAwALAAQAAFD5/wUAAwALAAQAAFAMAAAAAwALAAQAAGAMAAEAAwALAAQAAGAMAAIAAwALAAQAAGAMAAMAAwALAAQAAGAMAAQAAwALAAQAAGAMAAUAAwALAAQAAGAMAPv/AwALAAQAAGAMAPz/AwALAAQAAGAMAP3/AwALAAQAAGAMAP7/AwALAAQAAGAMAP//AwALAAQAAGAMAPr/AwAMAAQAAGAGAP//AwAKAAYAAAAHAP//AwALAAYAAAAIAP//AwALAAYAAAAJAP//AwALAAYAAAD6////AwAKAAUAAAD7////AwALAAUAAAD8////AwALAAUAAAD9////AwALAAUAAAD+////AwALAAUAAAD/////AwALAAUAAAAAAP//AwAMAAUAAAALAP//AwAMAAYAAAAKAP//AwALAAYAAAAAAAMAAwANAAYAAAAGAAMAAwANAAUAAAADAAEAAwANAAUAAAAMAAYAAgAFABEAAAA=")
 enabled = false
 tile_set = ExtResource("3_o03xv")
 
@@ -177,40 +179,6 @@ enabled = false
 tile_set = ExtResource("3_o03xv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms5Prev" unique_id=347910417]
-libraries/ = SubResource("AnimationLibrary_vcux0")
-
-[node name="Spikes1" type="TileMapLayer" parent="." unique_id=1814854722]
-texture_filter = 1
-tile_map_data = PackedByteArray("AAABAAYAAwADAAcAAAD2/wMAAwADAAcAAAAOAAIAAwADAAcAAAD3/wUAAwADAAcAAAD4/wUAAwADAAcAAAD5/wUAAwADAAcAAAD6/wUAAwADAAcAAAD7/wUAAwADAAcAAAAKAAUAAwADAAcAAAALAAUAAwADAAcAAAAMAAUAAwADAAcAAAANAAUAAwADAAcAAAAPAAUAAwADAAcAAAA=")
-enabled = false
-tile_set = ExtResource("3_o03xv")
-
-[node name="Spikes1Prev" type="TileMapLayer" parent="." unique_id=1078629690]
-self_modulate = Color(1, 1, 1, 0)
-texture_filter = 1
-tile_map_data = PackedByteArray("AAD2/wUAAwADAAcAAAD3/wUAAwADAAcAAAD4/wUAAwADAAcAAAAMAAUAAwADAAcAAAANAAUAAwADAAcAAAAOAAUAAwADAAcAAAAPAAUAAwADAAcAAAD5/wUAAwADAAcAAAD//wUAAwADAAcAAAAAAAUAAwADAAcAAAABAAUAAwADAAcAAAACAAUAAwADAAcAAAADAAUAAwADAAcAAAAEAAUAAwADAAcAAAAFAAUAAwADAAcAAAAGAAUAAwADAAcAAAA=")
-enabled = false
-tile_set = ExtResource("3_o03xv")
-collision_enabled = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Spikes1Prev" unique_id=2013734494]
-libraries/ = SubResource("AnimationLibrary_vcux0")
-
-[node name="Spikes2" type="TileMapLayer" parent="." unique_id=866281500]
-texture_filter = 1
-tile_map_data = PackedByteArray("AAD8/wUAAwADAAcAAAD9/wUAAwADAAcAAAD+/wUAAwADAAcAAAD//wUAAwADAAcAAAAAAAUAAwADAAcAAAAGAAUAAwADAAcAAAAHAAUAAwADAAcAAAAIAAUAAwADAAcAAAAJAAUAAwADAAcAAAAFAAYAAwADAAcAAAA=")
-enabled = false
-tile_set = ExtResource("3_o03xv")
-
-[node name="Spikes2Prev" type="TileMapLayer" parent="." unique_id=650315595]
-self_modulate = Color(1, 1, 1, 0)
-texture_filter = 1
-tile_map_data = PackedByteArray("AAD7/wUAAwADAAcAAAD8/wUAAwADAAcAAAD9/wUAAwADAAcAAAAIAAUAAwADAAcAAAAJAAUAAwADAAcAAAAKAAUAAwADAAcAAAD6/wUAAwADAAcAAAD+/wUAAwADAAcAAAAHAAUAAwADAAcAAAALAAUAAwADAAcAAAA=")
-enabled = false
-tile_set = ExtResource("3_o03xv")
-collision_enabled = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Spikes2Prev" unique_id=2051464797]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974044964]
@@ -274,6 +242,90 @@ bpm = 125
 [node name="PowerupCooldown" type="Timer" parent="." unique_id=1216662636]
 wait_time = 5.0
 one_shot = true
+
+[node name="Spike1PrevGroup" type="Node2D" parent="." unique_id=70822632]
+visible = false
+modulate = Color(1, 1, 1, 0.6797385)
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spike1PrevGroup" unique_id=1027772296]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
+[node name="SpikeSceneNC" parent="Spike1PrevGroup" unique_id=1260078520 instance=ExtResource("14_tr3nq")]
+position = Vector2(-32, 103)
+
+[node name="SpikeSceneNC2" parent="Spike1PrevGroup" unique_id=877898978 instance=ExtResource("14_tr3nq")]
+position = Vector2(-15, 103)
+
+[node name="SpikeSceneNC3" parent="Spike1PrevGroup" unique_id=1206543209 instance=ExtResource("14_tr3nq")]
+position = Vector2(1, 103)
+
+[node name="SpikeSceneNC4" parent="Spike1PrevGroup" unique_id=1339863959 instance=ExtResource("14_tr3nq")]
+position = Vector2(160, 103)
+
+[node name="SpikeSceneNC6" parent="Spike1PrevGroup" unique_id=1104583385 instance=ExtResource("14_tr3nq")]
+position = Vector2(176, 103)
+
+[node name="Spike2PrevGroup" type="Node2D" parent="." unique_id=211584798]
+visible = false
+modulate = Color(1, 1, 1, 0.6013072)
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spike2PrevGroup" unique_id=175850375]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
+[node name="SpikeSceneNC" parent="Spike2PrevGroup" unique_id=979002644 instance=ExtResource("14_tr3nq")]
+position = Vector2(16, 113)
+
+[node name="SpikeSceneNC2" parent="Spike2PrevGroup" unique_id=972144025 instance=ExtResource("14_tr3nq")]
+position = Vector2(80, 113)
+
+[node name="SpikeSceneNC3" parent="Spike2PrevGroup" unique_id=326116313 instance=ExtResource("14_tr3nq")]
+position = Vector2(-143, 103)
+
+[node name="SpikeSceneNC4" parent="Spike2PrevGroup" unique_id=218779741 instance=ExtResource("14_tr3nq")]
+position = Vector2(-127, 103)
+
+[node name="SpikeSceneNC5" parent="Spike2PrevGroup" unique_id=1461636802 instance=ExtResource("14_tr3nq")]
+position = Vector2(-112, 103)
+
+[node name="Spikes1" type="Node2D" parent="." unique_id=976399580]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="SpikeScene" parent="Spikes1" unique_id=1133243719 instance=ExtResource("14_o03xv")]
+position = Vector2(-32, 103)
+
+[node name="SpikeScene2" parent="Spikes1" unique_id=447582509 instance=ExtResource("14_o03xv")]
+position = Vector2(-15, 103)
+
+[node name="SpikeScene3" parent="Spikes1" unique_id=711828907 instance=ExtResource("14_o03xv")]
+position = Vector2(1, 103)
+
+[node name="SpikeScene4" parent="Spikes1" unique_id=1940957966 instance=ExtResource("14_o03xv")]
+position = Vector2(160, 103)
+
+[node name="SpikeScene6" parent="Spikes1" unique_id=404791728 instance=ExtResource("14_o03xv")]
+position = Vector2(176, 103)
+
+[node name="Spikes2" type="Node2D" parent="." unique_id=332471313]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="SpikeScene" parent="Spikes2" unique_id=1635357216 instance=ExtResource("14_o03xv")]
+position = Vector2(-143, 103)
+
+[node name="SpikeScene2" parent="Spikes2" unique_id=847050893 instance=ExtResource("14_o03xv")]
+position = Vector2(-127, 103)
+
+[node name="SpikeScene3" parent="Spikes2" unique_id=1892219855 instance=ExtResource("14_o03xv")]
+position = Vector2(-112, 103)
+
+[node name="SpikeScene4" parent="Spikes2" unique_id=632295889 instance=ExtResource("14_o03xv")]
+position = Vector2(16, 113)
+
+[node name="SpikeScene5" parent="Spikes2" unique_id=201212445 instance=ExtResource("14_o03xv")]
+position = Vector2(80, 113)
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

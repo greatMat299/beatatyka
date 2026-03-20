@@ -1,7 +1,7 @@
 extends Control
 
-@export var startTime : float = 5.0
-@export var noteSpeed : float = 200.0
+var startTime : float = 0.0
+var noteSpeed : float
 @export var BeatRectScene : PackedScene
 @export var beatAttackValue : float = 0.5
 var mapName=""
@@ -20,6 +20,7 @@ signal beatAttacked(playerIndex,beatType,comboAmount)
 func _process(delta):
 	if GameManager.hasStartSeqFinished==true and isStarted==false:
 		isStarted=true
+		noteSpeed=get_parent().get_parent().noteSpeed
 		startCatcher()
 	#print(comboAttacks)
 		
@@ -34,6 +35,8 @@ func startCatcher():
 	#dodanie MIDI playerów
 	await get_tree().process_frame
 	var midiPlayer = get_tree().get_nodes_in_group("midiPlayer")[3]
+	var mapName = get_parent().get_parent().get_parent().name
+	startTime=GameManager.START_TIMES[mapName]
 	midiPlayer.current_time=startTime
 	midiPlayer.note_played_wc.connect(self._on_note_played)
 	

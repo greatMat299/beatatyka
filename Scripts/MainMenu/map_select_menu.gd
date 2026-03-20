@@ -3,7 +3,8 @@ extends Control
 var currentSongPreview
 var fade_tween
 var zoom_tween
-var currentSongMapIndex=0
+var currentSongMapIndex=-1
+var maxButtons=0
 var enabled=false
 var mapBackgrounds=[]
 var songButtons=[]
@@ -22,7 +23,6 @@ var songPreviews = [
 	preload("res://Assets/Sound/songPreviews/chromaticallyPreview.mp3"),
 	preload("res://Assets/Sound/songPreviews/dead_man_walking_preview.mp3"),
 	preload("res://Assets/Sound/songPreviews/ghosts_n_stuff_preview.mp3"),
-	preload("res://Assets/Sound/songPreviews/dashstarPreview.mp3"),
 	preload("res://Assets/Sound/songPreviews/its_you_preview.mp3")
 ]
 
@@ -31,15 +31,17 @@ var songMaps = [
 	"res://Scenes/map2.tscn", #tu inna mapa
 	"res://Scenes/map1.tscn", #tu inna mapa
 	"res://Scenes/map1.tscn", #tu inna mapa
-	"res://Scenes/map1.tscn", #tu inna mapa
 	"res://Scenes/map1.tscn" #tu inna mapa
 ]
+
+func _ready() -> void:
+	maxButtons=len(songMaps)
 
 func _process(_delta):
 	if enabled:
 		if len(mapBackgrounds)==0:
 			var hboxNum=0
-			for i in range(0,6):
+			for i in range(0,len(songMaps)):
 				if i>=3:
 					hboxNum=2
 				else:
@@ -48,7 +50,7 @@ func _process(_delta):
 		
 		if len(songButtons)==0:
 			var hboxNum=0
-			for i in range(0,6):
+			for i in range(0,len(songMaps)):
 				if i>=3:
 					hboxNum=2
 				else:
@@ -58,10 +60,14 @@ func _process(_delta):
 					selectBorder.global_position = songButtons[0].global_position
 					selectBorder.size = songButtons[0].size
 					playPreview(0)
+		if currentSongMapIndex==-1:	
+			currentSongMapIndex=0
+			changeButtonPosition(currentKeyboardMapIndex)
+			playPreview(currentKeyboardMapIndex)
 					
 		if Input.is_action_just_pressed("ui_right"):
 			stopPreview(currentKeyboardMapIndex)
-			if currentKeyboardMapIndex>-1 and currentKeyboardMapIndex<5:
+			if currentKeyboardMapIndex>-1 and currentKeyboardMapIndex<len(songMaps)-1:
 				currentKeyboardMapIndex+=1
 				if songButtons[currentKeyboardMapIndex].disabled==true:
 					currentKeyboardMapIndex-=1
@@ -70,7 +76,7 @@ func _process(_delta):
 			
 		if Input.is_action_just_pressed("ui_left"):
 			stopPreview(currentKeyboardMapIndex)
-			if currentKeyboardMapIndex<6 and currentKeyboardMapIndex>0:
+			if currentKeyboardMapIndex<len(songMaps) and currentKeyboardMapIndex>0:
 				currentKeyboardMapIndex-=1
 				if songButtons[currentKeyboardMapIndex].disabled==true:
 					currentKeyboardMapIndex+=1
@@ -79,13 +85,10 @@ func _process(_delta):
 			
 		if Input.is_action_just_pressed("ui_down"):
 			stopPreview(currentKeyboardMapIndex)
-			match currentKeyboardMapIndex:
-				0:
-					currentKeyboardMapIndex=3
-				1:
-					currentKeyboardMapIndex=4
-				2:
-					currentKeyboardMapIndex=5
+			if currentKeyboardMapIndex<3 and (currentKeyboardMapIndex+3)<maxButtons-1:
+				currentKeyboardMapIndex+=3
+			elif currentKeyboardMapIndex<3 and (currentKeyboardMapIndex+3)>=maxButtons-1:
+				currentKeyboardMapIndex+=abs(3-maxButtons)
 			if songButtons[currentKeyboardMapIndex].disabled==true:
 				currentKeyboardMapIndex-=3
 			else:
@@ -94,13 +97,8 @@ func _process(_delta):
 			
 		if Input.is_action_just_pressed("ui_up"):
 			stopPreview(currentKeyboardMapIndex)
-			match currentKeyboardMapIndex:
-				3:
-					currentKeyboardMapIndex=0
-				4:
-					currentKeyboardMapIndex=1
-				5:
-					currentKeyboardMapIndex=2
+			if currentKeyboardMapIndex>2:
+				currentKeyboardMapIndex-=3
 			if songButtons[currentKeyboardMapIndex].disabled==true:
 				currentKeyboardMapIndex+=3
 			else:

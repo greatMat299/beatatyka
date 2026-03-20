@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://j41nkenbbfni"]
+
+[ext_resource type="Script" uid="uid://b8o5rlqijbpgc" path="res://Scripts/spike_logic.gd" id="1_bcnh0"]
+[ext_resource type="TileSet" uid="uid://bhs3hu7ad0kxq" path="res://Assets/TileSets/testTileSet.res" id="2_0tj1c"]
+
+[node name="SpikeScene" type="Node2D" unique_id=1260078520]
+script = ExtResource("1_bcnh0")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=997751496]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 3, 0, 3, 0, 7, 0, 0, 0)
+tile_set = ExtResource("2_0tj1c")

@@ -4,6 +4,13 @@ const CHARACTER_SPEEDS = [250.0,200.0,300.0,300.0]
 const CHARACTER_JUMP_VELS = [-500.0,-450.0,-600.0,-600.0]
 const CHARACTER_ATTACK_PWRS = [7.0,14.0,5.0,5.0]
 const CHARACTER_DASH_ATTACK_PWRS = [12.0,16.0,9.0,9.0]
+const START_TIMES={
+	"CrabRave":2.55,
+	"Chromatically":2.15,
+	"DeadManWalking":2.55,
+	"GhostsNStuff":2.55,
+	"ItsYou":2.55
+}
 
 var currentNote=0
 var isGamePlaying=false
@@ -82,7 +89,7 @@ func searchForSpikes():
 		
 		#ostrzegawcze
 		for i in range(1,3):
-			var spikePrevNode = get_parent().get_node(str(mapName)).get_node(str("Spikes")+str(i)+str("Prev"))
+			var spikePrevNode = get_parent().get_node(str(mapName)).get_node(str("Spike")+str(i)+str("PrevGroup"))
 			#print(spikePrevNode)
 			spikePrevList.push_back(spikePrevNode)
 		

@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://crvd4x1oahyu7"]
 
+[ext_resource type="Script" uid="uid://d27r6fl0qdcum" path="res://Scripts/ui_variables.gd" id="1_riyq3"]
 [ext_resource type="Script" uid="uid://dkx362fx2iwuo" path="res://Scripts/ui_gameplay.gd" id="3_4ii71"]
 [ext_resource type="Script" uid="uid://b8l640esogpq3" path="res://Scripts/pause_menu_logic.gd" id="3_7mm0a"]
 [ext_resource type="Shader" uid="uid://d2xvqetcvu2to" path="res://Shaders/blurShader.gdshader" id="3_iafmb"]
-[ext_resource type="Texture2D" uid="uid://d3ylgx60kmxne" path="res://Images/Powerups/gravity.png" id="4_88o7u"]
+[ext_resource type="Texture2D" uid="uid://d3ylgx60kmxne" path="res://Assets/Images/Powerups/gravity.png" id="4_88o7u"]
 [ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scripts/game_over_ui.gd" id="7_ha2xw"]
-[ext_resource type="Script" uid="uid://66mihx2amhnt" path="res://Scripts/beat_report_ui.gd" id="8_7ps6w"]
 [ext_resource type="PackedScene" uid="uid://cmxhxg7kkl32k" path="res://Scenes/beat_catcher.tscn" id="10_riyq3"]
 [ext_resource type="Script" uid="uid://bjqm2g40r5iai" path="res://Scripts/ui_start_game_logic.gd" id="11_cqsqe"]
 [ext_resource type="AudioStream" uid="uid://uik35qlbuqxg" path="res://Assets/Sound/SFX/startSound.mp3" id="12_bl3s2"]
-[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="13_4ii71"]
 [ext_resource type="Texture2D" uid="uid://blmf2qpr182wf" path="res://Assets/Images/drumstickplaceholderwillreplace.png" id="13_cqsqe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2xw"]
@@ -19,44 +18,6 @@ shader_parameter/blur = 1.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7mm0a"]
 shader = ExtResource("3_iafmb")
 shader_parameter/blur = 1.3
-
-[sub_resource type="Animation" id="Animation_riyq3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.165, 0.165)]
-}
-
-[sub_resource type="Animation" id="Animation_44dd6"]
-resource_name = "beatAnim"
-length = 0.2
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(0.25, 0.25), Vector2(0.2, 0.2)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_egsqa"]
-_data = {
-&"RESET": SubResource("Animation_riyq3"),
-&"beatAnim": SubResource("Animation_44dd6")
-}
 
 [sub_resource type="Animation" id="Animation_88o7u"]
 length = 0.001
@@ -193,6 +154,7 @@ _data = {
 }
 
 [node name="UserUI" type="CanvasLayer" unique_id=1761966764]
+script = ExtResource("1_riyq3")
 
 [node name="BlurFill" type="ColorRect" parent="." unique_id=1570569887]
 visible = false
@@ -386,23 +348,6 @@ text = "KONTYUNUJ"
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 text = "WYJDŹ"
-
-[node name="BeatLabel" type="TextureRect" parent="GameplayNodes" unique_id=1708007222]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -118.0
-offset_right = 1052.0
-offset_bottom = 1078.0
-grow_horizontal = 2
-scale = Vector2(0.165, 0.165)
-texture = ExtResource("13_4ii71")
-script = ExtResource("8_7ps6w")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes/BeatLabel" unique_id=1255462400]
-libraries/ = SubResource("AnimationLibrary_egsqa")
 
 [node name="BeatCatcher" parent="GameplayNodes" unique_id=540349467 instance=ExtResource("10_riyq3")]
 layout_mode = 1

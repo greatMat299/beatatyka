@@ -121,8 +121,8 @@ func _physics_process(delta):
 			if collision.get_normal().dot(Vector2.UP) > 0.9:
 				var collider = collision.get_collider()
 
-				if "Spikes" in collider.name:
-					#get_node("HealthManager").health = 0
+				if "SpikeScene" in collider.name:
+					get_node("HealthManager").health = 0
 					pass
 
 	#cała akcja z graczem jeżeli przynajmniej 2 graczy jest żywych

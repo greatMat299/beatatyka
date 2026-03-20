@@ -96,7 +96,7 @@ func _on_warning_note_played(note,sender):
 #usunięcie wszystkich aktywnych kolców
 func removeSpikes():
 	if currentSpike!=-1:
-		GameManager.spikeList[currentSpike].enabled = false
+		GameManager.spikeList[currentSpike].visible = false
 		currentSpike=-1
 	
 #funkcja mówi sama za siebie	
@@ -115,10 +115,10 @@ func set_active_spike(index: int, isWarning: bool):
 
 		#jeżeli jakaś sekwencja ostrzegawcza jest to ją usuwa
 		if currentWarningSpike != -1: 
-			GameManager.spikePrevList[currentWarningSpike].enabled = false
+			GameManager.spikePrevList[currentWarningSpike].visible = false
 
 		#pokazanie sekwencji ostrzegawczej
-		GameManager.spikePrevList[index].enabled = true
+		GameManager.spikePrevList[index].visible = true
 		GameManager.spikePrevList[index].get_node("AnimationPlayer").play("showSpikes")
 
 		currentWarningSpike = index
@@ -128,9 +128,9 @@ func set_active_spike(index: int, isWarning: bool):
 
 		#jak wyżej, usuwa wcześniej aktywne kolce
 		if currentSpike != -1:
-			GameManager.spikeList[currentSpike].enabled = false
+			GameManager.spikeList[currentSpike].visible = false
 
-		GameManager.spikeList[index].enabled = true
+		GameManager.spikeList[index].visible = true
 		currentSpike = index
 		
 func set_active_platform(index: int, isWarning: bool):

@@ -86,6 +86,7 @@ func checkIfAllReady() -> bool:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	print(index_p1)
 	if enabled:
 		if len(previewSprites)==0:
 			fillUpArrays()
@@ -172,7 +173,7 @@ func handle_input_p1():
 			p1_frame.visible=false
 			arePlayersReady[0]=true
 			if index_p1==len(characterSprites)-1:
-				index_p1 = rng.randi_range(-1,len(characterSprites)-3)
+				index_p1 = rng.randi_range(0,len(characterSprites)-2)
 				update_sprite_preview(1,index_p1)
 			isGameReady = checkIfAllReady()
 			

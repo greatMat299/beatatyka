@@ -20,7 +20,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aigbs")
-startTime = 3.1
 BeatRectScene = ExtResource("3_217gj")
 
 [node name="GoodAreaContainer" type="Control" parent="." unique_id=1063036634]
