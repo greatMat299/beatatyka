@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://wyc72sbrsudc" path="res://Scripts/MainMenu/map_select_menu.gd" id="1_6he57"]
 [ext_resource type="Texture2D" uid="uid://602ry78tkmql" path="res://Assets/Images/MapScreenshots/level1.png" id="2_0n7bi"]
 [ext_resource type="Texture2D" uid="uid://1paao5pc1hga" path="res://Assets/Images/SongCovers/crabRave.jpeg" id="3_6lno7"]
-[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Assets/Images/1767176322606.jpg" id="4_cpwnx"]
+[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="4_cpwnx"]
 [ext_resource type="AudioStream" uid="uid://cjpe0r033pba" path="res://Assets/Sound/songPreviews/crabRavePreview.mp3" id="4_gkm5v"]
 [ext_resource type="Texture2D" uid="uid://bbhvp2rlacshj" path="res://Assets/Images/MapScreenshots/level2.png" id="4_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bbx7or1yhen2w" path="res://Assets/Images/SongCovers/chromatically.png" id="5_jn2y1"]
@@ -280,11 +280,9 @@ theme_override_font_sizes/font_size = 15
 text = "HAYWYRE"
 
 [node name="SongButton3" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer1" unique_id=1754204659]
-modulate = Color(1, 1, 1, 0.48235294)
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 
 [node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=926074497]
 layout_mode = 1

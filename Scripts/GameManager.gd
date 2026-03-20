@@ -67,13 +67,13 @@ func searchForPlatforms():
 	if mapName!="":
 		
 		#normalne
-		for i in range(1,6):
+		for i in range(1,7):
 			var platformNode = get_parent().get_node(str(mapName)).get_node(str("Platforms")+str(i))
 			#print(platformNode)
 			platformsList.push_back(platformNode)
 			
 		#ostrzegawcze
-		for i in range(1,6):
+		for i in range(1,7):
 			var platformPrevNode = get_parent().get_node(str(mapName)).get_node(str("Platforms")+str(i)+str("Prev"))
 			#print(platformPrevNode)
 			platformPrevList.push_back(platformPrevNode)

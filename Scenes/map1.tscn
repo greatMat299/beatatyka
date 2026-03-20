@@ -236,6 +236,23 @@ collision_enabled = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms5Prev" unique_id=1953864587]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
+[node name="Platforms6" type="TileMapLayer" parent="." unique_id=116107955]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAEAPv/AgAFAAcAAAAFAPv/AgAFAAcAAAAGAPv/AgAFAAcAAAAHAPv/AgAFAAcAAAAIAPv/AgAFAAcAAAAJAPv/AgAFAAcAAAAAAP//AgAFAAcAAAABAP//AgAFAAcAAAACAP//AgAFAAcAAAD9/wUAAgAFAAcAAAD9/wQAAgAFAAcAAAD9/wMAAgAFAAcAAAD+/wMAAgAFAAcAAAD//wMAAgAFAAcAAAD//wQAAgAFAAcAAAD//wUAAgAFAAcAAAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAGAAEAAgAFAAcAAAAHAAEAAgAFAAcAAAA=")
+enabled = false
+tile_set = ExtResource("1_wouuh")
+
+[node name="Platforms6Prev" type="TileMapLayer" parent="." unique_id=113285865]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAEAPv/AgAFAAcAAAAFAPv/AgAFAAcAAAAGAPv/AgAFAAcAAAAHAPv/AgAFAAcAAAAIAPv/AgAFAAcAAAAJAPv/AgAFAAcAAAAAAP//AgAFAAcAAAABAP//AgAFAAcAAAACAP//AgAFAAcAAAD9/wUAAgAFAAcAAAD9/wQAAgAFAAcAAAD9/wMAAgAFAAcAAAD+/wMAAgAFAAcAAAD//wMAAgAFAAcAAAD//wQAAgAFAAcAAAD//wUAAgAFAAcAAAAIAAUAAgAFAAcAAAAIAAQAAgAFAAcAAAAIAAMAAgAFAAcAAAAJAAMAAgAFAAcAAAAKAAMAAgAFAAcAAAAKAAQAAgAFAAcAAAAKAAUAAgAFAAcAAAD6/wAAAgAFAAcAAAD7/wAAAgAFAAcAAAAGAAEAAgAFAAcAAAAHAAEAAgAFAAcAAAA=")
+enabled = false
+tile_set = ExtResource("1_wouuh")
+collision_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms6Prev" unique_id=1531980278]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974044964]
 position = Vector2(51, 7)
 zoom = Vector2(2.88, 2.88)

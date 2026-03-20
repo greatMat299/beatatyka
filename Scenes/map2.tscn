@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://j41nkenbbfni" path="res://Scenes/spikeScene.tscn" id="14_o03xv"]
 [ext_resource type="PackedScene" uid="uid://wurpq2bp4iqi" path="res://Scenes/spikeSceneNoCollision.tscn" id="14_tr3nq"]
 
-[sub_resource type="Animation" id="Animation_si05j"]
+[sub_resource type="Animation" id="Animation_cjqyo"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tnejx"]
+[sub_resource type="Animation" id="Animation_55xmv"]
 resource_name = "showPlatform"
 length = 0.6
 tracks/0/type = "value"
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0.37254903), Color(1, 1, 1, 0.8627451), Color(1, 1, 1, 0.13725491)]
 }
 
-[sub_resource type="Animation" id="Animation_vcux0"]
+[sub_resource type="Animation" id="Animation_ngqs7"]
 resource_name = "showSpikes"
 length = 0.6
 tracks/0/type = "value"
@@ -65,9 +65,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vcux0"]
 _data = {
-&"RESET": SubResource("Animation_si05j"),
-&"showPlatform": SubResource("Animation_tnejx"),
-&"showSpikes": SubResource("Animation_vcux0")
+&"RESET": SubResource("Animation_cjqyo"),
+&"showPlatform": SubResource("Animation_55xmv"),
+&"showSpikes": SubResource("Animation_ngqs7")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wouuh"]
@@ -179,6 +179,22 @@ enabled = false
 tile_set = ExtResource("3_o03xv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms5Prev" unique_id=347910417]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
+[node name="Platforms6" type="TileMapLayer" parent="." unique_id=799961978]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAADAAEAAwANAAUAAAD8/wMAAwALAAQAAAD9/wMAAwALAAQAAAAAAAIAAwALAAQAAAABAAIAAwALAAQAAAAFAAIAAwALAAQAAAAGAAIAAwALAAQAAAAIAAQAAwALAAQAADAJAAQAAwALAAQAADA=")
+enabled = false
+tile_set = ExtResource("3_o03xv")
+
+[node name="Platforms6Prev" type="TileMapLayer" parent="." unique_id=1504203669]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+tile_map_data = PackedByteArray("AAADAAEAAwANAAUAAAD8/wMAAwALAAQAAAD9/wMAAwALAAQAAAAAAAIAAwALAAQAAAABAAIAAwALAAQAAAAFAAIAAwALAAQAAAAGAAIAAwALAAQAAAAIAAQAAwALAAQAADAJAAQAAwALAAQAADA=")
+enabled = false
+tile_set = ExtResource("3_o03xv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms6Prev" unique_id=2102342350]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974044964]

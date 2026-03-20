@@ -85,8 +85,6 @@ func checkIfAllReady() -> bool:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-	print(index_p1)
 	if enabled:
 		if len(previewSprites)==0:
 			fillUpArrays()
@@ -161,7 +159,7 @@ func handle_input_p1():
 			update_frame(p1_frame, index_p1)
 			update_sprite_preview(1,index_p1)
 		
-		if Input.is_action_just_pressed("player1_left"):
+		if Input.is_action_just_pressed("player1_left") and index_p1>0:
 			index_p1 = (index_p1 - 1)% buttons.size()
 			update_frame(p1_frame,index_p1) 
 			update_sprite_preview(1,index_p1)
@@ -187,7 +185,7 @@ func handle_input_p2():
 			update_frame(p2_frame, index_p2)
 			update_sprite_preview(2,index_p2)
 		
-		if Input.is_action_just_pressed("player2_left"):
+		if Input.is_action_just_pressed("player2_left") and index_p2>0:
 			index_p2 = (index_p2 - 1 + buttons.size()) % buttons.size()
 			update_frame(p2_frame,index_p2)
 			update_sprite_preview(2,index_p2)
@@ -224,7 +222,7 @@ func handle_input_p3():
 			update_frame(p3_frame, index_p3)
 			update_sprite_preview(3,index_p3)
 		
-		if Input.is_action_just_pressed("player3_left"):
+		if Input.is_action_just_pressed("player3_left") and index_p3>0:
 			index_p3 = (index_p3 - 1 + buttons.size()) % buttons.size()
 			update_frame(p3_frame,index_p3) 
 			update_sprite_preview(3,index_p3)
@@ -261,7 +259,7 @@ func handle_input_p4():
 			update_frame(p4_frame, index_p4)
 			update_sprite_preview(4,index_p4)
 		
-		if Input.is_action_just_pressed("player4_left"):
+		if Input.is_action_just_pressed("player4_left") and index_p4>0:
 			index_p4 = (index_p4 - 1 + buttons.size()) % buttons.size()
 			update_frame(p4_frame,index_p4) 
 			update_sprite_preview(4,index_p4)
