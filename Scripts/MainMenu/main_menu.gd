@@ -7,6 +7,7 @@ extends Control
 @onready var menuSelectSfx = $MenuSelectSfx
 @onready var menuBackSfx = $MenuBackSfx
 @onready var menuPickSfx = $MenuPickSfx
+@onready var animPlayer = $AnimationPlayer
 
 var status
 var scene = "res://Scenes/map1.tscn"
@@ -18,7 +19,6 @@ var currentSelectIndex = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	AudioServer.set_bus_volume_db(0,0)
 	call_deferred("_apply_display_mode")
 	call_deferred("_apply_keybinds")
 	await get_tree().process_frame
@@ -124,6 +124,8 @@ func changeBorderPosition(index):
 
 func _on_start_button_pressed() -> void:
 	menuSelectSfx.play()
+	animPlayer.play("menuChange")
+	await get_tree().create_timer(0.1).timeout
 	isActive=false
 	menuContainer.visible=false
 	characterSelection.enabled=true
@@ -133,6 +135,8 @@ func _on_start_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	menuSelectSfx.play()
+	animPlayer.play("menuChange")
+	await get_tree().create_timer(0.1).timeout
 	get_node("SettingsMenu").visible=true
 	get_node("SettingsMenu").isActive=true
 	menuContainer.visible=false

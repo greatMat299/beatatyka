@@ -45,6 +45,7 @@ func my_note_callback(event, track):
 			"MidiPlayerWarning":
 				note_played_w.emit(event["note"], self)
 			"MidiPlayerWarning2":
+				print("warn2")
 				note_played_w2.emit(event["note"], self)
 			"MidiPlayerCatcher":
 				note_played_wc.emit(event["note"], self)

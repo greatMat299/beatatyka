@@ -14,6 +14,7 @@ var currentKeyboardMapIndex=0
 @onready var characterSelection = $"../CharacterSelection"
 @onready var loadingScreen = $"../LoadingScreen"
 @onready var animPlayer = $AnimationPlayer
+@onready var animPlayerMain = $"../AnimationPlayer"
 @onready var menuSelectSfx = $"../MenuSelectSfx"
 @onready var menuBackSfx = $"../MenuBackSfx"
 @onready var menuSwipeSfx = $"../MenuSwipeSfx"
@@ -29,9 +30,9 @@ var songPreviews = [
 var songMaps = [
 	"res://Scenes/map1.tscn",
 	"res://Scenes/map2.tscn", #tu inna mapa
-	"res://Scenes/map1.tscn", #tu inna mapa
-	"res://Scenes/map1.tscn", #tu inna mapa
-	"res://Scenes/map1.tscn" #tu inna mapa
+	"res://Scenes/map3.tscn", #tu inna mapa
+	"res://Scenes/map4.tscn", #tu inna mapa
+	"res://Scenes/map5.tscn" #tu inna mapa
 ]
 
 func _ready() -> void:
@@ -111,6 +112,8 @@ func _process(_delta):
 				
 		if Input.is_action_just_pressed("ui_cancel"):
 			menuBackSfx.play()
+			animPlayerMain.play("menuBack")
+			await get_tree().create_timer(0.1).timeout
 			for i in range(0,4):
 				characterSelection.arePlayersReady[i]=false
 			await get_tree().create_timer(0.03).timeout

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cw6pdjmkervtg" path="res://Scripts/MainMenu/main_menu.gd" id="1_jix8l"]
 [ext_resource type="PackedScene" uid="uid://crinudetly0iu" path="res://Scenes/MainMenu/settings_menu.tscn" id="2_fu7sn"]
+[ext_resource type="FontFile" uid="uid://bom6kvil2l0r2" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling Bd It.otf" id="2_rlg4b"]
 [ext_resource type="PackedScene" uid="uid://udwpaopb3ae3" path="res://Scenes/MainMenu/keybinds_menu.tscn" id="3_jix8l"]
 [ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
 [ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
@@ -22,6 +23,120 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+
+[sub_resource type="Animation" id="Animation_mdp32"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlashRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlashRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlackFlashRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlackFlashRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_w5buf"]
+resource_name = "menuChange"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackFlashRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlackFlashRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rlg4b"]
+resource_name = "menuChange"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlashRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlashRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w5buf"]
+_data = {
+&"RESET": SubResource("Animation_mdp32"),
+&"menuBack": SubResource("Animation_w5buf"),
+&"menuChange": SubResource("Animation_rlg4b")
+}
 
 [node name="MainMenu" type="Control" unique_id=1821620089]
 layout_mode = 3
@@ -52,20 +167,26 @@ size_flags_vertical = 0
 theme_override_constants/separation = 7
 
 [node name="StartButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=145053464]
+custom_minimum_size = Vector2(200, 90)
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("2_rlg4b")
+theme_override_font_sizes/font_size = 52
 action_mode = 0
-text = "PLAY"
+text = "GRAJ"
 
 [node name="SettingsButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=1461354496]
+custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "SETTINGS"
+theme_override_fonts/font = ExtResource("2_rlg4b")
+theme_override_font_sizes/font_size = 40
+text = "USTAWIENIA"
 
 [node name="QuitButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=2017831119]
+custom_minimum_size = Vector2(200, 70)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_rlg4b")
 theme_override_font_sizes/font_size = 48
-text = "QUIT GAME"
+text = "WYJDŹ"
 
 [node name="selectBorder" type="Panel" parent="MenuContainer" unique_id=769435911]
 visible = false
@@ -96,6 +217,7 @@ layout_mode = 1
 
 [node name="MenuSelectSfx" type="AudioStreamPlayer2D" parent="." unique_id=51584822]
 stream = ExtResource("7_n5jej")
+volume_db = 5.0
 bus = &"SFX"
 
 [node name="MenuBackSfx" type="AudioStreamPlayer2D" parent="." unique_id=1443139595]
@@ -110,6 +232,31 @@ bus = &"SFX"
 stream = ExtResource("10_agesy")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1610602171]
+libraries/ = SubResource("AnimationLibrary_w5buf")
+speed_scale = 2.5
+
+[node name="FlashRect" type="ColorRect" parent="." unique_id=177668050]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlackFlashRect" type="ColorRect" parent="." unique_id=1674035043]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="focus_entered" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_focus_entered"]
 [connection signal="mouse_entered" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_entered" binds= [0]]

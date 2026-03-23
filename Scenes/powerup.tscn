@@ -101,14 +101,17 @@ one_shot = true
 [node name="HealSFX" type="AudioStreamPlayer2D" parent="." unique_id=1233740677]
 stream = ExtResource("3_f1g1t")
 volume_db = 20.0
+bus = &"SFX"
 
 [node name="GravitySFX" type="AudioStreamPlayer2D" parent="." unique_id=40178851]
 stream = ExtResource("4_381t4")
 volume_db = 20.0
+bus = &"SFX"
 
 [node name="InvincibilitySFX" type="AudioStreamPlayer2D" parent="." unique_id=153151617]
 stream = ExtResource("5_5ydwi")
 volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]

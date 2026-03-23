@@ -7,9 +7,12 @@
 [ext_resource type="AudioStream" uid="uid://cjpe0r033pba" path="res://Assets/Sound/songPreviews/crabRavePreview.mp3" id="4_gkm5v"]
 [ext_resource type="Texture2D" uid="uid://bbhvp2rlacshj" path="res://Assets/Images/MapScreenshots/level2.png" id="4_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bbx7or1yhen2w" path="res://Assets/Images/SongCovers/chromatically.png" id="5_jn2y1"]
+[ext_resource type="Texture2D" uid="uid://dom7auydesw0f" path="res://Assets/Images/MapScreenshots/level3.png" id="6_cq744"]
 [ext_resource type="Texture2D" uid="uid://db6ds27aopqgn" path="res://Assets/Images/SongCovers/deadManWalking.jpg" id="6_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bea1efnah04o3" path="res://Assets/Images/SongCovers/ghosts_n_stuff.jpg" id="7_cq744"]
+[ext_resource type="Texture2D" uid="uid://cbal6im2t2cd6" path="res://Assets/Images/MapScreenshots/level4.png" id="8_lqrw5"]
 [ext_resource type="Texture2D" uid="uid://cn2rh2td2eagx" path="res://Assets/Images/SongCovers/itsYou.png" id="9_kt11f"]
+[ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="12_cq744"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkm5v"]
 content_margin_left = 4.0
@@ -292,7 +295,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(173.5, 100)
-texture = ExtResource("4_cpwnx")
+texture = ExtResource("6_cq744")
 expand_mode = 1
 stretch_mode = 6
 
@@ -327,9 +330,9 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
-theme_override_colors/font_color = Color(0.9764706, 0.7294118, 0.03137255, 1)
+theme_override_colors/font_color = Color(0.7882353, 0.36862746, 0, 1)
 theme_override_font_sizes/font_size = 40
-text = "MEDIUM"
+text = "DIFFICULT"
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=1637572679]
 layout_mode = 1
@@ -367,11 +370,9 @@ text = "GRANT & ELLIS"
 layout_mode = 2
 
 [node name="SongButton4" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1864175380]
-modulate = Color(1, 1, 1, 0.48235294)
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_horizontal = 3
-disabled = true
 
 [node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=834951794]
 layout_mode = 1
@@ -381,7 +382,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(173.5, 100)
-texture = ExtResource("4_cpwnx")
+texture = ExtResource("8_lqrw5")
 expand_mode = 1
 stretch_mode = 6
 
@@ -502,7 +503,7 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
-theme_override_colors/font_color = Color(0.84263474, 3.5616756e-06, 4.813075e-07, 1)
+theme_override_colors/font_color = Color(0.5924477, 8.904189e-07, 3.85046e-07, 1)
 theme_override_font_sizes/font_size = 40
 text = "HARDER"
 
@@ -555,15 +556,16 @@ bus = &"Music"
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.29900002
-anchor_top = 0.029000001
-anchor_right = 0.70100003
-anchor_bottom = 0.162
-offset_left = 0.2699585
-offset_top = 0.11999893
-offset_right = -0.27001953
-offset_bottom = 0.3600006
+anchor_left = 0.33900002
+anchor_right = 0.661
+anchor_bottom = 0.13100001
+offset_left = -0.5300293
+offset_right = 0.52996826
+offset_bottom = -0.32000732
 grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("12_cq744")
 theme_override_font_sizes/font_size = 70
 text = "WYBIERZ MAPĘ"
 
@@ -583,5 +585,5 @@ libraries/ = SubResource("AnimationLibrary_cq744")
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" to="." method="_on_song_button_mouse_exited" binds= [3]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" to="." method="_on_song_button_pressed" binds= [3]]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_entered" binds= [4]]
-[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_exited" binds= [5]]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_pressed" binds= [5]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_exited" binds= [4]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_pressed" binds= [4]]

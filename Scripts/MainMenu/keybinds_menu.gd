@@ -7,6 +7,7 @@ const settingPath = "res://settings.ini"
 @onready var menuSelectSfx = $"../MenuSelectSfx"
 @onready var menuBackSfx = $"../MenuBackSfx"
 @onready var menuPickSfx = $"../MenuPickSfx"
+@onready var animPlayer = $"../AnimationPlayer"
 
 var waitingForInput = false
 var currentKey;
@@ -145,6 +146,8 @@ func changeBorderPosition(index):
 
 func _on_return_pressed() -> void:
 	menuBackSfx.play()
+	animPlayer.play("menuBack")
+	await get_tree().create_timer(0.1).timeout
 	self.visible=false
 	currentSelectIndex=0
 	settingsMenu.visible=true

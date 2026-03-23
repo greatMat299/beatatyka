@@ -7,6 +7,8 @@ func _ready() -> void:
 	config =ConfigFile.new()
 	if(!FileAccess.file_exists(settings_file_path)):
 		config.set_value("Audio", "Master_Volume", 100)
+		config.set_value("Audio", "Music_Volume", 100)
+		config.set_value("Audio", "Sfx_Volume", 100)
 		
 		config.set_value("Video","Display",0)
 		config.set_value("Video", "FPSCap", 60)

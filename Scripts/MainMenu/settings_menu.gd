@@ -7,8 +7,12 @@ const settingPath = "res://settings.ini"
 @onready var menuSelectSfx = $"../MenuSelectSfx"
 @onready var menuBackSfx = $"../MenuBackSfx"
 @onready var menuPickSfx = $"../MenuPickSfx"
+@onready var animPlayer = $"../AnimationPlayer"
 
-var masterVolume
+var currentVolume=0.0
+var masterVolume=0.0
+var musicVolume=0.0
+var sfxVolume=0.0
 var currentDisplay
 var displayModes
 var fpsCap
@@ -22,6 +26,8 @@ var settingsButtons=[]
 func _ready() -> void:
 	fpsCap = ConfigFileHandler.config.get_value("Video","FPSCap")
 	masterVolume = ConfigFileHandler.config.get_value("Audio", "Master_Volume")
+	musicVolume = ConfigFileHandler.config.get_value("Audio", "Music_Volume")
+	sfxVolume = ConfigFileHandler.config.get_value("Audio", "Sfx_Volume")
 	currentDisplay = ConfigFileHandler.config.get_value("Video", "Display")
 	displayModes = ["WINDOW", "BORDERLESS WINDOW", "FULLSCREEN"]
 	vsync = ConfigFileHandler.config.get_value("Video","VSync")
@@ -76,16 +82,8 @@ func changeBorderPosition(index):
 	selectBorder.set_deferred("size", settingsButtons[index].size)
 
 
-func _on_volume_value_changed(value: float) -> void:
-	masterVolume = int(value)
-	ConfigFileHandler.config.set_value("Audio","Master_Volume",masterVolume)
-	ConfigFileHandler.config.save(settingPath)
-	
-	var db = linear_to_db(masterVolume / 100.0)
-	AudioServer.set_bus_volume_db(0, db)
-	
-	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer/VolumeValue").text = str(masterVolume)
-
+#func _on_volume_value_changed(value: float) -> void:
+	#
 
 func _on_display_mode_pressed() -> void:
 	var button = get_node("MarginContainer/VBoxContainer/GridContainer/DisplayMode")
@@ -114,6 +112,8 @@ func _on_display_mode_pressed() -> void:
 
 func _on_return_pressed() -> void:
 	menuBackSfx.play()
+	animPlayer.play("menuBack")
+	await get_tree().create_timer(0.1).timeout
 	self.visible=false
 	isActive=false
 	currentSelectIndex=0
@@ -159,9 +159,17 @@ func _on_keybinds_pressed() -> void:
 	keybindsMenu.visible=true
 
 func loadValues() -> void:
-	AudioServer.set_bus_volume_db(0, masterVolume)
+	AudioServer.set_bus_volume_db(0, linear_to_db(masterVolume/100.0))
+	AudioServer.set_bus_volume_db(1, linear_to_db(musicVolume/100.0))
+	AudioServer.set_bus_volume_db(2, linear_to_db(sfxVolume/100.0))
+	
 	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer/Volume").value = masterVolume
 	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer/VolumeValue").text = str(masterVolume)
+	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer2/Volume").value = musicVolume
+	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer2/VolumeValue").text = str(musicVolume)
+	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer3/Volume").value = sfxVolume
+	get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer3/VolumeValue").text = str(sfxVolume)
+	
 	get_node("MarginContainer/VBoxContainer/GridContainer/DisplayMode").text = displayModes[currentDisplay]
 	if(vsync): 
 		get_node("MarginContainer/VBoxContainer/GridContainer/VSync").text = "ON"
@@ -203,3 +211,26 @@ func _on_button_mouse_entered(extra_arg_0):
 func _on_button_mouse_exited():
 	selectBorder.visible=false
 	currentSelectIndex=0
+
+
+func _on_volume_slider_value_changed(value, extra_arg_0):
+	currentVolume = int(value)
+	ConfigFileHandler.config.set_value("Audio",extra_arg_0+"_Volume",currentVolume)
+	ConfigFileHandler.config.save(settingPath)
+	
+	var busId=-1
+	
+	
+	match extra_arg_0:
+		"Master":
+			busId=0
+			get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer/VolumeValue").text = str(currentVolume)
+		"Music":
+			busId=1
+			get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer2/VolumeValue").text = str(currentVolume)
+		"Sfx":
+			busId=2
+			get_node("MarginContainer/VBoxContainer/GridContainer/HFlowContainer3/VolumeValue").text = str(currentVolume)
+	
+	var db = linear_to_db(currentVolume / 100.0)
+	AudioServer.set_bus_volume_db(busId, db)

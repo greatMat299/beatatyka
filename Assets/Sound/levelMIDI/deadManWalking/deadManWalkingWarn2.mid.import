@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://pd5qc4gf1ujs"
+path="res://.godot/imported/deadManWalkingWarn2.mid-4942ad5f0d42e713086f484f997301f0.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/deadManWalking/deadManWalkingWarn2.mid"
+dest_files=["res://.godot/imported/deadManWalkingWarn2.mid-4942ad5f0d42e713086f484f997301f0.res"]
+
+[params]
+

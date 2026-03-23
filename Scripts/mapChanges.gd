@@ -12,6 +12,8 @@ var currentWarningPlatform := -1
 var currentWarningSpike := -1
 var playerCount = 3
 var rng
+var warningSpikeBySender = {}
+var warningPlatformBySender = {}
 @onready var ground := $Ground
 @onready var audioStreamPlayer = $AudioStreamPlayer2D
 
@@ -72,7 +74,7 @@ func _ready() -> void:
 	midi_player1.note_played.connect(self._on_note_played)
 	midi_player2.note_played_c2.connect(self._on_note_played)
 	midi_playerW.note_played_w.connect(self._on_warning_note_played)
-	midi_playerW2.note_played_w.connect(self._on_warning_note_played)
+	midi_playerW2.note_played_w2.connect(self._on_warning_note_played)
 	
 func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
@@ -86,11 +88,11 @@ func _on_warning_note_played(note,sender):
 	#aktywowanie platform ostrzegawczych
 	if note>=59&&note<=64:
 		modifierTypeW=abs(59-note)
-		call_deferred("_apply_warning_platform", modifierTypeW)
+		call_deferred("_apply_warning_platform", modifierTypeW, sender)
 	#aktywowanie kolców ostrzegawczych
-	elif note>=65&&note<=67:
-		modifierTypeW=abs(65-note)
-		call_deferred("_apply_warning_spike", modifierTypeW)
+	elif note>=65 && note<=67:
+		modifierTypeW = abs(65-note)
+		call_deferred("_apply_warning_spike", modifierTypeW, sender)
 	#potem będzie deszcz i trap platformy ale nie są zaimplementowane
 		
 #usunięcie wszystkich aktywnych kolców
@@ -100,57 +102,56 @@ func removeSpikes():
 		currentSpike=-1
 	
 #funkcja mówi sama za siebie	
-func _apply_warning_platform(index: int):
-	set_active_platform(index, true)
+func _apply_warning_platform(index: int,sender):
+	set_active_platform(index, true, sender)
 
 #funkcja mówi sama za siebie
-func _apply_warning_spike(index: int):
-	set_active_spike(index, true)
+func _apply_warning_spike(index: int,sender):
+	set_active_spike(index, true, sender)
 		
 #aktywowanie danej sekwencji kolców
-func set_active_spike(index: int, isWarning: bool):
+func set_active_spike(index: int, isWarning: bool, sender = null):
 	if isWarning:
-		if currentWarningSpike == index:
+		if sender == null:
 			return
+			
+		if warningSpikeBySender.has(sender):
+			var prev = warningSpikeBySender[sender]
+			GameManager.spikePrevList[prev].visible = false
 
-		#jeżeli jakaś sekwencja ostrzegawcza jest to ją usuwa
-		if currentWarningSpike != -1: 
-			GameManager.spikePrevList[currentWarningSpike].visible = false
-
-		#pokazanie sekwencji ostrzegawczej
 		GameManager.spikePrevList[index].visible = true
 		GameManager.spikePrevList[index].get_node("AnimationPlayer").play("showSpikes")
 
-		currentWarningSpike = index
+		warningSpikeBySender[sender] = index
+
 	else:
 		if currentSpike == index:
 			return
 
-		#jak wyżej, usuwa wcześniej aktywne kolce
 		if currentSpike != -1:
 			GameManager.spikeList[currentSpike].visible = false
 
 		GameManager.spikeList[index].visible = true
 		currentSpike = index
 		
-func set_active_platform(index: int, isWarning: bool):
+func set_active_platform(index: int, isWarning: bool, sender = null):
 	if isWarning:
-		if currentWarningPlatform == index:
+		if sender == null:
 			return
 
-		#jeżeli jakaś platforma ostrzegawcza jest to ją usuwa
-		if currentWarningPlatform != -1:
-			GameManager.platformPrevList[currentWarningPlatform].enabled = false
+		if warningPlatformBySender.has(sender):
+			var prev = warningPlatformBySender[sender]
+			GameManager.platformPrevList[prev].enabled = false
 
 		GameManager.platformPrevList[index].enabled = true
 		GameManager.platformPrevList[index].get_node("AnimationPlayer").play("showPlatform")
 
-		currentWarningPlatform = index
+		warningPlatformBySender[sender] = index
+
 	else:
 		if currentPlatform == index:
 			return
 
-		#jeżeli jakaś poprzednia platforma jest to ją usuwa
 		if currentPlatform != -1:
 			GameManager.platformsList[currentPlatform].enabled = false
 
@@ -158,11 +159,21 @@ func set_active_platform(index: int, isWarning: bool):
 		currentPlatform = index
 	
 func _on_note_played(note, sender):
-	if currentWarningPlatform != -1:
-		GameManager.platformPrevList[currentWarningPlatform].enabled = false
-		currentWarningPlatform = -1
+	#if currentWarningPlatform != -1:
+		#GameManager.platformPrevList[currentWarningPlatform].enabled = false
+		#currentWarningPlatform = -1
 	var listLength=len(GameManager.platformsList)
 	print(note)
+	
+	if warningPlatformBySender.has(sender):
+		var idx = warningPlatformBySender[sender]
+		GameManager.platformPrevList[idx].enabled = false
+		warningPlatformBySender.erase(sender)
+		
+	if warningSpikeBySender.has(sender):
+		var idx = warningSpikeBySender[sender]
+		GameManager.spikePrevList[idx].visible = false
+		warningSpikeBySender.erase(sender)
 	
 	#dodatkowe nuty
 	if note==57:
@@ -175,16 +186,17 @@ func _on_note_played(note, sender):
 		if ground.enabled==false:
 			ground.enabled=true
 		modifierType=note-59
-		set_active_platform(modifierType, false)
+		set_active_platform(modifierType, false,sender)
 	elif note>=65&&note<=67: #kolce
 		modifierType=abs(65-note)
 		removeSpikes()
-		set_active_spike(modifierType,false)
+		set_active_spike(modifierType,false,sender)
 	#elif note>=68&&note<=69: #deszcz
 		#pass
 	#elif note>=70&&note<=73: #laser
 		#pass
 	elif note==74: #usunięcie ziemi
+		get_node("Ground2").enabled=true
 		ground.enabled = false
 
 #wybranie nowego powerupa kiedy skończy się cooldown

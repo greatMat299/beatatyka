@@ -96,28 +96,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_y5h3j")
-text = "PLAYER 1"
+text = "GRACZ 1"
 
 [node name="Player2Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1416615071]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_jbay4")
-text = "PLAYER 2"
+text = "GRACZ 2"
 
 [node name="Player3Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1683570593]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_kqsh7")
-text = "PLAYER 3"
+text = "GRACZ 3"
 
 [node name="Player4Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=170615368]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_1rrhl")
-text = "PLAYER 4"
+text = "GRACZ 4"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=898542523]
 layout_mode = 2
@@ -139,7 +139,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 26
-text = "LEFT"
+text = "LEWO"
 
 [node name="CurrentLeftKey" type="Label" parent="MarginContainer/Container/VBoxContainer/LeftButton/HBoxContainer" unique_id=1969076731]
 custom_minimum_size = Vector2(100, 0)
@@ -165,7 +165,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 26
-text = "RIGHT"
+text = "PRAWO"
 
 [node name="CurrentRightKey" type="Label" parent="MarginContainer/Container/VBoxContainer/RightButton/HBoxContainer" unique_id=902440530]
 custom_minimum_size = Vector2(100, 0)
@@ -191,7 +191,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 26
-text = "JUMP"
+text = "SKOK"
 
 [node name="CurrentJumpKey" type="Label" parent="MarginContainer/Container/VBoxContainer/JumpButton/HBoxContainer" unique_id=341505452]
 custom_minimum_size = Vector2(100, 0)
@@ -217,7 +217,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 26
-text = "BASIC ATTACK"
+text = "ATAK"
 
 [node name="CurrentAttackKey" type="Label" parent="MarginContainer/Container/VBoxContainer/AttackButton/HBoxContainer" unique_id=188425162]
 custom_minimum_size = Vector2(100, 0)
@@ -243,7 +243,7 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 26
-text = "BLOCK"
+text = "BLOKOWANIE"
 
 [node name="CurrentBlockKey" type="Label" parent="MarginContainer/Container/VBoxContainer/BlockButton/HBoxContainer" unique_id=351232292]
 custom_minimum_size = Vector2(100, 0)
@@ -262,7 +262,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 25
-text = "RETURN"
+text = "WRÓĆ"
 
 [node name="Save" type="Button" parent="MarginContainer/Container/VBoxContainer/HBoxContainer" unique_id=1405651376]
 custom_minimum_size = Vector2(150, 50)
@@ -270,7 +270,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 25
-text = "SAVE"
+text = "ZAPISZ"
 
 [node name="selectBorder" type="Panel" parent="." unique_id=1422871602]
 visible = false

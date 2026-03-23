@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dkx362fx2iwuo" path="res://Scripts/ui_gameplay.gd" id="3_4ii71"]
 [ext_resource type="Script" uid="uid://b8l640esogpq3" path="res://Scripts/pause_menu_logic.gd" id="3_7mm0a"]
 [ext_resource type="Shader" uid="uid://d2xvqetcvu2to" path="res://Shaders/blurShader.gdshader" id="3_iafmb"]
-[ext_resource type="Texture2D" uid="uid://d3ylgx60kmxne" path="res://Assets/Images/Powerups/gravity.png" id="4_88o7u"]
+[ext_resource type="Texture2D" uid="uid://d3ylgx60kmxne" path="res://Images/Powerups/gravity.png" id="4_88o7u"]
 [ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scripts/game_over_ui.gd" id="7_ha2xw"]
 [ext_resource type="PackedScene" uid="uid://cmxhxg7kkl32k" path="res://Scenes/beat_catcher.tscn" id="10_riyq3"]
 [ext_resource type="Script" uid="uid://bjqm2g40r5iai" path="res://Scripts/ui_start_game_logic.gd" id="11_cqsqe"]
@@ -351,6 +351,8 @@ text = "WYJDŹ"
 
 [node name="BeatCatcher" parent="GameplayNodes" unique_id=540349467 instance=ExtResource("10_riyq3")]
 layout_mode = 1
+offset_top = 50.0
+offset_bottom = 50.0
 
 [node name="StartGameContainer" type="Control" parent="." unique_id=321453550]
 layout_mode = 3
@@ -366,6 +368,7 @@ libraries/ = SubResource("AnimationLibrary_atmls")
 
 [node name="startSFX" type="AudioStreamPlayer2D" parent="StartGameContainer" unique_id=2085200463]
 stream = ExtResource("12_bl3s2")
+bus = &"SFX"
 
 [node name="TextureRect" type="TextureRect" parent="StartGameContainer" unique_id=227857653]
 modulate = Color(1, 1, 1, 0)

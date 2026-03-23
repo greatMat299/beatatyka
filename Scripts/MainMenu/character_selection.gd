@@ -11,6 +11,8 @@ extends Control
 @onready var menuSelectSfx = $"../MenuSelectSfx"
 @onready var menuBackSfx = $"../MenuBackSfx"
 @onready var menuSwipeSfx = $"../MenuSwipeSfx"
+@onready var animPlayer = $"../AnimationPlayer"
+@onready var randomSelectSfx = $randomSelectSfx
 var previewSprites = []
 var playerLabels = []
 var speedCharLabels = []
@@ -57,9 +59,9 @@ func fillUpArrays():
 		
 		playerLabels.append(get_node("Control").get_node("PlayerLabels").get_node("P"+str(i+1)+"Label"))
 		if i>0:
-			playerLabels[i].text = str("PLAYER ")+str(i+1)+str(" - PRESS ")+OS.get_keycode_string(InputMap.action_get_events("player"+str(i+1)+"_attack")[0].physical_keycode)
+			playerLabels[i].text = str("GRACZ ")+str(i+1)+str(" - NACIŚNIJ ")+OS.get_keycode_string(InputMap.action_get_events("player"+str(i+1)+"_attack")[0].physical_keycode)
 		else:
-			playerLabels[0].text = "PLAYER 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" TO CONFIRM"
+			playerLabels[0].text = "GRACZ 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		
 		speedCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("SpeedLabel"))
 		jumpCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("JumpLabel"))
@@ -82,6 +84,18 @@ func checkIfAllReady() -> bool:
 			return true
 		else:
 			return false
+			
+func exitMenu():
+	menuBackSfx.play()
+	animPlayer.play("menuBack")
+	await get_tree().create_timer(0.1).timeout
+	enabled=false
+	visible=false
+	playerAmount=1
+	arePlayersActive=[true,false,false,false]
+	arePlayersReady=[false,false,false,false]
+	menuContainer.visible=true
+	menuContainer.get_parent().isActive=true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -96,15 +110,7 @@ func _process(delta: float) -> void:
 		handle_input_p4()
 		
 		if Input.is_action_just_pressed("ui_cancel"):
-			menuBackSfx.play()
-			await get_tree().create_timer(0.03).timeout
-			enabled=false
-			visible=false
-			playerAmount=1
-			arePlayersActive=[true,false,false,false]
-			arePlayersReady=[false,false,false,false]
-			menuContainer.visible=true
-			menuContainer.get_parent().isActive=true
+			exitMenu()
 		
 		
 		if isGameReady==true and isGameLaunching==false:
@@ -125,8 +131,11 @@ func _process(delta: float) -> void:
 					
 					preparePlayer(thePlayerIndex)
 						
-						
+			await get_tree().create_timer(.7).timeout
 			GameManager.playerLoadCount=playerAmount
+			animPlayer.play("menuChange")
+			menuSelectSfx.play()
+			await get_tree().create_timer(.1).timeout
 			self.visible=false
 			enabled=false
 			mapSelectMenu.visible = true
@@ -152,7 +161,7 @@ func update_frame(frame, index):
 
 func handle_input_p1():
 	if arePlayersReady[0]==false:
-		playerLabels[0].text = "PLAYER 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" TO CONFIRM"
+		playerLabels[0].text = "GRACZ 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		p1_frame.visible=true
 		if Input.is_action_just_pressed("player1_right"):
 			index_p1 = (index_p1 + 1) % buttons.size()
@@ -166,19 +175,22 @@ func handle_input_p1():
 			
 		if Input.is_action_just_pressed("player1_attack"):
 			print("Gracz 1 wybrał: ", index_p1)
-			playerLabels[0].text = "PLAYER 1 READY"
+			playerLabels[0].text = "GRACZ 1 GOTOWY"
 			playerLabels[0].add_theme_color_override("font_color", Color(0.996, 0.0, 0.176, 1.0))
 			p1_frame.visible=false
 			arePlayersReady[0]=true
 			if index_p1==len(characterSprites)-1:
 				index_p1 = rng.randi_range(0,len(characterSprites)-2)
+				previewSprites[0].play("random")
+				randomSelectSfx.play()
+				await get_tree().create_timer(.7).timeout
 				update_sprite_preview(1,index_p1)
 			isGameReady = checkIfAllReady()
 			
 
 func handle_input_p2():
 	if arePlayersActive[1]!=false and arePlayersReady[1]==false:
-		playerLabels[1].text = "PLAYER 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" TO CONFIRM"
+		playerLabels[1].text = "GRACZ 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		p2_frame.visible=true
 		if Input.is_action_just_pressed("player2_right"):
 			index_p2 = (index_p2 + 1) % buttons.size()
@@ -201,21 +213,24 @@ func handle_input_p2():
 			arePlayersActive[1]=true
 			p2_frame.visible=true
 			previewSprites[1].visible=true
-			playerLabels[1].text = "PLAYER 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" TO CONFIRM"
+			playerLabels[1].text = "GRACZ 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		else:
 			print("Gracz 2 wybrał: ", index_p2)
 			p2_frame.visible=false
-			playerLabels[1].text = "PLAYER 2 READY"
+			playerLabels[1].text = "GRACZ 2 GOTOWY"
 			playerLabels[1].add_theme_color_override("font_color", Color(0.0, 0.557, 0.929, 1.0))
 			arePlayersReady[1]=true
 			if index_p2==len(characterSprites)-1:
 				index_p2 = rng.randi_range(0,len(characterSprites)-2)
+				previewSprites[1].play("random")
+				randomSelectSfx.play()
+				await get_tree().create_timer(.7).timeout
 				update_sprite_preview(2,index_p2)
 			isGameReady = checkIfAllReady()
 		
 func handle_input_p3():
 	if arePlayersActive[2]!=false and arePlayersReady[2]==false:
-		playerLabels[2].text = "PLAYER 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" TO CONFIRM"
+		playerLabels[2].text = "GRACZ 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		p3_frame.visible=true
 		if Input.is_action_just_pressed("player3_right"):
 			index_p3 = (index_p3 + 1) % buttons.size()
@@ -238,22 +253,25 @@ func handle_input_p3():
 			arePlayersActive[2]=true
 			p3_frame.visible=true
 			previewSprites[2].visible=true
-			playerLabels[2].text = "PLAYER 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" TO CONFIRM"
+			playerLabels[2].text = "GRACZ 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		else:
 			print("Gracz 3 wybrał: ", index_p3)
 			p3_frame.visible=false
-			playerLabels[2].text = "PLAYER 3 READY"
+			playerLabels[2].text = "GRACZ 3 GOTOWY"
 			playerLabels[2].add_theme_color_override("font_color", Color(0.267, 0.639, 0.0, 1.0))
 			arePlayersReady[2]=true
 			if index_p3==len(characterSprites)-1:
 				index_p3 = rng.randi_range(0,len(characterSprites)-2)
+				previewSprites[2].play("random")
+				randomSelectSfx.play()
+				await get_tree().create_timer(.7).timeout
 				update_sprite_preview(3,index_p3)
 			isGameReady = checkIfAllReady()
 		
 func handle_input_p4():
 	if arePlayersActive[3]!=false and arePlayersReady[3]==false:
 		p4_frame.visible=true
-		playerLabels[3].text = "PLAYER 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" TO CONFIRM"
+		playerLabels[3].text = "GRACZ 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		if Input.is_action_just_pressed("player4_right"):
 			index_p4 = (index_p4 + 1) % buttons.size()
 			update_frame(p4_frame, index_p4)
@@ -275,15 +293,18 @@ func handle_input_p4():
 			arePlayersActive[3]=true
 			p4_frame.visible=true
 			previewSprites[3].visible=true
-			playerLabels[3].text = "PLAYER 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" TO CONFIRM"
+			playerLabels[3].text = "GRACZ 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
 		else:
 			print("Gracz 4 wybrał: ", index_p4)
 			p4_frame.visible=false
-			playerLabels[3].text = "PLAYER 4 READY"
+			playerLabels[3].text = "PLAYER 4 GOTOWY"
 			playerLabels[3].add_theme_color_override("font_color", Color(0.62, 0.584, 0.075, 1.0))
 			arePlayersReady[3]=true
 			if index_p4==len(characterSprites)-1:
 				index_p4 = rng.randi_range(0,len(characterSprites)-2)
+				previewSprites[3].play("random")
+				randomSelectSfx.play()
+				await get_tree().create_timer(.7).timeout
 				update_sprite_preview(4,index_p4)
 			isGameReady = checkIfAllReady()
 
@@ -308,3 +329,7 @@ func update_preview(index):
 		#preview.texture = btn.icon
 	#else:
 		#pass
+
+
+func _on_back_btn_pressed():
+	exitMenu()

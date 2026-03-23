@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://b1qd03a6ykgfy"
+path="res://.godot/imported/deadManWalkingC1.mid-fbf06b067808d57a47f5cb0e61de1170.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/deadManWalking/deadManWalkingC1.mid"
+dest_files=["res://.godot/imported/deadManWalkingC1.mid-fbf06b067808d57a47f5cb0e61de1170.res"]
+
+[params]
+

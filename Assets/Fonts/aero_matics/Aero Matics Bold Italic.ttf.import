@@ -1,0 +1,36 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://cug85ttjt7nro"
+path="res://.godot/imported/Aero Matics Bold Italic.ttf-bb755fb66f6130f9a2a31e1f85e5e3a4.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf"
+dest_files=["res://.godot/imported/Aero Matics Bold Italic.ttf-bb755fb66f6130f9a2a31e1f85e5e3a4.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
