@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b6hwk2fptol7k" path="res://Assets/Sound/SFX/menuBack.mp3" id="8_2r307"]
 [ext_resource type="AudioStream" uid="uid://cb1rcaamngf3q" path="res://Assets/Sound/SFX/menuPick.mp3" id="9_omq0y"]
 [ext_resource type="AudioStream" uid="uid://bipyv4qkekmw2" path="res://Assets/Sound/SFX/menuSwipe.mp3" id="10_agesy"]
+[ext_resource type="PackedScene" uid="uid://bx2rquiwy5n5w" path="res://Scenes/MainMenu/title_card.tscn" id="12_rlg4b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adu2g"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
@@ -148,6 +149,7 @@ grow_vertical = 2
 script = ExtResource("1_jix8l")
 
 [node name="MenuContainer" type="MarginContainer" parent="." unique_id=174165145]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.59900004
@@ -257,6 +259,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="TitleCard" parent="." unique_id=1708981528 instance=ExtResource("12_rlg4b")]
+layout_mode = 1
 
 [connection signal="focus_entered" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_focus_entered"]
 [connection signal="mouse_entered" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_entered" binds= [0]]

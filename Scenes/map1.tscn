@@ -4,17 +4,19 @@
 [ext_resource type="TileSet" uid="uid://bhs3hu7ad0kxq" path="res://Assets/TileSets/testTileSet.res" id="1_wouuh"]
 [ext_resource type="Script" uid="uid://bw0sauhnn3yro" path="res://Scripts/camera_work.gd" id="3_tnejx"]
 [ext_resource type="PackedScene" uid="uid://cmovijrkx6q7m" path="res://Scenes/player.tscn" id="4_xgpx1"]
+[ext_resource type="MidiResource" uid="uid://cefeyf0q1ss43" path="res://Assets/Sound/levelMIDI/test.mid" id="6_55xmv"]
 [ext_resource type="Script" uid="uid://bxfsq5isjqiwb" path="res://Scripts/midi_player.gd" id="6_wouuh"]
-[ext_resource type="MidiResource" uid="uid://c7vii1ld818v2" path="res://Sound/levelMIDI/crabRaveWarn.mid" id="7_si05j"]
-[ext_resource type="MidiResource" uid="uid://cqo03vx8ekjl7" path="res://Sound/levelMIDI/crabRaveC2.mid" id="8_gg3vl"]
+[ext_resource type="MidiResource" uid="uid://cqo03vx8ekjl7" path="res://Assets/Sound/levelMIDI/crabRave/crabRaveC2.mid" id="8_ngqs7"]
 [ext_resource type="PackedScene" uid="uid://crvd4x1oahyu7" path="res://Scenes/userUIgameplay.tscn" id="8_wouuh"]
-[ext_resource type="MidiResource" uid="uid://d2ni3hwmw5yj2" path="res://Sound/levelMIDI/crabRaveC1.mid" id="10_gg3vl"]
+[ext_resource type="MidiResource" uid="uid://c7vii1ld818v2" path="res://Assets/Sound/levelMIDI/crabRave/crabRaveWarn.mid" id="9_qakiw"]
 [ext_resource type="MidiResource" uid="uid://cdj2u6yohor35" path="res://Assets/Sound/levelMIDI/crabRave/crabRaveWarn2.mid" id="10_ypv6j"]
-[ext_resource type="AudioStream" uid="uid://c7i1ehb2ahxp0" path="res://Assets/Sound/levelMusic/crabRave.wav" id="11_vcux0"]
+[ext_resource type="AudioStream" uid="uid://dtvsuqbhukmhg" path="res://Assets/Sound/levelMusic/crabRave.mp3" id="11_vcux0"]
 [ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="12_gg3vl"]
 [ext_resource type="PackedScene" uid="uid://dhaa2cph3j40m" path="res://Scenes/powerup.tscn" id="12_vcux0"]
 [ext_resource type="PackedScene" uid="uid://wurpq2bp4iqi" path="res://Scenes/spikeSceneNoCollision.tscn" id="13_kif58"]
 [ext_resource type="PackedScene" uid="uid://j41nkenbbfni" path="res://Scenes/spikeScene.tscn" id="14_ypv6j"]
+[ext_resource type="AudioStream" uid="uid://0jfck1s18aaw" path="res://Assets/Sound/SFX/crowdCheering.mp3" id="16_cjqyo"]
+[ext_resource type="AudioStream" uid="uid://dlkd1lw7ct6yq" path="res://Assets/Sound/SFX/crowdChant.mp3" id="17_55xmv"]
 
 [sub_resource type="Animation" id="Animation_si05j"]
 length = 0.001
@@ -270,19 +272,19 @@ position = Vector2(133, -30)
 [node name="MusicPlayer" type="Node" parent="." unique_id=1917010015]
 
 [node name="MidiPlayer" type="MidiPlayer" parent="MusicPlayer" unique_id=1601789935 groups=["midiPlayer"]]
-midi = ExtResource("10_gg3vl")
+midi = ExtResource("6_55xmv")
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerChannel2" type="MidiPlayer" parent="MusicPlayer" unique_id=1078224799 groups=["midiPlayer"]]
-midi = ExtResource("8_gg3vl")
+midi = ExtResource("8_ngqs7")
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerWarning" type="MidiPlayer" parent="MusicPlayer" unique_id=1508510296 groups=["midiPlayer"]]
-midi = ExtResource("7_si05j")
+midi = ExtResource("9_qakiw")
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerCatcher" type="MidiPlayer" parent="MusicPlayer" unique_id=1413206763 groups=["midiPlayer"]]
-midi = ExtResource("10_gg3vl")
+midi = ExtResource("9_qakiw")
 script = ExtResource("6_wouuh")
 
 [node name="MidiPlayerWarning2" type="MidiPlayer" parent="MusicPlayer" unique_id=771857234 groups=["midiPlayer"]]
@@ -403,6 +405,15 @@ position = Vector2(53, 97)
 
 [node name="SpikeScene5" parent="Spikes2" unique_id=1829091494 instance=ExtResource("14_ypv6j")]
 position = Vector2(117, 97)
+
+[node name="CrowdCheerSFX" type="AudioStreamPlayer2D" parent="." unique_id=1878810571]
+stream = ExtResource("16_cjqyo")
+bus = &"SFX"
+
+[node name="CrowdChantSFX" type="AudioStreamPlayer2D" parent="." unique_id=1067521058]
+stream = ExtResource("17_55xmv")
+volume_db = -3.0
+bus = &"SFX"
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

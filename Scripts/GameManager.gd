@@ -19,6 +19,8 @@ var platformsList=[]
 var platformPrevList=[]
 var spikeList=[]
 var spikePrevList=[]
+var bombList=[]
+var bombPrevList=[]
 var arePlayersAlive=[]
 var playerAttackStatus=[]
 var currentPlayerKeybinds=[]
@@ -28,6 +30,7 @@ var currentCharacterSpeeds=[]
 var currentCharacterJumpVels=[]
 var currentCharacterAttackPwr=[]
 var currentCharacterDashAttackPwr=[]
+var playersDeadOrder=[]
 var mapName=""
 var playerLoadCount=0
 var player_count := 0
@@ -92,4 +95,13 @@ func searchForSpikes():
 			var spikePrevNode = get_parent().get_node(str(mapName)).get_node(str("Spike")+str(i)+str("PrevGroup"))
 			#print(spikePrevNode)
 			spikePrevList.push_back(spikePrevNode)
+			
+func searchForBombs():
+	for i in range(1,3):
+		var bombNode = get_parent().get_node(str(mapName)).get_node(str("Bombs")+str(i))
+		bombList.push_back(bombNode)
+		
+	for i in range(1,3):
+		var bombPrevNode = get_parent().get_node(str(mapName)).get_node(str("BombsPrev")+str(i))
+		bombPrevList.push_back(bombPrevNode)
 		

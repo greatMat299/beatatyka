@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bx2rquiwy5n5w"]
+
+[ext_resource type="Script" uid="uid://dvw5l1sva5tk0" path="res://Scripts/MainMenu/title_card.gd" id="1_6cajv"]
+[ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="2_e1pd8"]
+[ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="3_fyx8h"]
+
+[node name="TitleCard" type="Control" unique_id=1708981528]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6cajv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=121893943]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.5
+offset_top = -69.0
+offset_right = 506.5
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=2051994794]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_e1pd8")
+theme_override_font_sizes/font_size = 96
+text = "BEATATYKA"
+
+[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1152274741]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_fyx8h")
+theme_override_font_sizes/font_size = 30
+text = "Naciśnij ENTER"
+
+[node name="HiddenLabel" type="Label" parent="." unique_id=821002727]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "ale sigma"

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://d15v1pnidbpi3"]
+
+[ext_resource type="Script" uid="uid://bopt8vkw6ilx4" path="res://Scripts/bomb.gd" id="1_7krys"]
+[ext_resource type="TileSet" uid="uid://bhs3hu7ad0kxq" path="res://Assets/TileSets/testTileSet.res" id="2_w2ts3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w74q"]
+size = Vector2(16, 16)
+
+[node name="BombNC" type="Node2D" unique_id=1742308057]
+script = ExtResource("1_7krys")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=34927630]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 3, 0, 0, 0, 5, 0, 0, 0)
+tile_set = ExtResource("2_w2ts3")
+collision_enabled = false
+
+[node name="BombArea2D" type="Area2D" parent="TileMapLayer" unique_id=847810363]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/BombArea2D" unique_id=573459479]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_6w74q")

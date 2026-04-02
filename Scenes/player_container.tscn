@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://7v8yj0o1np5m"]
+
+[ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="1_4qj75"]
+[ext_resource type="Script" uid="uid://vi513khxx7pq" path="res://Scripts/animated_rect.gd" id="2_8bs35"]
+[ext_resource type="SpriteFrames" uid="uid://dkds8klu2sueq" path="res://Assets/SpriteSheets/djPadFrames.tres" id="3_ctt75"]
+
+[node name="PlayerContainer" type="CenterContainer" unique_id=919665359]
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 100.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=770655747]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1331765444]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_8bs35")
+sprites = ExtResource("3_ctt75")
+playing = true
+
+[node name="HealthLabel" type="Label" parent="VBoxContainer" unique_id=1553617397]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_4qj75")
+theme_override_font_sizes/font_size = 26
+text = "PLAYER 1"
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer" unique_id=478043416]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 3
+stretch_mode = 5

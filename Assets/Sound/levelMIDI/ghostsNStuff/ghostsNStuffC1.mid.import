@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://1fvbnen3jvsp"
+path="res://.godot/imported/ghostsNStuffC1.mid-c3a782f3c8959bda4463420f33dec5e9.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/ghostsNStuff/ghostsNStuffC1.mid"
+dest_files=["res://.godot/imported/ghostsNStuffC1.mid-c3a782f3c8959bda4463420f33dec5e9.res"]
+
+[params]
+

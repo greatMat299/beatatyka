@@ -1,5 +1,5 @@
 extends Node2D
-@onready var tilemap = $TileMapLayer
+@onready var tilemap = $SpikeTMLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

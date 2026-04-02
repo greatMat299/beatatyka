@@ -12,9 +12,11 @@
 [ext_resource type="PackedScene" uid="uid://crvd4x1oahyu7" path="res://Scenes/userUIgameplay.tscn" id="11_gbt8x"]
 [ext_resource type="MidiResource" uid="uid://pd5qc4gf1ujs" path="res://Assets/Sound/levelMIDI/deadManWalking/deadManWalkingWarn2.mid" id="11_nhgnk"]
 [ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="13_telfs"]
-[ext_resource type="AudioStream" uid="uid://duok8ktc1elm2" path="res://Assets/Sound/levelMusic/dead_man_walking.wav" id="13_uld1b"]
+[ext_resource type="AudioStream" uid="uid://b1y5kv4qjl0un" path="res://Assets/Sound/levelMusic/dead_man_walking.mp3" id="13_uld1b"]
 [ext_resource type="PackedScene" uid="uid://j41nkenbbfni" path="res://Scenes/spikeScene.tscn" id="15_imi18"]
 [ext_resource type="PackedScene" uid="uid://wurpq2bp4iqi" path="res://Scenes/spikeSceneNoCollision.tscn" id="16_nhgnk"]
+[ext_resource type="AudioStream" uid="uid://0jfck1s18aaw" path="res://Assets/Sound/SFX/crowdCheering.mp3" id="16_uld1b"]
+[ext_resource type="AudioStream" uid="uid://dlkd1lw7ct6yq" path="res://Assets/Sound/SFX/crowdChant.mp3" id="17_vgmqi"]
 
 [sub_resource type="Animation" id="Animation_si05j"]
 length = 0.001
@@ -436,6 +438,15 @@ position = Vector2(95, 80)
 
 [node name="SpikeSceneNC5" parent="Spike3PrevGroup" unique_id=1762227889 instance=ExtResource("16_nhgnk")]
 position = Vector2(111, 80)
+
+[node name="CrowdCheerSFX" type="AudioStreamPlayer2D" parent="." unique_id=1846453693]
+stream = ExtResource("16_uld1b")
+bus = &"SFX"
+
+[node name="CrowdChantSFX" type="AudioStreamPlayer2D" parent="." unique_id=1216483755]
+stream = ExtResource("17_vgmqi")
+volume_db = -3.0
+bus = &"SFX"
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

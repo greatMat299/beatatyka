@@ -1,9 +1,13 @@
 extends Control
 
+
+#NIEUŻYWANY SKRYPT
+
 var playerCount=0
 var prevCombo=0
 var players=[]
 var activeLabels=[]
+
 
 func _ready():
 	#dodawanie elementów graczy oraz tekstów z graczami
@@ -13,6 +17,7 @@ func _ready():
 	for i in range(0,playerCount):
 		players.push_back(get_parent().get_parent().get_parent().get_node(str("Player")+str(i+1)))
 		activeLabels.push_back(self.get_node(str("Label")+str(i+1)))
+	#crowdCheerSFX = get_parent()
 	#print(players)
 	
 	

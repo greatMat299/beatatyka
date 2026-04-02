@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://0ltgmtws6h7n"
+path="res://.godot/imported/ghostsNStuffWarn.mid-bba4c5b044501fa8f63465924dd2d091.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/ghostsNStuff/ghostsNStuffWarn.mid"
+dest_files=["res://.godot/imported/ghostsNStuffWarn.mid-bba4c5b044501fa8f63465924dd2d091.res"]
+
+[params]
+

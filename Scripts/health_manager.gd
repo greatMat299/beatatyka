@@ -45,6 +45,7 @@ func _process(_delta):
 		deathSFX.play()
 		GameManager.arePlayersAlive[id-1]=false
 		GameManager.player_count-=1
+		GameManager.playersDeadOrder.append(id)
 		health=0
 		animSprite.self_modulate=Color(1,1,1,.4)
 		animSprite.stop()

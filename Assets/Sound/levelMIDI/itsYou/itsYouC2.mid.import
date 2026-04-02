@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://b7xsnd5m0n342"
+path="res://.godot/imported/itsYouC2.mid-1611f41203511331b6e369b0e5443b12.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/itsYou/itsYouC2.mid"
+dest_files=["res://.godot/imported/itsYouC2.mid-1611f41203511331b6e369b0e5443b12.res"]
+
+[params]
+

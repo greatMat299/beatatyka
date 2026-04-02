@@ -113,6 +113,7 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ui_cancel"):
 			menuBackSfx.play()
 			animPlayerMain.play("menuBack")
+			GameManager.currentPlayerKeybinds=[]
 			await get_tree().create_timer(0.1).timeout
 			for i in range(0,4):
 				characterSelection.arePlayersReady[i]=false

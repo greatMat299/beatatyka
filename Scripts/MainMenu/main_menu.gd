@@ -3,6 +3,7 @@ extends Control
 @onready var settingsMenu = $SettingsMenu
 @onready var menuContainer = $MenuContainer
 @onready var characterSelection = $CharacterSelection
+@onready var titleCard = $TitleCard
 @onready var selectBorder = $MenuContainer/selectBorder
 @onready var menuSelectSfx = $MenuSelectSfx
 @onready var menuBackSfx = $MenuBackSfx
@@ -13,9 +14,10 @@ var status
 var scene = "res://Scenes/map1.tscn"
 var scene_loaded=false
 var scene_ready := false
-var isActive=true
+var isActive=false
 var menuButtons=[]
 var currentSelectIndex = 0
+var hasStarted=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -90,6 +92,15 @@ func _apply_display_mode():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	if titleCard.visible==false and isActive==false and hasStarted==false:
+		await get_tree().process_frame
+		menuSelectSfx.play()
+		animPlayer.play("menuChange")
+		isActive=true
+		hasStarted=true
+		await get_tree().create_timer(0.1).timeout
+		menuContainer.visible=true	
+		
 	if isActive==true:
 		if Input.is_action_just_pressed("ui_down"):
 			if currentSelectIndex>-1 and currentSelectIndex<2:

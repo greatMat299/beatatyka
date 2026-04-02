@@ -16,6 +16,10 @@
 [ext_resource type="Script" uid="uid://w1826nx1r678" path="res://Scripts/beat_counter.gd" id="12_88x3e"]
 [ext_resource type="PackedScene" uid="uid://j41nkenbbfni" path="res://Scenes/spikeScene.tscn" id="14_o03xv"]
 [ext_resource type="PackedScene" uid="uid://wurpq2bp4iqi" path="res://Scenes/spikeSceneNoCollision.tscn" id="14_tr3nq"]
+[ext_resource type="AudioStream" uid="uid://0jfck1s18aaw" path="res://Assets/Sound/SFX/crowdCheering.mp3" id="17_goh0q"]
+[ext_resource type="PackedScene" uid="uid://c1ysp1g5i5h4c" path="res://Scenes/bomb.tscn" id="18_3vcwm"]
+[ext_resource type="AudioStream" uid="uid://dlkd1lw7ct6yq" path="res://Assets/Sound/SFX/crowdChant.mp3" id="18_rjj4s"]
+[ext_resource type="PackedScene" uid="uid://d15v1pnidbpi3" path="res://Scenes/bombNoCollision.tscn" id="19_g1h0t"]
 
 [sub_resource type="Animation" id="Animation_cjqyo"]
 length = 0.001
@@ -30,6 +34,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BombsPrev1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rjj4s"]
+resource_name = "showBombs"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BombsPrev1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_55xmv"]
@@ -67,6 +99,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vcux0"]
 _data = {
 &"RESET": SubResource("Animation_cjqyo"),
+&"showBombs": SubResource("Animation_rjj4s"),
 &"showPlatform": SubResource("Animation_55xmv"),
 &"showSpikes": SubResource("Animation_ngqs7")
 }
@@ -343,6 +376,71 @@ position = Vector2(16, 113)
 
 [node name="SpikeScene5" parent="Spikes2" unique_id=201212445 instance=ExtResource("14_o03xv")]
 position = Vector2(80, 113)
+
+[node name="CrowdCheerSFX" type="AudioStreamPlayer2D" parent="." unique_id=993313804]
+stream = ExtResource("17_goh0q")
+bus = &"SFX"
+
+[node name="CrowdChantSFX" type="AudioStreamPlayer2D" parent="." unique_id=1549765640]
+stream = ExtResource("18_rjj4s")
+volume_db = -3.0
+bus = &"SFX"
+
+[node name="Bombs1" type="Node2D" parent="." unique_id=713362963]
+visible = false
+
+[node name="Bomb" parent="Bombs1" unique_id=1742308057 instance=ExtResource("18_3vcwm")]
+position = Vector2(-135, 0)
+
+[node name="Bomb2" parent="Bombs1" unique_id=817881 instance=ExtResource("18_3vcwm")]
+position = Vector2(201, 0)
+
+[node name="Bomb3" parent="Bombs1" unique_id=1950455718 instance=ExtResource("18_3vcwm")]
+position = Vector2(111, 49)
+
+[node name="Bombs2" type="Node2D" parent="." unique_id=979321772]
+visible = false
+
+[node name="Bomb" parent="Bombs2" unique_id=1342880524 instance=ExtResource("18_3vcwm")]
+position = Vector2(-96, -31)
+
+[node name="Bomb2" parent="Bombs2" unique_id=254572869 instance=ExtResource("18_3vcwm")]
+position = Vector2(-15, 65)
+
+[node name="Bomb3" parent="Bombs2" unique_id=1010831059 instance=ExtResource("18_3vcwm")]
+position = Vector2(-8, -12)
+
+[node name="BombsPrev1" type="Node2D" parent="." unique_id=1383492855]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="BombNC" parent="BombsPrev1" unique_id=924479156 instance=ExtResource("19_g1h0t")]
+position = Vector2(-135, 0)
+
+[node name="BombNC2" parent="BombsPrev1" unique_id=1671334900 instance=ExtResource("19_g1h0t")]
+position = Vector2(111, 49)
+
+[node name="BombNC3" parent="BombsPrev1" unique_id=987008081 instance=ExtResource("19_g1h0t")]
+position = Vector2(201, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BombsPrev1" unique_id=495475264]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
+[node name="BombsPrev2" type="Node2D" parent="." unique_id=251575488]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="BombNC" parent="BombsPrev2" unique_id=1661543861 instance=ExtResource("19_g1h0t")]
+position = Vector2(-96, -31)
+
+[node name="BombNC2" parent="BombsPrev2" unique_id=1840487858 instance=ExtResource("19_g1h0t")]
+position = Vector2(-8, -12)
+
+[node name="BombNC3" parent="BombsPrev2" unique_id=1208378464 instance=ExtResource("19_g1h0t")]
+position = Vector2(-15, 65)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BombsPrev2" unique_id=622506818]
+libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

@@ -198,7 +198,22 @@ bus = &"SFX"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1389346117]
 libraries/ = SubResource("AnimationLibrary_f1ek2")
 
+[node name="jumpBufferTimer" type="Timer" parent="." unique_id=2001931728]
+wait_time = 2.0
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=632329068]
+wait_time = 2.0
+one_shot = true
+
+[node name="LaserDMGCooldownTimer" type="Timer" parent="." unique_id=423479580]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="playerAttack" from="." to="." method="_on_player_attack"]
 [connection signal="playerAttack" from="." to="HealthManager" method="_on_player_attack"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
 [connection signal="body_entered" from="BlockArea" to="." method="_on_block_area_body_entered"]
+[connection signal="timeout" from="jumpBufferTimer" to="." method="_on_jump_buffer_timer_timeout"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="LaserDMGCooldownTimer" to="." method="_on_laser_dmg_cooldown_timer_timeout"]

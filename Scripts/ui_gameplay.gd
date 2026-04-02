@@ -5,6 +5,8 @@ var players=[]
 var activeHealthLabels=[]
 var comboLabels=[]
 var prevCombo = 0
+var crowdCheerSFX
+var crowdChantSFX
 
 @export var playerIcons : Array[Texture2D] = []
 
@@ -28,7 +30,7 @@ func _ready() -> void:
 		self.get_node(str("Player")+str(i+1)).show()
 		print(GameManager.playerSpriteSheets[0])
 		self.get_node(str("Player")+str(i+1)).get_node("PlayerIcon").texture = GameManager.playerSpriteIcons[i]
-		
+	crowdCheerSFX = get_parent().get_parent().get_parent().get_node("CrowdCheerSFX")
 	
 
 
@@ -60,6 +62,8 @@ func healthChanges():
 
 func _on_beat_attacked(index,type,comboAmount):
 	comboLabels[index-1].visible=true
+	if comboAmount==3:
+		crowdCheerSFX.play()
 	if type==0 and prevCombo>0:
 		comboLabels[index-1].add_theme_color_override("font_color", Color.RED)
 		comboLabels[index-1].text = "MISS!"

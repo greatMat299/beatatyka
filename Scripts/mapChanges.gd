@@ -8,12 +8,15 @@ var modifierType
 var modifierTypeW
 var currentPlatform=-1
 var currentSpike=-1
+var currentBombs=-1
 var currentWarningPlatform := -1
 var currentWarningSpike := -1
+var currentWarningBomb := -1
 var playerCount = 3
 var rng
 var warningSpikeBySender = {}
 var warningPlatformBySender = {}
+var warningBombBySender = {}
 @onready var ground := $Ground
 @onready var audioStreamPlayer = $AudioStreamPlayer2D
 
@@ -63,6 +66,7 @@ func _ready() -> void:
 	GameManager.mapName=self.name
 	GameManager.searchForPlatforms()
 	GameManager.searchForSpikes()
+	GameManager.searchForBombs()
 	
 	#wstępne przygotowanie odtwarzaczy MIDI
 	midi_player1 = self.get_node("MusicPlayer").get_node("MidiPlayer")
@@ -93,6 +97,9 @@ func _on_warning_note_played(note,sender):
 	elif note>=65 && note<=67:
 		modifierTypeW = abs(65-note)
 		call_deferred("_apply_warning_spike", modifierTypeW, sender)
+	elif note>=68 && note<=69:
+		modifierTypeW = abs(68-note)
+		call_deferred("_apply_warning_bomb", modifierTypeW, sender)
 	#potem będzie deszcz i trap platformy ale nie są zaimplementowane
 		
 #usunięcie wszystkich aktywnych kolców
@@ -100,6 +107,11 @@ func removeSpikes():
 	if currentSpike!=-1:
 		GameManager.spikeList[currentSpike].visible = false
 		currentSpike=-1
+		
+func removeBombs():
+	if currentBombs!=-1:
+		GameManager.bombList[currentBombs].visible = false
+		currentBombs=-1
 	
 #funkcja mówi sama za siebie	
 func _apply_warning_platform(index: int,sender):
@@ -108,6 +120,10 @@ func _apply_warning_platform(index: int,sender):
 #funkcja mówi sama za siebie
 func _apply_warning_spike(index: int,sender):
 	set_active_spike(index, true, sender)
+
+#funkcja mówi sama za siebie
+func _apply_warning_bomb(index: int,sender):
+	set_active_bomb(index, true, sender)
 		
 #aktywowanie danej sekwencji kolców
 func set_active_spike(index: int, isWarning: bool, sender = null):
@@ -133,6 +149,30 @@ func set_active_spike(index: int, isWarning: bool, sender = null):
 
 		GameManager.spikeList[index].visible = true
 		currentSpike = index
+		
+func set_active_bomb(index: int, isWarning: bool, sender = null):
+	if isWarning:
+		if sender == null:
+			return
+			
+		if warningBombBySender.has(sender):
+			var prev = warningBombBySender[sender]
+			GameManager.bombPrevList[prev].visible = false
+
+		GameManager.bombPrevList[index].visible = true
+		GameManager.bombPrevList[index].get_node("AnimationPlayer").play("showBombs")
+
+		warningBombBySender[sender] = index
+
+	else:
+		if currentBombs == index:
+			return
+
+		if currentBombs != -1:
+			GameManager.bombList[currentBombs].visible = false
+
+		GameManager.bombList[index].visible = true
+		currentBombs = index
 		
 func set_active_platform(index: int, isWarning: bool, sender = null):
 	if isWarning:
@@ -174,6 +214,11 @@ func _on_note_played(note, sender):
 		var idx = warningSpikeBySender[sender]
 		GameManager.spikePrevList[idx].visible = false
 		warningSpikeBySender.erase(sender)
+		
+	if warningBombBySender.has(sender):
+		var idx = warningBombBySender[sender]
+		GameManager.bombPrevList[idx].visible = false
+		warningBombBySender.erase(sender)
 	
 	#dodatkowe nuty
 	if note==57:
@@ -191,11 +236,13 @@ func _on_note_played(note, sender):
 		modifierType=abs(65-note)
 		removeSpikes()
 		set_active_spike(modifierType,false,sender)
-	#elif note>=68&&note<=69: #deszcz
-		#pass
+	elif note>=68&&note<=69:
+		modifierType=abs(68-note)
+		removeBombs()
+		set_active_bomb(modifierType,false,sender)
 	#elif note>=70&&note<=73: #laser
 		#pass
-	elif note==74: #usunięcie ziemi
+	elif note==74: #zmiana ziemii
 		get_node("Ground2").enabled=true
 		ground.enabled = false
 

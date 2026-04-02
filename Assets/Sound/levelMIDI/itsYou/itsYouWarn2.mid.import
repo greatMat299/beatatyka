@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://ddura1hmv5nm4"
+path="res://.godot/imported/itsYouWarn2.mid-13ed9f24fa2ceeb4d93e042decfbc138.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/itsYou/itsYouWarn2.mid"
+dest_files=["res://.godot/imported/itsYouWarn2.mid-13ed9f24fa2ceeb4d93e042decfbc138.res"]
+
+[params]
+

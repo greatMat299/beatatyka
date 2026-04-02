@@ -5,6 +5,8 @@ signal playerAttack(player, damage, playerDamaged, direction)
 const PLAYER_ACTIONS = ["jump", "right", "left", "attack", "block"]
 var jumps=0
 var maxJumps = 1
+var jumpAviable = false
+var jumpBuffer = false
 var dashPresses=0
 var maxDashPresses=1
 var dashVelocity := 0.0
@@ -20,12 +22,18 @@ var isInvincible=false
 var playerKeybindId=-1
 var currentSpriteSheet
 var isDashAnim=false
+var spikeDMG = 25
+var laserDMG = 10
+var canLaserDMG = true
+var laserDMGCooldownAmount = 0.3
+var should_play := false
 
 var powerup1
 var powerup2
 var powerup3
 
 @onready var animSprite = $AnimatedSprite2D
+@onready var chant = get_parent().get_node("CrowdChantSFX")
 @onready var moveTimer = $MoveTimer
 @onready var bufferTimer = $BufferTimer
 @onready var dashPressTimer = $DashPressTimer
@@ -42,6 +50,10 @@ var powerup3
 @onready var jumpSfx = $SFX/JumpSfx
 @onready var blockSfx = $SFX/BlockSfx
 @onready var invincibilitySfx = $SFX/InvincibilitySfx
+@onready var coyoteTimer = $CoyoteTimer
+@onready var jumpBufferTimer = $jumpBufferTimer
+@onready var laserDMGCooldownTimer = $LaserDMGCooldownTimer
+
 
 @export_category("Player attributes")
 @export var playerSpeed : float = 250.0
@@ -54,6 +66,10 @@ var powerup3
 @export var attackCooldownAmount : float = .3
 @export var blockTimeAmount : float = .7
 @export var blockCooldownAmount : float = 3.0
+@export var coyoteTimerAmount : float = 0.10
+@export var jumpBufferTimerAmount : float = 0.15
+
+
 
 @export_category("Attribute power values")
 @export var dashPower : float = 1000.0
@@ -82,6 +98,8 @@ func _ready():
 	attackCooldownTimer.wait_time = attackCooldownAmount
 	blockTimer.wait_time = blockTimeAmount
 	blockCooldownTimer.wait_time = blockCooldownAmount
+	coyoteTimer.wait_time = coyoteTimerAmount
+	jumpBufferTimer.wait_time = jumpBufferTimerAmount
 	
 	#dodanie przypisów klawiszy dla graczy
 	for i in range(0,len(PLAYER_ACTIONS)):
@@ -106,6 +124,7 @@ func set_invicibility(body, state):
 			invincibilitySfx.stop()
 
 
+
 func _physics_process(delta):
 			
 	#grawitacja
@@ -120,10 +139,25 @@ func _physics_process(delta):
 
 			if collision.get_normal().dot(Vector2.UP) > 0.9:
 				var collider = collision.get_collider()
-
-				if "SpikeScene" in collider.name:
-					get_node("HealthManager").health = 0
+				#print(collider)
+				if "SpikeTMLayer" in collider.name:
+					get_node("HealthManager").health -= spikeDMG
+					Jump()
 					pass
+					
+					
+	var health = get_node("HealthManager").health
+	var condition = health < 15 and GameManager.player_count == 2 and GameManager.arePlayersAlive[player_id-1]==true
+
+	if condition and !should_play:
+		chant.play()
+		should_play = true
+
+	elif !condition and should_play:
+		chant.stop()
+		should_play = false
+				
+					
 
 	#cała akcja z graczem jeżeli przynajmniej 2 graczy jest żywych
 	if GameManager.arePlayersAlive[player_id-1]==true:
@@ -208,24 +242,49 @@ func _physics_process(delta):
 
 
 		#aktywacja dash'a
-		if Input.is_action_just_pressed(currentPlayerActions[0]) and GameManager.isGamePlaying==true:
-			bufferTimer.start()
-			if jumps < maxJumps:
-				print("yump")
-				jumpSfx.play()
-				jumps += 1
-				velocity.y = jumpVelocity
+		#if Input.is_action_just_pressed(currentPlayerActions[0]) and GameManager.isGamePlaying==true:
+			#bufferTimer.start()
+			#if jumps < maxJumps:
+				#print("yump")
+				#jumpSfx.play()
+				#jumps += 1
+				#velocity.y = jumpVelocity
 			
 			
-		#resetowanie skoków na buffer jeżeli gracz jest na ziemi
-		if is_on_floor() and GameManager.isGamePlaying==true:
-			jumps = 0	
-			if bufferTimer.time_left>0:
-				jumps += 1
-				jumpSfx.play()
-				velocity.y = jumpVelocity
-				bufferTimer.stop()
-
+		
+		
+		#coyote time
+		if !is_on_floor() and GameManager.isGamePlaying==true:
+			if jumpAviable == true:
+				if coyoteTimer.is_stopped():
+					coyoteTimer.start(coyoteTimerAmount)
+					print("Start")
+		else:
+			jumpAviable = true
+			coyoteTimer.stop()
+		
+		
+		#mechanika oraz bufferowanie skoku
+		if jumpBuffer == true && is_on_floor():
+			Jump()
+			
+		if Input.is_action_just_pressed(currentPlayerActions[0]) && GameManager.isGamePlaying==true:
+			if jumpAviable:
+				Jump()
+			else:
+				jumpBuffer = true
+				jumpBufferTimer.start()
+			#jumps = 0	
+			#if bufferTimer.time_left>0:
+				#jumps += 1
+				#jumpSfx.play()
+				#velocity.y = jumpVelocity
+				#bufferTimer.stop()
+			
+		
+			
+		
+		
 		#zmienne z dash'em i atakowaniem z dash'em
 		dashVelocity = move_toward(dashVelocity, 0, dashPower * delta * 6)
 		attackVelocity = move_toward(attackVelocity, 0, 4000 * delta)
@@ -265,9 +324,18 @@ func _physics_process(delta):
 	else:
 		#moveTimer.stop()
 		animSprite.stop()
+		stopAllSfx()
 		set_collision_layer_value(2,false)
 		set_collision_mask_value(1,false)
 		animSprite.self_modulate=Color(1,1,1,.4)
+		
+func stopAllSfx():
+	dashSfx.stop()
+	attackSfx.stop()
+	walkSfx.stop()
+	jumpSfx.stop()
+	blockSfx.stop()
+	invincibilitySfx.stop()
 
 #zakończenie gry po spadnięciu z mapy
 func _on_death_area_body_entered(body: Node2D) -> void:
@@ -303,3 +371,29 @@ func _on_block_area_body_entered(body):
 		playerAttacking=body.player_id
 		isPlayerInBlockArea=true
 		print(str(body.name)+str(" ")+str(player_id))
+
+func _on_jump_buffer_timer_timeout() -> void:
+	jumpBuffer = false
+	print("hu hun")
+
+func _on_coyote_timer_timeout() -> void:
+	jumpAviable = false
+	print("nuh uh")
+
+
+func Jump():
+	print("jump")
+	jumpSfx.play()
+	velocity.y = jumpVelocity
+	jumpAviable = false
+
+# zadawanie obrażeń przez laser (oraz bomby bo mi sie nie chciało)
+func take_laser_damage(damage):
+	if canLaserDMG == true:
+		get_node("HealthManager").health -= damage
+		canLaserDMG = false
+		laserDMGCooldownTimer.start()
+
+
+func _on_laser_dmg_cooldown_timer_timeout():
+	canLaserDMG = true

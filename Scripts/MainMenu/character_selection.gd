@@ -86,6 +86,7 @@ func checkIfAllReady() -> bool:
 			return false
 			
 func exitMenu():
+	GameManager.currentPlayerKeybinds=[]
 	menuBackSfx.play()
 	animPlayer.play("menuBack")
 	await get_tree().create_timer(0.1).timeout
@@ -99,6 +100,7 @@ func exitMenu():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print(GameManager.currentPlayerKeybinds)
 	if enabled:
 		if len(previewSprites)==0:
 			fillUpArrays()

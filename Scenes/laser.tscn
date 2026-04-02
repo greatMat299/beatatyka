@@ -1,0 +1,34 @@
+[gd_scene format=4 uid="uid://qfl2dek2an0g"]
+
+[ext_resource type="Script" uid="uid://5n208wiwmxs1" path="res://Scripts/laser.gd" id="1_6vqwg"]
+[ext_resource type="Texture2D" uid="uid://c4w3eg06ny6" path="res://Assets/Images/OtherAssets/LaserTileMap.png" id="1_fn5yt"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6vqwg"]
+texture = ExtResource("1_fn5yt")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_g6b45"]
+sources/0 = SubResource("TileSetAtlasSource_6vqwg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vqwg"]
+size = Vector2(458, 14)
+
+[node name="Laser" type="Node2D" unique_id=400737884]
+script = ExtResource("1_6vqwg")
+
+[node name="LaserTMLayer" type="TileMapLayer" parent="." unique_id=1647523085]
+tile_map_data = PackedByteArray("AAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAP//AAAAAAAAAAD/////AAAAAAAAAAD+////AAAAAAAAAAD9////AAAAAAAAAAD8////AAAAAAAAAAD7////AAAAAAAAAAD6////AAAAAAAAAAD5////AAAAAAAAAAD4////AAAAAAAAAAD3////AAAAAAAAAAANAP//AAAAAAAAAAAOAP//AAAAAAAAAAD2////AAAAAAAAAAD1////AAAAAAAAAAD0////AAAAAAAAAADz////AAAAAAAAAADy////AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_g6b45")
+
+[node name="LaserDMGArea2D" type="Area2D" parent="LaserTMLayer" unique_id=1575811371]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserTMLayer/LaserDMGArea2D" unique_id=1863114368]
+position = Vector2(8, -8)
+shape = SubResource("RectangleShape2D_6vqwg")
+
+[connection signal="body_entered" from="LaserTMLayer/LaserDMGArea2D" to="." method="_on_laser_dmg_area_2d_body_entered"]
