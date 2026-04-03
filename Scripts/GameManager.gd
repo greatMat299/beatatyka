@@ -14,7 +14,9 @@ const START_TIMES={
 
 var currentNote=0
 var isGamePlaying=false
+var isExtraMapEnabled=false
 var hasStartSeqFinished=false
+var hasPlayedRound=false
 var platformsList=[]
 var platformPrevList=[]
 var spikeList=[]

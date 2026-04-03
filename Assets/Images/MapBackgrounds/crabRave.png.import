@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iprljto1axmy"
-path="res://.godot/imported/level1.png-79377feafb286d8e77293597df194bcc.ctex"
+uid="uid://cybyryb3pk327"
+path="res://.godot/imported/crabRave.png-fc761498cee326cf80afa604177625b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/MapScreenshots/level1.png"
-dest_files=["res://.godot/imported/level1.png-79377feafb286d8e77293597df194bcc.ctex"]
+source_file="res://Assets/Images/MapBackgrounds/crabRave.png"
+dest_files=["res://.godot/imported/crabRave.png-fc761498cee326cf80afa604177625b4.ctex"]
 
 [params]
 

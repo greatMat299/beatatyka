@@ -9,6 +9,11 @@ extends Control
 @onready var menuBackSfx = $MenuBackSfx
 @onready var menuPickSfx = $MenuPickSfx
 @onready var animPlayer = $AnimationPlayer
+@onready var mainMenuMusic = $MainMenuMusic
+@onready var songContainer = $SongContainer
+@export var mainMenuSongs:Array[AudioStream]
+@export var songArtists:Array[String]
+@export var songTitles:Array[String]
 
 var status
 var scene = "res://Scenes/map1.tscn"
@@ -18,20 +23,54 @@ var isActive=false
 var menuButtons=[]
 var currentSelectIndex = 0
 var hasStarted=false
+var selectedSong=-1
+var rng
+var usedSongs=[-1]
+var isFadeActive=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	call_deferred("_apply_display_mode")
 	call_deferred("_apply_keybinds")
+	
+	selectMusic()
+	
 	await get_tree().process_frame
 	
 	menuButtons.append(get_node("MenuContainer/VBoxContainer/StartButton"))
 	menuButtons.append(get_node("MenuContainer/VBoxContainer/SettingsButton"))
 	menuButtons.append(get_node("MenuContainer/VBoxContainer/QuitButton"))
 	
-	await get_tree().process_frame
-	changeBorderPosition(0)
 	
+	
+func selectMusic():
+	rng = RandomNumberGenerator.new()
+	var newSongIndex=selectedSong
+	if hasStarted==false:
+		newSongIndex=rng.randi_range(0,len(mainMenuSongs)-1)
+		usedSongs.append(newSongIndex)
+	else:
+		while(newSongIndex in usedSongs):
+			newSongIndex=rng.randi_range(0,len(mainMenuSongs)-1)
+		usedSongs.append(newSongIndex)
+	selectedSong=newSongIndex
+	mainMenuMusic.stream = mainMenuSongs[selectedSong]
+	mainMenuMusic.play()
+	
+	
+	
+	songContainer.get_node("Artist").text=songArtists[selectedSong]
+	songContainer.get_node("Title").text=songTitles[selectedSong]
+	
+func showMusicInfo():
+	if isFadeActive==false:
+		isFadeActive=true
+		songContainer.get_node("AnimationPlayer").play("songContainerFadeIn")
+		await get_tree().create_timer(5.0).timeout
+		if songContainer.visible==true:
+			isFadeActive=false
+			songContainer.get_node("AnimationPlayer").play_backwards("songContainerFadeIn")
+
 func _apply_keybinds():
 	var keyLeft
 	var keyRight
@@ -98,8 +137,13 @@ func _process(_delta: float) -> void:
 		animPlayer.play("menuChange")
 		isActive=true
 		hasStarted=true
+		
 		await get_tree().create_timer(0.1).timeout
-		menuContainer.visible=true	
+		menuContainer.visible=true
+		currentSelectIndex=0
+		changeBorderPosition(0)
+		
+		showMusicInfo()
 		
 	if isActive==true:
 		if Input.is_action_just_pressed("ui_down"):
@@ -134,6 +178,8 @@ func changeBorderPosition(index):
 
 
 func _on_start_button_pressed() -> void:
+	print("yay")
+	songContainer.visible=false
 	menuSelectSfx.play()
 	animPlayer.play("menuChange")
 	await get_tree().create_timer(0.1).timeout
@@ -146,6 +192,7 @@ func _on_start_button_pressed() -> void:
 
 func _on_settings_button_pressed() -> void:
 	menuSelectSfx.play()
+	songContainer.visible=false
 	animPlayer.play("menuChange")
 	await get_tree().create_timer(0.1).timeout
 	get_node("SettingsMenu").visible=true
@@ -173,3 +220,9 @@ func _on_menu_button_mouse_exited():
 	if isActive:
 		if selectBorder.visible==true:
 			selectBorder.visible=false
+
+
+func _on_main_menu_music_finished():
+	selectMusic()
+	if isActive:
+		showMusicInfo()

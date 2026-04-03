@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dhaa2cph3j40m"]
 
 [ext_resource type="Script" uid="uid://cuht07dng30u2" path="res://Scripts/powerup_logic.gd" id="1_dkaad"]
-[ext_resource type="Texture2D" uid="uid://dbxdumnujx0mj" path="res://Images/Powerups/heal.png" id="2_f1g1t"]
 [ext_resource type="AudioStream" uid="uid://cnplnsqr48ayc" path="res://Assets/Sound/SFX/healSound.mp3" id="3_f1g1t"]
 [ext_resource type="AudioStream" uid="uid://dgt1cxd0vw062" path="res://Assets/Sound/SFX/gravitySound.mp3" id="4_381t4"]
 [ext_resource type="AudioStream" uid="uid://db0jyaon4m8mw" path="res://Assets/Sound/SFX/invincibilitySound.mp3" id="5_5ydwi"]
@@ -89,7 +88,6 @@ shape = SubResource("RectangleShape2D_og0gp")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=372788865]
 modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-texture = ExtResource("2_f1g1t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1377916670]
 libraries/ = SubResource("AnimationLibrary_og0gp")

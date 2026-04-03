@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://bqo4muxpe8a7q"
+path="res://.godot/imported/oMojRozmarynieWarn.mid-ea19a9edded0a9c4a080e752dc04a7cf.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/oMojRozmarynie/oMojRozmarynieWarn.mid"
+dest_files=["res://.godot/imported/oMojRozmarynieWarn.mid-ea19a9edded0a9c4a080e752dc04a7cf.res"]
+
+[params]
+

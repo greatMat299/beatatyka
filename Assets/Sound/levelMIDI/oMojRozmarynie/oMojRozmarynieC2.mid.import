@@ -1,0 +1,14 @@
+[remap]
+
+importer="com.nlaha.godotmidi"
+type="MidiResource"
+uid="uid://cifg2qnx1jxfl"
+path="res://.godot/imported/oMojRozmarynieC2.mid-1060508f721d6e707c90069a60c8affa.res"
+
+[deps]
+
+source_file="res://Assets/Sound/levelMIDI/oMojRozmarynie/oMojRozmarynieC2.mid"
+dest_files=["res://.godot/imported/oMojRozmarynieC2.mid-1060508f721d6e707c90069a60c8affa.res"]
+
+[params]
+

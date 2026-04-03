@@ -6,12 +6,53 @@
 [ext_resource type="PackedScene" uid="uid://udwpaopb3ae3" path="res://Scenes/MainMenu/keybinds_menu.tscn" id="3_jix8l"]
 [ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
 [ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
+[ext_resource type="FontFile" uid="uid://cdylfyee2of84" path="res://Assets/Fonts/aero_matics/Aero Matics Bold.ttf" id="5_nqd6t"]
 [ext_resource type="PackedScene" uid="uid://c4hfaayvti8bf" path="res://Scenes/loadingScreen.tscn" id="6_0l8wx"]
 [ext_resource type="AudioStream" uid="uid://b76hbj6w3fkej" path="res://Assets/Sound/SFX/menuSelect.mp3" id="7_n5jej"]
 [ext_resource type="AudioStream" uid="uid://b6hwk2fptol7k" path="res://Assets/Sound/SFX/menuBack.mp3" id="8_2r307"]
 [ext_resource type="AudioStream" uid="uid://cb1rcaamngf3q" path="res://Assets/Sound/SFX/menuPick.mp3" id="9_omq0y"]
 [ext_resource type="AudioStream" uid="uid://bipyv4qkekmw2" path="res://Assets/Sound/SFX/menuSwipe.mp3" id="10_agesy"]
 [ext_resource type="PackedScene" uid="uid://bx2rquiwy5n5w" path="res://Scenes/MainMenu/title_card.tscn" id="12_rlg4b"]
+[ext_resource type="AudioStream" uid="uid://do18cmpkrbbo7" path="res://Assets/Sound/levelMusic/mainMenu/Capone_HeyPluto.mp3" id="13_fo6ee"]
+[ext_resource type="AudioStream" uid="uid://cdgwjnqwdip6s" path="res://Assets/Sound/levelMusic/mainMenu/nekosanctuaryUboauboasuki.mp3" id="14_nqd6t"]
+[ext_resource type="AudioStream" uid="uid://luaarxoyc84s" path="res://Assets/Sound/levelMusic/mainMenu/LoseYaAsc.mp3" id="15_43m2q"]
+
+[sub_resource type="Animation" id="Animation_nqd6t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_43m2q"]
+resource_name = "songContainerFadeIn"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xt57n"]
+_data = {
+&"RESET": SubResource("Animation_nqd6t"),
+&"songContainerFadeIn": SubResource("Animation_43m2q")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adu2g"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
@@ -147,16 +188,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jix8l")
+mainMenuSongs = Array[AudioStream]([ExtResource("13_fo6ee"), ExtResource("14_nqd6t"), ExtResource("15_43m2q")])
+songArtists = Array[String](["Hey Pluto!", "nekosanctuary ", "Asc"])
+songTitles = Array[String](["Capone", "Uboauboasuki ", "lose ya"])
+
+[node name="SongContainer" type="Control" parent="." unique_id=249278006]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchor_left = 0.04246875
+anchor_top = 0.83150005
+anchor_right = 0.96121883
+anchor_bottom = 0.9302778
+offset_left = -0.3600006
+offset_top = 0.3199463
+offset_right = 0.6398926
+offset_bottom = 0.19995117
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="Artist" type="Label" parent="SongContainer" unique_id=1156559333]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.90400004
+anchor_right = 0.9990001
+anchor_bottom = 0.257
+offset_left = -0.5220947
+offset_right = -0.53723145
+offset_bottom = -0.017999649
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("5_nqd6t")
+text = "asdasdasdasdas"
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Label" parent="SongContainer" unique_id=1903785576]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.768
+anchor_top = 0.326
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.35272217
+offset_top = -8.123999
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_nqd6t")
+theme_override_font_sizes/font_size = 50
+text = "asdasdasdas"
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SongContainer" unique_id=598131441]
+libraries/ = SubResource("AnimationLibrary_xt57n")
 
 [node name="MenuContainer" type="MarginContainer" parent="." unique_id=174165145]
 visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.59900004
-anchor_right = 0.254
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 49.71997
-offset_right = -49.580017
+offset_top = -294.0
+grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 0
@@ -191,8 +288,8 @@ theme_override_font_sizes/font_size = 48
 text = "WYJDŹ"
 
 [node name="selectBorder" type="Panel" parent="MenuContainer" unique_id=769435911]
-visible = false
 layout_mode = 2
+size_flags_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_adu2g")
 metadata/_edit_use_anchors_ = true
@@ -263,6 +360,9 @@ color = Color(0, 0, 0, 1)
 [node name="TitleCard" parent="." unique_id=1708981528 instance=ExtResource("12_rlg4b")]
 layout_mode = 1
 
+[node name="MainMenuMusic" type="AudioStreamPlayer2D" parent="." unique_id=737157502]
+bus = &"Music"
+
 [connection signal="focus_entered" from="MenuContainer/VBoxContainer/StartButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_focus_entered"]
 [connection signal="mouse_entered" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_entered" binds= [0]]
 [connection signal="mouse_exited" from="MenuContainer/VBoxContainer/StartButton" to="." method="_on_menu_button_mouse_exited"]
@@ -278,3 +378,4 @@ layout_mode = 1
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="MenuContainer/VBoxContainer/StartButton" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="MenuContainer/VBoxContainer/QuitButton" to="MenuContainer/VBoxContainer/QuitButton" method="_on_pressed"]
+[connection signal="finished" from="MainMenuMusic" to="." method="_on_main_menu_music_finished"]

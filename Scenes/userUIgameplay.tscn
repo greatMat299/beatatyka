@@ -4,11 +4,12 @@
 [ext_resource type="Script" uid="uid://dkx362fx2iwuo" path="res://Scripts/ui_gameplay.gd" id="3_4ii71"]
 [ext_resource type="Script" uid="uid://b8l640esogpq3" path="res://Scripts/pause_menu_logic.gd" id="3_7mm0a"]
 [ext_resource type="Shader" uid="uid://d2xvqetcvu2to" path="res://Shaders/blurShader.gdshader" id="3_iafmb"]
-[ext_resource type="Texture2D" uid="uid://d3ylgx60kmxne" path="res://Images/Powerups/gravity.png" id="4_88o7u"]
+[ext_resource type="Texture2D" uid="uid://d3ylgx60kmxne" path="res://Assets/Images/Powerups/gravity.png" id="4_88o7u"]
 [ext_resource type="FontFile" uid="uid://cug85ttjt7nro" path="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf" id="4_egsqa"]
 [ext_resource type="Script" uid="uid://d2hqc78gm1icd" path="res://Scripts/ui_results_container.gd" id="5_88o7u"]
 [ext_resource type="PackedScene" uid="uid://7v8yj0o1np5m" path="res://Scenes/player_container.tscn" id="6_4ii71"]
 [ext_resource type="AudioStream" uid="uid://ovh50a0ek811" path="res://Assets/Sound/SFX/gameFinish.mp3" id="7_4ii71"]
+[ext_resource type="FontFile" uid="uid://cw36b2cfh4ttr" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling Lt It.otf" id="7_88o7u"]
 [ext_resource type="Script" uid="uid://b307itr14xj50" path="res://Scripts/game_over_ui.gd" id="7_ha2xw"]
 [ext_resource type="PackedScene" uid="uid://cmxhxg7kkl32k" path="res://Scenes/beat_catcher.tscn" id="10_riyq3"]
 [ext_resource type="Script" uid="uid://bjqm2g40r5iai" path="res://Scripts/ui_start_game_logic.gd" id="11_cqsqe"]
@@ -294,10 +295,13 @@ text = "CZAS STOP!"
 
 [node name="ResultsContainer" type="VBoxContainer" parent="GameOverContainer" unique_id=656272710]
 visible = false
-layout_mode = 0
-offset_top = 149.0
-offset_right = 1270.0
-offset_bottom = 561.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.20700002
+anchor_right = 1.0
+anchor_bottom = 0.77900004
+offset_top = -0.040008545
+offset_bottom = 0.11999512
 script = ExtResource("5_88o7u")
 playerContainerScene = ExtResource("6_4ii71")
 
@@ -312,6 +316,14 @@ vertical_alignment = 1
 [node name="PlayerStatus" type="HBoxContainer" parent="GameOverContainer/ResultsContainer" unique_id=141720758]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+
+[node name="ReturnToMenuBtn" type="Button" parent="GameOverContainer/ResultsContainer" unique_id=517271668]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("7_88o7u")
+theme_override_font_sizes/font_size = 28
+text = "WRÓĆ DO MENU "
 
 [node name="GameEndSFX" type="AudioStreamPlayer2D" parent="GameOverContainer" unique_id=1226409677]
 stream = ExtResource("7_4ii71")
@@ -545,6 +557,7 @@ text = "GET READY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="GameOverContainer/ResultsContainer/ReturnToMenuBtn" to="GameOverContainer/ResultsContainer" method="_on_return_to_menu_btn_pressed"]
 [connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="resumeGame"]
 [connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_exit_btn_pressed"]
 [connection signal="animation_finished" from="StartGameContainer/AnimationPlayer" to="StartGameContainer" method="_on_animation_player_animation_finished"]

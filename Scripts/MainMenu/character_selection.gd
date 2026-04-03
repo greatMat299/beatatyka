@@ -13,6 +13,7 @@ extends Control
 @onready var menuSwipeSfx = $"../MenuSwipeSfx"
 @onready var animPlayer = $"../AnimationPlayer"
 @onready var randomSelectSfx = $randomSelectSfx
+@onready var mainMenuMusic = $"../MainMenuMusic"
 var previewSprites = []
 var playerLabels = []
 var speedCharLabels = []
@@ -26,6 +27,7 @@ var isGameLaunching=false
 var enabled=false
 var scene = "res://Scenes/map1.tscn"
 var rng
+var fade_music_tween
 
 var index_p1 = 0;
 var index_p2 = 0;
@@ -51,6 +53,22 @@ var characterIcons = [
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
+	
+func fadeInOutMusic(isFading:bool):
+	if isFading:
+		if fade_music_tween:
+			fade_music_tween.kill()
+			fade_music_tween=null
+		
+		fade_music_tween = create_tween()
+		fade_music_tween.tween_property(mainMenuMusic, "volume_db", -20, 0.5)
+	else:
+		if fade_music_tween:
+			fade_music_tween.kill()
+			fade_music_tween=null
+		
+		fade_music_tween = create_tween()
+		fade_music_tween.tween_property(mainMenuMusic, "volume_db", 0, 0.5)
 	
 func fillUpArrays():
 	for i in range(0,4):
@@ -100,7 +118,6 @@ func exitMenu():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(GameManager.currentPlayerKeybinds)
 	if enabled:
 		if len(previewSprites)==0:
 			fillUpArrays()
@@ -184,8 +201,10 @@ func handle_input_p1():
 			if index_p1==len(characterSprites)-1:
 				index_p1 = rng.randi_range(0,len(characterSprites)-2)
 				previewSprites[0].play("random")
+				fadeInOutMusic(true)
 				randomSelectSfx.play()
 				await get_tree().create_timer(.7).timeout
+				fadeInOutMusic(false)
 				update_sprite_preview(1,index_p1)
 			isGameReady = checkIfAllReady()
 			
@@ -225,8 +244,10 @@ func handle_input_p2():
 			if index_p2==len(characterSprites)-1:
 				index_p2 = rng.randi_range(0,len(characterSprites)-2)
 				previewSprites[1].play("random")
+				fadeInOutMusic(true)
 				randomSelectSfx.play()
 				await get_tree().create_timer(.7).timeout
+				fadeInOutMusic(false)
 				update_sprite_preview(2,index_p2)
 			isGameReady = checkIfAllReady()
 		
@@ -265,8 +286,10 @@ func handle_input_p3():
 			if index_p3==len(characterSprites)-1:
 				index_p3 = rng.randi_range(0,len(characterSprites)-2)
 				previewSprites[2].play("random")
+				fadeInOutMusic(true)
 				randomSelectSfx.play()
 				await get_tree().create_timer(.7).timeout
+				fadeInOutMusic(false)
 				update_sprite_preview(3,index_p3)
 			isGameReady = checkIfAllReady()
 		
@@ -305,8 +328,10 @@ func handle_input_p4():
 			if index_p4==len(characterSprites)-1:
 				index_p4 = rng.randi_range(0,len(characterSprites)-2)
 				previewSprites[3].play("random")
+				fadeInOutMusic(true)
 				randomSelectSfx.play()
 				await get_tree().create_timer(.7).timeout
+				fadeInOutMusic(false)
 				update_sprite_preview(4,index_p4)
 			isGameReady = checkIfAllReady()
 

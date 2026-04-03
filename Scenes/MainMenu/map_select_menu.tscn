@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://wyc72sbrsudc" path="res://Scripts/MainMenu/map_select_menu.gd" id="1_6he57"]
 [ext_resource type="Texture2D" uid="uid://602ry78tkmql" path="res://Assets/Images/MapScreenshots/level1.png" id="2_0n7bi"]
 [ext_resource type="Texture2D" uid="uid://1paao5pc1hga" path="res://Assets/Images/SongCovers/crabRave.jpeg" id="3_6lno7"]
-[ext_resource type="Texture2D" uid="uid://cyobbnyvf3hq8" path="res://Images/1767176322606.jpg" id="4_cpwnx"]
 [ext_resource type="AudioStream" uid="uid://cjpe0r033pba" path="res://Assets/Sound/songPreviews/crabRavePreview.mp3" id="4_gkm5v"]
 [ext_resource type="Texture2D" uid="uid://bbhvp2rlacshj" path="res://Assets/Images/MapScreenshots/level2.png" id="4_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bbx7or1yhen2w" path="res://Assets/Images/SongCovers/chromatically.png" id="5_jn2y1"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bea1efnah04o3" path="res://Assets/Images/SongCovers/ghosts_n_stuff.jpg" id="7_cq744"]
 [ext_resource type="Texture2D" uid="uid://cbal6im2t2cd6" path="res://Assets/Images/MapScreenshots/level4.png" id="8_lqrw5"]
 [ext_resource type="Texture2D" uid="uid://cn2rh2td2eagx" path="res://Assets/Images/SongCovers/itsYou.png" id="9_kt11f"]
+[ext_resource type="Texture2D" uid="uid://d0ft8g8ceuiik" path="res://Assets/Images/SongCovers/oMojRozmarynie.png" id="11_lqrw5"]
 [ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="12_cq744"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkm5v"]
@@ -33,6 +33,9 @@ resource_name = "albumCoverShow"
 _data = {
 &"albumCoverShow": SubResource("Animation_6lno7")
 }
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cq744"]
+load_path = "res://.godot/imported/1767176322606.jpg-0b91f5d3c3e6a9989a0b094ada49a834.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn2y1"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
@@ -400,7 +403,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 28
-text = "GHOSTS 'N STUFF"
+text = " GHOSTS 'N STUFF"
 vertical_alignment = 1
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=1465588848]
@@ -429,11 +432,14 @@ anchor_top = 0.56
 anchor_right = 0.97400004
 anchor_bottom = 0.91
 offset_left = 0.115997314
+offset_top = -28.999985
 offset_right = 0.021972656
+offset_bottom = 6.5519867
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("7_cq744")
-expand_mode = 1
+expand_mode = 4
+stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=1297946436]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
@@ -468,7 +474,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(173.5, 100)
-texture = ExtResource("4_cpwnx")
+texture = SubResource("CompressedTexture2D_cq744")
 expand_mode = 1
 stretch_mode = 6
 
@@ -514,12 +520,15 @@ anchor_left = 0.772
 anchor_top = 0.56
 anchor_right = 0.97400004
 anchor_bottom = 0.91
-offset_left = 0.115997314
-offset_right = 0.021972656
+offset_left = 0.243927
+offset_top = -28.999985
+offset_right = 0.14990234
+offset_bottom = 6.5519867
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("9_kt11f")
-expand_mode = 1
+expand_mode = 4
+stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=2089711087]
 libraries/ = SubResource("AnimationLibrary_gkm5v")
@@ -538,6 +547,96 @@ grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "NINAJIRACHI & DAINE"
+
+[node name="SongButton6" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=604046932]
+visible = false
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MapBackground" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=955390993]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 100)
+texture = ExtResource("11_lqrw5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SongNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=331289758]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.68
+anchor_right = 0.651
+anchor_bottom = 0.95500004
+offset_left = -9.344496
+offset_right = 13.283493
+offset_bottom = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "  O MÓJ ROZMARYNIE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=1194549460]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.012
+anchor_top = 0.040000003
+anchor_right = 0.27800003
+anchor_bottom = 0.155
+offset_left = 2.836
+offset_top = 2.999999
+offset_right = 132.534
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.4168997, 0.4168997)
+theme_override_colors/font_color = Color(1, 0.3804735, 0.8284094, 1)
+theme_override_font_sizes/font_size = 40
+text = "JACO"
+
+[node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=237878273]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.772
+anchor_top = 0.56
+anchor_right = 0.97400004
+anchor_bottom = 0.91
+offset_left = 0.115997314
+offset_top = -2.0
+offset_right = 0.021972656
+offset_bottom = -1.7980042
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("11_lqrw5")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=586721913]
+libraries/ = SubResource("AnimationLibrary_gkm5v")
+
+[node name="ArtistLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=1924173895]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020000001
+anchor_top = 0.605
+anchor_right = 0.588
+anchor_bottom = 0.725
+offset_left = 0.059999466
+offset_right = -0.035995483
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "JACEK WAWRZYCZNY"
 
 [node name="selectBorder" type="Panel" parent="MarginContainer" unique_id=96824703]
 custom_minimum_size = Vector2(347, 0)
@@ -587,3 +686,6 @@ libraries/ = SubResource("AnimationLibrary_cq744")
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_entered" binds= [4]]
 [connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_mouse_exited" binds= [4]]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" to="." method="_on_song_button_pressed" binds= [4]]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_mouse_entered" binds= [5]]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_mouse_exited" binds= [5]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" to="." method="_on_song_button_pressed" binds= [5]]

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://bx2rquiwy5n5w"]
 
 [ext_resource type="Script" uid="uid://dvw5l1sva5tk0" path="res://Scripts/MainMenu/title_card.gd" id="1_6cajv"]
-[ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="2_e1pd8"]
+[ext_resource type="Texture2D" uid="uid://chw5rky0xqk4e" path="res://Assets/Images/OtherAssets/beatatykaLogoSmall.png" id="2_fyx8h"]
 [ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="3_fyx8h"]
+[ext_resource type="FontFile" uid="uid://ggli4bd3hm1c" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling El.otf" id="4_e1pd8"]
+[ext_resource type="AudioStream" uid="uid://brmhgbofcedth" path="res://Assets/Sound/SFX/ding.mp3" id="5_fyx8h"]
 
 [node name="TitleCard" type="Control" unique_id=1708981528]
 layout_mode = 3
@@ -15,28 +17,29 @@ script = ExtResource("1_6cajv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=121893943]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -506.5
-offset_top = -69.0
-offset_right = 506.5
-offset_bottom = 69.0
+anchors_preset = -1
+anchor_left = 0.28
+anchor_top = 0.30200002
+anchor_right = 0.72
+anchor_bottom = 0.698
+offset_left = -0.6000061
+offset_top = 0.0599823
+offset_right = 0.5999756
+offset_bottom = -0.05999756
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=2051994794]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=428897903]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("2_e1pd8")
-theme_override_font_sizes/font_size = 96
-text = "BEATATYKA"
+size_flags_vertical = 6
+texture = ExtResource("2_fyx8h")
+stretch_mode = 3
 
 [node name="Label2" type="Label" parent="VBoxContainer" unique_id=1152274741]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 2
 theme_override_fonts/font = ExtResource("3_fyx8h")
 theme_override_font_sizes/font_size = 30
 text = "Naciśnij ENTER"
@@ -54,4 +57,9 @@ offset_top = -23.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "ale sigma"
+theme_override_fonts/font = ExtResource("4_e1pd8")
+text = "konkurs piosenki patriotycznej aktywowany"
+
+[node name="DingSFX" type="AudioStreamPlayer2D" parent="." unique_id=1239699658]
+stream = ExtResource("5_fyx8h")
+bus = &"SFX"

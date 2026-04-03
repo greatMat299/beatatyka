@@ -2,6 +2,7 @@ extends Control
 
 var currentSongPreview
 var fade_tween
+var fade_music_tween
 var zoom_tween
 var currentSongMapIndex=-1
 var maxButtons=0
@@ -18,6 +19,7 @@ var currentKeyboardMapIndex=0
 @onready var menuSelectSfx = $"../MenuSelectSfx"
 @onready var menuBackSfx = $"../MenuBackSfx"
 @onready var menuSwipeSfx = $"../MenuSwipeSfx"
+@onready var mainMenuMusic = $"../MainMenuMusic"
 
 var songPreviews = [
 	preload("res://Assets/Sound/songPreviews/crabRavePreview.mp3"),
@@ -29,17 +31,23 @@ var songPreviews = [
 
 var songMaps = [
 	"res://Scenes/map1.tscn",
-	"res://Scenes/map2.tscn", #tu inna mapa
-	"res://Scenes/map3.tscn", #tu inna mapa
-	"res://Scenes/map4.tscn", #tu inna mapa
-	"res://Scenes/map5.tscn" #tu inna mapa
+	"res://Scenes/map2.tscn",
+	"res://Scenes/map3.tscn",
+	"res://Scenes/map4.tscn",
+	"res://Scenes/map5.tscn"
 ]
 
 func _ready() -> void:
 	maxButtons=len(songMaps)
 
 func _process(_delta):
+	if GameManager.isExtraMapEnabled==true and len(songMaps)==5:
+		songMaps.append("res://Scenes/map5.tscn")
+		songPreviews.append(preload("res://Assets/Sound/songPreviews/o_moj_rozmarynie_preview.mp3"))
+		maxButtons=6
 	if enabled:
+		if GameManager.isExtraMapEnabled==true:
+			$MarginContainer/VBoxContainer/HBoxContainer2/SongButton6.visible=true
 		if len(mapBackgrounds)==0:
 			var hboxNum=0
 			for i in range(0,len(songMaps)):
@@ -57,7 +65,7 @@ func _process(_delta):
 				else:
 					hboxNum=1
 				songButtons.append(get_node("MarginContainer/VBoxContainer/HBoxContainer"+str(hboxNum)+"/SongButton"+str(i+1)))
-				if i==5:
+				if i==len(songMaps):
 					selectBorder.global_position = songButtons[0].global_position
 					selectBorder.size = songButtons[0].size
 					playPreview(0)
@@ -135,8 +143,15 @@ func playPreview(index):
 		fade_tween.kill()
 		fade_tween = null
 		
+	if fade_music_tween:
+		fade_music_tween.kill()
+		fade_music_tween=null
+		
 	zoom_tween = create_tween()
 	zoom_tween.tween_property(mapBackgrounds[index], "scale", Vector2(1.02, 1.02), 0.15)
+	
+	fade_music_tween = create_tween()
+	fade_music_tween.tween_property(mainMenuMusic, "volume_db", -80, 0.5)
 	
 	changeButtonPosition(index)
 	
@@ -149,12 +164,19 @@ func stopPreview(index):
 	if fade_tween:
 		fade_tween.kill()
 		fade_tween=null
+		
+	if fade_music_tween:
+		fade_music_tween.kill()
+		fade_music_tween=null
 			
 	if zoom_tween:
 		zoom_tween.kill()
 		zoom_tween=null
 			
 	#selectBorder.visible=false
+	
+	fade_music_tween = create_tween()
+	fade_music_tween.tween_property(mainMenuMusic, "volume_db", 0, 0.2)
 		
 	zoom_tween = create_tween()
 	zoom_tween.tween_property(mapBackgrounds[index], "scale", Vector2(1, 1), 0.15)
@@ -162,6 +184,8 @@ func stopPreview(index):
 	fade_tween = create_tween()
 	fade_tween.tween_property(songPreviewPlayer, "volume_db", -80, 0.5)
 	fade_tween.tween_callback(songPreviewPlayer.stop)
+	
+	
 
 func loadGameMap(index):
 	loadingScreen.mapPath = songMaps[index]

@@ -14,12 +14,24 @@ var playerHealthsSorted=[]
 var maxHealth=0
 var minHealth=101
 var maxHealthId=-1
+var isExiting=false
+var menuMapPath="res://Scenes/MainMenu/main_menu.tscn"
+var progress=[]
 
 func sort_by_health_desc(a, b):
 	return a>b
 
 func _process(delta):
-	if GameManager.isGamePlaying==false and GameManager.hasStartSeqFinished==true:
+	if isExiting==true:
+		ResourceLoader.load_threaded_request(menuMapPath)
+		var progress=[]
+		ResourceLoader.load_threaded_get_status(menuMapPath,progress)
+		if progress[0]==1:
+			var packedScene = ResourceLoader.load_threaded_get(menuMapPath)
+			get_tree().change_scene_to_packed(packedScene)
+			GameManager.hasPlayedRound=true
+			
+	if GameManager.isGamePlaying==false and GameManager.hasStartSeqFinished==true and isExiting==false:
 		players = get_tree().get_nodes_in_group("player")
 		if maxHealth==0:
 			var i=0
@@ -59,3 +71,7 @@ func _process(delta):
 					get_node("PlayerStatus").get_child(curDeadIndex-1).get_node("VBoxContainer/TextureRect2").texture = trophyImages[maxPlayers-j]
 				var pHealthIndex = playerHealths.find(maxHealth)
 				get_node("PlayerStatus").get_child(pHealthIndex).get_node("VBoxContainer/TextureRect2").texture = trophyImages[0]
+
+
+func _on_return_to_menu_btn_pressed():
+	isExiting=true

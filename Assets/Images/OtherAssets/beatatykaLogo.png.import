@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iprljto1axmy"
-path="res://.godot/imported/level1.png-79377feafb286d8e77293597df194bcc.ctex"
+uid="uid://1kn1rtp031wa"
+path="res://.godot/imported/beatatykaLogo.png-c5b0b0509d8dda276179b8caa8596ae5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/MapScreenshots/level1.png"
-dest_files=["res://.godot/imported/level1.png-79377feafb286d8e77293597df194bcc.ctex"]
+source_file="res://Assets/Images/OtherAssets/beatatykaLogo.png"
+dest_files=["res://.godot/imported/beatatykaLogo.png-c5b0b0509d8dda276179b8caa8596ae5.ctex"]
 
 [params]
 
