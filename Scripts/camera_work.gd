@@ -15,7 +15,6 @@ func addPlayers():
 		
 func _process(_delta):
 	
-	
 	#jeżeli gracz nie jest za nisko to dodaje przybliżenie kamery zależne od pozycji wszystkich graczy
 	if playerCount>0:
 		if players[0].position.y<160:

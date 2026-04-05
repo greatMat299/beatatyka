@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 @onready var resultLabel = $"ResultLabel"
+@onready var animPlayer = $"../AnimationPlayer"
 @export var playerContainerScene : PackedScene
 var trophyImages = [
 	preload("res://Assets/Images/OtherAssets/FirstPlace.png"),
@@ -30,6 +31,7 @@ func _process(delta):
 			var packedScene = ResourceLoader.load_threaded_get(menuMapPath)
 			get_tree().change_scene_to_packed(packedScene)
 			GameManager.hasPlayedRound=true
+			GameManager.resetGameManager()
 			
 	if GameManager.isGamePlaying==false and GameManager.hasStartSeqFinished==true and isExiting==false:
 		players = get_tree().get_nodes_in_group("player")
@@ -74,4 +76,7 @@ func _process(delta):
 
 
 func _on_return_to_menu_btn_pressed():
+	animPlayer.play("levelExit")
+	await get_tree().create_timer(.1).timeout
 	isExiting=true
+	

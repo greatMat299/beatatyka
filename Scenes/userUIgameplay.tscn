@@ -15,7 +15,11 @@
 [ext_resource type="Script" uid="uid://bjqm2g40r5iai" path="res://Scripts/ui_start_game_logic.gd" id="11_cqsqe"]
 [ext_resource type="AudioStream" uid="uid://uik35qlbuqxg" path="res://Assets/Sound/SFX/startSound.mp3" id="12_bl3s2"]
 [ext_resource type="FontFile" uid="uid://ds1cfmjhrm1y8" path="res://Assets/Fonts/digital_disco/DigitalDisco.ttf" id="12_cqsqe"]
+[ext_resource type="FontFile" uid="uid://clip8sj64bxp6" path="res://Assets/Fonts/aero_matics/Aero Matics Italic.ttf" id="13_atmls"]
 [ext_resource type="Texture2D" uid="uid://blmf2qpr182wf" path="res://Assets/Images/drumstickplaceholderwillreplace.png" id="13_cqsqe"]
+[ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="14_4efw7"]
+[ext_resource type="StyleBox" uid="uid://dnxpjco013d8u" path="res://Assets/Styles/normalButtonStyle.tres" id="14_r5oyd"]
+[ext_resource type="StyleBox" uid="uid://bemsbnqo0ilar" path="res://Assets/Styles/highlightedButtonStyle.tres" id="15_r5oyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2xw"]
 shader = ExtResource("3_iafmb")
@@ -58,6 +62,59 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_oc6ra"]
+resource_name = "levelExit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_4ii71"]
@@ -104,12 +161,70 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_88o7u"]
 _data = {
 &"RESET": SubResource("Animation_bl3s2"),
+&"levelExit": SubResource("Animation_oc6ra"),
 &"showEndGame": SubResource("Animation_4ii71")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7mm0a"]
-shader = ExtResource("3_iafmb")
-shader_parameter/blur = 1.3
+[sub_resource type="Animation" id="Animation_r5oyd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_evvkg"]
+resource_name = "levelExit"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oc6ra"]
+_data = {
+&"RESET": SubResource("Animation_r5oyd"),
+&"levelExit": SubResource("Animation_evvkg")
+}
 
 [sub_resource type="Animation" id="Animation_88o7u"]
 length = 0.001
@@ -330,6 +445,17 @@ stream = ExtResource("7_4ii71")
 volume_db = 10.0
 bus = &"SFX"
 
+[node name="ColorRect" type="ColorRect" parent="GameOverContainer" unique_id=422072001]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="GameplayNodes" type="Control" parent="." unique_id=448258597]
 visible = false
 layout_mode = 3
@@ -338,6 +464,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameplayNodes" unique_id=284569628]
+libraries/ = SubResource("AnimationLibrary_oc6ra")
 
 [node name="Players" type="HBoxContainer" parent="GameplayNodes" unique_id=574964973]
 layout_mode = 1
@@ -451,6 +580,11 @@ layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 24
 
+[node name="BeatCatcher" parent="GameplayNodes" unique_id=540349467 instance=ExtResource("10_riyq3")]
+layout_mode = 1
+offset_top = 50.0
+offset_bottom = 50.0
+
 [node name="PauseMenu" type="Control" parent="GameplayNodes" unique_id=10365116]
 process_mode = 3
 visible = false
@@ -462,46 +596,85 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_7mm0a")
 
-[node name="BackgroundFill" type="ColorRect" parent="GameplayNodes/PauseMenu" unique_id=537255738]
-material = SubResource("ShaderMaterial_7mm0a")
+[node name="TextureRect" type="ColorRect" parent="GameplayNodes/PauseMenu" unique_id=952231203]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.9110001
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.079956055
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.53333336, 0.81960785, 0, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenuContainer" type="HBoxContainer" parent="GameplayNodes/PauseMenu/TextureRect" unique_id=948645047]
+texture_filter = 1
+layout_direction = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="PauseMenuContainer" type="VBoxContainer" parent="GameplayNodes/PauseMenu/BackgroundFill" unique_id=1662359046]
-texture_filter = 1
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -51.5
-offset_top = -72.0
-offset_right = 51.5
-offset_bottom = 72.0
-grow_horizontal = 2
-grow_vertical = 2
 alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="ContinueBtn" type="Button" parent="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer" unique_id=351675730]
-custom_minimum_size = Vector2(0, 70)
+[node name="ContinueBtn" type="Button" parent="GameplayNodes/PauseMenu/TextureRect/PauseMenuContainer" unique_id=351675730]
+custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_atmls")
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = ExtResource("14_r5oyd")
+theme_override_styles/hover = ExtResource("15_r5oyd")
+theme_override_styles/focus = ExtResource("15_r5oyd")
 text = "KONTYUNUJ"
 
-[node name="ExitBtn" type="Button" parent="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer" unique_id=284892593]
-custom_minimum_size = Vector2(0, 70)
+[node name="ExitBtn" type="Button" parent="GameplayNodes/PauseMenu/TextureRect/PauseMenuContainer" unique_id=284892593]
+custom_minimum_size = Vector2(270, 0)
 layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("13_atmls")
+theme_override_font_sizes/font_size = 27
+theme_override_styles/normal = ExtResource("14_r5oyd")
+theme_override_styles/hover = ExtResource("15_r5oyd")
+theme_override_styles/focus = ExtResource("15_r5oyd")
 text = "WYJDŹ"
 
-[node name="BeatCatcher" parent="GameplayNodes" unique_id=540349467 instance=ExtResource("10_riyq3")]
+[node name="Label" type="Label" parent="GameplayNodes/PauseMenu" unique_id=507794396]
 layout_mode = 1
-offset_top = 50.0
-offset_bottom = 50.0
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.771
+anchor_right = 0.19500001
+anchor_bottom = 0.89900005
+offset_left = 0.3199997
+offset_top = 3.880005
+offset_right = -33.600006
+offset_bottom = -0.2800293
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("14_4efw7")
+theme_override_font_sizes/font_size = 80
+text = "PAUZA"
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="GameplayNodes" unique_id=1265430287]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="StartGameContainer" type="Control" parent="." unique_id=321453550]
 layout_mode = 3
@@ -553,11 +726,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("12_cqsqe")
 theme_override_font_sizes/font_size = 80
-text = "GET READY"
+text = "GOTOWI?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="GameOverContainer/ResultsContainer/ReturnToMenuBtn" to="GameOverContainer/ResultsContainer" method="_on_return_to_menu_btn_pressed"]
-[connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="resumeGame"]
-[connection signal="pressed" from="GameplayNodes/PauseMenu/BackgroundFill/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_exit_btn_pressed"]
+[connection signal="mouse_entered" from="GameplayNodes/PauseMenu/TextureRect/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="_on_btn_mouse_entered" binds= [0]]
+[connection signal="pressed" from="GameplayNodes/PauseMenu/TextureRect/PauseMenuContainer/ContinueBtn" to="GameplayNodes/PauseMenu" method="resumeGame"]
+[connection signal="mouse_entered" from="GameplayNodes/PauseMenu/TextureRect/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_btn_mouse_entered" binds= [1]]
+[connection signal="pressed" from="GameplayNodes/PauseMenu/TextureRect/PauseMenuContainer/ExitBtn" to="GameplayNodes/PauseMenu" method="_on_exit_btn_pressed"]
 [connection signal="animation_finished" from="StartGameContainer/AnimationPlayer" to="StartGameContainer" method="_on_animation_player_animation_finished"]

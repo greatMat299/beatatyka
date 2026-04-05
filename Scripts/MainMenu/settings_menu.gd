@@ -29,7 +29,7 @@ func _ready() -> void:
 	musicVolume = ConfigFileHandler.config.get_value("Audio", "Music_Volume")
 	sfxVolume = ConfigFileHandler.config.get_value("Audio", "Sfx_Volume")
 	currentDisplay = ConfigFileHandler.config.get_value("Video", "Display")
-	displayModes = ["WINDOW", "BORDERLESS WINDOW", "FULLSCREEN"]
+	displayModes = ["OKNO", "OKNO BEZ RAMEK", "PEŁNY EKRAN"]
 	vsync = ConfigFileHandler.config.get_value("Video","VSync")
 	loadValues()
 	
@@ -141,7 +141,7 @@ func _on_fps_pressed() -> void:
 			button.text = "144"
 		144: 
 			fpsCap = 0
-			button.text = "UNLIMITED"
+			button.text = "BEZ LIMITU"
 		0:
 			fpsCap = 60
 			button.text = "60"
@@ -172,9 +172,9 @@ func loadValues() -> void:
 	
 	get_node("MarginContainer/VBoxContainer/GridContainer/DisplayMode").text = displayModes[currentDisplay]
 	if(vsync): 
-		get_node("MarginContainer/VBoxContainer/GridContainer/VSync").text = "ON"
+		get_node("MarginContainer/VBoxContainer/GridContainer/VSync").text = "WŁĄCZONY"
 	else:
-		get_node("MarginContainer/VBoxContainer/GridContainer/VSync").text = "OFF"
+		get_node("MarginContainer/VBoxContainer/GridContainer/VSync").text = "WYŁĄCZONY"
 
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	await get_tree().process_frame
@@ -198,7 +198,7 @@ func loadValues() -> void:
 
 	var button = get_node("MarginContainer/VBoxContainer/GridContainer/FPS")
 	if fpsCap==0:
-		button.text = "UNLIMITED"
+		button.text = "BEZ LIMITU"
 	else:
 		button.text = str(fpsCap)
 	Engine.max_fps = fpsCap

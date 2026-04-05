@@ -29,6 +29,8 @@ func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	GameManager.choose_new_powerup()
 	
+	GameManager.isGamePlaying==true
+	
 	audioStreamPlayer.play()
 	
 	print(GameManager.currentPlayerKeybinds)
@@ -89,18 +91,19 @@ func _process(_delta):
 		audioStreamPlayer.play()
 	
 func _on_warning_note_played(note,sender):
-	#aktywowanie platform ostrzegawczych
-	if note>=59&&note<=64:
-		modifierTypeW=abs(59-note)
-		call_deferred("_apply_warning_platform", modifierTypeW, sender)
-	#aktywowanie kolców ostrzegawczych
-	elif note>=65 && note<=67:
-		modifierTypeW = abs(65-note)
-		call_deferred("_apply_warning_spike", modifierTypeW, sender)
-	elif note>=68 && note<=69:
-		modifierTypeW = abs(68-note)
-		call_deferred("_apply_warning_bomb", modifierTypeW, sender)
-	#potem będzie deszcz i trap platformy ale nie są zaimplementowane
+	if GameManager.isGamePlaying==true:
+		#aktywowanie platform ostrzegawczych
+		if note>=59&&note<=64:
+			modifierTypeW=abs(59-note)
+			call_deferred("_apply_warning_platform", modifierTypeW, sender)
+		#aktywowanie kolców ostrzegawczych
+		elif note>=65 && note<=67:
+			modifierTypeW = abs(65-note)
+			call_deferred("_apply_warning_spike", modifierTypeW, sender)
+		elif note>=68 && note<=69:
+			modifierTypeW = abs(68-note)
+			call_deferred("_apply_warning_bomb", modifierTypeW, sender)
+		#potem będzie deszcz i trap platformy ale nie są zaimplementowane
 		
 #usunięcie wszystkich aktywnych kolców
 func removeSpikes():
@@ -199,52 +202,53 @@ func set_active_platform(index: int, isWarning: bool, sender = null):
 		currentPlatform = index
 	
 func _on_note_played(note, sender):
-	#if currentWarningPlatform != -1:
-		#GameManager.platformPrevList[currentWarningPlatform].enabled = false
-		#currentWarningPlatform = -1
-	var listLength=len(GameManager.platformsList)
-	print(note)
-	
-	if warningPlatformBySender.has(sender):
-		var idx = warningPlatformBySender[sender]
-		GameManager.platformPrevList[idx].enabled = false
-		warningPlatformBySender.erase(sender)
+	if GameManager.isGamePlaying==true:
+		#if currentWarningPlatform != -1:
+			#GameManager.platformPrevList[currentWarningPlatform].enabled = false
+			#currentWarningPlatform = -1
+		var listLength=len(GameManager.platformsList)
+		print(note)
 		
-	if warningSpikeBySender.has(sender):
-		var idx = warningSpikeBySender[sender]
-		GameManager.spikePrevList[idx].visible = false
-		warningSpikeBySender.erase(sender)
+		if warningPlatformBySender.has(sender):
+			var idx = warningPlatformBySender[sender]
+			GameManager.platformPrevList[idx].enabled = false
+			warningPlatformBySender.erase(sender)
+			
+		if warningSpikeBySender.has(sender):
+			var idx = warningSpikeBySender[sender]
+			GameManager.spikePrevList[idx].visible = false
+			warningSpikeBySender.erase(sender)
+			
+		if warningBombBySender.has(sender):
+			var idx = warningBombBySender[sender]
+			GameManager.bombPrevList[idx].visible = false
+			warningBombBySender.erase(sender)
 		
-	if warningBombBySender.has(sender):
-		var idx = warningBombBySender[sender]
-		GameManager.bombPrevList[idx].visible = false
-		warningBombBySender.erase(sender)
-	
-	#dodatkowe nuty
-	if note==57:
-		GameManager.isGamePlaying=false #koniec gry
-	if note==58:
-		removeSpikes()
-		
-	#normalne nuty
-	if note>=59&&note<=64: #platforma
-		if ground.enabled==false:
-			ground.enabled=true
-		modifierType=note-59
-		set_active_platform(modifierType, false,sender)
-	elif note>=65&&note<=67: #kolce
-		modifierType=abs(65-note)
-		removeSpikes()
-		set_active_spike(modifierType,false,sender)
-	elif note>=68&&note<=69:
-		modifierType=abs(68-note)
-		removeBombs()
-		set_active_bomb(modifierType,false,sender)
-	#elif note>=70&&note<=73: #laser
-		#pass
-	elif note==74: #zmiana ziemii
-		get_node("Ground2").enabled=true
-		ground.enabled = false
+		#dodatkowe nuty
+		if note==57:
+			GameManager.isGamePlaying=false #koniec gry
+		if note==58:
+			removeSpikes()
+			
+		#normalne nuty
+		if note>=59&&note<=64: #platforma
+			if ground.enabled==false:
+				ground.enabled=true
+			modifierType=note-59
+			set_active_platform(modifierType, false,sender)
+		elif note>=65&&note<=67: #kolce
+			modifierType=abs(65-note)
+			removeSpikes()
+			set_active_spike(modifierType,false,sender)
+		elif note>=68&&note<=69:
+			modifierType=abs(68-note)
+			removeBombs()
+			set_active_bomb(modifierType,false,sender)
+		#elif note>=70&&note<=73: #laser
+			#pass
+		elif note==74: #zmiana ziemii
+			get_node("Ground2").enabled=true
+			ground.enabled = false
 
 #wybranie nowego powerupa kiedy skończy się cooldown
 func _on_powerup_cooldown_timeout():

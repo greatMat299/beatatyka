@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://djsuarslw0rmb"]
 
 [ext_resource type="Script" uid="uid://wyc72sbrsudc" path="res://Scripts/MainMenu/map_select_menu.gd" id="1_6he57"]
-[ext_resource type="Texture2D" uid="uid://602ry78tkmql" path="res://Assets/Images/MapScreenshots/level1.png" id="2_0n7bi"]
+[ext_resource type="Texture2D" uid="uid://iprljto1axmy" path="res://Assets/Images/MapScreenshots/level1.png" id="2_0n7bi"]
 [ext_resource type="Texture2D" uid="uid://1paao5pc1hga" path="res://Assets/Images/SongCovers/crabRave.jpeg" id="3_6lno7"]
+[ext_resource type="FontFile" uid="uid://cug85ttjt7nro" path="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf" id="3_pmgc3"]
+[ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="4_2hdnq"]
 [ext_resource type="AudioStream" uid="uid://cjpe0r033pba" path="res://Assets/Sound/songPreviews/crabRavePreview.mp3" id="4_gkm5v"]
 [ext_resource type="Texture2D" uid="uid://bbhvp2rlacshj" path="res://Assets/Images/MapScreenshots/level2.png" id="4_ix5qw"]
 [ext_resource type="Texture2D" uid="uid://bbx7or1yhen2w" path="res://Assets/Images/SongCovers/chromatically.png" id="5_jn2y1"]
@@ -13,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cn2rh2td2eagx" path="res://Assets/Images/SongCovers/itsYou.png" id="9_kt11f"]
 [ext_resource type="Texture2D" uid="uid://d0ft8g8ceuiik" path="res://Assets/Images/SongCovers/oMojRozmarynie.png" id="11_lqrw5"]
 [ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="12_cq744"]
+[ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="15_2hdnq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkm5v"]
 content_margin_left = 4.0
@@ -36,18 +39,6 @@ _data = {
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cq744"]
 load_path = "res://.godot/imported/1767176322606.jpg-0b91f5d3c3e6a9989a0b094ada49a834.ctex"
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn2y1"]
-bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [sub_resource type="Animation" id="Animation_jn2y1"]
 length = 0.001
@@ -147,6 +138,7 @@ offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pmgc3")
 theme_override_font_sizes/font_size = 40
 text = "CRAB RAVE"
 
@@ -162,26 +154,29 @@ offset_right = -0.035995483
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2hdnq")
 theme_override_font_sizes/font_size = 15
 text = "NOISESTORM"
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=254667612]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.012
-anchor_top = 0.040000003
-anchor_right = 0.27800003
-anchor_bottom = 0.155
-offset_left = 2.836
-offset_top = 2.999999
-offset_right = 132.534
-offset_bottom = 35.0
+anchor_left = 0.026
+anchor_top = 0.055
+anchor_right = 0.291
+anchor_bottom = 0.224
+offset_left = -0.09999657
+offset_right = 129.94803
+offset_bottom = 47.199997
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
 theme_override_colors/font_color = Color(0, 0.93781835, 0.030428646, 1)
-theme_override_font_sizes/font_size = 40
-text = "EASY"
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_cq744")
+theme_override_font_sizes/font_size = 60
+text = "ŁATWY"
+vertical_alignment = 1
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton1" unique_id=1307446815]
 custom_minimum_size = Vector2(70, 70)
@@ -231,7 +226,8 @@ offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("3_pmgc3")
+theme_override_font_sizes/font_size = 33
 text = "CHROMATICALLY"
 vertical_alignment = 1
 
@@ -239,19 +235,22 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
-anchor_top = 0.040000003
-anchor_right = 0.27800003
-anchor_bottom = 0.155
-offset_left = 2.836
-offset_top = 2.999999
-offset_right = 132.534
-offset_bottom = 35.0
+anchor_top = 0.055000003
+anchor_right = 0.28500003
+anchor_bottom = 0.224
+offset_left = 2.7879958
+offset_right = 130.02899
+offset_bottom = 47.199997
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
 theme_override_colors/font_color = Color(0.9764706, 0.7294118, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "MEDIUM"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_cq744")
+theme_override_font_sizes/font_size = 60
+text = "ŚREDNI"
+vertical_alignment = 1
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton2" unique_id=740828250]
 layout_mode = 1
@@ -282,6 +281,7 @@ offset_right = -0.035995483
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2hdnq")
 theme_override_font_sizes/font_size = 15
 text = "HAYWYRE"
 
@@ -307,15 +307,16 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
 anchor_top = 0.68
-anchor_right = 0.68700004
+anchor_right = 0.749
 anchor_bottom = 0.95500004
 offset_left = 1.8240228
-offset_right = 21.924011
+offset_right = 0.16201782
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("3_pmgc3")
+theme_override_font_sizes/font_size = 28
 text = "DEAD MAN WALKING"
 vertical_alignment = 1
 
@@ -323,19 +324,21 @@ vertical_alignment = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
-anchor_top = 0.040000003
-anchor_right = 0.27800003
-anchor_bottom = 0.155
-offset_left = 2.836
-offset_top = 2.999999
-offset_right = 132.534
-offset_bottom = 35.0
+anchor_top = 0.055000003
+anchor_right = 0.61700004
+anchor_bottom = 0.224
+offset_left = 1.7880287
+offset_right = 294.433
+offset_bottom = 47.199997
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
 theme_override_colors/font_color = Color(0.7882353, 0.36862746, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "DIFFICULT"
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_cq744")
+theme_override_font_sizes/font_size = 60
+text = "PROBLEMATYCZNY"
+vertical_alignment = 1
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer1/SongButton3" unique_id=1637572679]
 layout_mode = 1
@@ -366,6 +369,7 @@ offset_right = -0.035995483
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2hdnq")
 theme_override_font_sizes/font_size = 15
 text = "GRANT & ELLIS"
 
@@ -394,15 +398,16 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
 anchor_top = 0.68
-anchor_right = 0.651
+anchor_right = 0.72300005
 anchor_bottom = 0.95500004
-offset_left = -4.164
-offset_right = 9.102997
+offset_left = -4.2000036
+offset_right = -0.05001831
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("3_pmgc3")
+theme_override_font_sizes/font_size = 32
 text = " GHOSTS 'N STUFF"
 vertical_alignment = 1
 
@@ -411,18 +416,22 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
 anchor_top = 0.040000003
-anchor_right = 0.27800003
-anchor_bottom = 0.155
-offset_left = 2.836
-offset_top = 2.999999
-offset_right = 132.534
-offset_bottom = 35.0
+anchor_right = 0.23
+anchor_bottom = 0.19900002
+offset_left = 2.664003
+offset_top = 2.999998
+offset_right = 157.706
+offset_bottom = 40.199997
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "HARD"
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_cq744")
+theme_override_font_sizes/font_size = 60
+text = "TRUDNY"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton4" unique_id=729248928]
 layout_mode = 1
@@ -451,11 +460,12 @@ anchor_left = 0.020000001
 anchor_top = 0.605
 anchor_right = 0.588
 anchor_bottom = 0.725
-offset_left = 0.059999466
-offset_right = -0.035995483
+offset_left = -1.5600033
+offset_right = -1.6560059
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2hdnq")
 theme_override_font_sizes/font_size = 15
 text = "DEADMAU5 & ROB SWIRE"
 
@@ -492,26 +502,30 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pmgc3")
 theme_override_font_sizes/font_size = 40
 text = "IT'S YOU"
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=42358440]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.012
-anchor_top = 0.040000003
-anchor_right = 0.27800003
-anchor_bottom = 0.155
-offset_left = 2.836
-offset_top = 2.999999
-offset_right = 132.534
-offset_bottom = 35.0
+anchor_left = 0.020193756
+anchor_top = 0.055000003
+anchor_right = 0.35900003
+anchor_bottom = 0.19900002
+offset_left = -0.08799839
+offset_right = 250.57408
+offset_bottom = 40.199997
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
 theme_override_colors/font_color = Color(0.5924477, 8.904189e-07, 3.85046e-07, 1)
-theme_override_font_sizes/font_size = 40
-text = "HARDER"
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_cq744")
+theme_override_font_sizes/font_size = 60
+text = "TRUDNIEJSZY"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton5" unique_id=608438913]
 layout_mode = 1
@@ -545,6 +559,7 @@ offset_right = -0.035995483
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2hdnq")
 theme_override_font_sizes/font_size = 15
 text = "NINAJIRACHI & DAINE"
 
@@ -571,36 +586,39 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.012
 anchor_top = 0.68
-anchor_right = 0.651
+anchor_right = 0.661
 anchor_bottom = 0.95500004
-offset_left = -9.344496
-offset_right = 13.283493
+offset_left = 2.7880116
+offset_right = -0.010986328
 offset_bottom = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pmgc3")
 theme_override_font_sizes/font_size = 25
-text = "  O MÓJ ROZMARYNIE"
+text = "O MÓJ ROZMARYNIE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DifficultyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=1194549460]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.012
-anchor_top = 0.040000003
-anchor_right = 0.27800003
-anchor_bottom = 0.155
-offset_left = 2.836
-offset_top = 2.999999
-offset_right = 132.534
-offset_bottom = 35.0
+anchor_left = 0.017
+anchor_top = 0.055000003
+anchor_right = 0.282
+anchor_bottom = 0.19900002
+offset_left = 1.0330257
+offset_right = 131.08203
+offset_bottom = 40.199997
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.4168997, 0.4168997)
 theme_override_colors/font_color = Color(1, 0.3804735, 0.8284094, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("12_cq744")
+theme_override_font_sizes/font_size = 60
 text = "JACO"
 
 [node name="AlbumCover" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2/SongButton6" unique_id=237878273]
@@ -635,6 +653,7 @@ offset_right = -0.035995483
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_2hdnq")
 theme_override_font_sizes/font_size = 15
 text = "JACEK WAWRZYCZNY"
 
@@ -644,7 +663,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_jn2y1")
+theme_override_styles/panel = ExtResource("15_2hdnq")
 metadata/_edit_use_anchors_ = true
 
 [node name="SongPreview" type="AudioStreamPlayer2D" parent="." unique_id=1641397160]

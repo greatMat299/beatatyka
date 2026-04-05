@@ -43,6 +43,34 @@ var currentPowerupType = -1
 var rng = RandomNumberGenerator.new()
 var levelBPM = 0
 
+func resetGameManager():
+	hasStartSeqFinished=false
+	platformsList=[]
+	platformPrevList=[]
+	spikeList=[]
+	spikePrevList=[]
+	bombList=[]
+	bombPrevList=[]
+	arePlayersAlive=[]
+	playerAttackStatus=[]
+	currentPlayerKeybinds=[]
+	playerSpriteSheets=[]
+	playerSpriteIcons=[]
+	currentCharacterSpeeds=[]
+	currentCharacterJumpVels=[]
+	currentCharacterAttackPwr=[]
+	currentCharacterDashAttackPwr=[]
+	playersDeadOrder=[]
+	mapName=""
+	player_count=0
+	next_player_id=0
+	isSongOver=false
+	currentPowerupIndex=-1
+	currentPowerupType=-1
+	levelBPM=0
+	
+	
+
 func setCharacterAttribute(charIndex, att):
 	match att:
 		0:

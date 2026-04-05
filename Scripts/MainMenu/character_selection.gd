@@ -340,9 +340,9 @@ func update_sprite_preview(player,index):
 	if index<len(GameManager.CHARACTER_SPEEDS):
 		previewSprites[player-1].sprite_frames = characterSprites[index]
 		previewSprites[player-1].play("idle")
-		speedCharLabels[player-1].text = "Speed: "+str(GameManager.CHARACTER_SPEEDS[index])
-		jumpCharLabels[player-1].text = "Jump: "+str(abs(GameManager.CHARACTER_JUMP_VELS[index]))
-		attackCharLabels[player-1].text = "Attack: "+str(GameManager.CHARACTER_ATTACK_PWRS[index])
+		speedCharLabels[player-1].text = "Szybkość: "+str(GameManager.CHARACTER_SPEEDS[index])
+		jumpCharLabels[player-1].text = "Skok: "+str(abs(GameManager.CHARACTER_JUMP_VELS[index]))
+		attackCharLabels[player-1].text = "Atak: "+str(GameManager.CHARACTER_ATTACK_PWRS[index])
 	elif index==len(GameManager.CHARACTER_SPEEDS):
 		previewSprites[player-1].sprite_frames = characterSprites[index]
 		previewSprites[player-1].play("idle")

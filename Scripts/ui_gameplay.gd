@@ -86,4 +86,5 @@ func _on_beat_attacked(index,type,comboAmount):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	healthChanges()
+	if GameManager.isGamePlaying==true:
+		healthChanges()

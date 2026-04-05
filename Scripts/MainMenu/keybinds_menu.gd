@@ -8,6 +8,7 @@ const settingPath = "res://settings.ini"
 @onready var menuBackSfx = $"../MenuBackSfx"
 @onready var menuPickSfx = $"../MenuPickSfx"
 @onready var animPlayer = $"../AnimationPlayer"
+@onready var saveAlert = $MarginContainer/Container/VBoxContainer/HBoxContainer/SaveAlert
 
 var waitingForInput = false
 var currentKey;
@@ -55,7 +56,9 @@ func _ready() -> void:
 		loadPlayerKeybinds(i,true,false)
 	for i in range(1,5):
 		playerButtons.append(get_node("MarginContainer/Container/HBoxContainer/Player"+str(i)+"Btn"))
-	loadPlayerKeybinds(1, false, true)
+	#loadPlayerKeybinds(1, false, true)
+	currentSelPlayer=1
+	_on_player_btn_pressed(currentSelPlayer)
 	
 	menuButtons.append(leftButtonCurrent.get_parent())
 	menuButtons.append(rightButtonCurrent.get_parent())
@@ -154,6 +157,9 @@ func _on_return_pressed() -> void:
 	isActive=false
 
 func _on_save_pressed() -> void:
+	if saveAlert.visible==true:
+		saveAlert.visible=false
+		
 	for i in range(1,5):
 		var eventAttack := InputEventKey.new()
 		var eventRight := InputEventKey.new()
@@ -185,34 +191,31 @@ func _on_save_pressed() -> void:
 		ConfigFileHandler.config.set_value("Keybinds",str("Jump")+str(i),keyJump[i-1])
 		ConfigFileHandler.config.set_value("Keybinds",str("Basic_Attack")+str(i),basicAttack[i-1])
 		ConfigFileHandler.config.save(settingPath)
-	self.visible=false
-	isActive=false
-	settingsMenu.visible=true
 
 
 func _on_left_button_pressed() -> void:
-	currentAction="left"
+	currentAction="Left"
 	currentLabel = leftButtonCurrent
 	changeBorderPosition(0)
 	await get_tree().process_frame
 	waitingForInput = true
 
 func _on_block_button_pressed() -> void:
-	currentAction="block"
+	currentAction="Block"
 	currentLabel = blockButtonCurrent
 	changeBorderPosition(4)
 	await get_tree().process_frame
 	waitingForInput = true
 
 func _on_right_button_pressed() -> void:
-	currentAction="right"
+	currentAction="Right"
 	currentLabel = rightButtonCurrent
 	changeBorderPosition(1)
 	await get_tree().process_frame
 	waitingForInput = true
 
 func _on_jump_button_pressed() -> void:
-	currentAction="jump"
+	currentAction="Jump"
 	currentLabel = jumpButtonCurrent
 	changeBorderPosition(2)
 	await get_tree().process_frame
@@ -220,7 +223,7 @@ func _on_jump_button_pressed() -> void:
 
 
 func _on_attack_button_pressed() -> void:
-	currentAction="attack"
+	currentAction="Basic_Attack"
 	currentLabel = attackButtonCurrent
 	changeBorderPosition(3)
 	await get_tree().process_frame
@@ -245,23 +248,25 @@ func _input(event: InputEvent) -> void:
 		currentLabel.text = OS.get_keycode_string(currentKey)
 		
 		match currentAction:
-			"left":
+			"Left":
 				keyLeft[currentPlayer] = currentKey
-			"block":
+			"Block":
 				keyBlock[currentPlayer] = currentKey
-			"right":
+			"Right":
 				keyRight[currentPlayer] = currentKey
-			"jump":
+			"Jump":
 				keyJump[currentPlayer] = currentKey
-			"attack":
+			"Basic_Attack":
 				basicAttack[currentPlayer] = currentKey
 				print(currentKey)
-
+		
+		saveAlert.visible=true
 		waitingForInput = false
 		
 
 
 func _on_player_btn_pressed(extra_arg_0):
+	currentSelPlayer=extra_arg_0
 	for i in range(0,4):
 		var style_box_i: StyleBoxFlat = playerButtons[i].get_theme_stylebox("normal")
 		playerColors[i].a=1.0

@@ -1,26 +1,14 @@
 [gd_scene format=3 uid="uid://crinudetly0iu"]
 
 [ext_resource type="Script" uid="uid://o7dtwc4eu77v" path="res://Scripts/MainMenu/settings_menu.gd" id="1_ufg0w"]
-[ext_resource type="FontFile" uid="uid://c3fmapxlqdtuv" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling Rg.otf" id="2_acgr6"]
-[ext_resource type="FontFile" uid="uid://ggli4bd3hm1c" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling El.otf" id="3_1jn0d"]
-[ext_resource type="FontFile" uid="uid://bx734gerj27ny" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling El It.otf" id="4_i4x0w"]
-[ext_resource type="FontFile" uid="uid://cw36b2cfh4ttr" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling Lt It.otf" id="5_fxa22"]
-[ext_resource type="FontFile" uid="uid://ci0sy6g14j3v3" path="res://Assets/Fonts/Galderglynn/Galderglynn Titling Lt.otf" id="6_i4x0w"]
+[ext_resource type="FontFile" uid="uid://id3ftf4d0b3k" path="res://Assets/Fonts/aero_matics/Aero Matics Display Regular.ttf" id="2_cg4s6"]
+[ext_resource type="FontFile" uid="uid://b46oe8133hsu7" path="res://Assets/Fonts/aero_matics/Aero Matics Display Light.ttf" id="3_1jn0d"]
+[ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="4_i4x0w"]
+[ext_resource type="FontFile" uid="uid://cug85ttjt7nro" path="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf" id="5_1jn0d"]
+[ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="6_i4x0w"]
 
 [sub_resource type="Theme" id="Theme_ufg0w"]
 default_font_size = 32
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4tdx"]
-bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 
 [node name="SettingsMenu" type="Control" unique_id=1974948080]
 layout_mode = 3
@@ -54,7 +42,7 @@ columns = 2
 
 [node name="VolumeText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1672535895]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_acgr6")
+theme_override_fonts/font = ExtResource("2_cg4s6")
 theme_override_font_sizes/font_size = 32
 text = "GŁÓWNY DŹWIĘK"
 
@@ -77,7 +65,7 @@ text = "100"
 
 [node name="VolumeText2" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1811793723]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_acgr6")
+theme_override_fonts/font = ExtResource("2_cg4s6")
 theme_override_font_sizes/font_size = 32
 text = "MUZYKA"
 
@@ -100,7 +88,7 @@ text = "100"
 
 [node name="VolumeText3" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=270701650]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_acgr6")
+theme_override_fonts/font = ExtResource("2_cg4s6")
 theme_override_font_sizes/font_size = 32
 text = "EFEKTY DŹWIĘKOWE"
 
@@ -123,27 +111,27 @@ text = "100"
 
 [node name="DisplayModeText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1396261756]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_acgr6")
+theme_override_fonts/font = ExtResource("2_cg4s6")
 text = "WYŚWIETLANIE"
 
 [node name="DisplayMode" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=755708616]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_i4x0w")
-text = "WINDOW"
+text = "OKNO"
 
 [node name="VSyncText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1096303974]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_acgr6")
+theme_override_fonts/font = ExtResource("2_cg4s6")
 text = "V-SYNC"
 
 [node name="VSync" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1038791073]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_i4x0w")
-text = "ON"
+text = "WŁĄCZONY"
 
 [node name="FPSText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1802899836]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_acgr6")
+theme_override_fonts/font = ExtResource("2_cg4s6")
 text = "LIMIT FPS"
 
 [node name="FPS" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=633404761]
@@ -157,7 +145,7 @@ layout_mode = 2
 [node name="Keybinds" type="Button" parent="MarginContainer/VBoxContainer" unique_id=576157263]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_fonts/font = ExtResource("5_fxa22")
+theme_override_fonts/font = ExtResource("4_i4x0w")
 text = "PRZYPISANIA KLAWISZY"
 
 [node name="Return" type="Button" parent="MarginContainer" unique_id=375859853]
@@ -165,7 +153,7 @@ custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("6_i4x0w")
+theme_override_fonts/font = ExtResource("5_1jn0d")
 theme_override_font_sizes/font_size = 30
 text = "WRÓĆ"
 
@@ -173,7 +161,7 @@ text = "WRÓĆ"
 visible = false
 layout_mode = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_e4tdx")
+theme_override_styles/panel = ExtResource("6_i4x0w")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/GridContainer/HFlowContainer/Volume" to="." method="_on_volume_slider_value_changed" binds= ["Master"]]

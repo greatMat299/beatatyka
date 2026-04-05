@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://udwpaopb3ae3"]
 
 [ext_resource type="Script" uid="uid://bpc8qsusr51xp" path="res://Scripts/MainMenu/keybinds_menu.gd" id="1_2im6s"]
+[ext_resource type="FontFile" uid="uid://b6rytw4u216qp" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold.ttf" id="2_1rrhl"]
+[ext_resource type="FontFile" uid="uid://id3ftf4d0b3k" path="res://Assets/Fonts/aero_matics/Aero Matics Display Regular.ttf" id="3_n7hio"]
+[ext_resource type="FontFile" uid="uid://b46oe8133hsu7" path="res://Assets/Fonts/aero_matics/Aero Matics Display Light.ttf" id="4_n7hio"]
+[ext_resource type="FontFile" uid="uid://cug85ttjt7nro" path="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf" id="4_vwpq0"]
+[ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="6_vwpq0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5h3j"]
 content_margin_left = 4.0
@@ -14,6 +19,8 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwpq0"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbay4"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -25,6 +32,8 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwqsp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqsh7"]
 content_margin_left = 4.0
@@ -38,6 +47,8 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngqg3"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rrhl"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -50,17 +61,21 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7hio"]
-bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2666u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8pign"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a7fgk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lls6a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycbbx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cijoo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tafc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tqg76"]
 
 [node name="KeybindsMenu" type="Control" unique_id=192418036]
 layout_mode = 3
@@ -94,29 +109,37 @@ size_flags_vertical = 4
 [node name="Player1Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1643236412]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_1rrhl")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_y5h3j")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vwpq0")
 text = "GRACZ 1"
 
 [node name="Player2Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1416615071]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_1rrhl")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_jbay4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lwqsp")
 text = "GRACZ 2"
 
 [node name="Player3Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=1683570593]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_1rrhl")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_kqsh7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ngqg3")
 text = "GRACZ 3"
 
 [node name="Player4Btn" type="Button" parent="MarginContainer/Container/HBoxContainer" unique_id=170615368]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_1rrhl")
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_1rrhl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2666u")
 text = "GRACZ 4"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Container" unique_id=898542523]
@@ -126,6 +149,7 @@ size_flags_vertical = 4
 [node name="LeftButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1005997891]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8pign")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/LeftButton" unique_id=203646628]
 layout_mode = 1
@@ -138,6 +162,7 @@ grow_vertical = 2
 [node name="LeftText" type="Label" parent="MarginContainer/Container/VBoxContainer/LeftButton/HBoxContainer" unique_id=2073345378]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_n7hio")
 theme_override_font_sizes/font_size = 26
 text = "LEWO"
 
@@ -145,6 +170,7 @@ text = "LEWO"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_n7hio")
 theme_override_font_sizes/font_size = 28
 text = "←"
 horizontal_alignment = 1
@@ -152,6 +178,7 @@ horizontal_alignment = 1
 [node name="RightButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1433995185]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a7fgk")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/RightButton" unique_id=794160716]
 layout_mode = 1
@@ -164,6 +191,7 @@ grow_vertical = 2
 [node name="RightText" type="Label" parent="MarginContainer/Container/VBoxContainer/RightButton/HBoxContainer" unique_id=972503406]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_n7hio")
 theme_override_font_sizes/font_size = 26
 text = "PRAWO"
 
@@ -171,6 +199,7 @@ text = "PRAWO"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_n7hio")
 theme_override_font_sizes/font_size = 28
 text = "→"
 horizontal_alignment = 1
@@ -178,6 +207,7 @@ horizontal_alignment = 1
 [node name="JumpButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=335485505]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lls6a")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/JumpButton" unique_id=894994976]
 layout_mode = 1
@@ -190,6 +220,7 @@ grow_vertical = 2
 [node name="JumpText" type="Label" parent="MarginContainer/Container/VBoxContainer/JumpButton/HBoxContainer" unique_id=1998923712]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_n7hio")
 theme_override_font_sizes/font_size = 26
 text = "SKOK"
 
@@ -197,6 +228,7 @@ text = "SKOK"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_n7hio")
 theme_override_font_sizes/font_size = 28
 text = "SPACE"
 horizontal_alignment = 1
@@ -204,6 +236,7 @@ horizontal_alignment = 1
 [node name="AttackButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1044293508]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ycbbx")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/AttackButton" unique_id=208277120]
 layout_mode = 1
@@ -216,6 +249,7 @@ grow_vertical = 2
 [node name="AttackText" type="Label" parent="MarginContainer/Container/VBoxContainer/AttackButton/HBoxContainer" unique_id=1233916191]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_n7hio")
 theme_override_font_sizes/font_size = 26
 text = "ATAK"
 
@@ -223,6 +257,7 @@ text = "ATAK"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_n7hio")
 theme_override_font_sizes/font_size = 28
 text = "Z"
 horizontal_alignment = 1
@@ -230,6 +265,7 @@ horizontal_alignment = 1
 [node name="BlockButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1935285469]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cijoo")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/BlockButton" unique_id=846861510]
 layout_mode = 1
@@ -242,6 +278,7 @@ grow_vertical = 2
 [node name="BlockText" type="Label" parent="MarginContainer/Container/VBoxContainer/BlockButton/HBoxContainer" unique_id=1867678858]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_n7hio")
 theme_override_font_sizes/font_size = 26
 text = "BLOKOWANIE"
 
@@ -249,6 +286,7 @@ text = "BLOKOWANIE"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("4_n7hio")
 theme_override_font_sizes/font_size = 28
 text = "↓"
 horizontal_alignment = 1
@@ -261,7 +299,9 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_vwpq0")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0tafc")
 text = "WRÓĆ"
 
 [node name="Save" type="Button" parent="MarginContainer/Container/VBoxContainer/HBoxContainer" unique_id=1405651376]
@@ -269,14 +309,25 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_vwpq0")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tqg76")
 text = "ZAPISZ"
+
+[node name="SaveAlert" type="Label" parent="MarginContainer/Container/VBoxContainer/HBoxContainer" unique_id=1812447390]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_colors/font_color = Color(1, 0.5181232, 0.45217043, 1)
+theme_override_fonts/font = ExtResource("4_vwpq0")
+theme_override_font_sizes/font_size = 25
+text = "NIEZAPISANE ZMIANY!"
 
 [node name="selectBorder" type="Panel" parent="." unique_id=1422871602]
 visible = false
 layout_mode = 0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_n7hio")
+theme_override_styles/panel = ExtResource("6_vwpq0")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="MarginContainer/Container/HBoxContainer/Player1Btn" to="." method="_on_player_btn_pressed" binds= [1]]
