@@ -84,7 +84,7 @@ func _ready() -> void:
 	
 func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
-	if GameManager.player_count<=1:
+	if GameManager.player_count<=0:
 		GameManager.isGamePlaying=false
 		
 	if GameManager.hasStartSeqFinished==true and audioStreamPlayer.playing==false:
@@ -202,6 +202,7 @@ func set_active_platform(index: int, isWarning: bool, sender = null):
 		currentPlatform = index
 	
 func _on_note_played(note, sender):
+	print("uwu ",note)
 	if GameManager.isGamePlaying==true:
 		#if currentWarningPlatform != -1:
 			#GameManager.platformPrevList[currentWarningPlatform].enabled = false
@@ -225,9 +226,11 @@ func _on_note_played(note, sender):
 			warningBombBySender.erase(sender)
 		
 		#dodatkowe nuty
-		if note==57:
+		if note==56:
+			removeBombs()
+		elif note==57:
 			GameManager.isGamePlaying=false #koniec gry
-		if note==58:
+		elif note==58:
 			removeSpikes()
 			
 		#normalne nuty
