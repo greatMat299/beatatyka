@@ -11,6 +11,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 5.0
+offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6cajv")
@@ -18,14 +22,14 @@ script = ExtResource("1_6cajv")
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=121893943]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.28
-anchor_top = 0.30200002
-anchor_right = 0.72
-anchor_bottom = 0.698
-offset_left = -0.6000061
-offset_top = 0.0599823
-offset_right = 0.5999756
-offset_bottom = -0.05999756
+anchor_left = 0.22700001
+anchor_top = 0.26000002
+anchor_right = 0.77300006
+anchor_bottom = 0.74
+offset_left = 67.23996
+offset_top = 30.299988
+offset_right = -67.24005
+offset_bottom = -30.299988
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -36,10 +40,14 @@ size_flags_vertical = 6
 texture = ExtResource("2_fyx8h")
 stretch_mode = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer" unique_id=1152274741]
+[node name="StartLabel" type="Label" parent="VBoxContainer" unique_id=1152274741]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 1
 theme_override_fonts/font = ExtResource("3_fyx8h")
 theme_override_font_sizes/font_size = 30
 text = "Naciśnij ENTER"
@@ -63,3 +71,6 @@ text = "konkurs piosenki patriotycznej aktywowany"
 [node name="DingSFX" type="AudioStreamPlayer2D" parent="." unique_id=1239699658]
 stream = ExtResource("5_fyx8h")
 bus = &"SFX"
+
+[connection signal="mouse_entered" from="VBoxContainer" to="." method="_on_v_box_container_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer" to="." method="_on_v_box_container_mouse_exited"]

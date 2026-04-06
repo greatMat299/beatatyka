@@ -2,6 +2,9 @@ extends VBoxContainer
 
 @onready var resultLabel = $"ResultLabel"
 @onready var animPlayer = $"../AnimationPlayer"
+@onready var returnBtn = $ReturnToMenuBtn
+@onready var normalStyleBox = load("res://Assets/Styles/normalButtonStyle.tres")
+@onready var highlightedStyleBox = load("res://Assets/Styles/highlightedButtonStyle.tres")
 @export var playerContainerScene : PackedScene
 var trophyImages = [
 	preload("res://Assets/Images/OtherAssets/FirstPlace.png"),
@@ -80,3 +83,13 @@ func _on_return_to_menu_btn_pressed():
 	await get_tree().create_timer(.1).timeout
 	isExiting=true
 	
+
+
+func _on_return_to_menu_btn_mouse_exited():
+	returnBtn.add_theme_color_override("font_color", Color.WHITE)
+	returnBtn.add_theme_stylebox_override("normal", normalStyleBox)
+
+
+func _on_return_to_menu_btn_mouse_entered():
+	returnBtn.add_theme_color_override("font_color", Color.BLACK)
+	returnBtn.add_theme_stylebox_override("normal", highlightedStyleBox)

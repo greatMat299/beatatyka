@@ -5,7 +5,9 @@
 [ext_resource type="FontFile" uid="uid://b46oe8133hsu7" path="res://Assets/Fonts/aero_matics/Aero Matics Display Light.ttf" id="3_1jn0d"]
 [ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="4_i4x0w"]
 [ext_resource type="FontFile" uid="uid://cug85ttjt7nro" path="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf" id="5_1jn0d"]
+[ext_resource type="StyleBox" uid="uid://dnxpjco013d8u" path="res://Assets/Styles/normalButtonStyle.tres" id="5_h5fes"]
 [ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="6_i4x0w"]
+[ext_resource type="StyleBox" uid="uid://bemsbnqo0ilar" path="res://Assets/Styles/highlightedButtonStyle.tres" id="6_l8sra"]
 
 [sub_resource type="Theme" id="Theme_ufg0w"]
 default_font_size = 32
@@ -116,7 +118,11 @@ text = "WYŚWIETLANIE"
 
 [node name="DisplayMode" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=755708616]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_i4x0w")
+theme_override_styles/normal = ExtResource("5_h5fes")
+theme_override_styles/hover = ExtResource("6_l8sra")
 text = "OKNO"
 
 [node name="VSyncText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1096303974]
@@ -126,7 +132,11 @@ text = "V-SYNC"
 
 [node name="VSync" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1038791073]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_i4x0w")
+theme_override_styles/normal = ExtResource("5_h5fes")
+theme_override_styles/hover = ExtResource("6_l8sra")
 text = "WŁĄCZONY"
 
 [node name="FPSText" type="Label" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1802899836]
@@ -136,7 +146,11 @@ text = "LIMIT FPS"
 
 [node name="FPS" type="Button" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=633404761]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_i4x0w")
+theme_override_styles/normal = ExtResource("5_h5fes")
+theme_override_styles/hover = ExtResource("6_l8sra")
 text = "60"
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer/GridContainer" unique_id=1086689804]
@@ -145,7 +159,11 @@ layout_mode = 2
 [node name="Keybinds" type="Button" parent="MarginContainer/VBoxContainer" unique_id=576157263]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_i4x0w")
+theme_override_styles/normal = ExtResource("5_h5fes")
+theme_override_styles/hover = ExtResource("6_l8sra")
 text = "PRZYPISANIA KLAWISZY"
 
 [node name="Return" type="Button" parent="MarginContainer" unique_id=375859853]
@@ -153,8 +171,12 @@ custom_minimum_size = Vector2(150, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_1jn0d")
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("5_h5fes")
+theme_override_styles/hover = ExtResource("6_l8sra")
 text = "WRÓĆ"
 
 [node name="selectBorder" type="Panel" parent="." unique_id=1909745576]

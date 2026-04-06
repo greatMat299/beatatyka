@@ -14,6 +14,8 @@ var waitingForInput = false
 var currentKey;
 var currentLabel;
 var currentSelPlayer=0
+@export var normalStyles:Array[StyleBox]=[]
+@export var highlightedStyles:Array[StyleBox]=[]
 
 @onready var leftButtonCurrent = null
 @onready var jumpButtonCurrent = null
@@ -60,11 +62,11 @@ func _ready() -> void:
 	currentSelPlayer=1
 	_on_player_btn_pressed(currentSelPlayer)
 	
-	menuButtons.append(leftButtonCurrent.get_parent())
-	menuButtons.append(rightButtonCurrent.get_parent())
-	menuButtons.append(jumpButtonCurrent.get_parent())
-	menuButtons.append(attackButtonCurrent.get_parent())
-	menuButtons.append(blockButtonCurrent.get_parent())
+	menuButtons.append(leftButtonCurrent.get_parent().get_parent())
+	menuButtons.append(rightButtonCurrent.get_parent().get_parent())
+	menuButtons.append(jumpButtonCurrent.get_parent().get_parent())
+	menuButtons.append(attackButtonCurrent.get_parent().get_parent())
+	menuButtons.append(blockButtonCurrent.get_parent().get_parent())
 	menuButtons.append(returnButton)
 	menuButtons.append(saveButton)
 
@@ -88,7 +90,6 @@ func _process(_delta):
 	if visible==true and isActive==false:
 		isActive=true
 		await get_tree().process_frame
-		changeBorderPosition(currentSelectIndex)
 	elif visible==false:
 		isActive=false
 		
@@ -97,25 +98,25 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ui_down"):
 			if currentSelectIndex>-1 and currentSelectIndex<5:
 				currentSelectIndex+=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"down")
 				
 		if Input.is_action_just_pressed("ui_up"):
 			if currentSelectIndex==6:
 				currentSelectIndex-=2
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"up")
 			elif currentSelectIndex>0 and currentSelectIndex<6:
 				currentSelectIndex-=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"up")
 				
 		if Input.is_action_just_pressed("ui_right"):
 			if currentSelectIndex==5:
 				currentSelectIndex+=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"down")
 				
 		if Input.is_action_just_pressed("ui_left"):
 			if currentSelectIndex==6:
 				currentSelectIndex-=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"up")
 				
 		if Input.is_action_just_pressed("ui_cancel"):
 			_on_return_pressed()
@@ -139,12 +140,82 @@ func _process(_delta):
 				6:
 					_on_save_pressed()
 					
+func changePanelTextColor(index,dir):
+	if index>4 and index<7:
+		if dir=="up":
+			menuButtons[index].add_theme_color_override("font_color", Color.BLACK)
+			if index<6:
+				menuButtons[index+1].add_theme_color_override("font_color", Color.WHITE)
+		elif dir=="down":
+			menuButtons[index].add_theme_color_override("font_color", Color.BLACK)
+			if index>0:
+				if index!=5:
+					menuButtons[index-1].add_theme_color_override("font_color", Color.WHITE)
+				else:
+					menuButtons[index-1].get_node("HBoxContainer").get_child(0).add_theme_color_override("font_color", Color.WHITE)
+					menuButtons[index-1].get_node("HBoxContainer").get_child(1).add_theme_color_override("font_color", Color.WHITE)
+	else:
+		for i in range(0,2):
+			if dir=="up":
+				menuButtons[index].get_node("HBoxContainer").get_child(i).add_theme_color_override("font_color", Color.BLACK)
+				if index>=0 and index<4:
+					menuButtons[index+1].get_node("HBoxContainer").get_child(i).add_theme_color_override("font_color", Color.WHITE)
+				if index==4:
+					menuButtons[index+1].add_theme_color_override("font_color", Color.WHITE)
+					menuButtons[index+2].add_theme_color_override("font_color", Color.WHITE)
+				if index==5:
+					menuButtons[index+1].add_theme_color_override("font_color", Color.WHITE)
 
-func changeBorderPosition(index):
+			elif dir=="down":
+				menuButtons[index].get_node("HBoxContainer").get_child(i).add_theme_color_override("font_color", Color.BLACK)
+				if index>0:
+					menuButtons[index-1].get_node("HBoxContainer").get_child(i).add_theme_color_override("font_color", Color.WHITE)
+			elif dir=="hover":
+				for j in range(0, len(menuButtons)):
+					var container = menuButtons[j].get_node_or_null("HBoxContainer")
+					if container:
+						for child in container.get_children():
+							if child is Label or child is Button:
+								if j == index:
+									child.add_theme_color_override("font_color", Color.BLACK)
+								else:
+									child.add_theme_color_override("font_color", Color.WHITE)
+					else:
+						if j == index:
+							menuButtons[j].add_theme_color_override("font_color", Color.BLACK)
+						else:
+							menuButtons[j].add_theme_color_override("font_color", Color.WHITE)
+			elif dir=="remove":
+				for j in range(0, len(menuButtons)):
+					menuButtons[j].get_node("HBoxContainer").get_child(i).add_theme_color_override("font_color", Color.WHITE)
+				
+func changeBorderPosition(index,dir):
 	menuPickSfx.play()
-	selectBorder.set_deferred("global_position", menuButtons[index].global_position)
-	selectBorder.set_deferred("size", menuButtons[index].size)
-	selectBorder.visible=true
+	if len(menuButtons)>0:
+		if dir=="up":
+			menuButtons[index].add_theme_stylebox_override("normal", highlightedStyles[index])
+			changePanelTextColor(index,"up")
+			menuButtons[index+1].add_theme_stylebox_override("normal", normalStyles[index+1])			
+			
+			#usuwamy na wszelki wypadek żeby w przypadku dolnych przycisków nie było obu podświetlonych
+			if index<len(menuButtons)-2:
+				menuButtons[index+2].add_theme_stylebox_override("normal", normalStyles[index+2])
+		elif dir=="down":
+			menuButtons[index].add_theme_stylebox_override("normal", highlightedStyles[index])
+			changePanelTextColor(index,"down")
+			if index>0:
+				menuButtons[index-1].add_theme_stylebox_override("normal", normalStyles[index-1])
+		elif dir=="hover":
+			for i in range(0,len(menuButtons)):
+				if i!=index:
+					menuButtons[i].add_theme_stylebox_override("normal", normalStyles[index])
+					changePanelTextColor(index,"hover")
+				else:
+					menuButtons[i].add_theme_stylebox_override("normal", highlightedStyles[index])
+		elif dir=="remove":
+			for i in range(0,len(menuButtons)):
+				menuButtons[i].add_theme_stylebox_override("normal", normalStyles[index])
+				changePanelTextColor(index,"remove")
 
 
 func _on_return_pressed() -> void:
@@ -196,28 +267,28 @@ func _on_save_pressed() -> void:
 func _on_left_button_pressed() -> void:
 	currentAction="Left"
 	currentLabel = leftButtonCurrent
-	changeBorderPosition(0)
+	changeBorderPosition(0,"hover")
 	await get_tree().process_frame
 	waitingForInput = true
 
 func _on_block_button_pressed() -> void:
 	currentAction="Block"
 	currentLabel = blockButtonCurrent
-	changeBorderPosition(4)
+	changeBorderPosition(4,"hover")
 	await get_tree().process_frame
 	waitingForInput = true
 
 func _on_right_button_pressed() -> void:
 	currentAction="Right"
 	currentLabel = rightButtonCurrent
-	changeBorderPosition(1)
+	changeBorderPosition(1,"hover")
 	await get_tree().process_frame
 	waitingForInput = true
 
 func _on_jump_button_pressed() -> void:
 	currentAction="Jump"
 	currentLabel = jumpButtonCurrent
-	changeBorderPosition(2)
+	changeBorderPosition(2,"hover")
 	await get_tree().process_frame
 	waitingForInput = true
 
@@ -225,7 +296,7 @@ func _on_jump_button_pressed() -> void:
 func _on_attack_button_pressed() -> void:
 	currentAction="Basic_Attack"
 	currentLabel = attackButtonCurrent
-	changeBorderPosition(3)
+	changeBorderPosition(3,"hover")
 	await get_tree().process_frame
 	waitingForInput = true
 
@@ -287,4 +358,4 @@ func _on_button_mouse_entered(extra_arg_0):
 			selectBorder.visible=true
 		if extra_arg_0>=0 and extra_arg_0<=4:
 			currentSelectIndex=extra_arg_0
-			changeBorderPosition(extra_arg_0)
+			changeBorderPosition(extra_arg_0,"hover")

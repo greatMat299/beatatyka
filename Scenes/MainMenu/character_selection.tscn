@@ -7,13 +7,24 @@
 [ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="2_hhaln"]
 [ext_resource type="AudioStream" uid="uid://dqxxkmfpweh50" path="res://Assets/Sound/SFX/randomSelect.mp3" id="5_f8l4s"]
 [ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="5_te3kb"]
+[ext_resource type="StyleBox" uid="uid://dnxpjco013d8u" path="res://Assets/Styles/normalButtonStyle.tres" id="7_mdrdw"]
+[ext_resource type="StyleBox" uid="uid://bemsbnqo0ilar" path="res://Assets/Styles/highlightedButtonStyle.tres" id="8_gooup"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te3kb"]
+bg_color = Color(1, 1, 1, 0.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6s0g4"]
+bg_color = Color(1, 1, 1, 0.2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdrdw"]
+bg_color = Color(0.75686276, 0.5686275, 0, 0.29411766)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdkri"]
 bg_color = Color(0.078431375, 0.49019608, 0.8392157, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.6745098, 0.047058824, 0.09019608, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -22,10 +33,10 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_235bc"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0, 0.45886308, 0.756995, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -34,10 +45,10 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fm6ub"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(1.9492954e-06, 0.52869636, 0.32334274, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -46,10 +57,10 @@ corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nbr6"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
 border_color = Color(0.70693237, 0.5040673, 0, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
@@ -89,7 +100,7 @@ offset_left = 54.829987
 offset_right = -62.450073
 offset_bottom = -19.64
 grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0.6955032, 0.6955031, 0.6955031, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
 theme_override_fonts/font = ExtResource("2_hhaln")
 theme_override_font_sizes/font_size = 60
@@ -110,7 +121,7 @@ offset_right = 0.5199585
 offset_bottom = -0.20000458
 grow_horizontal = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.7121294, 0.7121294, 0.71212935, 1)
+theme_override_colors/font_color = Color(0.92535293, 0.9253528, 0.9253529, 1)
 theme_override_fonts/font = ExtResource("2_f8l4s")
 theme_override_font_sizes/font_size = 24
 text = "2 GRACZY WYMAGANYCH"
@@ -133,6 +144,7 @@ metadata/_edit_use_anchors_ = true
 custom_minimum_size = Vector2(180, 200)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_te3kb")
 icon_alignment = 1
 expand_icon = true
 
@@ -140,6 +152,7 @@ expand_icon = true
 custom_minimum_size = Vector2(180, 200)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6s0g4")
 icon_alignment = 1
 expand_icon = true
 
@@ -147,6 +160,7 @@ expand_icon = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6s0g4")
 icon_alignment = 1
 expand_icon = true
 
@@ -154,6 +168,7 @@ expand_icon = true
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_6s0g4")
 icon_alignment = 1
 expand_icon = true
 
@@ -161,6 +176,7 @@ expand_icon = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_mdrdw")
 icon = ExtResource("2_e4kuv")
 autowrap_trim_flags = 0
 icon_alignment = 1
@@ -183,6 +199,7 @@ metadata/_edit_use_anchors_ = true
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_f8l4s")
 text = "PLAYER 1 IS CHOOSING"
 horizontal_alignment = 1
@@ -192,6 +209,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 0.49019608)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49019608)
 theme_override_fonts/font = ExtResource("2_f8l4s")
 text = "PLAYER 2 - PRESS U"
 horizontal_alignment = 1
@@ -201,6 +219,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 0.49019608)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49019608)
 theme_override_fonts/font = ExtResource("2_f8l4s")
 text = "PLAYER 3 - PRESS ["
 horizontal_alignment = 1
@@ -210,6 +229,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 1, 1, 0.49019608)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49019608)
 theme_override_fonts/font = ExtResource("2_f8l4s")
 text = "PLAYER 4 - PRESS RIGHT CONTROL"
 horizontal_alignment = 1
@@ -566,8 +586,12 @@ offset_left = -0.40000153
 offset_top = -0.2800007
 offset_right = -0.19000244
 offset_bottom = 0.040000916
-theme_override_fonts/font = ExtResource("2_f8l4s")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_te3kb")
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("7_mdrdw")
+theme_override_styles/hover = ExtResource("8_gooup")
 text = "WRÓĆ"
 metadata/_edit_use_anchors_ = true
 

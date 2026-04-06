@@ -6,17 +6,25 @@
 [ext_resource type="PackedScene" uid="uid://udwpaopb3ae3" path="res://Scenes/MainMenu/keybinds_menu.tscn" id="3_jix8l"]
 [ext_resource type="PackedScene" uid="uid://djsuarslw0rmb" path="res://Scenes/MainMenu/map_select_menu.tscn" id="4_0qgbs"]
 [ext_resource type="PackedScene" uid="uid://13ucrs8ylqr2" path="res://Scenes/MainMenu/character_selection.tscn" id="5_adu2g"]
+[ext_resource type="Texture2D" uid="uid://c4hfu7s0oiwsp" path="res://Assets/Images/OtherAssets/mainMenuBgTemp.png" id="5_n0kcp"]
 [ext_resource type="FontFile" uid="uid://cdylfyee2of84" path="res://Assets/Fonts/aero_matics/Aero Matics Bold.ttf" id="5_nqd6t"]
 [ext_resource type="PackedScene" uid="uid://c4hfaayvti8bf" path="res://Scenes/loadingScreen.tscn" id="6_0l8wx"]
+[ext_resource type="Shader" uid="uid://d2xvqetcvu2to" path="res://Shaders/blurShader.gdshader" id="6_37xt4"]
 [ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="7_43m2q"]
 [ext_resource type="AudioStream" uid="uid://b76hbj6w3fkej" path="res://Assets/Sound/SFX/menuSelect.mp3" id="7_n5jej"]
+[ext_resource type="StyleBox" uid="uid://dnxpjco013d8u" path="res://Assets/Styles/normalButtonStyle.tres" id="7_os7au"]
 [ext_resource type="AudioStream" uid="uid://b6hwk2fptol7k" path="res://Assets/Sound/SFX/menuBack.mp3" id="8_2r307"]
+[ext_resource type="StyleBox" uid="uid://bemsbnqo0ilar" path="res://Assets/Styles/highlightedButtonStyle.tres" id="8_n0kcp"]
 [ext_resource type="AudioStream" uid="uid://cb1rcaamngf3q" path="res://Assets/Sound/SFX/menuPick.mp3" id="9_omq0y"]
 [ext_resource type="AudioStream" uid="uid://bipyv4qkekmw2" path="res://Assets/Sound/SFX/menuSwipe.mp3" id="10_agesy"]
 [ext_resource type="PackedScene" uid="uid://bx2rquiwy5n5w" path="res://Scenes/MainMenu/title_card.tscn" id="12_rlg4b"]
 [ext_resource type="AudioStream" uid="uid://do18cmpkrbbo7" path="res://Assets/Sound/levelMusic/mainMenu/Capone_HeyPluto.mp3" id="13_fo6ee"]
 [ext_resource type="AudioStream" uid="uid://cdgwjnqwdip6s" path="res://Assets/Sound/levelMusic/mainMenu/nekosanctuaryUboauboasuki.mp3" id="14_nqd6t"]
 [ext_resource type="AudioStream" uid="uid://luaarxoyc84s" path="res://Assets/Sound/levelMusic/mainMenu/LoseYaAsc.mp3" id="15_43m2q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdh17"]
+shader = ExtResource("6_37xt4")
+shader_parameter/blur = 2.0
 
 [sub_resource type="Animation" id="Animation_nqd6t"]
 length = 0.001
@@ -181,6 +189,25 @@ mainMenuSongs = Array[AudioStream]([ExtResource("13_fo6ee"), ExtResource("14_nqd
 songArtists = Array[String](["Hey Pluto!", "nekosanctuary ", "Asc"])
 songTitles = Array[String](["Capone", "Uboauboasuki ", "lose ya"])
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2034867235]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_n0kcp")
+
+[node name="BlurFill" type="ColorRect" parent="." unique_id=165206393]
+visible = false
+material = SubResource("ShaderMaterial_mdh17")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="SongContainer" type="Control" parent="." unique_id=249278006]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -207,6 +234,7 @@ offset_left = -0.5220947
 offset_right = -0.53723145
 offset_bottom = -0.017999649
 grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_nqd6t")
 text = "asdasdasdasdas"
 horizontal_alignment = 2
@@ -224,6 +252,7 @@ offset_left = -0.35272217
 offset_top = -8.123999
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_nqd6t")
 theme_override_font_sizes/font_size = 50
 text = "asdasdasdas"
@@ -257,23 +286,36 @@ theme_override_constants/separation = 7
 [node name="StartButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=145053464]
 custom_minimum_size = Vector2(200, 90)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_rlg4b")
 theme_override_font_sizes/font_size = 52
+theme_override_styles/normal = ExtResource("7_os7au")
+theme_override_styles/hover = ExtResource("8_n0kcp")
 action_mode = 0
 text = "GRAJ"
 
 [node name="SettingsButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=1461354496]
 custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_rlg4b")
 theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("7_os7au")
+theme_override_styles/hover = ExtResource("8_n0kcp")
 text = "USTAWIENIA"
 
 [node name="QuitButton" type="Button" parent="MenuContainer/VBoxContainer" unique_id=2017831119]
 custom_minimum_size = Vector2(200, 70)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_rlg4b")
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("7_os7au")
+theme_override_styles/hover = ExtResource("8_n0kcp")
 text = "WYJDŹ"
 
 [node name="selectBorder" type="Panel" parent="MenuContainer" unique_id=769435911]

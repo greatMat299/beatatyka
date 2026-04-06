@@ -11,10 +11,13 @@ extends Control
 @onready var animPlayer = $AnimationPlayer
 @onready var mainMenuMusic = $MainMenuMusic
 @onready var songContainer = $SongContainer
+@onready var blurFill = $BlurFill
 @export var mainMenuSongs:Array[AudioStream]
 @export var songArtists:Array[String]
 @export var songTitles:Array[String]
 
+var normalStyleBox = load("res://Assets/Styles/normalButtonStyle.tres")
+var highlightStyleBox = load("res://Assets/Styles/highlightedButtonStyle.tres")
 var status
 var scene = "res://Scenes/map1.tscn"
 var scene_loaded=false
@@ -25,7 +28,7 @@ var currentSelectIndex = 0
 var hasStarted=false
 var selectedSong=-1
 var rng
-var usedSongs=[-1]
+var usedSongs=[]
 var isFadeActive=false
 
 # Called when the node enters the scene tree for the first time.
@@ -46,13 +49,16 @@ func _ready() -> void:
 func selectMusic():
 	rng = RandomNumberGenerator.new()
 	var newSongIndex=selectedSong
-	if hasStarted==false:
+	if hasStarted==false or len(usedSongs)==len(mainMenuSongs):
+		if len(usedSongs)==len(mainMenuSongs):
+			usedSongs=[]
 		newSongIndex=rng.randi_range(0,len(mainMenuSongs)-1)
 		usedSongs.append(newSongIndex)
 	else:
 		while(newSongIndex in usedSongs):
 			newSongIndex=rng.randi_range(0,len(mainMenuSongs)-1)
 		usedSongs.append(newSongIndex)
+	print(usedSongs)
 	selectedSong=newSongIndex
 	mainMenuMusic.stream = mainMenuSongs[selectedSong]
 	mainMenuMusic.play()
@@ -141,20 +147,21 @@ func _process(_delta: float) -> void:
 		await get_tree().create_timer(0.1).timeout
 		menuContainer.visible=true
 		currentSelectIndex=0
-		changeBorderPosition(0)
 		
 		showMusicInfo()
 		
 	if isActive==true:
+		if blurFill.visible==true:
+			blurFill.visible=false
 		if Input.is_action_just_pressed("ui_down"):
 			if currentSelectIndex>-1 and currentSelectIndex<2:
 				currentSelectIndex+=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"down")
 				
 		if Input.is_action_just_pressed("ui_up"):
 			if currentSelectIndex>0 and currentSelectIndex<3:
 				currentSelectIndex-=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"up")
 			
 		if Input.is_action_just_pressed("ui_accept"):
 			print("oops")
@@ -169,13 +176,32 @@ func _process(_delta: float) -> void:
 			
 			
 
-func changeBorderPosition(index):
+func changeBorderPosition(index,dir):
+	menuPickSfx.play()
 	if len(menuButtons)>0:
-		menuPickSfx.play()
-		selectBorder.visible=true
-		selectBorder.set_deferred("global_position", menuButtons[index].global_position)
-		selectBorder.set_deferred("size", menuButtons[index].size)
-
+		if dir=="up":
+			menuButtons[index].add_theme_stylebox_override("normal", highlightStyleBox)
+			menuButtons[index].add_theme_color_override("font_color", Color.BLACK)
+			menuButtons[index+1].add_theme_stylebox_override("normal", normalStyleBox)
+			menuButtons[index+1].add_theme_color_override("font_color", Color.WHITE)
+		elif dir=="down":
+			menuButtons[index].add_theme_stylebox_override("normal", highlightStyleBox)
+			menuButtons[index].add_theme_color_override("font_color", Color.BLACK)
+			if index>0:
+				menuButtons[index-1].add_theme_stylebox_override("normal", normalStyleBox)
+				menuButtons[index-1].add_theme_color_override("font_color", Color.WHITE)
+		elif dir=="hover":
+			for i in range(0,len(menuButtons)):
+				if i!=index:
+					menuButtons[i].add_theme_stylebox_override("normal", normalStyleBox)
+					menuButtons[i].add_theme_color_override("font_color", Color.WHITE)
+				else:
+					menuButtons[i].add_theme_stylebox_override("normal", highlightStyleBox)
+					menuButtons[i].add_theme_color_override("font_color", Color.BLACK)
+		elif dir=="remove":
+			for i in range(0,len(menuButtons)):
+				menuButtons[i].add_theme_stylebox_override("normal", normalStyleBox)
+				menuButtons[i].add_theme_color_override("font_color", Color.WHITE)
 
 func _on_start_button_pressed() -> void:
 	print("yay")
@@ -184,6 +210,7 @@ func _on_start_button_pressed() -> void:
 	animPlayer.play("menuChange")
 	await get_tree().create_timer(0.1).timeout
 	isActive=false
+	blurFill.visible=true
 	menuContainer.visible=false
 	characterSelection.enabled=true
 	characterSelection.visible=true
@@ -199,6 +226,7 @@ func _on_settings_button_pressed() -> void:
 	get_node("SettingsMenu").isActive=true
 	menuContainer.visible=false
 	isActive=false
+	blurFill.visible=true
 	
 
 
@@ -213,13 +241,14 @@ func _on_menu_button_mouse_entered(extra_arg_0):
 			selectBorder.visible=true
 		if extra_arg_0>=0 and extra_arg_0<=2:
 			currentSelectIndex=extra_arg_0
-			changeBorderPosition(extra_arg_0)
+			changeBorderPosition(currentSelectIndex,"hover")
 
 
 func _on_menu_button_mouse_exited():
 	if isActive:
 		if selectBorder.visible==true:
 			selectBorder.visible=false
+			changeBorderPosition(0,"remove")
 
 
 func _on_main_menu_music_finished():

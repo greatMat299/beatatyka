@@ -151,15 +151,16 @@ func _process(delta: float) -> void:
 					preparePlayer(thePlayerIndex)
 						
 			await get_tree().create_timer(.7).timeout
-			GameManager.playerLoadCount=playerAmount
-			animPlayer.play("menuChange")
-			menuSelectSfx.play()
-			await get_tree().create_timer(.1).timeout
-			self.visible=false
-			enabled=false
-			mapSelectMenu.visible = true
-			mapSelectMenu.enabled = true
-			print("lets go")
+			if isGameReady==true:
+				GameManager.playerLoadCount=playerAmount
+				animPlayer.play("menuChange")
+				menuSelectSfx.play()
+				await get_tree().create_timer(.1).timeout
+				self.visible=false
+				enabled=false
+				mapSelectMenu.visible = true
+				mapSelectMenu.enabled = true
+				print("lets go")
 			
 		if playerAmount>=2 and warnLabel.visible==true:
 			warnLabel.visible=false
@@ -207,8 +208,15 @@ func handle_input_p1():
 				fadeInOutMusic(false)
 				update_sprite_preview(1,index_p1)
 			isGameReady = checkIfAllReady()
+	else:
+		if Input.is_action_just_pressed("player1_attack"):
+			playerLabels[0].text = "GRACZ 1 - "+str(OS.get_keycode_string(InputMap.action_get_events("player1_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+			p1_frame.visible=true
+			arePlayersReady[0]=false
+			playerLabels[0].add_theme_color_override("font_color",Color.WHITE)
+			isGameReady = checkIfAllReady()
+			isGameLaunching=false
 			
-
 func handle_input_p2():
 	if arePlayersActive[1]!=false and arePlayersReady[1]==false:
 		playerLabels[1].text = "GRACZ 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
@@ -235,6 +243,14 @@ func handle_input_p2():
 			p2_frame.visible=true
 			previewSprites[1].visible=true
 			playerLabels[1].text = "GRACZ 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+		elif arePlayersReady[1]==true:
+			if Input.is_action_just_pressed("player2_attack"):
+				playerLabels[1].text = "GRACZ 2 - "+str(OS.get_keycode_string(InputMap.action_get_events("player2_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+				p2_frame.visible=true
+				arePlayersReady[1]=false
+				playerLabels[1].add_theme_color_override("font_color",Color.WHITE)
+				isGameReady = checkIfAllReady()
+				isGameLaunching=false
 		else:
 			print("Gracz 2 wybrał: ", index_p2)
 			p2_frame.visible=false
@@ -277,6 +293,14 @@ func handle_input_p3():
 			p3_frame.visible=true
 			previewSprites[2].visible=true
 			playerLabels[2].text = "GRACZ 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+		elif arePlayersReady[2]==true:
+			if Input.is_action_just_pressed("player3_attack"):
+				playerLabels[2].text = "GRACZ 3 - "+str(OS.get_keycode_string(InputMap.action_get_events("player3_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+				p3_frame.visible=true
+				arePlayersReady[2]=false
+				playerLabels[2].add_theme_color_override("font_color",Color.WHITE)
+				isGameReady = checkIfAllReady()
+				isGameLaunching=false
 		else:
 			print("Gracz 3 wybrał: ", index_p3)
 			p3_frame.visible=false
@@ -319,6 +343,14 @@ func handle_input_p4():
 			p4_frame.visible=true
 			previewSprites[3].visible=true
 			playerLabels[3].text = "GRACZ 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+		elif arePlayersReady[3]==true:
+			if Input.is_action_just_pressed("player4_attack"):
+				playerLabels[3].text = "GRACZ 4 - "+str(OS.get_keycode_string(InputMap.action_get_events("player4_attack")[0].physical_keycode))+" ŻEBY POTWIERDZIĆ"
+				p4_frame.visible=true
+				arePlayersReady[3]=false
+				playerLabels[3].add_theme_color_override("font_color",Color.WHITE)
+				isGameReady = checkIfAllReady()
+				isGameLaunching=false
 		else:
 			print("Gracz 4 wybrał: ", index_p4)
 			p4_frame.visible=false
@@ -334,7 +366,7 @@ func handle_input_p4():
 				fadeInOutMusic(false)
 				update_sprite_preview(4,index_p4)
 			isGameReady = checkIfAllReady()
-
+			
 func update_sprite_preview(player,index):
 	print("sex")
 	if index<len(GameManager.CHARACTER_SPEEDS):

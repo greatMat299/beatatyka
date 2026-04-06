@@ -1,6 +1,8 @@
 extends Control
 
 const settingPath = "res://settings.ini"
+var normalStyleBox = load("res://Assets/Styles/normalButtonStyle.tres")
+var highlightStyleBox = load("res://Assets/Styles/highlightedButtonStyle.tres")
 @onready var keybindsMenu = $"../KeybindsMenu"
 @onready var menuContainer = $"../MenuContainer"
 @onready var selectBorder = $selectBorder
@@ -43,19 +45,19 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 
 	if visible==true and isActive==false:
-		changeBorderPosition(currentSelectIndex)
+		changeBorderPosition(currentSelectIndex,"hover")
 		isActive=true
 	
 	if isActive==true:
 		if Input.is_action_just_pressed("ui_down"):
 			if currentSelectIndex>-1 and currentSelectIndex<4:
 				currentSelectIndex+=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"down")
 				
 		if Input.is_action_just_pressed("ui_up"):
 			if currentSelectIndex>0 and currentSelectIndex<5:
 				currentSelectIndex-=1
-				changeBorderPosition(currentSelectIndex)
+				changeBorderPosition(currentSelectIndex,"up")
 				
 		if Input.is_action_just_pressed("ui_accept"):
 			print("oops")
@@ -75,11 +77,32 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_cancel"):
 			_on_return_pressed()
 
-func changeBorderPosition(index):
+func changeBorderPosition(index,dir):
 	menuPickSfx.play()
-	selectBorder.visible=true
-	selectBorder.set_deferred("global_position", settingsButtons[index].global_position)
-	selectBorder.set_deferred("size", settingsButtons[index].size)
+	if len(settingsButtons)>0:
+		if dir=="up":
+			settingsButtons[index].add_theme_stylebox_override("normal", highlightStyleBox)
+			settingsButtons[index].add_theme_color_override("font_color", Color.BLACK)
+			settingsButtons[index+1].add_theme_stylebox_override("normal", normalStyleBox)
+			settingsButtons[index+1].add_theme_color_override("font_color", Color.WHITE)
+		elif dir=="down":
+			settingsButtons[index].add_theme_stylebox_override("normal", highlightStyleBox)
+			settingsButtons[index].add_theme_color_override("font_color", Color.BLACK)
+			if index>0:
+				settingsButtons[index-1].add_theme_stylebox_override("normal", normalStyleBox)
+				settingsButtons[index-1].add_theme_color_override("font_color", Color.WHITE)
+		elif dir=="hover":
+			for i in range(0,len(settingsButtons)):
+				if i!=index:
+					settingsButtons[i].add_theme_stylebox_override("normal", normalStyleBox)
+					settingsButtons[i].add_theme_color_override("font_color", Color.WHITE)
+				else:
+					settingsButtons[i].add_theme_stylebox_override("normal", highlightStyleBox)
+					settingsButtons[i].add_theme_color_override("font_color", Color.BLACK)
+		elif dir=="remove":
+			for i in range(0,len(settingsButtons)):
+				settingsButtons[i].add_theme_stylebox_override("normal", normalStyleBox)
+				settingsButtons[i].add_theme_color_override("font_color", Color.WHITE)
 
 
 #func _on_volume_value_changed(value: float) -> void:
@@ -127,10 +150,10 @@ func _on_v_sync_pressed() -> void:
 	ConfigFileHandler.config.save(settingPath)
 	if (vsync):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-		button.text = "ON"
+		button.text = "WŁĄCZONY"
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-		button.text = "OFF"
+		button.text = "WYŁĄCZONY"
 
 		
 func _on_fps_pressed() -> void:
@@ -205,12 +228,13 @@ func loadValues() -> void:
 
 
 func _on_button_mouse_entered(extra_arg_0):
-	changeBorderPosition(extra_arg_0)
+	changeBorderPosition(extra_arg_0,"hover")
 
 
 func _on_button_mouse_exited():
 	selectBorder.visible=false
 	currentSelectIndex=0
+	changeBorderPosition(0,"remove")
 
 
 func _on_volume_slider_value_changed(value, extra_arg_0):

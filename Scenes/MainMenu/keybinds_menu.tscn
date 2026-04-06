@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bpc8qsusr51xp" path="res://Scripts/MainMenu/keybinds_menu.gd" id="1_2im6s"]
 [ext_resource type="FontFile" uid="uid://b6rytw4u216qp" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold.ttf" id="2_1rrhl"]
+[ext_resource type="StyleBox" uid="uid://dt87wrihjqspl" path="res://Assets/Styles/normalPanelStyle.tres" id="3_8pign"]
 [ext_resource type="FontFile" uid="uid://id3ftf4d0b3k" path="res://Assets/Fonts/aero_matics/Aero Matics Display Regular.ttf" id="3_n7hio"]
-[ext_resource type="FontFile" uid="uid://b46oe8133hsu7" path="res://Assets/Fonts/aero_matics/Aero Matics Display Light.ttf" id="4_n7hio"]
+[ext_resource type="StyleBox" uid="uid://bqsxvyhvkadla" path="res://Assets/Styles/highlightedPanelStyle.tres" id="4_a7fgk"]
 [ext_resource type="FontFile" uid="uid://cug85ttjt7nro" path="res://Assets/Fonts/aero_matics/Aero Matics Bold Italic.ttf" id="4_vwpq0"]
+[ext_resource type="StyleBox" uid="uid://dnxpjco013d8u" path="res://Assets/Styles/normalButtonStyle.tres" id="6_ngqg3"]
 [ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="6_vwpq0"]
+[ext_resource type="StyleBox" uid="uid://bemsbnqo0ilar" path="res://Assets/Styles/highlightedButtonStyle.tres" id="7_2666u"]
+[ext_resource type="FontFile" uid="uid://fsdynrbd4dlv" path="res://Assets/Fonts/aero_matics/Aero Matics Display Italic.ttf" id="8_8pign"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y5h3j"]
 content_margin_left = 4.0
@@ -85,6 +89,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2im6s")
+normalStyles = Array[StyleBox]([ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("6_ngqg3"), ExtResource("6_ngqg3")])
+highlightedStyles = Array[StyleBox]([ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("7_2666u"), ExtResource("7_2666u")])
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1882054342]
 layout_mode = 1
@@ -149,6 +155,9 @@ size_flags_vertical = 4
 [node name="LeftButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1005997891]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_8pign")
+theme_override_styles/hover = ExtResource("4_a7fgk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_8pign")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/LeftButton" unique_id=203646628]
@@ -170,14 +179,17 @@ text = "LEWO"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("4_n7hio")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("8_8pign")
+theme_override_font_sizes/font_size = 24
 text = "←"
 horizontal_alignment = 1
 
 [node name="RightButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1433995185]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_8pign")
+theme_override_styles/hover = ExtResource("4_a7fgk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_a7fgk")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/RightButton" unique_id=794160716]
@@ -199,14 +211,17 @@ text = "PRAWO"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("4_n7hio")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("8_8pign")
+theme_override_font_sizes/font_size = 24
 text = "→"
 horizontal_alignment = 1
 
 [node name="JumpButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=335485505]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_8pign")
+theme_override_styles/hover = ExtResource("4_a7fgk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_lls6a")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/JumpButton" unique_id=894994976]
@@ -228,14 +243,17 @@ text = "SKOK"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("4_n7hio")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("8_8pign")
+theme_override_font_sizes/font_size = 24
 text = "SPACE"
 horizontal_alignment = 1
 
 [node name="AttackButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1044293508]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_8pign")
+theme_override_styles/hover = ExtResource("4_a7fgk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ycbbx")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/AttackButton" unique_id=208277120]
@@ -257,14 +275,17 @@ text = "ATAK"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("4_n7hio")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("8_8pign")
+theme_override_font_sizes/font_size = 24
 text = "Z"
 horizontal_alignment = 1
 
 [node name="BlockButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=1935285469]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_8pign")
+theme_override_styles/hover = ExtResource("4_a7fgk")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cijoo")
 
 [node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/BlockButton" unique_id=846861510]
@@ -286,8 +307,8 @@ text = "BLOKOWANIE"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("4_n7hio")
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("8_8pign")
+theme_override_font_sizes/font_size = 24
 text = "↓"
 horizontal_alignment = 1
 
@@ -299,8 +320,12 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_vwpq0")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("6_ngqg3")
+theme_override_styles/hover = ExtResource("7_2666u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0tafc")
 text = "WRÓĆ"
 
@@ -309,8 +334,12 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_vwpq0")
 theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("6_ngqg3")
+theme_override_styles/hover = ExtResource("7_2666u")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tqg76")
 text = "ZAPISZ"
 
