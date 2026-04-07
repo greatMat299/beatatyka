@@ -22,7 +22,7 @@ var isInvincible=false
 var playerKeybindId=-1
 var currentSpriteSheet
 var isDashAnim=false
-var spikeDMG = 25
+var spikeDMG = 0
 var laserDMG = 10
 var canLaserDMG = true
 var laserDMGCooldownAmount = 0.3

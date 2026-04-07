@@ -480,6 +480,10 @@ bus = &"SFX"
 
 [node name="LasersPrev2" type="Node2D" parent="." unique_id=1534067520]
 
+[node name="Spikes3" type="Node2D" parent="." unique_id=213523517]
+
+[node name="Spikes3PrevGroup" type="Node2D" parent="." unique_id=1223285419]
+
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup2" method="_on_powerup_cooldown_timeout"]

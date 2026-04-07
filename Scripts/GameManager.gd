@@ -115,13 +115,13 @@ func searchForSpikes():
 	if mapName!="":
 		
 		#normalne
-		for i in range(1,3):
+		for i in range(1,4):
 			var spikeNode = get_parent().get_node(str(mapName)).get_node(str("Spikes")+str(i))
 			#print(spikeNode)
 			spikeList.push_back(spikeNode)
 		
 		#ostrzegawcze
-		for i in range(1,3):
+		for i in range(1,4):
 			var spikePrevNode = get_parent().get_node(str(mapName)).get_node(str("Spike")+str(i)+str("PrevGroup"))
 			#print(spikePrevNode)
 			spikePrevList.push_back(spikePrevNode)
