@@ -22,7 +22,7 @@ var isInvincible=false
 var playerKeybindId=-1
 var currentSpriteSheet
 var isDashAnim=false
-var spikeDMG = 0
+var spikeDMG = 10
 var laserDMG = 10
 var canLaserDMG = true
 var laserDMGCooldownAmount = 0.3
@@ -72,10 +72,10 @@ var powerup3
 
 
 @export_category("Attribute power values")
-@export var dashPower : float = 1000.0
+@export var dashPower : float = 800.0
 @export var attackPower : float = 15.0
 @export var dashAttackPower : float = 30.0
-@export var attackPushPower : float = 600.0
+@export var attackPushPower : float = 800.0
 
 
 func _ready():

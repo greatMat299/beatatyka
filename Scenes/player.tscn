@@ -95,6 +95,7 @@ _data = {
 collision_layer = 2
 collision_mask = 15
 script = ExtResource("1_cvnsp")
+attackCooldownAmount = 0.8
 attackPower = 10.0
 dashAttackPower = 18.0
 

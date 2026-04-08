@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c1ysp1g5i5h4c" path="res://Scenes/bomb.tscn" id="18_3vcwm"]
 [ext_resource type="AudioStream" uid="uid://dlkd1lw7ct6yq" path="res://Assets/Sound/SFX/crowdChant.mp3" id="18_rjj4s"]
 [ext_resource type="PackedScene" uid="uid://d15v1pnidbpi3" path="res://Scenes/bombNoCollision.tscn" id="19_g1h0t"]
+[ext_resource type="PackedScene" uid="uid://caj0ctea5bdcl" path="res://Scenes/spikeScenePlatform.tscn" id="21_grsgd"]
 
 [sub_resource type="Animation" id="Animation_cjqyo"]
 length = 0.001
@@ -105,7 +106,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wouuh"]
-size = Vector2(1297, 28)
+size = Vector2(1154.75, 28)
 
 [node name="Chromatically" type="Node2D" unique_id=1065128858]
 script = ExtResource("1_slxia")
@@ -280,11 +281,11 @@ collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="DeathArea" unique_id=1173869249]
-position = Vector2(941, 19)
+position = Vector2(1010.75, 19)
 shape = SubResource("RectangleShape2D_wouuh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea" unique_id=700767055]
-position = Vector2(-352.5, 19)
+position = Vector2(-559.375, 19)
 shape = SubResource("RectangleShape2D_wouuh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=927735588]
@@ -450,6 +451,17 @@ libraries/ = SubResource("AnimationLibrary_vcux0")
 [node name="Spikes3" type="Node2D" parent="." unique_id=1995076748]
 
 [node name="Spikes3PrevGroup" type="Node2D" parent="." unique_id=709280039]
+
+[node name="VoidSpikes" type="Node2D" parent="." unique_id=189357035]
+
+[node name="SpikeScene" parent="VoidSpikes" unique_id=48906191 instance=ExtResource("21_grsgd")]
+position = Vector2(33, 153)
+
+[node name="SpikeScene2" parent="VoidSpikes" unique_id=687131757 instance=ExtResource("21_grsgd")]
+position = Vector2(49, 153)
+
+[node name="SpikeScene3" parent="VoidSpikes" unique_id=1099623222 instance=ExtResource("21_grsgd")]
+position = Vector2(64, 153)
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

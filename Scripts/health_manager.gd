@@ -2,6 +2,7 @@ extends Node
 
 var health = 100.0
 var id: int =-1
+var lifes=3
 var powerup1
 var powerup2
 var powerup3
@@ -40,16 +41,23 @@ func heal_player(body, healthAdded):
 		body.get_node("HealthManager").health+=healthPenalty
 	
 func _process(_delta):
+	print(GameManager.playerLifes[id-1])
 	#akcje po wyczerpaniu się zdrowia gracza
 	if health<=0 and GameManager.arePlayersAlive[id-1]==true:
-		deathSFX.play()
-		GameManager.arePlayersAlive[id-1]=false
-		GameManager.player_count-=1
-		GameManager.playersDeadOrder.append(id)
-		health=0
-		animSprite.self_modulate=Color(1,1,1,.4)
-		animSprite.stop()
-		player.get_node("CollisionShape2D").disabled = true
+		if lifes>1:
+			health=100
+			get_parent().Jump()
+			lifes-=1
+			GameManager.playerLifes[id-1]=lifes
+		else:
+			deathSFX.play()
+			GameManager.arePlayersAlive[id-1]=false
+			GameManager.player_count-=1
+			GameManager.playersDeadOrder.append(id)
+			health=0
+			animSprite.self_modulate=Color(1,1,1,.4)
+			animSprite.stop()
+			player.get_node("CollisionShape2D").disabled = true
 
 #usuwanie zdrowia zaatakowanemu graczowi
 func _on_player_attack(player, damage, playerDamaged, direction):

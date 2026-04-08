@@ -1,6 +1,6 @@
 extends Node
 
-const CHARACTER_SPEEDS = [250.0,300.0,180.0,320.0]
+const CHARACTER_SPEEDS = [170.0,220.0,135.0,230.0]
 const CHARACTER_JUMP_VELS = [-550.0,-630.0,-500.0,-600.0]
 const CHARACTER_ATTACK_PWRS = [7.0,5.5,8.5,4.5]
 const CHARACTER_DASH_ATTACK_PWRS = [11.0,10.0,14.0,8.0]
@@ -36,6 +36,7 @@ var currentCharacterJumpVels=[]
 var currentCharacterAttackPwr=[]
 var currentCharacterDashAttackPwr=[]
 var playersDeadOrder=[]
+var playerLifes=[]
 var mapName=""
 var playerLoadCount=0
 var player_count := 0
@@ -72,6 +73,9 @@ func resetGameManager():
 	currentPowerupType=-1
 	levelBPM=0
 	
+func addPlayerLife():
+	for i in range(0,player_count):
+		playerLifes.append(3)
 	
 
 func setCharacterAttribute(charIndex, att):

@@ -420,7 +420,7 @@ position = Vector2(-75, 97)
 [node name="Spikes1" type="Node2D" parent="." unique_id=791742905]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -1)
+position = Vector2(0, 15)
 
 [node name="SpikeScene" parent="Spikes1" unique_id=827716279 instance=ExtResource("14_ypv6j")]
 position = Vector2(-32, 97)
@@ -440,7 +440,7 @@ position = Vector2(176, 97)
 [node name="Spikes2" type="Node2D" parent="." unique_id=1789022395]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -1)
+position = Vector2(0, 15)
 
 [node name="SpikeScene" parent="Spikes2" unique_id=1530637308 instance=ExtResource("14_ypv6j")]
 position = Vector2(-106, 97)

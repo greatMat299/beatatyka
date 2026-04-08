@@ -63,16 +63,18 @@ func _ready() -> void:
 		
 		var death_area = get_node("DeathArea")
 		death_area.body_entered.connect(copy._on_death_area_body_entered)
+		GameManager.addPlayerLife()
 		add_child(copy)
 		
 	var midiPlayerName
 	
 	#wstępne przygotowanie mapy
 	GameManager.mapName=self.name
+	GameManager.searchForLasers()
 	GameManager.searchForPlatforms()
 	GameManager.searchForSpikes()
 	GameManager.searchForBombs()
-	GameManager.searchForLasers()
+	
 	
 	#wstępne przygotowanie odtwarzaczy MIDI
 	midi_player1 = self.get_node("MusicPlayer").get_node("MidiPlayer")
@@ -88,7 +90,7 @@ func _ready() -> void:
 	
 func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
-	if GameManager.player_count<=0:
+	if GameManager.player_count<=1:
 		GameManager.isGamePlaying=false
 		
 	if GameManager.hasStartSeqFinished==true and audioStreamPlayer.playing==false:
