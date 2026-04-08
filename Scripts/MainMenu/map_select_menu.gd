@@ -42,7 +42,7 @@ func _ready() -> void:
 
 func _process(_delta):
 	if GameManager.isExtraMapEnabled==true and len(songMaps)==5:
-		songMaps.append("res://Scenes/map5.tscn")
+		songMaps.append("res://Scenes/mapS.tscn")
 		songPreviews.append(preload("res://Assets/Sound/songPreviews/o_moj_rozmarynie_preview.mp3"))
 		maxButtons=6
 	if enabled:

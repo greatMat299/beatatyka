@@ -415,6 +415,8 @@ position = Vector2(-90, 97)
 [node name="SpikeSceneNC5" parent="Spike2PrevGroup" unique_id=449738186 instance=ExtResource("13_kif58")]
 position = Vector2(-75, 97)
 
+[node name="Spikes3PrevGroup" type="Node2D" parent="." unique_id=1223285419]
+
 [node name="Spikes1" type="Node2D" parent="." unique_id=791742905]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
@@ -455,6 +457,8 @@ position = Vector2(53, 97)
 [node name="SpikeScene5" parent="Spikes2" unique_id=1829091494 instance=ExtResource("14_ypv6j")]
 position = Vector2(117, 97)
 
+[node name="Spikes3" type="Node2D" parent="." unique_id=213523517]
+
 [node name="CrowdCheerSFX" type="AudioStreamPlayer2D" parent="." unique_id=1878810571]
 stream = ExtResource("16_cjqyo")
 bus = &"SFX"
@@ -479,10 +483,6 @@ bus = &"SFX"
 [node name="LasersPrev1" type="Node2D" parent="." unique_id=916931062]
 
 [node name="LasersPrev2" type="Node2D" parent="." unique_id=1534067520]
-
-[node name="Spikes3" type="Node2D" parent="." unique_id=213523517]
-
-[node name="Spikes3PrevGroup" type="Node2D" parent="." unique_id=1223285419]
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

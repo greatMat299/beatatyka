@@ -17,6 +17,7 @@
 [ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="12_cq744"]
 [ext_resource type="Texture2D" uid="uid://bnqj6rlthv41f" path="res://Assets/Images/MapScreenshots/level5.png" id="13_loyux"]
 [ext_resource type="StyleBox" uid="uid://ceaa6ebh53vdp" path="res://Assets/Styles/highlightedMenuStyle.tres" id="15_2hdnq"]
+[ext_resource type="Texture2D" uid="uid://crtvt7a7wj63r" path="res://Assets/Images/MapScreenshots/levelSpreview.png" id="15_h5cqr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gkm5v"]
 content_margin_left = 4.0
@@ -573,7 +574,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(173.5, 100)
-texture = ExtResource("11_lqrw5")
+texture = ExtResource("15_h5cqr")
 expand_mode = 1
 stretch_mode = 6
 

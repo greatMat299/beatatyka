@@ -8,7 +8,8 @@ func _ready():
 
 
 func _process(delta):
-	for body in $LaserTMLayer/LaserDMGArea2D.get_overlapping_bodies():
-		#if body.is_in_group("players"):
-		if "Player" in body.name:
-			body.take_laser_damage(10)
+	if get_parent().visible and "Prev" not in get_parent().name:
+		for body in $LaserTMLayer/LaserDMGArea2D.get_overlapping_bodies():
+			#if body.is_in_group("players"):
+			if "Player" in body.name:
+				body.take_laser_damage(10)

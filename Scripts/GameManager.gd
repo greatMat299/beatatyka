@@ -9,7 +9,8 @@ const START_TIMES={
 	"Chromatically":2.15,
 	"DeadManWalking":2.55,
 	"GhostsNStuff":2.55,
-	"ItsYou":2.55
+	"itsYou":2.55,
+	"jaco":2.55
 }
 
 var currentNote=0
@@ -23,6 +24,8 @@ var spikeList=[]
 var spikePrevList=[]
 var bombList=[]
 var bombPrevList=[]
+var laserList=[]
+var laserPrevList=[]
 var arePlayersAlive=[]
 var playerAttackStatus=[]
 var currentPlayerKeybinds=[]
@@ -135,3 +138,11 @@ func searchForBombs():
 		var bombPrevNode = get_parent().get_node(str(mapName)).get_node(str("BombsPrev")+str(i))
 		bombPrevList.push_back(bombPrevNode)
 		
+func searchForLasers():
+	for i in range(1,5):
+		var laserNode = get_parent().get_node(str(mapName)).get_node(str("Lasers")+str(i))
+		laserList.push_back(laserNode)
+		
+	for i in range(1,5):
+		var laserPrevNode = get_parent().get_node(str(mapName)).get_node(str("LasersPrev")+str(i))
+		laserPrevList.push_back(laserPrevNode)

@@ -61,6 +61,7 @@ func disablePowerup(launchTimer:bool):
 	isActive = false
 	
 	if launchTimer==true:
+		await get_tree().process_frame
 		powerupCooldown.start()
 		isCooldownLaunched=true
 
