@@ -203,6 +203,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_rjj4s"]
 resource_name = "showBombs"
@@ -218,6 +230,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.60784316), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_3aimw"]
@@ -283,7 +307,7 @@ position = Vector2(26, -62)
 visible = false
 
 [node name="Laser" parent="Lasers2" unique_id=1117862238 instance=ExtResource("4_qiypn")]
-position = Vector2(23, 69)
+position = Vector2(23, -71)
 
 [node name="Laser2" parent="Lasers2" unique_id=1339109071 instance=ExtResource("4_qiypn")]
 position = Vector2(-98, 43)
@@ -295,6 +319,7 @@ rotation = 1.5707964
 
 [node name="Lasers3" type="Node2D" parent="." unique_id=875795788]
 visible = false
+position = Vector2(6, -41)
 
 [node name="Laser" parent="Lasers3" unique_id=725100817 instance=ExtResource("4_qiypn")]
 position = Vector2(19.000002, 28.000002)
@@ -308,95 +333,84 @@ rotation = -0.2617994
 visible = false
 
 [node name="Laser" parent="Lasers4" unique_id=597221957 instance=ExtResource("4_qiypn")]
-position = Vector2(27, 54)
+position = Vector2(35, 76)
 
 [node name="Laser2" parent="Lasers4" unique_id=1803649712 instance=ExtResource("4_qiypn")]
-position = Vector2(-117, 26)
-rotation = 1.5707964
-
-[node name="Laser3" parent="Lasers4" unique_id=1095484859 instance=ExtResource("4_qiypn")]
-position = Vector2(-56, 27)
+position = Vector2(-113, 46)
 rotation = 1.5707964
 
 [node name="Laser4" parent="Lasers4" unique_id=1627888685 instance=ExtResource("4_qiypn")]
-position = Vector2(187, 27)
+position = Vector2(190, 74)
 rotation = 1.5707964
 
-[node name="LasersPrev1" type="Node2D" parent="." unique_id=541634005]
+[node name="LasersPrev1" type="Node2D" parent="." unique_id=1338804609]
 visible = false
 modulate = Color(1, 0, 0, 0)
 
-[node name="Laser" parent="LasersPrev1" unique_id=1346405578 instance=ExtResource("4_qiypn")]
+[node name="Laser" parent="LasersPrev1" unique_id=1023436842 instance=ExtResource("4_qiypn")]
 position = Vector2(23, 11)
 
-[node name="Laser2" parent="LasersPrev1" unique_id=1516734849 instance=ExtResource("4_qiypn")]
+[node name="Laser2" parent="LasersPrev1" unique_id=1306876801 instance=ExtResource("4_qiypn")]
 position = Vector2(26, -62)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev1" unique_id=1986034051]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev1" unique_id=1731712072]
 libraries/ = SubResource("AnimationLibrary_pc3ep")
 
-[node name="LasersPrev2" type="Node2D" parent="." unique_id=188194428]
+[node name="LasersPrev2" type="Node2D" parent="." unique_id=824199041]
 visible = false
 modulate = Color(1, 0, 0, 0)
 
-[node name="Laser" parent="LasersPrev2" unique_id=1187999816 instance=ExtResource("4_qiypn")]
-position = Vector2(23, 69)
+[node name="Laser" parent="LasersPrev2" unique_id=806688461 instance=ExtResource("4_qiypn")]
+position = Vector2(23, -71)
 
-[node name="Laser2" parent="LasersPrev2" unique_id=84538281 instance=ExtResource("4_qiypn")]
+[node name="Laser2" parent="LasersPrev2" unique_id=551942417 instance=ExtResource("4_qiypn")]
 position = Vector2(-98, 43)
 rotation = 1.5707964
 
-[node name="Laser3" parent="LasersPrev2" unique_id=652555786 instance=ExtResource("4_qiypn")]
+[node name="Laser3" parent="LasersPrev2" unique_id=763095600 instance=ExtResource("4_qiypn")]
 position = Vector2(149, 45)
 rotation = 1.5707964
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev2" unique_id=1744377794]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev2" unique_id=1188902862]
 libraries/ = SubResource("AnimationLibrary_pc3ep")
 
-[node name="LasersPrev3" type="Node2D" parent="." unique_id=1451627668]
+[node name="LasersPrev3" type="Node2D" parent="." unique_id=2018027403]
 visible = false
 modulate = Color(1, 0, 0, 0)
+position = Vector2(6, -41)
 
-[node name="Laser" parent="LasersPrev3" unique_id=969668797 instance=ExtResource("4_qiypn")]
+[node name="Laser" parent="LasersPrev3" unique_id=1867713815 instance=ExtResource("4_qiypn")]
 position = Vector2(19.000002, 28.000002)
 rotation = 0.2617994
 
-[node name="Laser2" parent="LasersPrev3" unique_id=851093325 instance=ExtResource("4_qiypn")]
+[node name="Laser2" parent="LasersPrev3" unique_id=2059813320 instance=ExtResource("4_qiypn")]
 position = Vector2(19.000002, 28.000002)
 rotation = -0.2617994
 
-[node name="Laser3" parent="LasersPrev3" unique_id=1332058322 instance=ExtResource("4_qiypn")]
-position = Vector2(24, 28)
-rotation = 1.5707964
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev3" unique_id=1268077560]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev3" unique_id=2088201166]
 libraries/ = SubResource("AnimationLibrary_pc3ep")
 
-[node name="LasersPrev4" type="Node2D" parent="." unique_id=1048059204]
+[node name="LasersPrev4" type="Node2D" parent="." unique_id=1465538586]
 visible = false
 modulate = Color(1, 0, 0, 0)
 
-[node name="Laser" parent="LasersPrev4" unique_id=1522584352 instance=ExtResource("4_qiypn")]
-position = Vector2(27, 54)
+[node name="Laser" parent="LasersPrev4" unique_id=34311680 instance=ExtResource("4_qiypn")]
+position = Vector2(35, 76)
 
-[node name="Laser2" parent="LasersPrev4" unique_id=705635151 instance=ExtResource("4_qiypn")]
-position = Vector2(-117, 26)
+[node name="Laser2" parent="LasersPrev4" unique_id=52502316 instance=ExtResource("4_qiypn")]
+position = Vector2(-113, 46)
 rotation = 1.5707964
 
-[node name="Laser3" parent="LasersPrev4" unique_id=243480777 instance=ExtResource("4_qiypn")]
-position = Vector2(-56, 27)
+[node name="Laser4" parent="LasersPrev4" unique_id=1680868640 instance=ExtResource("4_qiypn")]
+position = Vector2(190, 74)
 rotation = 1.5707964
 
-[node name="Laser4" parent="LasersPrev4" unique_id=559689262 instance=ExtResource("4_qiypn")]
-position = Vector2(187, 27)
-rotation = 1.5707964
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev4" unique_id=2112324425]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev4" unique_id=183222232]
 libraries/ = SubResource("AnimationLibrary_pc3ep")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=2015374518]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD6/wUAEwADAAAAADD9/wUAEwAEAAAAACAHAAUAEwADAAAAACAIAAUAEwADAAAAADAJAAUAEwADAAAAACAKAAUAEwADAAAAADD5/wUAEwADAAAAACD4/wUAEwADAAAAADD3/wUAEwAEAAAAADANAAUAEwAEAAAAACALAAUAEwADAAAAACAMAAUAEwADAAAAACANAAQAEwAIAAAAABD3/wQAEwACAAAAABD8/wUAEwADAAAAACD7/wUAEwADAAAAADAAAAUAEwAEAAAAADABAAUAEwADAAAAACADAAUAEwADAAAAACAGAAUAEwAEAAAAADACAAQAEwAAAAAAAAACAAAAEwAAAAAAAAACAP//EwAAAAAAAAACAAUAEwADAAAAADAEAAUAEwAEAAAAACA=")
+tile_map_data = PackedByteArray("AAD6/wUAEwADAAAAADD9/wUAEwAEAAAAACAHAAUAEwADAAAAACAIAAUAEwADAAAAADAJAAUAEwADAAAAACAKAAUAEwADAAAAADD5/wUAEwADAAAAACD4/wUAEwADAAAAADD3/wUAEwAEAAAAADANAAUAEwAEAAAAACALAAUAEwADAAAAACAMAAUAEwADAAAAACANAAQAEwAIAAAAABD3/wQAEwACAAAAABD8/wUAEwADAAAAACD7/wUAEwADAAAAADAAAAUAEwAEAAAAADABAAUAEwADAAAAACADAAUAEwADAAAAACAGAAUAEwAEAAAAADACAAUAEwADAAAAADAEAAUAEwAEAAAAACA=")
 tile_set = ExtResource("3_26gpk")
 
 [node name="Ground2" type="TileMapLayer" parent="." unique_id=735098729]
@@ -417,17 +431,17 @@ libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms1" type="TileMapLayer" parent="." unique_id=174709984]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAHAAIAEwAIAAAAABD9/wIAEwACAAAAABD//wEAEwAEAAAAADAAAAEAEwADAAAAADABAAEAEwADAAAAACACAAEAEwADAAAAACADAAEAEwADAAAAADAFAAEAEwAEAAAAACAEAAEAEwADAAAAACD//wQAEwACAAAAAAAFAAQAEwAIAAAAAAA=")
+tile_map_data = PackedByteArray("AAAHAAIAEwAIAAAAABD9/wIAEwACAAAAABABAAEAEwADAAAAADACAAEAEwADAAAAADD//wQAEwACAAAAAAAFAAQAEwAIAAAAAAAAAAEAEwAEAAAAADADAAEAEwADAAAAACAEAAEAEwAEAAAAACA=")
 tile_set = ExtResource("3_26gpk")
 
-[node name="Platforms1Prev" type="TileMapLayer" parent="." unique_id=1552885474]
+[node name="Platforms1Prev" type="TileMapLayer" parent="." unique_id=123087895]
 self_modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAHAAIAEwAIAAAAABD9/wIAEwACAAAAABD//wEAEwAEAAAAADAAAAEAEwADAAAAADABAAEAEwADAAAAACACAAEAEwADAAAAACADAAEAEwADAAAAADAFAAEAEwAEAAAAACAEAAEAEwADAAAAACD//wQAEwACAAAAAAAFAAQAEwAIAAAAAAA=")
+tile_map_data = PackedByteArray("AAAHAAIAEwAIAAAAABD9/wIAEwACAAAAABABAAEAEwADAAAAADACAAEAEwADAAAAADD//wQAEwACAAAAAAAFAAQAEwAIAAAAAAAAAAEAEwAEAAAAADADAAEAEwADAAAAACAEAAEAEwAEAAAAACA=")
 tile_set = ExtResource("3_26gpk")
 collision_enabled = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms1Prev" unique_id=1065789580]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms1Prev" unique_id=169437189]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms2" type="TileMapLayer" parent="." unique_id=815646963]
@@ -448,18 +462,18 @@ libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms3" type="TileMapLayer" parent="." unique_id=319529954]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAGAAEAEwAIAAAAABAHAAEAEwAIAAAAAAD9/wEAEwACAAAAAAD+/wEAEwACAAAAABD4////FAAAAAAAAFD5////EwADAAAAACD6////EwADAAAAADD7////EwADAAAAACD8////EwADAAAAADD9////EwADAAAAACD//wAAEwACAAAAAAAAAAIAEwAAAAAAAAAEAAIAEwAAAAAAAAABAAMAEwAAAAAAAAADAAMAEwAAAAAAAAACAP//EwAAAAAAAAAAAP//EwAEAAAAADABAP//EwADAAAAADADAP//EwADAAAAADAEAP//EwAEAAAAACAFAAAAEwAIAAAAAAAIAP//EwAEAAAAADAJAP//EwADAAAAADAKAP//EwADAAAAACALAP//EwADAAAAADAMAP//EwADAAAAACANAP//FAAAAAAAAEANAP7/FAAAAAAAAGANAP3/EwAEAAAAAGANAAAAEwAEAAAAAGANAAEAFAAAAAAAAGAMAAEAEwADAAAAABALAAEAEwADAAAAAAAJAAEAEwADAAAAABAKAAEAEwADAAAAAAAIAAEAEwAEAAAAABD8/wEAEwAEAAAAAAD7/wEAEwADAAAAAAD6/wEAEwADAAAAABD5/wEAEwADAAAAAAD4/wEAFAAAAAAAAAD4/wAAEwADAAAAAFD4//7/EwAEAAAAAHAMAP7/EwAEAAAAABA=")
+tile_map_data = PackedByteArray("AAD4////FAAAAAAAAFD5////EwADAAAAACD6////EwADAAAAADD7////EwADAAAAACD8////EwADAAAAADD9////EwADAAAAACABAAMAEwAAAAAAAAADAAMAEwAAAAAAAAAAAP//EwAEAAAAADABAP//EwADAAAAADADAP//EwADAAAAADAEAP//EwAEAAAAACAIAP//EwAEAAAAADAJAP//EwADAAAAADAKAP//EwADAAAAACALAP//EwADAAAAADAMAP//EwADAAAAACANAP//FAAAAAAAAEANAP7/FAAAAAAAAGANAP3/EwAEAAAAAGANAAAAEwAEAAAAAGANAAEAFAAAAAAAAGAMAAEAEwADAAAAABALAAEAEwADAAAAAAAJAAEAEwADAAAAABAKAAEAEwADAAAAAAAIAAEAEwAEAAAAABD8/wEAEwAEAAAAAAD7/wEAEwADAAAAAAD6/wEAEwADAAAAABD5/wEAEwADAAAAAAD4/wEAFAAAAAAAAAD4/wAAEwADAAAAAFD4//7/EwAEAAAAAHAMAP7/EwAEAAAAABAAAAMAEwAAAAAAAAAEAAMAEwAAAAAAAAA=")
 enabled = false
 tile_set = ExtResource("3_26gpk")
 
-[node name="Platforms3Prev" type="TileMapLayer" parent="." unique_id=151668587]
+[node name="Platforms3Prev" type="TileMapLayer" parent="." unique_id=1114079903]
 self_modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAGAAEAEwAIAAAAABAHAAEAEwAIAAAAAAD9/wEAEwACAAAAAAD+/wEAEwACAAAAABD4////FAAAAAAAAFD5////EwADAAAAACD6////EwADAAAAADD7////EwADAAAAACD8////EwADAAAAADD9////EwADAAAAACD//wAAEwACAAAAAAAAAAIAEwAAAAAAAAAEAAIAEwAAAAAAAAABAAMAEwAAAAAAAAADAAMAEwAAAAAAAAACAP//EwAAAAAAAAAAAP//EwAEAAAAADABAP//EwADAAAAADADAP//EwADAAAAADAEAP//EwAEAAAAACAFAAAAEwAIAAAAAAAIAP//EwAEAAAAADAJAP//EwADAAAAADAKAP//EwADAAAAACALAP//EwADAAAAADAMAP//EwADAAAAACANAP//FAAAAAAAAEANAP7/FAAAAAAAAGANAP3/EwAEAAAAAGANAAAAEwAEAAAAAGANAAEAFAAAAAAAAGAMAAEAEwADAAAAABALAAEAEwADAAAAAAAJAAEAEwADAAAAABAKAAEAEwADAAAAAAAIAAEAEwAEAAAAABD8/wEAEwAEAAAAAAD7/wEAEwADAAAAAAD6/wEAEwADAAAAABD5/wEAEwADAAAAAAD4/wEAFAAAAAAAAAD4/wAAEwADAAAAAFD4//7/EwAEAAAAAHAMAP7/EwAEAAAAABA=")
+tile_map_data = PackedByteArray("AAD4////FAAAAAAAAFD5////EwADAAAAACD6////EwADAAAAADD7////EwADAAAAACD8////EwADAAAAADD9////EwADAAAAACABAAMAEwAAAAAAAAADAAMAEwAAAAAAAAAAAP//EwAEAAAAADABAP//EwADAAAAADADAP//EwADAAAAADAEAP//EwAEAAAAACAIAP//EwAEAAAAADAJAP//EwADAAAAADAKAP//EwADAAAAACALAP//EwADAAAAADAMAP//EwADAAAAACANAP//FAAAAAAAAEANAP7/FAAAAAAAAGANAP3/EwAEAAAAAGANAAAAEwAEAAAAAGANAAEAFAAAAAAAAGAMAAEAEwADAAAAABALAAEAEwADAAAAAAAJAAEAEwADAAAAABAKAAEAEwADAAAAAAAIAAEAEwAEAAAAABD8/wEAEwAEAAAAAAD7/wEAEwADAAAAAAD6/wEAEwADAAAAABD5/wEAEwADAAAAAAD4/wEAFAAAAAAAAAD4/wAAEwADAAAAAFD4//7/EwAEAAAAAHAMAP7/EwAEAAAAABAAAAMAEwAAAAAAAAAEAAMAEwAAAAAAAAA=")
 tile_set = ExtResource("3_26gpk")
 collision_enabled = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms3Prev" unique_id=695519739]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms3Prev" unique_id=513934919]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
 [node name="Platforms4" type="TileMapLayer" parent="." unique_id=987987478]
@@ -823,15 +837,6 @@ visible = false
 [node name="Bomb" parent="Bombs1" unique_id=1742308057 instance=ExtResource("21_25umv")]
 position = Vector2(-95, 19)
 
-[node name="Bomb2" parent="Bombs1" unique_id=1913554294 instance=ExtResource("21_25umv")]
-position = Vector2(-109, -21)
-
-[node name="Bomb3" parent="Bombs1" unique_id=1847422676 instance=ExtResource("21_25umv")]
-position = Vector2(33, -24)
-
-[node name="Bomb4" parent="Bombs1" unique_id=447733327 instance=ExtResource("21_25umv")]
-position = Vector2(188, -27)
-
 [node name="Bomb5" parent="Bombs1" unique_id=1694242709 instance=ExtResource("21_25umv")]
 position = Vector2(196, 16)
 
@@ -853,9 +858,6 @@ position = Vector2(98, -8)
 [node name="Bomb11" parent="Bombs1" unique_id=926564172 instance=ExtResource("21_25umv")]
 position = Vector2(-160, -28)
 
-[node name="Bomb12" parent="Bombs1" unique_id=178522338 instance=ExtResource("21_25umv")]
-position = Vector2(-143, 59)
-
 [node name="BombsPrev1" type="Node2D" parent="." unique_id=457318916]
 visible = false
 modulate = Color(1, 1, 1, 0)
@@ -864,17 +866,11 @@ self_modulate = Color(1, 1, 1, 0)
 [node name="BombNC" parent="BombsPrev1" unique_id=261710643 instance=ExtResource("22_njiyv")]
 position = Vector2(-91, 77)
 
-[node name="BombNC2" parent="BombsPrev1" unique_id=1080766703 instance=ExtResource("22_njiyv")]
-position = Vector2(-143, 59)
-
 [node name="BombNC3" parent="BombsPrev1" unique_id=735386914 instance=ExtResource("22_njiyv")]
 position = Vector2(-95, 19)
 
 [node name="BombNC4" parent="BombsPrev1" unique_id=1473305305 instance=ExtResource("22_njiyv")]
 position = Vector2(-15, 62)
-
-[node name="BombNC5" parent="BombsPrev1" unique_id=1600192127 instance=ExtResource("22_njiyv")]
-position = Vector2(-109, -21)
 
 [node name="BombNC6" parent="BombsPrev1" unique_id=711073997 instance=ExtResource("22_njiyv")]
 position = Vector2(-160, -28)
@@ -882,14 +878,8 @@ position = Vector2(-160, -28)
 [node name="BombNC7" parent="BombsPrev1" unique_id=688905260 instance=ExtResource("22_njiyv")]
 position = Vector2(-29, -46)
 
-[node name="BombNC8" parent="BombsPrev1" unique_id=134449012 instance=ExtResource("22_njiyv")]
-position = Vector2(33, -24)
-
 [node name="BombNC9" parent="BombsPrev1" unique_id=1052012707 instance=ExtResource("22_njiyv")]
 position = Vector2(98, -8)
-
-[node name="BombNC10" parent="BombsPrev1" unique_id=956239926 instance=ExtResource("22_njiyv")]
-position = Vector2(188, -27)
 
 [node name="BombNC11" parent="BombsPrev1" unique_id=339521180 instance=ExtResource("22_njiyv")]
 position = Vector2(196, 16)
@@ -912,51 +902,28 @@ position = Vector2(38, -52)
 [node name="Bomb3" parent="Bombs2" unique_id=1669061640 instance=ExtResource("21_25umv")]
 position = Vector2(118, -38)
 
-[node name="Bomb4" parent="Bombs2" unique_id=261834278 instance=ExtResource("21_25umv")]
-position = Vector2(56, 11)
-
 [node name="Bomb5" parent="Bombs2" unique_id=1992262769 instance=ExtResource("21_25umv")]
 position = Vector2(9, 10)
 
 [node name="Bomb6" parent="Bombs2" unique_id=1830792209 instance=ExtResource("21_25umv")]
 position = Vector2(187, 63)
 
-[node name="Bomb7" parent="Bombs2" unique_id=2039206767 instance=ExtResource("21_25umv")]
-position = Vector2(-115, 60)
-
 [node name="Bomb8" parent="Bombs2" unique_id=1254275769 instance=ExtResource("21_25umv")]
 position = Vector2(-118, 15)
-
-[node name="Bomb9" parent="Bombs2" unique_id=1582927 instance=ExtResource("21_25umv")]
-position = Vector2(-132, -43)
-
-[node name="Bomb10" parent="Bombs2" unique_id=311174346 instance=ExtResource("21_25umv")]
-position = Vector2(218, -54)
-
-[node name="Bomb11" parent="Bombs2" unique_id=124458269 instance=ExtResource("21_25umv")]
-position = Vector2(-41, 13)
 
 [node name="Bomb12" parent="Bombs2" unique_id=819814037 instance=ExtResource("21_25umv")]
 position = Vector2(167, 15)
 
 [node name="BombsPrev2" type="Node2D" parent="." unique_id=975527072]
 visible = false
+modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
-
-[node name="BombNC" parent="BombsPrev2" unique_id=1040767298 instance=ExtResource("22_njiyv")]
-position = Vector2(-132, -43)
 
 [node name="BombNC2" parent="BombsPrev2" unique_id=605718807 instance=ExtResource("22_njiyv")]
 position = Vector2(-73, -39)
 
-[node name="BombNC3" parent="BombsPrev2" unique_id=1385759348 instance=ExtResource("22_njiyv")]
-position = Vector2(-41, 13)
-
 [node name="BombNC4" parent="BombsPrev2" unique_id=1428447357 instance=ExtResource("22_njiyv")]
 position = Vector2(-118, 15)
-
-[node name="BombNC5" parent="BombsPrev2" unique_id=1497731050 instance=ExtResource("22_njiyv")]
-position = Vector2(-115, 60)
 
 [node name="BombNC6" parent="BombsPrev2" unique_id=1279462575 instance=ExtResource("22_njiyv")]
 position = Vector2(9, 10)
@@ -964,14 +931,8 @@ position = Vector2(9, 10)
 [node name="BombNC7" parent="BombsPrev2" unique_id=1121474612 instance=ExtResource("22_njiyv")]
 position = Vector2(38, -52)
 
-[node name="BombNC8" parent="BombsPrev2" unique_id=84036936 instance=ExtResource("22_njiyv")]
-position = Vector2(56, 11)
-
 [node name="BombNC9" parent="BombsPrev2" unique_id=868979807 instance=ExtResource("22_njiyv")]
 position = Vector2(118, -38)
-
-[node name="BombNC10" parent="BombsPrev2" unique_id=500649729 instance=ExtResource("22_njiyv")]
-position = Vector2(218, -54)
 
 [node name="BombNC11" parent="BombsPrev2" unique_id=117238744 instance=ExtResource("22_njiyv")]
 position = Vector2(167, 15)

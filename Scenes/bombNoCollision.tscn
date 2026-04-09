@@ -10,7 +10,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_7krys")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=34927630]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 3, 0, 0, 0, 5, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 7, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_w2ts3")
 collision_enabled = false
 

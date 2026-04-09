@@ -26,8 +26,7 @@ func _ready() -> void:
 		comboLabels.push_back(self.get_node("Player"+str(i+1)+"/Player/vBox/LabelCombo"))
 		self.get_node("Player"+str(i+1)+"/Player/cBox/LabelHealth").visible = true
 		self.get_node("Player"+str(i+1)+"/Player/vBox/LabelCombo").visible = true
-		self.get_node("Player"+str(i+1)+"/Player/vBox/hBox/vBox/hBox/cBox/gravityBuff").modulate = Color(0.5, 0.5, 0.5, 1)
-		self.get_node("Player"+str(i+1)+"/Player/vBox/hBox/vBox/hBox/cBox2/defenseBuff").modulate = Color(0.5, 0.5, 0.5, 1)
+		self.get_node("Player"+str(i+1)+"/Player/cBox/cBox2/defenseBuff").modulate = Color(0.5, 0.5, 0.5, 1)
 		self.get_node("Player"+str(i+1)).show()
 		print(GameManager.playerSpriteSheets[0])
 		var icon = self.get_node("Player"+str(i+1)).get_node("Player/vBox/hBox/vBox/cBox/PlayerIcon")
@@ -38,7 +37,7 @@ func _ready() -> void:
 func buffChanges():
 	var players = get_tree().get_nodes_in_group("player")
 	for i in range(players.size()):
-		var player_node = get_node("Player"+str(i+1)+"/Player/vBox/hBox/vBox/hBox/cBox2/defenseBuff")
+		var player_node = get_node("Player"+str(i+1)+"/Player/cBox/cBox2/defenseBuff")
 		if players[i].isInvincible:
 			player_node.modulate = Color(1, 1, 1, 1)
 		else:

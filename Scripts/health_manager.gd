@@ -45,7 +45,7 @@ func _process(_delta):
 	if health<=0 and GameManager.arePlayersAlive[id-1]==true:
 		if lifes>1:
 			health=100
-			get_parent().Jump()
+			get_parent().move_player_to_spawn()
 			lifes-=1
 			GameManager.playerLifes[id-1]=lifes
 		else:
@@ -60,7 +60,7 @@ func _process(_delta):
 
 #usuwanie zdrowia zaatakowanemu graczowi
 func _on_player_attack(player, damage, playerDamaged, direction):
-	print(str("helo ")+str(playerDamaged))
+	print(str("helo ")+str(playerDamaged)+str(' ')+str(player))
 	playerDamaged.get_node("HealthManager").health-=damage
 	if playerDamaged.get_node("HealthManager").health<=0 and playerDamaged.get_node("MoveTimer").is_stopped()==false:
 		playerDamaged.get_node("MoveTimer").stop()

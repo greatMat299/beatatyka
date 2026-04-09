@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://j41nkenbbfni" path="res://Scenes/spikeScene.tscn" id="15_kbifk"]
 [ext_resource type="AudioStream" uid="uid://0jfck1s18aaw" path="res://Assets/Sound/SFX/crowdCheering.mp3" id="16_7m6j4"]
 [ext_resource type="AudioStream" uid="uid://dlkd1lw7ct6yq" path="res://Assets/Sound/SFX/crowdChant.mp3" id="17_nw01y"]
+[ext_resource type="PackedScene" uid="uid://c1ysp1g5i5h4c" path="res://Scenes/bomb.tscn" id="18_sj6s6"]
+[ext_resource type="PackedScene" uid="uid://d15v1pnidbpi3" path="res://Scenes/bombNoCollision.tscn" id="19_hu5ju"]
+[ext_resource type="PackedScene" uid="uid://qfl2dek2an0g" path="res://Scenes/laser.tscn" id="20_p31s7"]
 
 [sub_resource type="Animation" id="Animation_si05j"]
 length = 0.001
@@ -129,6 +132,126 @@ _data = {
 &"showSpikes": SubResource("Animation_ngqs7")
 }
 
+[sub_resource type="Animation" id="Animation_evjh5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BombsPrev1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rjj4s"]
+resource_name = "showBombs"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BombsPrev1:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3aimw"]
+resource_name = "showPlatform"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.37254903), Color(1, 1, 1, 0.8627451), Color(1, 1, 1, 0.13725491)]
+}
+
+[sub_resource type="Animation" id="Animation_gbt8x"]
+resource_name = "showSpikes"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.78431374), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rqx3g"]
+_data = {
+&"RESET": SubResource("Animation_evjh5"),
+&"showBombs": SubResource("Animation_rjj4s"),
+&"showPlatform": SubResource("Animation_3aimw"),
+&"showSpikes": SubResource("Animation_gbt8x")
+}
+
+[sub_resource type="Animation" id="Animation_ggc6e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_14duj"]
+resource_name = "showLaser"
+length = 0.56666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0124, 0.5533, 0.56666666),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.60784316), Color(1, 0, 0, 0.60784316), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51k7m"]
+_data = {
+&"RESET": SubResource("Animation_ggc6e"),
+&"showLaser": SubResource("Animation_14duj")
+}
+
 [node name="jaco" type="Node2D" unique_id=1065128858]
 script = ExtResource("1_1xphd")
 playerScene = ExtResource("2_eb7le")
@@ -140,6 +263,11 @@ tile_map_data = PackedByteArray("AAD1//j/BwAAAAAAAAD1//n/BwAAAAEAAAD1//r/BwAAAAI
 tile_set = ExtResource("3_eb7le")
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=2015374518]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD2/wQACwACAAAAABD3/wQACwABAAAAAAD4/wQACwABAAAAAAD5/wQACwABAAAAAAD6/wQACwABAAAAAAD7/wQACwABAAAAAAD8/wQACwABAAAAAAD9/wQACwABAAAAAAD+/wQACwABAAAAAAD//wQACwABAAAAAAAAAAQACwABAAAAAAABAAQACwABAAAAAAACAAQACwABAAAAAAADAAQACwABAAAAAAAEAAQACwABAAAAAAAFAAQACwABAAAAAAAGAAQACwABAAAAAAAHAAQACwABAAAAAAAIAAQACwABAAAAAAAJAAQACwABAAAAAAAKAAQACwABAAAAAAALAAQACwABAAAAAAAMAAQACwABAAAAAAANAAQACwABAAAAAAAOAAQACwABAAAAAAAPAAQACwACAAAAAAA=")
+tile_set = ExtResource("3_eb7le")
+
+[node name="Ground2" type="TileMapLayer" parent="." unique_id=1226361982]
 texture_filter = 1
 tile_map_data = PackedByteArray("AAD2/wQACwACAAAAABD3/wQACwABAAAAAAD4/wQACwABAAAAAAD5/wQACwABAAAAAAD6/wQACwABAAAAAAD7/wQACwABAAAAAAD8/wQACwABAAAAAAD9/wQACwABAAAAAAD+/wQACwABAAAAAAD//wQACwABAAAAAAAAAAQACwABAAAAAAABAAQACwABAAAAAAACAAQACwABAAAAAAADAAQACwABAAAAAAAEAAQACwABAAAAAAAFAAQACwABAAAAAAAGAAQACwABAAAAAAAHAAQACwABAAAAAAAIAAQACwABAAAAAAAJAAQACwABAAAAAAAKAAQACwABAAAAAAALAAQACwABAAAAAAAMAAQACwABAAAAAAANAAQACwABAAAAAAAOAAQACwABAAAAAAAPAAQACwACAAAAAAA=")
 tile_set = ExtResource("3_eb7le")
@@ -234,6 +362,22 @@ collision_enabled = false
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms5Prev" unique_id=1083514845]
 libraries/ = SubResource("AnimationLibrary_vcux0")
 
+[node name="Platforms6" type="TileMapLayer" parent="." unique_id=724970796]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAHAP7/CwABAAAAACAIAP7/CwABAAAAACAJAP7/CwABAAAAACAKAP7/CwABAAAAACALAP7/CwABAAAAACAMAP7/CwABAAAAACANAP7/CwABAAAAACAOAP7/CwABAAAAACAPAP7/CwABAAAAACAGAP3/CwACAAAAAEAGAPz/CwABAAAAAGD7//7/CwABAAAAADD6//7/CwABAAAAADD5//7/CwABAAAAADD4//7/CwABAAAAADD3//7/CwABAAAAADD2//7/CwABAAAAADD9//z/CwABAAAAAHD9//v/CwACAAAAAHAGAPv/CwACAAAAAGAGAP7/CwACAAAAADAQAP7/CwACAAAAACD1//7/CwACAAAAADD8//7/CwABAAAAADD9//3/CwACAAAAAFD9//7/CwACAAAAACA=")
+enabled = false
+tile_set = ExtResource("3_eb7le")
+
+[node name="Platforms6Prev" type="TileMapLayer" parent="." unique_id=1280407889]
+self_modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAHAP7/CwABAAAAACAIAP7/CwABAAAAACAJAP7/CwABAAAAACAKAP7/CwABAAAAACALAP7/CwABAAAAACAMAP7/CwABAAAAACANAP7/CwABAAAAACAOAP7/CwABAAAAACAPAP7/CwABAAAAACAGAP3/CwACAAAAAEAGAPz/CwABAAAAAGD7//7/CwABAAAAADD6//7/CwABAAAAADD5//7/CwABAAAAADD4//7/CwABAAAAADD3//7/CwABAAAAADD2//7/CwABAAAAADD9//z/CwABAAAAAHD9//v/CwACAAAAAHAGAPv/CwACAAAAAGAGAP7/CwACAAAAADAQAP7/CwACAAAAACD1//7/CwACAAAAADD8//7/CwABAAAAADD9//3/CwACAAAAAFD9//7/CwACAAAAACA=")
+tile_set = ExtResource("3_eb7le")
+collision_enabled = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms6Prev" unique_id=346058732]
+libraries/ = SubResource("AnimationLibrary_vcux0")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1974044964]
 visible = false
 position = Vector2(48, -1)
@@ -274,6 +418,10 @@ script = ExtResource("7_rqx3g")
 midi = ExtResource("10_hu5ju")
 script = ExtResource("7_rqx3g")
 
+[node name="MidiPlayerCatcher2" type="MidiPlayer" parent="MusicPlayer" unique_id=929914178 groups=["midiPlayer"]]
+midi = ExtResource("10_hu5ju")
+script = ExtResource("7_rqx3g")
+
 [node name="UserUI" parent="." unique_id=1459571692 instance=ExtResource("11_ypbyd")]
 noteSpeed = 250.0
 
@@ -306,7 +454,7 @@ one_shot = true
 visible = false
 modulate = Color(1, 1, 1, 0.6797385)
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -2)
+position = Vector2(-48, -33)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Spike1PrevGroup" unique_id=707694897]
 libraries/ = SubResource("AnimationLibrary_qakiw")
@@ -330,7 +478,7 @@ position = Vector2(176, 98)
 visible = false
 modulate = Color(1, 1, 1, 0.6013072)
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -2)
+position = Vector2(113, -32)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Spike2PrevGroup" unique_id=1935903267]
 libraries/ = SubResource("AnimationLibrary_qakiw")
@@ -350,10 +498,34 @@ position = Vector2(-90, 97)
 [node name="SpikeSceneNC5" parent="Spike2PrevGroup" unique_id=449738186 instance=ExtResource("14_s1jxu")]
 position = Vector2(-75, 97)
 
+[node name="Spike3PrevGroup" type="Node2D" parent="." unique_id=1070581493]
+visible = false
+modulate = Color(1, 1, 1, 0.6013072)
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(113, -32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spike3PrevGroup" unique_id=12019275]
+libraries/ = SubResource("AnimationLibrary_qakiw")
+
+[node name="SpikeSceneNC" parent="Spike3PrevGroup" unique_id=80966436 instance=ExtResource("14_s1jxu")]
+position = Vector2(53, 97)
+
+[node name="SpikeSceneNC2" parent="Spike3PrevGroup" unique_id=598502661 instance=ExtResource("14_s1jxu")]
+position = Vector2(117, 97)
+
+[node name="SpikeSceneNC3" parent="Spike3PrevGroup" unique_id=2083978957 instance=ExtResource("14_s1jxu")]
+position = Vector2(-106, 97)
+
+[node name="SpikeSceneNC4" parent="Spike3PrevGroup" unique_id=528628692 instance=ExtResource("14_s1jxu")]
+position = Vector2(-90, 97)
+
+[node name="SpikeSceneNC5" parent="Spike3PrevGroup" unique_id=916418873 instance=ExtResource("14_s1jxu")]
+position = Vector2(-75, 97)
+
 [node name="Spikes1" type="Node2D" parent="." unique_id=791742905]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -1)
+position = Vector2(-48, -32)
 
 [node name="SpikeScene" parent="Spikes1" unique_id=827716279 instance=ExtResource("15_kbifk")]
 position = Vector2(-32, 97)
@@ -373,7 +545,7 @@ position = Vector2(176, 97)
 [node name="Spikes2" type="Node2D" parent="." unique_id=1789022395]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -1)
+position = Vector2(113, -32)
 
 [node name="SpikeScene" parent="Spikes2" unique_id=1530637308 instance=ExtResource("15_kbifk")]
 position = Vector2(-106, 97)
@@ -390,6 +562,26 @@ position = Vector2(53, 97)
 [node name="SpikeScene5" parent="Spikes2" unique_id=1829091494 instance=ExtResource("15_kbifk")]
 position = Vector2(117, 97)
 
+[node name="Spikes3" type="Node2D" parent="." unique_id=285436305]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(113, -32)
+
+[node name="SpikeScene" parent="Spikes3" unique_id=1326845085 instance=ExtResource("15_kbifk")]
+position = Vector2(-106, 97)
+
+[node name="SpikeScene2" parent="Spikes3" unique_id=14665983 instance=ExtResource("15_kbifk")]
+position = Vector2(-90, 97)
+
+[node name="SpikeScene3" parent="Spikes3" unique_id=689358034 instance=ExtResource("15_kbifk")]
+position = Vector2(-75, 97)
+
+[node name="SpikeScene4" parent="Spikes3" unique_id=1559604106 instance=ExtResource("15_kbifk")]
+position = Vector2(53, 97)
+
+[node name="SpikeScene5" parent="Spikes3" unique_id=321568842 instance=ExtResource("15_kbifk")]
+position = Vector2(117, 97)
+
 [node name="CrowdCheerSFX" type="AudioStreamPlayer2D" parent="." unique_id=1878810571]
 stream = ExtResource("16_7m6j4")
 bus = &"SFX"
@@ -400,32 +592,189 @@ volume_db = -3.0
 bus = &"SFX"
 
 [node name="Bombs1" type="Node2D" parent="." unique_id=665226273]
+visible = false
+
+[node name="Bomb" parent="Bombs1" unique_id=1742308057 instance=ExtResource("18_sj6s6")]
+position = Vector2(-133, 38)
+
+[node name="Bomb2" parent="Bombs1" unique_id=635149291 instance=ExtResource("18_sj6s6")]
+position = Vector2(-68, 10)
+
+[node name="Bomb3" parent="Bombs1" unique_id=256446823 instance=ExtResource("18_sj6s6")]
+position = Vector2(0, 9)
+
+[node name="Bomb4" parent="Bombs1" unique_id=1501259737 instance=ExtResource("18_sj6s6")]
+position = Vector2(75, 44)
+
+[node name="Bomb5" parent="Bombs1" unique_id=1752481757 instance=ExtResource("18_sj6s6")]
+position = Vector2(166, 43)
+
+[node name="Bomb6" parent="Bombs1" unique_id=1989110669 instance=ExtResource("18_sj6s6")]
+position = Vector2(233, 9)
+
+[node name="Bomb7" parent="Bombs1" unique_id=980264463 instance=ExtResource("18_sj6s6")]
+position = Vector2(142, -58)
+
+[node name="Bomb8" parent="Bombs1" unique_id=1587094980 instance=ExtResource("18_sj6s6")]
+position = Vector2(-37, -59)
 
 [node name="Bombs2" type="Node2D" parent="." unique_id=1931645485]
+visible = false
+
+[node name="Bomb" parent="Bombs2" unique_id=161895885 instance=ExtResource("18_sj6s6")]
+position = Vector2(-144, 10)
+
+[node name="Bomb2" parent="Bombs2" unique_id=2056259324 instance=ExtResource("18_sj6s6")]
+position = Vector2(-82, 41)
+
+[node name="Bomb3" parent="Bombs2" unique_id=501827259 instance=ExtResource("18_sj6s6")]
+position = Vector2(9, 44)
+
+[node name="Bomb4" parent="Bombs2" unique_id=241844137 instance=ExtResource("18_sj6s6")]
+position = Vector2(77, 13)
+
+[node name="Bomb5" parent="Bombs2" unique_id=1214109748 instance=ExtResource("18_sj6s6")]
+position = Vector2(117, 46)
+
+[node name="Bomb6" parent="Bombs2" unique_id=405053342 instance=ExtResource("18_sj6s6")]
+position = Vector2(180, 0)
+
+[node name="Bomb7" parent="Bombs2" unique_id=1264392641 instance=ExtResource("18_sj6s6")]
+position = Vector2(236, 52)
+
+[node name="Bomb8" parent="Bombs2" unique_id=368588333 instance=ExtResource("18_sj6s6")]
+position = Vector2(208, -34)
 
 [node name="BombsPrev1" type="Node2D" parent="." unique_id=505175695]
+visible = false
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="BombNC" parent="BombsPrev1" unique_id=1235713841 instance=ExtResource("19_hu5ju")]
+position = Vector2(-133, 38)
+
+[node name="BombNC2" parent="BombsPrev1" unique_id=2061916245 instance=ExtResource("19_hu5ju")]
+position = Vector2(-68, 10)
+
+[node name="BombNC3" parent="BombsPrev1" unique_id=650996735 instance=ExtResource("19_hu5ju")]
+position = Vector2(-37, -59)
+
+[node name="BombNC4" parent="BombsPrev1" unique_id=478804448 instance=ExtResource("19_hu5ju")]
+position = Vector2(0, 9)
+
+[node name="BombNC5" parent="BombsPrev1" unique_id=1140718342 instance=ExtResource("19_hu5ju")]
+position = Vector2(75, 44)
+
+[node name="BombNC6" parent="BombsPrev1" unique_id=801826038 instance=ExtResource("19_hu5ju")]
+position = Vector2(142, -58)
+
+[node name="BombNC7" parent="BombsPrev1" unique_id=1638215087 instance=ExtResource("19_hu5ju")]
+position = Vector2(166, 43)
+
+[node name="BombNC8" parent="BombsPrev1" unique_id=1710401910 instance=ExtResource("19_hu5ju")]
+position = Vector2(233, 9)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BombsPrev1" unique_id=1517879012]
+libraries/ = SubResource("AnimationLibrary_rqx3g")
 
 [node name="BombsPrev2" type="Node2D" parent="." unique_id=2145814526]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="BombNC" parent="BombsPrev2" unique_id=324227948 instance=ExtResource("19_hu5ju")]
+position = Vector2(-144, 10)
+
+[node name="BombNC2" parent="BombsPrev2" unique_id=1898524901 instance=ExtResource("19_hu5ju")]
+position = Vector2(-82, 41)
+
+[node name="BombNC3" parent="BombsPrev2" unique_id=1693210343 instance=ExtResource("19_hu5ju")]
+position = Vector2(9, 44)
+
+[node name="BombNC4" parent="BombsPrev2" unique_id=1694620888 instance=ExtResource("19_hu5ju")]
+position = Vector2(77, 13)
+
+[node name="BombNC5" parent="BombsPrev2" unique_id=1622925470 instance=ExtResource("19_hu5ju")]
+position = Vector2(117, 46)
+
+[node name="BombNC6" parent="BombsPrev2" unique_id=1490617652 instance=ExtResource("19_hu5ju")]
+position = Vector2(180, 0)
+
+[node name="BombNC7" parent="BombsPrev2" unique_id=1194953304 instance=ExtResource("19_hu5ju")]
+position = Vector2(208, -34)
+
+[node name="BombNC8" parent="BombsPrev2" unique_id=1679604729 instance=ExtResource("19_hu5ju")]
+position = Vector2(236, 52)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BombsPrev2" unique_id=1161469118]
+libraries/ = SubResource("AnimationLibrary_rqx3g")
 
 [node name="Lasers1" type="Node2D" parent="." unique_id=1337365522]
+visible = false
+
+[node name="Laser" parent="Lasers1" unique_id=400737884 instance=ExtResource("20_p31s7")]
+position = Vector2(26, 50)
 
 [node name="Lasers2" type="Node2D" parent="." unique_id=1489196203]
+visible = false
+
+[node name="Laser" parent="Lasers2" unique_id=1447212927 instance=ExtResource("20_p31s7")]
+position = Vector2(24, -8)
 
 [node name="Lasers3" type="Node2D" parent="." unique_id=2030148153]
+visible = false
+
+[node name="Laser" parent="Lasers3" unique_id=1914599803 instance=ExtResource("20_p31s7")]
+position = Vector2(-70, 4)
+rotation = -1.5707964
 
 [node name="Lasers4" type="Node2D" parent="." unique_id=634169767]
+visible = false
+
+[node name="Laser" parent="Lasers4" unique_id=1933258624 instance=ExtResource("20_p31s7")]
+position = Vector2(206, 3)
+rotation = -1.5707964
 
 [node name="LasersPrev1" type="Node2D" parent="." unique_id=916931062]
+visible = false
+modulate = Color(1, 0, 0, 0)
+
+[node name="Laser" parent="LasersPrev1" unique_id=47718655 instance=ExtResource("20_p31s7")]
+position = Vector2(26, 50)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev1" unique_id=1467101190]
+libraries/ = SubResource("AnimationLibrary_51k7m")
 
 [node name="LasersPrev2" type="Node2D" parent="." unique_id=1534067520]
+visible = false
+modulate = Color(1, 0, 0, 0)
+
+[node name="Laser" parent="LasersPrev2" unique_id=1024294447 instance=ExtResource("20_p31s7")]
+position = Vector2(24, -8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev2" unique_id=96026524]
+libraries/ = SubResource("AnimationLibrary_51k7m")
 
 [node name="LasersPrev3" type="Node2D" parent="." unique_id=1774904339]
+visible = false
+modulate = Color(1, 0, 0, 0)
+
+[node name="Laser" parent="LasersPrev3" unique_id=1795168920 instance=ExtResource("20_p31s7")]
+position = Vector2(-70, 4)
+rotation = -1.5707964
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev3" unique_id=1132694006]
+libraries/ = SubResource("AnimationLibrary_51k7m")
 
 [node name="LasersPrev4" type="Node2D" parent="." unique_id=380424808]
+visible = false
+modulate = Color(1, 0, 0, 0)
 
-[node name="Spikes3" type="Node2D" parent="." unique_id=213523517]
+[node name="Laser" parent="LasersPrev4" unique_id=940173734 instance=ExtResource("20_p31s7")]
+position = Vector2(206, 3)
+rotation = -1.5707964
 
-[node name="Spikes3PrevGroup" type="Node2D" parent="." unique_id=1223285419]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LasersPrev4" unique_id=2042800625]
+libraries/ = SubResource("AnimationLibrary_51k7m")
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

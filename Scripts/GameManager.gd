@@ -4,6 +4,7 @@ const CHARACTER_SPEEDS = [170.0,220.0,135.0,230.0]
 const CHARACTER_JUMP_VELS = [-550.0,-630.0,-500.0,-600.0]
 const CHARACTER_ATTACK_PWRS = [7.0,5.5,8.5,4.5]
 const CHARACTER_DASH_ATTACK_PWRS = [11.0,10.0,14.0,8.0]
+const CHARACTER_ULT_ATTACK_COOLDOWN = [10,20,5,30]
 const START_TIMES={
 	"CrabRave":2.55,
 	"Chromatically":2.15,
@@ -43,6 +44,7 @@ var currentCharacterSpeeds=[]
 var currentCharacterJumpVels=[]
 var currentCharacterAttackPwr=[]
 var currentCharacterDashAttackPwr=[]
+var currentCharacterUltAttackCooldown=[]
 var playersDeadOrder=[]
 var playerLifes=[]
 var mapName=""
@@ -57,6 +59,7 @@ var levelBPM = 0
 
 func resetGameManager():
 	hasStartSeqFinished=false
+	isGamePlaying=false
 	platformsList=[]
 	platformPrevList=[]
 	spikeList=[]
@@ -73,6 +76,7 @@ func resetGameManager():
 	currentCharacterAttackPwr=[]
 	currentCharacterDashAttackPwr=[]
 	playersDeadOrder=[]
+	currentCharacterUltAttackCooldown=[]
 	mapName=""
 	player_count=0
 	next_player_id=0
@@ -96,7 +100,9 @@ func setCharacterAttribute(charIndex, att):
 			currentCharacterAttackPwr.append(CHARACTER_ATTACK_PWRS[charIndex])
 		3:
 			currentCharacterDashAttackPwr.append(CHARACTER_DASH_ATTACK_PWRS[charIndex])
-
+		4:
+			currentCharacterUltAttackCooldown.append(CHARACTER_ULT_ATTACK_COOLDOWN[charIndex])
+			
 func choose_new_powerup():
 	currentPowerupIndex = rng.randi_range(1, 3)
 	currentPowerupType = rng.randi_range(1, 3)

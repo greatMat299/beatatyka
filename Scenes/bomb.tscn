@@ -10,7 +10,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_4fn8o")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=34927630]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 3, 0, 0, 0, 5, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 7, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("2_nfxiy")
 
 [node name="BombArea2D" type="Area2D" parent="TileMapLayer" unique_id=847810363]

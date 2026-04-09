@@ -32,8 +32,6 @@ func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	GameManager.choose_new_powerup()
 	
-	GameManager.isGamePlaying==true
-	
 	audioStreamPlayer.play()
 	
 	print(GameManager.currentPlayerKeybinds)
@@ -53,13 +51,15 @@ func _ready() -> void:
 		copy.playerKeybindId = GameManager.currentPlayerKeybinds[i]
 		copy.name=str("Player")+str(i+1)
 		
+		copy.currentSpriteSheet = GameManager.playerSpriteSheets[i]
 		copy.playerSpeed=GameManager.currentCharacterSpeeds[i]
 		copy.jumpVelocity=GameManager.currentCharacterJumpVels[i]
 		copy.attackPower=GameManager.currentCharacterAttackPwr[i]
 		copy.dashAttackPower=GameManager.currentCharacterDashAttackPwr[i]
+		copy.ultCooldownTimerAmount=GameManager.currentCharacterUltAttackCooldown[i]
 		
 		copy.position.x = playerPos[i]
-		copy.currentSpriteSheet = GameManager.playerSpriteSheets[i]
+		
 		
 		var death_area = get_node("DeathArea")
 		death_area.body_entered.connect(copy._on_death_area_body_entered)
@@ -90,7 +90,7 @@ func _ready() -> void:
 	
 func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
-	if GameManager.player_count<=0:
+	if GameManager.player_count<=1:
 		GameManager.isGamePlaying=false
 		
 	if GameManager.hasStartSeqFinished==true and audioStreamPlayer.playing==false:
@@ -288,8 +288,11 @@ func _on_note_played(note, sender):
 			
 		#normalne nuty
 		if note>=59&&note<=64: #platforma
-			if ground.enabled==false:
+			if note==59:
+				get_node("Ground2").enabled=false
 				ground.enabled=true
+			#if ground.enabled==false:
+				#ground.enabled=true
 			modifierType=note-59
 			set_active_platform(modifierType, false,sender)
 		elif note>=65&&note<=67: #kolce

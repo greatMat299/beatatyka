@@ -14,11 +14,13 @@ extends Control
 @onready var animPlayer = $"../AnimationPlayer"
 @onready var randomSelectSfx = $randomSelectSfx
 @onready var mainMenuMusic = $"../MainMenuMusic"
+const PLAYER_EXTRAS=["2.5X DASH na 5s", "2X DAMAGE na 5s", "+2HP co 5s", "ATAK RADIOAKTYWNY"]
 var previewSprites = []
 var playerLabels = []
 var speedCharLabels = []
 var jumpCharLabels = []
 var attackCharLabels = []
+var extraCharLabels=[]
 var playerAmount=1
 var arePlayersActive=[true,false,false,false]
 var arePlayersReady=[false,false,false,false]
@@ -84,6 +86,7 @@ func fillUpArrays():
 		speedCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("SpeedLabel"))
 		jumpCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("JumpLabel"))
 		attackCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("AttackLabel"))
+		extraCharLabels.append(get_node("PreviewSprites").get_node("SpriteControl"+str(i+1)).get_node("ExtraLabel"))
 		
 	for i in range(0,len(characterIcons)-1):	
 		get_node("Control/HBoxContainer/Postac"+str(i+1)).icon = characterIcons[i]
@@ -105,6 +108,9 @@ func checkIfAllReady() -> bool:
 			
 func exitMenu():
 	GameManager.currentPlayerKeybinds=[]
+	GameManager.currentCharacterUltAttackCooldown=[]
+	GameManager.playerSpriteSheets=[]
+	GameManager.playerSpriteIcons=[]
 	menuBackSfx.play()
 	animPlayer.play("menuBack")
 	await get_tree().create_timer(0.1).timeout
@@ -172,6 +178,7 @@ func preparePlayer(index):
 	GameManager.setCharacterAttribute(index,1)
 	GameManager.setCharacterAttribute(index,2)
 	GameManager.setCharacterAttribute(index,3)
+	GameManager.setCharacterAttribute(index,4)
 	
 func update_frame(frame, index):
 	menuSwipeSfx.play()
@@ -236,6 +243,7 @@ func handle_input_p2():
 			speedCharLabels[1].visible = true
 			jumpCharLabels[1].visible = true
 			attackCharLabels[1].visible = true
+			extraCharLabels[1].visible = true
 			
 			playerLabels[1].add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 			playerAmount+=1
@@ -286,6 +294,7 @@ func handle_input_p3():
 			speedCharLabels[2].visible = true
 			jumpCharLabels[2].visible = true
 			attackCharLabels[2].visible = true
+			extraCharLabels[2].visible = true
 			
 			playerLabels[2].add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 			playerAmount+=1
@@ -336,6 +345,7 @@ func handle_input_p4():
 			speedCharLabels[3].visible = true
 			jumpCharLabels[3].visible = true
 			attackCharLabels[3].visible = true
+			extraCharLabels[3].visible = true
 			
 			playerLabels[3].add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 			playerAmount+=1
@@ -375,12 +385,14 @@ func update_sprite_preview(player,index):
 		speedCharLabels[player-1].text = "Szybkość: "+str(GameManager.CHARACTER_SPEEDS[index])
 		jumpCharLabels[player-1].text = "Skok: "+str(abs(GameManager.CHARACTER_JUMP_VELS[index]))
 		attackCharLabels[player-1].text = "Atak: "+str(GameManager.CHARACTER_ATTACK_PWRS[index])
+		extraCharLabels[player-1].text = PLAYER_EXTRAS[index]
 	elif index==len(GameManager.CHARACTER_SPEEDS):
 		previewSprites[player-1].sprite_frames = characterSprites[index]
 		previewSprites[player-1].play("idle")
 		speedCharLabels[player-1].text = ""
 		jumpCharLabels[player-1].text = ""
 		attackCharLabels[player-1].text = ""
+		extraCharLabels[player-1].text = ""
 
 func update_preview(index):
 	var btn = buttons[index]

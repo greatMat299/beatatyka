@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal playerAttack(player, damage, playerDamaged, direction)
 
-const PLAYER_ACTIONS = ["jump", "right", "left", "attack", "block"]
+const PLAYER_ACTIONS = ["jump", "right", "left", "attack", "block", "down", "ult"]
 var jumps=0
 var maxJumps = 1
 var jumpAviable = false
@@ -22,11 +22,15 @@ var isInvincible=false
 var playerKeybindId=-1
 var currentSpriteSheet
 var isDashAnim=false
-var spikeDMG = 0
-var laserDMG = 0
+var spikeDMG = 10
+var laserDMG = 15
+var boomboxUltDMG = 55
+var electricGuiterDMGMultiplayer = 2
 var canLaserDMG = true
 var laserDMGCooldownAmount = 0.3
 var should_play := false
+var is_crouching :=false
+var canUseUlt = true
 
 var powerup1
 var powerup2
@@ -44,16 +48,27 @@ var powerup3
 @onready var attackCooldownTimer = $AttackCooldownTimer
 @onready var blockTimer = $BlockTimer
 @onready var blockCooldownTimer = $BlockCooldownTimer
+@onready var saxophonePassiveTimer = $SaxophonePassiveTimer
+@onready var ultDurationTimer = $UltDurationTimer
+@onready var ultCooldownTimer = $UltCooldownTimer
 @onready var dashSfx = $SFX/DashSfx
 @onready var attackSfx = $SFX/AttackSfx
+@onready var classicGuitarAttackSfx = $SFX/ClassicGuitarAttackSfx
 @onready var walkSfx = $SFX/WalkSfx
 @onready var jumpSfx = $SFX/JumpSfx
 @onready var blockSfx = $SFX/BlockSfx
+@onready var saxophoneHealSfx = $SFX/SaxophoneHealSfx
+@onready var sonicBoomSfx = $SFX/SonicBoomSfx
 @onready var invincibilitySfx = $SFX/InvincibilitySfx
+@onready var guitarAttackSfx = $SFX/GuitarAttackSfx
 @onready var coyoteTimer = $CoyoteTimer
 @onready var jumpBufferTimer = $jumpBufferTimer
 @onready var laserDMGCooldownTimer = $LaserDMGCooldownTimer
-
+@onready var sonicBoomArea = $SonicBoomArea2D
+@onready var playerNumberLabel = $PlayerNumberLabel
+@onready var collision_box = $CollisionShape2D
+@onready var sonicBoomAnimation = $SonicBoomArea2D/sonicBoomAnimation
+@onready var animTimer = $AnimTimer
 
 @export_category("Player attributes")
 @export var playerSpeed : float = 250.0
@@ -68,6 +83,7 @@ var powerup3
 @export var blockCooldownAmount : float = 3.0
 @export var coyoteTimerAmount : float = 0.10
 @export var jumpBufferTimerAmount : float = 0.15
+var ultCooldownTimerAmount : float = 30.0
 
 
 
@@ -100,16 +116,30 @@ func _ready():
 	blockCooldownTimer.wait_time = blockCooldownAmount
 	coyoteTimer.wait_time = coyoteTimerAmount
 	jumpBufferTimer.wait_time = jumpBufferTimerAmount
+	ultCooldownTimer.wait_time = ultCooldownTimerAmount
+	
+	var color
+	match player_id:
+		1: color = Color(0.996, 0.0, 0.176)
+		2: color = Color(0.0, 0.557, 0.929)
+		3: color = Color(0.267, 0.639, 0.0)
+		4: color = Color(0.62, 0.584, 0.075)
+
+	playerNumberLabel.modulate = color
+	
+	#Wyswietlanie numeru gracza
+	playerNumberLabel.text = "P"+str(player_id)
 	
 	#dodanie przypisów klawiszy dla graczy
 	for i in range(0,len(PLAYER_ACTIONS)):
 		currentPlayerActions.push_back(str("player")+str(playerKeybindId)+str("_")+str(PLAYER_ACTIONS[i]))
 		
+	if(ultCooldownTimerAmount == 5): 
+		saxophonePassiveTimer.start(ultCooldownTimerAmount)	
+	
 	#usunięcie swojej kolizji z RayCastów
 	attackRaycast.add_exception(self)
 	dashRaycast.add_exception(self)
-	
-	print("I am player ", player_id, " and my node name is ", name)
 	
 func set_invicibility(body, state):
 	if self!=body:
@@ -126,7 +156,7 @@ func set_invicibility(body, state):
 
 
 func _physics_process(delta):
-			
+	print("ult: ",ultCooldownTimer.time_left)
 	#grawitacja
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -156,7 +186,24 @@ func _physics_process(delta):
 	elif !condition and should_play:
 		chant.stop()
 		should_play = false
-				
+		
+	#kucanie
+	if Input.is_action_just_pressed(currentPlayerActions[5]):
+		animSprite.position = Vector2(0,1.5)
+		playerSpeed = .125*playerSpeed
+		collision_box.scale = Vector2(1,0.5)
+		collision_box.position = Vector2(0,9)
+		is_crouching = true
+	
+	if Input.is_action_just_released(currentPlayerActions[5]):
+		animSprite.position = Vector2(0,0)
+		animSprite.skew = 0
+		playerSpeed = 8*playerSpeed
+		is_crouching = false	
+		collision_box.scale =Vector2(1,1)
+		collision_box.position = Vector2(0,4)
+	if is_crouching:
+		animSprite.skew = -.45 if animSprite.flip_h else .45	
 					
 
 	#cała akcja z graczem jeżeli przynajmniej 2 graczy jest żywych
@@ -199,7 +246,7 @@ func _physics_process(delta):
 						else:
 							body.get_node("AnimationPlayer").stop()
 							body.get_node("AnimationPlayer").play("playerHurt")
-						emit_signal("playerAttack",player_id,attackPower,body,dir)
+						body.emit_signal("playerAttack",player_id,attackPower,body,dir)
 			if dashPresses < maxDashPresses:
 				dashPresses += 1
 			else:
@@ -216,6 +263,17 @@ func _physics_process(delta):
 					isDashAnim=false
 				dashPresses=0
 				dashPressTimer.stop()
+				
+		if Input.is_action_just_pressed(currentPlayerActions[6]) and GameManager.isGamePlaying==true && canUseUlt == true:
+			print("tak ",ultCooldownTimerAmount)
+			match ultCooldownTimerAmount:
+				20.0: 
+					electric_guitar_mode()
+				30.0:
+					sonic_boom_attack()
+				10.0:
+					guitar_attack()
+					
 		
 		#anulacja dash'u jeżeli odliczanie się skończy
 		if dashPressTimer.is_stopped():
@@ -235,12 +293,13 @@ func _physics_process(delta):
 		
 		#atak z dash'em
 		if dashRaycast.is_colliding():
-			if abs(velocity.x)>700.0 and dashAttackCooldownTimer.is_stopped():
+			if abs(velocity.x)>600.0 and direction != 0 and dashAttackCooldownTimer.is_stopped():	
 				dashAttackCooldownTimer.start()
 				var body = dashRaycast.get_collider()
 				var hit_dir := -1 if animSprite.flip_h else 1
+				print("daaash ",body.player_id," ",player_id)
 				body.attackVelocity = attackPushPower * hit_dir
-				emit_signal("playerAttack",player_id,dashAttackPower,body,direction)
+				body.emit_signal("playerAttack",player_id,dashAttackPower,body,direction)
 				dashCooldownTimer.start()
 
 
@@ -397,6 +456,62 @@ func take_laser_damage(damage):
 		canLaserDMG = false
 		laserDMGCooldownTimer.start()
 
+func take_damage(damage):
+	if isInvincible == false:
+		get_node("HealthManager").health -= damage
 
 func _on_laser_dmg_cooldown_timer_timeout():
 	canLaserDMG = true
+	
+func move_player_to_spawn():
+	velocity.x = 0
+	velocity.y = 0
+	position.x = 50
+	position.y = -100
+	
+func sonic_boom_attack():
+	for body in sonicBoomArea.get_overlapping_bodies():
+		if "Player" in body.name && body != self:
+			body.take_damage(boomboxUltDMG)
+	sonicBoomSfx.play()
+	ultCooldownTimer.start()
+	sonicBoomAnimation.visible = true
+	canUseUlt = false
+	animTimer.start()
+	
+#ult od gitary elektrycznej
+func electric_guitar_mode():
+	attackPower = attackPower * 2
+	#ult cooldowny znajdują się w GameManagerze
+	ultCooldownTimer.start()
+	canUseUlt = false
+	modulate = Color(0.0, 0.736, 0.977, 1.0)
+	guitarAttackSfx.play()
+	await get_tree().create_timer(3.0).timeout
+	modulate = Color(1.0, 1.0, 1.0, 1.0)
+	attackPower = attackPower / 2
+	
+func _on_saxophone_passive_timer_timeout():
+	take_damage(-2)
+	saxophoneHealSfx.play()
+	saxophonePassiveTimer.start(ultCooldownTimerAmount)
+	
+func _on_ult_duration_timer_timeout():
+	attackPower = attackPower / 2
+	
+func _on_ult_cooldown_timer_timeout():
+	canUseUlt = true
+	
+func guitar_attack():
+	dashPower = dashPower * 2.5
+	dashAttackPower = dashAttackPower * 2
+	classicGuitarAttackSfx.play()
+	modulate = Color(1.0, 0.51, 0.444, 1.0)
+	await get_tree().create_timer(3.0).timeout
+	modulate = Color(1.0, 1.0, 1.0, 1.0)
+	dashPower = dashPower / 2.5
+	dashAttackPower = dashAttackPower / 2
+	
+	
+func _on_anim_timer_timeout():
+	sonicBoomAnimation.visible = false

@@ -89,8 +89,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2im6s")
-normalStyles = Array[StyleBox]([ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("6_ngqg3"), ExtResource("6_ngqg3")])
-highlightedStyles = Array[StyleBox]([ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("7_2666u"), ExtResource("7_2666u")])
+normalStyles = Array[StyleBox]([ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("3_8pign"), ExtResource("6_ngqg3"), ExtResource("6_ngqg3")])
+highlightedStyles = Array[StyleBox]([ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("4_a7fgk"), ExtResource("7_2666u"), ExtResource("7_2666u")])
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1882054342]
 layout_mode = 1
@@ -312,6 +312,37 @@ theme_override_font_sizes/font_size = 24
 text = "↓"
 horizontal_alignment = 1
 
+[node name="DownButton" type="Button" parent="MarginContainer/Container/VBoxContainer" unique_id=2075431290]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = ExtResource("3_8pign")
+theme_override_styles/hover = ExtResource("4_a7fgk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cijoo")
+
+[node name="HBoxContainer" type="MarginContainer" parent="MarginContainer/Container/VBoxContainer/DownButton" unique_id=306167505]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DownText" type="Label" parent="MarginContainer/Container/VBoxContainer/DownButton/HBoxContainer" unique_id=1952879278]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("3_n7hio")
+theme_override_font_sizes/font_size = 26
+text = "SCHYLANIE"
+
+[node name="CurrentDownKey" type="Label" parent="MarginContainer/Container/VBoxContainer/DownButton/HBoxContainer" unique_id=908159472]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("8_8pign")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Container/VBoxContainer" unique_id=1591645428]
 layout_mode = 2
 
@@ -373,5 +404,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="MarginContainer/Container/VBoxContainer/AttackButton" to="." method="_on_attack_button_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/Container/VBoxContainer/BlockButton" to="." method="_on_button_mouse_entered" binds= [4]]
 [connection signal="pressed" from="MarginContainer/Container/VBoxContainer/BlockButton" to="." method="_on_block_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/Container/VBoxContainer/DownButton" to="." method="_on_button_mouse_entered" binds= [5]]
+[connection signal="pressed" from="MarginContainer/Container/VBoxContainer/DownButton" to="." method="_on_down_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Container/VBoxContainer/HBoxContainer/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="MarginContainer/Container/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]

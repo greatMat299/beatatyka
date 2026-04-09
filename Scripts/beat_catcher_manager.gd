@@ -74,8 +74,9 @@ func onPlayerAttack(player, damage, playerDamaged, direction):
 		beatAttacked.emit(player,0,0)
 		return
 		
-	if playerDamaged not in attackers:
-		attackers.append(playerDamaged)
+	if playerDamaged.player_id != player:
+		if playerDamaged not in attackers:
+			attackers.append(playerDamaged)
 	
 	if not attackWindowOpen:
 		attackWindowOpen=true

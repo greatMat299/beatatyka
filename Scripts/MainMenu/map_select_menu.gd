@@ -130,6 +130,9 @@ func _process(_delta):
 			animPlayerMain.play("menuBack")
 			
 			GameManager.currentPlayerKeybinds=[]
+			GameManager.currentCharacterUltAttackCooldown=[]
+			GameManager.playerSpriteSheets=[]
+			GameManager.playerSpriteIcons=[]
 			await get_tree().create_timer(0.1).timeout
 			for i in range(0,4):
 				characterSelection.arePlayersReady[i]=false

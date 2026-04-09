@@ -43,10 +43,12 @@ func _process(delta):
 			for player in players:
 				var playerContCopy = playerContainerScene.instantiate()
 				var currentHealth = player.get_node("HealthManager").health
+				var currentLife = player.get_node("HealthManager").lifes
 				playerContCopy.get_node("VBoxContainer/HealthLabel").text=str(currentHealth)
 				playerContCopy.get_node("VBoxContainer/TextureRect").sprites = GameManager.playerSpriteSheets[i]
 				get_node("PlayerStatus").add_child(playerContCopy)
-				playerHealths.append(currentHealth)
+				playerHealths.append(currentHealth*currentLife)
+				print(playerHealths)
 				if currentHealth>maxHealth:
 					maxHealth=currentHealth
 					maxHealthId=player.player_id

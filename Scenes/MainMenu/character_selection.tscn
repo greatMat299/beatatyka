@@ -306,6 +306,24 @@ offset_right = 0.3500061
 offset_bottom = 0.15997314
 metadata/_edit_use_anchors_ = true
 
+[node name="ExtraLabel" type="Label" parent="PreviewSprites/SpriteControl1" unique_id=571222351]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.279
+anchor_top = -0.082
+anchor_right = 0.72200006
+anchor_bottom = -0.004
+offset_left = -0.02009964
+offset_top = -23.074007
+offset_right = 0.85743713
+offset_bottom = -21.028008
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.85539424, 0.62007445, 0.07572145, 1)
+theme_override_fonts/font = ExtResource("5_te3kb")
+theme_override_font_sizes/font_size = 18
+text = "2X DASH"
+
 [node name="SpeedLabel" type="Label" parent="PreviewSprites/SpriteControl1" unique_id=591733453]
 texture_filter = 1
 layout_mode = 1
@@ -432,6 +450,25 @@ scale = Vector2(5, 5)
 sprite_frames = ExtResource("2_gih77")
 animation = &"random"
 
+[node name="ExtraLabel" type="Label" parent="PreviewSprites/SpriteControl2" unique_id=1237248058]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.279
+anchor_top = -0.082
+anchor_right = 0.72200006
+anchor_bottom = -0.004
+offset_left = -0.02009964
+offset_top = -23.074007
+offset_right = 0.85743713
+offset_bottom = -21.028008
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.85539424, 0.62007445, 0.07572145, 1)
+theme_override_fonts/font = ExtResource("5_te3kb")
+theme_override_font_sizes/font_size = 18
+text = "2X DASH"
+
 [node name="SpriteControl3" type="Control" parent="PreviewSprites" unique_id=1067041066]
 layout_mode = 1
 anchor_left = 0.5011562
@@ -503,6 +540,25 @@ scale = Vector2(5, 5)
 sprite_frames = ExtResource("2_gih77")
 animation = &"random"
 
+[node name="ExtraLabel" type="Label" parent="PreviewSprites/SpriteControl3" unique_id=1527069594]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.279
+anchor_top = -0.082
+anchor_right = 0.72200006
+anchor_bottom = -0.004
+offset_left = -0.02009964
+offset_top = -23.074007
+offset_right = 0.85743713
+offset_bottom = -21.028008
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.85539424, 0.62007445, 0.07572145, 1)
+theme_override_fonts/font = ExtResource("5_te3kb")
+theme_override_font_sizes/font_size = 18
+text = "2X DASH"
+
 [node name="SpriteControl4" type="Control" parent="PreviewSprites" unique_id=2020339427]
 layout_mode = 1
 anchor_left = 0.6831875
@@ -573,6 +629,25 @@ position = Vector2(108, 138)
 scale = Vector2(5, 5)
 sprite_frames = ExtResource("2_gih77")
 animation = &"random"
+
+[node name="ExtraLabel" type="Label" parent="PreviewSprites/SpriteControl4" unique_id=1926233842]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.279
+anchor_top = -0.082
+anchor_right = 0.72200006
+anchor_bottom = -0.004
+offset_left = -0.02009964
+offset_top = -23.074007
+offset_right = 0.85743713
+offset_bottom = -21.028008
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.85539424, 0.62007445, 0.07572145, 1)
+theme_override_fonts/font = ExtResource("5_te3kb")
+theme_override_font_sizes/font_size = 18
+text = "2X DASH"
 
 [node name="BackBtn" type="Button" parent="." unique_id=1968977312]
 texture_filter = 1
