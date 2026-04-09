@@ -7,10 +7,18 @@ const CHARACTER_DASH_ATTACK_PWRS = [11.0,10.0,14.0,8.0]
 const START_TIMES={
 	"CrabRave":2.55,
 	"Chromatically":2.15,
-	"DeadManWalking":2.55,
-	"GhostsNStuff":2.55,
-	"itsYou":2.55,
+	"DeadManWalking":2.31,
+	"GhostsNStuff":2.56,
+	"itsYou":0.0,
 	"jaco":2.55
+}
+const START_TIMES_2={
+	"CrabRave":0.0,
+	"Chromatically":0.0,
+	"DeadManWalking":2.29,
+	"GhostsNStuff":1.58,
+	"itsYou":0.0,
+	"jaco":0.0
 }
 
 var currentNote=0

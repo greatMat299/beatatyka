@@ -1,6 +1,7 @@
 extends Control
 
 var startTime : float = 0.0
+var startTime2 : float = 0.0
 var noteSpeed : float
 @export var BeatRectScene : PackedScene
 @export var beatAttackValue : float = 0.5
@@ -38,9 +39,10 @@ func startCatcher():
 	var midiPlayer2 = get_tree().get_nodes_in_group("midiPlayer")[5]
 	var mapName = get_parent().get_parent().get_parent().name
 	startTime=GameManager.START_TIMES[mapName]
+	startTime2=GameManager.START_TIMES_2[mapName]
+	midiPlayer2.current_time=startTime2
 	midiPlayer.current_time=startTime
 	midiPlayer.note_played_wc.connect(self._on_note_played)
-	midiPlayer2.current_time=startTime
 	midiPlayer2.note_played_wc.connect(self._on_note_played)
 	
 #zainicjonowanie obiektu nuty

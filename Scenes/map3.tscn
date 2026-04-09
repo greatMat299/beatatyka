@@ -382,6 +382,10 @@ script = ExtResource("7_vgmqi")
 midi = ExtResource("11_nhgnk")
 script = ExtResource("7_vgmqi")
 
+[node name="MidiPlayerCatcher2" type="MidiPlayer" parent="MusicPlayer" unique_id=1057031105 groups=["midiPlayer"]]
+midi = ExtResource("11_nhgnk")
+script = ExtResource("7_vgmqi")
+
 [node name="UserUI" parent="." unique_id=1459571692 instance=ExtResource("11_gbt8x")]
 
 [node name="DeathArea" type="Area2D" parent="." unique_id=1429821473]

@@ -340,6 +340,10 @@ script = ExtResource("6_wouuh")
 midi = ExtResource("10_ypv6j")
 script = ExtResource("6_wouuh")
 
+[node name="MidiPlayerCatcher2" type="MidiPlayer" parent="MusicPlayer" unique_id=1074785613 groups=["midiPlayer"]]
+midi = ExtResource("10_ypv6j")
+script = ExtResource("6_wouuh")
+
 [node name="UserUI" parent="." unique_id=1459571692 instance=ExtResource("8_wouuh")]
 noteSpeed = 250.0
 

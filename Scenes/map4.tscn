@@ -564,6 +564,7 @@ midi = ExtResource("11_edayh")
 script = ExtResource("7_kekxw")
 
 [node name="UserUI" parent="." unique_id=1459571692 instance=ExtResource("11_b7chw")]
+noteSpeed = 250.0
 
 [node name="DeathArea" type="Area2D" parent="." unique_id=1429821473]
 position = Vector2(-177, 127)

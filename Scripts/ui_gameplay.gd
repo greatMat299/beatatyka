@@ -21,110 +21,52 @@ func _ready() -> void:
 	get_parent().get_node("BeatCatcher").beatAttacked.connect(self._on_beat_attacked)
 	playerCount=GameManager.player_count
 	for i in range(0,playerCount):
-		players.push_back(get_parent().get_parent().get_parent().get_node(str("Player")+str(i+1)))
-		activeHealthLabels.push_back(self.get_node(str("Player")+str(i+1)+str("/vBox/hBox/cBox/LabelHealth")))
-		comboLabels.push_back(self.get_node(str("Player")+str(i+1)+str("/vBox/LabelCombo")))
-		self.get_node(str("Player")+str(i+1)+str("/vBox/hBox/cBox/LabelHealth")).visible = true
-		self.get_node(str("Player")+str(i+1)+str("/vBox/LabelCombo")).visible = true
-		self.get_node(str("Player")+str(i+1)+str("/vBox/hBox/vBox/hBox/cBox/gravityBuff")).modulate = Color(0.5, 0.5, 0.5, 1)
-		self.get_node(str("Player")+str(i+1)+str("/vBox/hBox/vBox/hBox/cBox2/defenseBuff")).modulate = Color(0.5, 0.5, 0.5, 1)
-		self.get_node(str("Player")+str(i+1)).show()
+		players.push_back(get_parent().get_parent().get_parent().get_node("Player"+str(i+1)))
+		activeHealthLabels.push_back(self.get_node("Player"+str(i+1)+"/Player/cBox/LabelHealth"))
+		comboLabels.push_back(self.get_node("Player"+str(i+1)+"/Player/vBox/LabelCombo"))
+		self.get_node("Player"+str(i+1)+"/Player/cBox/LabelHealth").visible = true
+		self.get_node("Player"+str(i+1)+"/Player/vBox/LabelCombo").visible = true
+		self.get_node("Player"+str(i+1)+"/Player/vBox/hBox/vBox/hBox/cBox/gravityBuff").modulate = Color(0.5, 0.5, 0.5, 1)
+		self.get_node("Player"+str(i+1)+"/Player/vBox/hBox/vBox/hBox/cBox2/defenseBuff").modulate = Color(0.5, 0.5, 0.5, 1)
+		self.get_node("Player"+str(i+1)).show()
 		print(GameManager.playerSpriteSheets[0])
-		var icon = self.get_node(str("Player") + str(i+1)).get_node("vBox/hBox/vBox/cBox/PlayerIcon")
+		var icon = self.get_node("Player"+str(i+1)).get_node("Player/vBox/hBox/vBox/cBox/PlayerIcon")
 		icon.texture = GameManager.playerSpriteIcons[i]
 		icon.custom_minimum_size = Vector2(80, 80)
 		
-		
-		
 	crowdCheerSFX = get_parent().get_parent().get_parent().get_node("CrowdCheerSFX")
-	
-
 func buffChanges():
-	if get_tree().get_nodes_in_group("player")[0].isInvincible:
-		$Player1/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1, 1, 1, 1)
-	else:
-		$Player1/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1.0, 1.0, 1.0, 0.49)
-	if playerCount>=2:
-		if get_tree().get_nodes_in_group("player")[1].isInvincible:
-			$Player2/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1, 1, 1, 1)
+	var players = get_tree().get_nodes_in_group("player")
+	for i in range(players.size()):
+		var player_node = get_node("Player"+str(i+1)+"/Player/vBox/hBox/vBox/hBox/cBox2/defenseBuff")
+		if players[i].isInvincible:
+			player_node.modulate = Color(1, 1, 1, 1)
 		else:
-			$Player2/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1.0, 1.0, 1.0, 0.49)
-	if playerCount>=3:
-		if get_tree().get_nodes_in_group("player")[2].isInvincible:
-			$Player3/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1, 1, 1, 1)
-		else:
-			$Player3/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1.0, 1.0, 1.0, 0.49)
-	if playerCount>=4:
-		if get_tree().get_nodes_in_group("player")[3].isInvincible:
-			$Player4/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1, 1, 1, 1)
-		else:
-			$Player4/vBox/hBox/vBox/hBox/cBox2/defenseBuff.modulate = Color(1.0, 1.0, 1.0, 0.49)
+			player_node.modulate = Color(1, 1, 1, 0.5)
 
 func lifeChanges():
-	var p1Lifes = get_tree().get_nodes_in_group("player")[0].get_node("HealthManager").lifes
-	var p2Lifes=-1
-	var p3Lifes=-1
-	var p4Lifes=-1
+	var players = get_tree().get_nodes_in_group("player")
 	
-	if get_tree().get_nodes_in_group("player")[0].get_node("HealthManager").lifes>0:
-		for i in range(0,3):
-			if (i+1)>p1Lifes:
-				$Player1/hBox.get_child(i).visible=false
-			else:
-				$Player1/hBox.get_child(i).visible=true
-				
-	if GameManager.player_count>=2:
-		p2Lifes = get_tree().get_nodes_in_group("player")[1].get_node("HealthManager").lifes
-		if get_tree().get_nodes_in_group("player")[1].get_node("HealthManager").lifes>0:
-			for i in range(0,3):
-				if (i+1)>p2Lifes:
-					$Player2/hBox.get_child(i).visible=false
+	for i in range(players.size()):
+		var player = players[i]
+		var lifes = player.get_node("HealthManager").lifes
+		if lifes > 0:
+			var lifeIcons = get_node("Player" + str(i + 1) + "/Player/vBox2")
+			for j in range(3):
+				if (j + 1) <= lifes:
+					lifeIcons.get_child(j).visible = true
 				else:
-					$Player2/hBox.get_child(i).visible=true
-				
-	if GameManager.player_count>=3:
-		p3Lifes = get_tree().get_nodes_in_group("player")[2].get_node("HealthManager").lifes
-		if get_tree().get_nodes_in_group("player")[2].get_node("HealthManager").lifes>0:
-			for i in range(0,3):
-				if (i+1)>p3Lifes:
-					$Player3/hBox.get_child(i).visible=false
-				else:
-					$Player3/hBox.get_child(i).visible=true
-				
-	if GameManager.player_count>=4:
-		p4Lifes = get_tree().get_nodes_in_group("player")[3].get_node("HealthManager").lifes
-		if get_tree().get_nodes_in_group("player")[3].get_node("HealthManager").lifes>0:
-			for i in range(0,3):
-				if (i+1)>p4Lifes:
-					$Player4/hBox.get_child(i).visible=false
-				else:
-					$Player4/hBox.get_child(i).visible=true
+					lifeIcons.get_child(j).visible = false
+
 
 func healthChanges():
-	if len(activeHealthLabels)>0:
-		if GameManager.arePlayersAlive[0]==false:
-			activeHealthLabels[0].add_theme_color_override("font_color", Color.RED)
-			activeHealthLabels[0].text=str("DEAD!")
+	for i in range(0, len(activeHealthLabels)):
+		if GameManager.arePlayersAlive[i] == false:
+			activeHealthLabels[i].add_theme_color_override("font_color", Color.RED)
+			activeHealthLabels[i].text = "DEAD!"
 		else:
-			activeHealthLabels[0].text=str(int(players[0].get_node("HealthManager").health))
-		if playerCount>=2:
-			if GameManager.arePlayersAlive[1]==false:
-				activeHealthLabels[1].add_theme_color_override("font_color", Color.RED)
-				activeHealthLabels[1].text=str("DEAD!")
-			else:
-				activeHealthLabels[1].text=str(int(players[1].get_node("HealthManager").health))
-		if playerCount>=3:
-			if GameManager.arePlayersAlive[2]==false:
-				activeHealthLabels[2].add_theme_color_override("font_color", Color.RED)
-				activeHealthLabels[2].text=str("DEAD!")
-			else:
-				activeHealthLabels[2].text=str(int(players[2].get_node("HealthManager").health))
-		if playerCount>=4:
-			if GameManager.arePlayersAlive[3]==false:
-				activeHealthLabels[3].add_theme_color_override("font_color", Color.RED)
-				activeHealthLabels[3].text=str("DEAD!")
-			else:
-				activeHealthLabels[3].text=str(int(players[3].get_node("HealthManager").health))
+			var health = players[i].get_node("HealthManager").health
+			activeHealthLabels[i].text = str(int(health))
 
 
 

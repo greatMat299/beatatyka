@@ -90,7 +90,7 @@ func _ready() -> void:
 	
 func _process(_delta):
 	#logika po śmierci wszystkich oprócz jednego gracza
-	if GameManager.player_count<=1:
+	if GameManager.player_count<=0:
 		GameManager.isGamePlaying=false
 		
 	if GameManager.hasStartSeqFinished==true and audioStreamPlayer.playing==false:
