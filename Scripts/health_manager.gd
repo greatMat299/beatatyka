@@ -41,7 +41,6 @@ func heal_player(body, healthAdded):
 		body.get_node("HealthManager").health+=healthPenalty
 	
 func _process(_delta):
-	print(GameManager.playerLifes[id-1])
 	#akcje po wyczerpaniu się zdrowia gracza
 	if health<=0 and GameManager.arePlayersAlive[id-1]==true:
 		if lifes>1:

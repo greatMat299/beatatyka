@@ -371,7 +371,7 @@ one_shot = true
 visible = false
 modulate = Color(1, 1, 1, 0.6797385)
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -2)
+position = Vector2(0, 14)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Spike1PrevGroup" unique_id=707694897]
 libraries/ = SubResource("AnimationLibrary_qakiw")
@@ -395,7 +395,7 @@ position = Vector2(176, 98)
 visible = false
 modulate = Color(1, 1, 1, 0.6013072)
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(0, -2)
+position = Vector2(0, 14)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Spike2PrevGroup" unique_id=1935903267]
 libraries/ = SubResource("AnimationLibrary_qakiw")
@@ -480,9 +480,17 @@ bus = &"SFX"
 
 [node name="Lasers2" type="Node2D" parent="." unique_id=1489196203]
 
+[node name="Lasers3" type="Node2D" parent="." unique_id=673167198]
+
+[node name="Lasers4" type="Node2D" parent="." unique_id=286547268]
+
 [node name="LasersPrev1" type="Node2D" parent="." unique_id=916931062]
 
 [node name="LasersPrev2" type="Node2D" parent="." unique_id=1534067520]
+
+[node name="LasersPrev3" type="Node2D" parent="." unique_id=1891459954]
+
+[node name="LasersPrev4" type="Node2D" parent="." unique_id=1529398917]
 
 [connection signal="timeout" from="PowerupCooldown" to="." method="_on_powerup_cooldown_timeout"]
 [connection signal="timeout" from="PowerupCooldown" to="Powerup1" method="_on_powerup_cooldown_timeout"]

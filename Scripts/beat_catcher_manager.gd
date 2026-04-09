@@ -35,10 +35,13 @@ func startCatcher():
 	#dodanie MIDI playerów
 	await get_tree().process_frame
 	var midiPlayer = get_tree().get_nodes_in_group("midiPlayer")[3]
+	var midiPlayer2 = get_tree().get_nodes_in_group("midiPlayer")[5]
 	var mapName = get_parent().get_parent().get_parent().name
 	startTime=GameManager.START_TIMES[mapName]
 	midiPlayer.current_time=startTime
 	midiPlayer.note_played_wc.connect(self._on_note_played)
+	midiPlayer2.current_time=startTime
+	midiPlayer2.note_played_wc.connect(self._on_note_played)
 	
 #zainicjonowanie obiektu nuty
 func _on_note_played(note, sender):
@@ -50,9 +53,16 @@ func _on_note_played(note, sender):
 		copy.get_node("BeatRectCube").color = Color(0.607, 0.01, 0.536, 1.0)
 	elif note>=65&&note<=67: #kolce
 		copy.get_node("BeatRectCube").color = Color(0.967, 0.0, 0.083, 1.0)
+	elif note>=68&&note<=69: #bomba
+		copy.get_node("BeatRectCube").color = Color(0.0, 0.0, 0.0, 1.0)
+	elif note>=70&&note<=73: #laser
+		copy.get_node("BeatRectCube").color = Color(0.214, 0.48, 1.0, 1.0)
+	elif note==74: #zmiana platformy
+		copy.get_node("BeatRectCube").color = Color(0.81, 0.685, 0.0, 1.0)
 	else:
 		copy.get_node("BeatRectCube").color = Color(1.0, 1.0, 1.0, 1.0)
-	add_child(copy)
+	if note>=59:
+		add_child(copy)
 
 #akcje po ataku gracza
 func onPlayerAttack(player, damage, playerDamaged, direction):

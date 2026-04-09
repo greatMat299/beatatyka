@@ -17,9 +17,15 @@
 [ext_resource type="FontFile" uid="uid://ds1cfmjhrm1y8" path="res://Assets/Fonts/digital_disco/DigitalDisco.ttf" id="12_cqsqe"]
 [ext_resource type="FontFile" uid="uid://clip8sj64bxp6" path="res://Assets/Fonts/aero_matics/Aero Matics Italic.ttf" id="13_atmls"]
 [ext_resource type="Texture2D" uid="uid://blmf2qpr182wf" path="res://Assets/Images/drumstickplaceholderwillreplace.png" id="13_cqsqe"]
+[ext_resource type="Texture2D" uid="uid://sm6v87sc5e7g" path="res://Assets/Images/Powerups/no_damage.png" id="13_evvkg"]
 [ext_resource type="FontFile" uid="uid://b0yu7wpawigol" path="res://Assets/Fonts/aero_matics/Aero Matics Display Bold Italic.ttf" id="14_4efw7"]
+[ext_resource type="Texture2D" uid="uid://c330xgbmr66gc" path="res://OtherAssets/RedBorder.png" id="14_oc6ra"]
 [ext_resource type="StyleBox" uid="uid://dnxpjco013d8u" path="res://Assets/Styles/normalButtonStyle.tres" id="14_r5oyd"]
+[ext_resource type="Texture2D" uid="uid://dbxdumnujx0mj" path="res://Assets/Images/Powerups/heal.png" id="15_fcnet"]
+[ext_resource type="Texture2D" uid="uid://d3yhm67cubra4" path="res://OtherAssets/BlueBorder.png" id="15_n8ptg"]
 [ext_resource type="StyleBox" uid="uid://bemsbnqo0ilar" path="res://Assets/Styles/highlightedButtonStyle.tres" id="15_r5oyd"]
+[ext_resource type="Texture2D" uid="uid://drtn4f5m76t8q" path="res://OtherAssets/GreenBorder.png" id="16_fcnet"]
+[ext_resource type="Texture2D" uid="uid://ckxqiyxno3t6p" path="res://OtherAssets/YellowBorder.png" id="17_2mw78"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ha2xw"]
 shader = ExtResource("3_iafmb")
@@ -487,7 +493,47 @@ size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 
-[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player1" unique_id=1092760336]
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player1" unique_id=2039869382]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player1/vBox" unique_id=626535685]
+layout_mode = 2
+
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player1/vBox/hBox" unique_id=1765988193]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox" unique_id=452980175]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox/hBox" unique_id=1612121963]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="gravityBuff" type="TextureRect" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox/hBox/cBox" unique_id=1782652019]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_88o7u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox2" type="CenterContainer" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox/hBox" unique_id=1173859608]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="defenseBuff" type="TextureRect" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox/hBox/cBox2" unique_id=30345456]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("13_evvkg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox" unique_id=1855473533]
+layout_mode = 2
+
+[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox/cBox" unique_id=1092760336]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -495,25 +541,93 @@ size_flags_vertical = 0
 texture = ExtResource("4_88o7u")
 expand_mode = 1
 
-[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player1" unique_id=1988809273]
+[node name="Border" type="TextureRect" parent="GameplayNodes/Players/Player1/vBox/hBox/vBox/cBox" unique_id=817650534]
+layout_mode = 2
+texture = ExtResource("14_oc6ra")
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player1/vBox/hBox" unique_id=843280775]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 8
+
+[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player1/vBox/hBox/cBox" unique_id=1988809273]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_egsqa")
+theme_override_font_sizes/font_size = 64
 
-[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player1" unique_id=1321843709]
+[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player1/vBox" unique_id=1321843709]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 24
 
-[node name="Player2" type="MarginContainer" parent="GameplayNodes/Players" unique_id=1738795827]
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player1" unique_id=141208607]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="GameplayNodes/Players/Player1/hBox" unique_id=1660848627]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect2" type="TextureRect" parent="GameplayNodes/Players/Player1/hBox" unique_id=1644903286]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect3" type="TextureRect" parent="GameplayNodes/Players/Player1/hBox" unique_id=1704561864]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="Player2" type="MarginContainer" parent="GameplayNodes/Players" unique_id=1295208987]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 
-[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player2" unique_id=520932280]
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player2" unique_id=1594450345]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player2/vBox" unique_id=81749253]
+layout_mode = 2
+
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player2/vBox/hBox" unique_id=1617909982]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox" unique_id=199799947]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox/hBox" unique_id=370278235]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="gravityBuff" type="TextureRect" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox/hBox/cBox" unique_id=969873416]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_88o7u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox2" type="CenterContainer" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox/hBox" unique_id=882104955]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="defenseBuff" type="TextureRect" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox/hBox/cBox2" unique_id=186397438]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("13_evvkg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox" unique_id=830842036]
+layout_mode = 2
+
+[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox/cBox" unique_id=167625123]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -521,25 +635,92 @@ size_flags_vertical = 0
 texture = ExtResource("4_88o7u")
 expand_mode = 1
 
-[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player2" unique_id=1150703344]
+[node name="Border" type="TextureRect" parent="GameplayNodes/Players/Player2/vBox/hBox/vBox/cBox" unique_id=252457761]
+layout_mode = 2
+texture = ExtResource("15_n8ptg")
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player2/vBox/hBox" unique_id=2059598879]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player2/vBox/hBox/cBox" unique_id=1140260046]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0, 0.7176471, 0.9372549, 1)
+theme_override_fonts/font = ExtResource("4_egsqa")
+theme_override_font_sizes/font_size = 64
 
-[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player2" unique_id=744416797]
+[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player2/vBox" unique_id=1510509523]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 24
 
-[node name="Player3" type="MarginContainer" parent="GameplayNodes/Players" unique_id=949872745]
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player2" unique_id=1136984389]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="GameplayNodes/Players/Player2/hBox" unique_id=508208711]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect2" type="TextureRect" parent="GameplayNodes/Players/Player2/hBox" unique_id=679758321]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect3" type="TextureRect" parent="GameplayNodes/Players/Player2/hBox" unique_id=833267892]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="Player3" type="MarginContainer" parent="GameplayNodes/Players" unique_id=1841358969]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 
-[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player3" unique_id=2130538408]
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player3" unique_id=695543314]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player3/vBox" unique_id=1457245697]
+layout_mode = 2
+
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player3/vBox/hBox" unique_id=1029862315]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox" unique_id=1228414650]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox/hBox" unique_id=1015183268]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="gravityBuff" type="TextureRect" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox/hBox/cBox" unique_id=697067528]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_88o7u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox2" type="CenterContainer" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox/hBox" unique_id=1789180506]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="defenseBuff" type="TextureRect" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox/hBox/cBox2" unique_id=193740635]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("13_evvkg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox" unique_id=1742274075]
+layout_mode = 2
+
+[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox/cBox" unique_id=2084442986]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -547,25 +728,92 @@ size_flags_vertical = 0
 texture = ExtResource("4_88o7u")
 expand_mode = 1
 
-[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player3" unique_id=975196830]
+[node name="Border" type="TextureRect" parent="GameplayNodes/Players/Player3/vBox/hBox/vBox/cBox" unique_id=721082846]
+layout_mode = 2
+texture = ExtResource("16_fcnet")
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player3/vBox/hBox" unique_id=153727942]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player3/vBox/hBox/cBox" unique_id=1685108305]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(0.13333334, 0.69411767, 0.29803923, 1)
+theme_override_fonts/font = ExtResource("4_egsqa")
+theme_override_font_sizes/font_size = 64
 
-[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player3" unique_id=1798351708]
+[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player3/vBox" unique_id=91217612]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 24
 
-[node name="Player4" type="MarginContainer" parent="GameplayNodes/Players" unique_id=791046209]
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player3" unique_id=656277709]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="GameplayNodes/Players/Player3/hBox" unique_id=1011406769]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect2" type="TextureRect" parent="GameplayNodes/Players/Player3/hBox" unique_id=348384690]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect3" type="TextureRect" parent="GameplayNodes/Players/Player3/hBox" unique_id=789803879]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="Player4" type="MarginContainer" parent="GameplayNodes/Players" unique_id=980290906]
 custom_minimum_size = Vector2(150, 80)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 
-[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player4" unique_id=953525211]
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player4" unique_id=1073809858]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player4/vBox" unique_id=1567967161]
+layout_mode = 2
+
+[node name="vBox" type="VBoxContainer" parent="GameplayNodes/Players/Player4/vBox/hBox" unique_id=1799684539]
+layout_mode = 2
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox" unique_id=267561543]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox/hBox" unique_id=299011449]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="gravityBuff" type="TextureRect" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox/hBox/cBox" unique_id=201218802]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("4_88o7u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox2" type="CenterContainer" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox/hBox" unique_id=100887592]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="defenseBuff" type="TextureRect" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox/hBox/cBox2" unique_id=1661464473]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("13_evvkg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox" unique_id=428548297]
+layout_mode = 2
+
+[node name="PlayerIcon" type="TextureRect" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox/cBox" unique_id=598498503]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -573,16 +821,43 @@ size_flags_vertical = 0
 texture = ExtResource("4_88o7u")
 expand_mode = 1
 
-[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player4" unique_id=907432302]
+[node name="Border" type="TextureRect" parent="GameplayNodes/Players/Player4/vBox/hBox/vBox/cBox" unique_id=1281244587]
+layout_mode = 2
+texture = ExtResource("17_2mw78")
+
+[node name="cBox" type="CenterContainer" parent="GameplayNodes/Players/Player4/vBox/hBox" unique_id=1771727992]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="LabelHealth" type="Label" parent="GameplayNodes/Players/Player4/vBox/hBox/cBox" unique_id=1438544278]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(1, 0.7607843, 0.05490196, 1)
+theme_override_fonts/font = ExtResource("4_egsqa")
+theme_override_font_sizes/font_size = 64
 
-[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player4" unique_id=1813901826]
+[node name="LabelCombo" type="Label" parent="GameplayNodes/Players/Player4/vBox" unique_id=492320375]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 24
+
+[node name="hBox" type="HBoxContainer" parent="GameplayNodes/Players/Player4" unique_id=697759069]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="GameplayNodes/Players/Player4/hBox" unique_id=2043081266]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect2" type="TextureRect" parent="GameplayNodes/Players/Player4/hBox" unique_id=1520558437]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
+
+[node name="TextureRect3" type="TextureRect" parent="GameplayNodes/Players/Player4/hBox" unique_id=1855040728]
+layout_mode = 2
+texture = ExtResource("15_fcnet")
 
 [node name="BeatCatcher" parent="GameplayNodes" unique_id=540349467 instance=ExtResource("10_riyq3")]
 layout_mode = 1

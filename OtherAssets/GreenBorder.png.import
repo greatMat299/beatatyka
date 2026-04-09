@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beatvpyx73llt"
-path="res://.godot/imported/bgS2.png-a60fcf6a8ef75cc2628559192c3e4a0f.ctex"
+uid="uid://drtn4f5m76t8q"
+path="res://.godot/imported/GreenBorder.png-f8603d0096265666b649e8871c406aae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/fourSeasonsPlatformer_ [tileset, version 2.0]/background_/bgS2.png"
-dest_files=["res://.godot/imported/bgS2.png-a60fcf6a8ef75cc2628559192c3e4a0f.ctex"]
+source_file="res://OtherAssets/GreenBorder.png"
+dest_files=["res://.godot/imported/GreenBorder.png-f8603d0096265666b649e8871c406aae.ctex"]
 
 [params]
 

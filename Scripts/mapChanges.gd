@@ -262,8 +262,13 @@ func _on_note_played(note, sender):
 			warningSpikeBySender.erase(sender)
 			
 		if warningBombBySender.has(sender):
+			print("disabling bomb")
 			var idx = warningBombBySender[sender]
-			GameManager.bombPrevList[idx].visible = false
+			var bomb = GameManager.bombPrevList[idx]
+
+			bomb.get_node("AnimationPlayer").stop()
+			bomb.visible = false
+
 			warningBombBySender.erase(sender)
 			
 		if warningLaserBySender.has(sender):

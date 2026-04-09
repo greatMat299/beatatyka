@@ -49,5 +49,7 @@ func my_note_callback(event, track):
 				note_played_w2.emit(event["note"], self)
 			"MidiPlayerCatcher":
 				note_played_wc.emit(event["note"], self)
+			"MidiPlayerCatcher2":
+				note_played_wc.emit(event["note"], self)
 	elif event["subtype"] == MIDI_MESSAGE_NOTE_OFF:
 		note_off.emit()

@@ -22,7 +22,7 @@ var isInvincible=false
 var playerKeybindId=-1
 var currentSpriteSheet
 var isDashAnim=false
-var spikeDMG = 10
+var spikeDMG = 0
 var laserDMG = 10
 var canLaserDMG = true
 var laserDMGCooldownAmount = 0.3
@@ -190,7 +190,10 @@ func _physics_process(delta):
 				else:
 					if !body.isInvincible:
 						attackCooldownTimer.start()
-						body.attackVelocity = attackPushPower * sign(dir)
+						if is_on_wall():
+							velocity.x += sign(velocity.x) * 50
+						if player_id > body.player_id:
+							body.attackVelocity = attackPushPower * sign(dir)
 						if body.get_node("AnimationPlayer").is_playing()==false:
 							body.get_node("AnimationPlayer").play("playerHurt")
 						else:
